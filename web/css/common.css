@@ -1,0 +1,87 @@
+/* 
+#fffcf0 : 누리끼리색 - .ivory
+#dedcee : 옅은 남?보라?색 - .navy
+#6a60a9 : 진한 남?보라?색 - .thNavy
+#fbd14b : 노랭이 - .yellow */
+
+/* 타이틀폰트 - 굵 */
+@font-face {
+	font-family: 'TmonMonsori';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* 컨텐츠폰트 - 얇 */
+@font-face {
+	font-family: 'BBTreeGR';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* 글씨 */
+/* 전체 기본 폰트 : 얇은 */
+*{
+	font-family: 'BBTreeGR';
+}
+/* 헤더 타이틀 폰트 */
+.navfont {
+	font-family: 'TmonMonsori';
+	font-size: 25px;
+	color: #fffcf0 !important;
+}
+/* 타이틀 이거 적용해주세요 */
+h1{
+	font-family: 'TmonMonsori';
+}
+/* 내용 굵은 글씨 */
+.bContent{
+	font-family: 'BBTreeGR';
+	font-weight: bolder;
+}
+.yellow{
+    color: #fbd14b;
+}
+.navy{
+    color: #dedcee;
+}
+.thNavy{
+    color: #6a60a9 ;
+}
+.ivory{
+    color: #fffcf0;
+}
+
+
+/* 배경 */
+/* 네비게이션,푸터 배경 */
+.navbg, .footerbg{
+	background-color: #6a60a9;
+	border : 0px;
+	color:#ffffff !important;
+}
+
+
+/* a태그?? */
+.aa {
+	font-family: 'BBTreeGR';
+	font-size: 18px;
+	font-weight: bolder;
+	color: #ffffff !important;
+}
+.wfullImg{
+    width: 100%;
+}
+
+
+.marginT50{
+    margin-top: 50px;
+}
+
+.marginB100{
+    margin-bottom: 100px;
+}
