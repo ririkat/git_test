@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="views/common/header.jsp"%>
+<%@ include file="/views/common/header.jsp"%>
 <section class="marginB100">
 	<!-- 배너 슬라이더 -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -137,4 +137,4 @@
 			<br>
 		</div>
 </section>
-<%@ include file="views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>

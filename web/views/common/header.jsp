@@ -24,9 +24,9 @@
 -->
 
 
-<link rel="stylesheet" href="css/hotel.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
