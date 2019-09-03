@@ -18,6 +18,24 @@ public class Client {
 	public Client() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
+			String cAddr, Date cEd, int cBLCount, int authority) {
+		super();
+		this.cId = cId;
+		this.cPw = cPw;
+		this.cName = cName;
+		this.cBirth = cBirth;
+		this.cGender = cGender;
+		this.cEmail = cEmail;
+		this.cPhone = cPhone;
+		this.cAddr = cAddr;
+		this.cEd = cEd;
+		this.cBLCount = cBLCount;
+		Authority = authority;
+	}
+
 
 	public String getcId() {
 		return cId;
