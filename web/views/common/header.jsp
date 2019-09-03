@@ -66,7 +66,7 @@
 						<% if (loginClient == null) {%>
 						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 						 <%} else {%>
-                        <li><a class="aa" href="<%=request.getContextPath()%>/mypageHome.jsp">마이페이지</a></li>
+                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
                         <li><a class="aa" href='<%=request.getContextPath()%>/logout'/>로그아웃</a></li>
                         <%} %>
 					</ul>

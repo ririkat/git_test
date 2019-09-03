@@ -24,7 +24,7 @@
                                     ID / PW 찾기</button><br>
                                     
 <!--                                 	업체일반 회원뷰로 전환 -->
-                                <a href="<%=request.getContextPath()%>/singUpChoice.jsp" class="text-center new-account">회원가입</a>
+                                <a href="<%=request.getContextPath()%>/views/client/singUpChoice.jsp" class="text-center new-account">회원가입</a>
                             </form>
                         </div>
                     </div>
