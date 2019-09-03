@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.jb.client.model.vo.Client" %>
 <%
-	/* List<Client> clients = (List)request.getAttribute("clients");
-	int cPage = (int)request.getAttribute("cPage"); */
+	List<Client> clients = (List)request.getAttribute("clients");
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -45,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link" href="jang3.html">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/master/clientList">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-users">
@@ -65,7 +64,7 @@
             <!--content영역-->
             <div class="col-md-9">
                 <br><br><br>
-                <h2>회원관리</h2>
+                <h2 style="text-align:center";>회원관리</h2> <br>
                 <table id="tbl-clientList" class="table table-hover">
                     <thead>
                         <tr>
@@ -81,27 +80,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                    	<% if(clients!=null && !clients.isEmpty()) {
+	                    	 for(Client c : clients) { %>
+		                        <tr>
+		                            <td><%=c.getcId() %></td>
+		                            <td><%=c.getcName() %></td>
+		                            <td><%=c.getcBirth() %></td>
+		                            <td><%=c.getcGender() %></td>
+		                            <td><%=c.getcEmail() %></td>
+		                            <td><%=c.getcPhone() %></td>
+		                            <td><%=c.getcAddr() %></td>
+		                            <td><%=c.getcEd() %></td>
+		                            <td><%=c.getcBLCount() %></td>
+		                        </tr>
+		                <%	}
+	                    }%>
                     </tbody>
                 </table>
-
+                
+                <div id="pageBar">
+		        	<%=request.getAttribute("pageBar") %>
+		        </div>
+        
                 <div class="text-center">
                     <ul class="pagination">
+                    	<li><a href="#">&laquo;</a></li>
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
                         <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>
             </div>

@@ -31,6 +31,10 @@ public class MasterClientListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//미완성.
+		//관리자 메뉴이기 때문에 관리자가 아닐 경우
+		//주소입력을 통해 실행되지 않게 처리하는 로직 구현해야함
+		
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -41,7 +45,6 @@ public class MasterClientListServlet extends HttpServlet {
 		int totalClient = new ClientService().selectCountClient();
 		List<Client> clients = new ClientService().selectListPage(cPage,numPerPage);
 		int totalPage = (int)Math.ceil((double)totalClient/numPerPage);
-		
 		String pageBar = "";
 		int pageBarSize = 5;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -51,14 +54,14 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>[이전]</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/admin/memberList?cPage="+(pageNo-1)+">[이전]</a>";
+			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">[이전]</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo == cPage) {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>";
 			}
 			else {
-				pageBar += "<a href="+request.getContextPath()+"/admin/memberList?cPage="+pageNo+">"+pageNo+"</a>";
+				pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+pageNo+">"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -67,7 +70,7 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>[다음]</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/admin/memberList?cPage="+(pageNo)+">[다음]</a>";
+			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">[다음]</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
