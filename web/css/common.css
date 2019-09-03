@@ -57,14 +57,6 @@ h1{
 }
 
 
-/* 배경 */
-/* 네비게이션,푸터 배경 */
-.navbg, .footerbg{
-	background-color: #6a60a9;
-	border : 0px;
-	color:#ffffff !important;
-}
-
 
 /* a태그?? */
 .aa {
