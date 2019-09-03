@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import ="com.jb.client.model.vo.Client" %>
+<% 
+	Client loginClient = (Client)session.getAttribute("loginClient"); 
+%>
+	
+	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,13 +58,20 @@
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand navfont" href="#">자바방</a>
+					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>/index.jsp">자바방</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
 						<li><a class="aa" href="#">공지사항</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">게시판</a></li>
 						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						<li><a class="aa" href="#">게시판</a></li>
+						<% if (loginClient == null) {%>
+						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						 <%} else {%>
+                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
+                        <li><a class="aa" href='<%=request.getContextPath()%>/logout'/>로그아웃</a></li>
+                        <%} %>
 					</ul>
 				</div>
 			</div>
