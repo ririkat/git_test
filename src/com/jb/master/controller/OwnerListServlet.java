@@ -32,6 +32,8 @@ public class OwnerListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			//주우서억
+		
 //		Master loginMaster = (Master)request.getSession().getAttribute("loginMaster");
 //		if(loginMaster==null) {
 //			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다");
