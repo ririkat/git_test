@@ -15,9 +15,16 @@ public class ClientService {
 
 	private ClientDao dao = new ClientDao();
 
-	public int updateClient(Client c) {
+	public Client selectId(String id, String pw) {
 		Connection conn = getConnection();
-		int result = dao.updateClient(conn, c);
+		Client c = dao.selectId(conn, id, pw);
+		close(conn);
+		return c;
+	}
+	
+	public int updateClient(Client c){
+		Connection conn=getConnection();
+		int result= dao.updateClient(conn,c);
 		close(conn);
 		return result;
 	}

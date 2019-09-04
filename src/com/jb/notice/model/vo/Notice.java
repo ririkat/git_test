@@ -7,9 +7,10 @@ public class Notice {
 	private int nNo;
 	private String nTitle;
 	private Date nEntDate;
-	private Date nModeDate;
+	private Date nModDate;
 	private String nContent;
-	private String nFile;
+	private String nOriginFile;
+	private String nRenamedFile;
 	private String mId;
 	private int nViewCnt;
 	
@@ -17,17 +18,14 @@ public class Notice {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notice(int nNo, String nTitle, Date nEntDate, Date nModeDate, String nContent, String nFile, String mId,
-			int nViewCnt) {
-		super();
-		this.nNo = nNo;
+	public Notice(String nTitle,String writer, String nContent, String nOriginFile,
+			String nRenamedFile) {
+
 		this.nTitle = nTitle;
-		this.nEntDate = nEntDate;
-		this.nModeDate = nModeDate;
 		this.nContent = nContent;
-		this.nFile = nFile;
-		this.mId = mId;
-		this.nViewCnt = nViewCnt;
+		this.mId=writer;
+		this.nOriginFile = nOriginFile;
+		this.nRenamedFile = nRenamedFile;
 	}
 
 	public int getnNo() {
@@ -54,12 +52,12 @@ public class Notice {
 		this.nEntDate = nEntDate;
 	}
 
-	public Date getnModeDate() {
-		return nModeDate;
+	public Date getnModDate() {
+		return nModDate;
 	}
 
-	public void setnModeDate(Date nModeDate) {
-		this.nModeDate = nModeDate;
+	public void setnModDate(Date nModDate) {
+		this.nModDate = nModDate;
 	}
 
 	public String getnContent() {
@@ -70,12 +68,20 @@ public class Notice {
 		this.nContent = nContent;
 	}
 
-	public String getnFile() {
-		return nFile;
+	public String getnOriginFile() {
+		return nOriginFile;
 	}
 
-	public void setnFile(String nFile) {
-		this.nFile = nFile;
+	public void setnOriginFile(String nOriginFile) {
+		this.nOriginFile = nOriginFile;
+	}
+
+	public String getnRenamedFile() {
+		return nRenamedFile;
+	}
+
+	public void setnRenamedFile(String nRenamedFile) {
+		this.nRenamedFile = nRenamedFile;
 	}
 
 	public String getmId() {
@@ -96,8 +102,11 @@ public class Notice {
 
 	@Override
 	public String toString() {
-		return "Notice [nNo=" + nNo + ", nTitle=" + nTitle + ", nEntDate=" + nEntDate + ", nModeDate=" + nModeDate
-				+ ", nContent=" + nContent + ", nFile=" + nFile + ", mId=" + mId + ", nViewCnt=" + nViewCnt + "]";
+		return "Notice [nNo=" + nNo + ", nTitle=" + nTitle + ", nEntDate=" + nEntDate + ", nModDate=" + nModDate
+				+ ", nContent=" + nContent + ", nOriginFile=" + nOriginFile + ", nRenamedFile=" + nRenamedFile
+				+ ", mId=" + mId + ", nViewCnt=" + nViewCnt + "]";
 	}
 
+	
+	
 }

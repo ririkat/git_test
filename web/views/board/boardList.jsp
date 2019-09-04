@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.jb.board.model.vo.Board" %>
 
+<%
+ 	int cPage=(int)request.getAttribute("cPage");
+	String pageBar=(String)request.getAttribute("pageBar");
+ 	List<Board> list=(List)request.getAttribute("list");
+ 	
+%>
     
 <%@ include file="/views/common/header.jsp"%>
 
 	<section>
 		<div class="container">
+		<h2> 게시판 </h2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -17,53 +25,41 @@
                 </tr>
             </thead>
             <tbody>
+            <%if(list!=null && !list.isEmpty()){
+            	for(Board b : list){%>
             	<tr>
-            		<td></td>
-            		<td></td>
-            		<td></td>
-            		<td></td>
-            		<td></td>
-            	</tr>
-            	
-                <tr>
-                    <td>001</td>
-                    <td><a href="">오우 쒯</a></td>
-                    <td>오건철</td>
-                    <td>2019.08.20</td>
-                    <td>2</td>
+                    <td><%=b.getbNo() %></td>
+                    <td>
+                    	<a href="<%=request.getContextPath() %>/board/baordView?bNo=<%=b.getbNo() %>"></a>
+                    	<%=b.getTitle() %>
+                    </td>
+                    <td><%=b.getcId() %></td>
+                    <td><%=b.getEntDate() %></td>
+                    <td><%=b.getViewCnt() %></td>
                 </tr>
-                <tr>
-                    <td>002</td>
-                    <td><a href="">배도부른데 졸리기까지하네</a></td>
-                    <td>망했죠?</td>
-                    <td>2019.08.20</td>
-                    <td>count</td>
-                </tr>
-                <tr>
-                    <td>003</td>
-                    <td><a href="">언제끝나요?</a></td>
-                    <td>최고관리자</td>
-                    <td>2019.08.20</td>
-                    <td>1</td>
-                </tr>
+            <%}
+            }%>
             </tbody>
         </table>
         <hr/>
 
         <!-- 글쓰기 버튼 좌우 정렬 pull-right / pull-left -->
-        <a class="btn btn-default pull-right">글쓰기</a>
-        <a class="btn btn-default pull-right">검색</a>
+        <!-- 로그인시에만 보이는 보이는 로직 필요 -->
+        <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()";/>
+        <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()";/>
+        
 
         <div class="text-center">
             <ul class="pagination">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                <li><%=request.getAttribute("pageBar") %></li>
             </ul>
         </div>
     </div>
+    <script>
+       	function writeBoard(){
+       		location.href="<%=request.getContextPath()%>/board/boardForm";
+       	}
+    </script>
 		
 	</section>
     
