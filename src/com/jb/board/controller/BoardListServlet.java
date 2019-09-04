@@ -32,13 +32,13 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cPage;//���� �����ִ� ������
+		int cPage;//
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=10;//�� �������� ����� �Խñ� ��
+		int numPerPage=10;//
 		
 		int totalBoard=new BoardService().selectCountBoard();
 		List<Board> list=new BoardService().selectBoard(cPage,numPerPage);
@@ -51,9 +51,9 @@ public class BoardListServlet extends HttpServlet {
 		int pageEnd=pageNo+pageSizeBar-1;
 		
 		if(pageNo==1) {
-			pageBar+="<span>[����]</span>";
+			pageBar+="<span> < </span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo-1)+"'>[����]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo-1)+"'> > </a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -64,11 +64,13 @@ public class BoardListServlet extends HttpServlet {
 			}pageNo++;
 		}
 		if(pageNo>totalPage) {
-			pageBar+="<span>[����]</sapn>";
+			pageBar+="<span> > </sapn>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo)+"'>[����]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo)+"'> > </a>";
 		}
-		
+		System.out.println(pageBar);
+		System.out.println(cPage);
+		System.out.println(list);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("cPage",cPage);
 		request.setAttribute("list",list);
