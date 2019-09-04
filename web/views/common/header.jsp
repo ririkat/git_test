@@ -29,7 +29,6 @@
 #fbd14b : 노랭이
 -->
 
-
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
@@ -63,7 +62,8 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
 						<li><a class="aa" href="#">공지사항</a></li>
-						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">게시판</a></li>
+						<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
+						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
 						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 						<li><a class="aa" href="#">게시판</a></li>
 						<% if (loginClient == null) {%>
