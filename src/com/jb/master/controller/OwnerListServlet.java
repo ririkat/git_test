@@ -32,13 +32,13 @@ public class OwnerListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Master loginMaster = (Master)request.getSession().getAttribute("loginMaster");
-		if(loginMaster==null) {
-			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			return;
-		}
+//		Master loginMaster = (Master)request.getSession().getAttribute("loginMaster");
+//		if(loginMaster==null) {
+//			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다");
+//			request.setAttribute("loc", "/");
+//			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+//			return;
+//		}
 		
 		//페이징 처리!!
 		int cPage;//현재보고있는 페이지
@@ -52,11 +52,41 @@ public class OwnerListServlet extends HttpServlet {
 		//DB에서 데이터 현황(총수), 필요한 데이터 만큼만 조회해서
 		//가져옴(공식에 의해)
 		int totalOwner=new MasterService().selectCountOwner();
-				
-//		List<Member> list=new MemberService().selectList();
+		System.out.println(totalOwner);
 		List<Owner> list=new MasterService().selectListPage(cPage,numPerPage);
+		System.out.println(list);
 		
 		//pageBar구성! 구성하는 문자열작성(코드)
+//		int totalPage=(int)Math.ceil((double)totalOwner/numPerPage);
+//		String pageBar="";
+//		int pageSizeBar=5;   //   12345/678910/...
+//		System.out.println("cpage : "+cPage);
+//		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
+//		System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
+//		int pageEnd=pageNo+pageSizeBar-1;
+//		if(pageNo==1) {
+//			pageBar+="<span>[이전]</span>";
+//		}
+//		else {
+//			pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+(pageNo-1)+">[이전]</a>";
+//		}
+//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+//			if(pageNo==cPage) {
+//				pageBar+="<span class='cPage'>"+pageNo+"</span>";
+//			}
+//			else {
+//				pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+pageNo+">"+pageNo+"</a>";
+//			}
+//			pageNo++;
+//		}
+//		if(pageNo>totalPage) {
+//			pageBar+="<span>[다음]</span>";
+//		}
+//		else {
+//			pageBar+="<a href="+request.getContextPath()+
+//			"/master/ownerList?cPage="+(pageNo)+">[다음]</a>";
+//		}
+		
 		int totalPage=(int)Math.ceil((double)totalOwner/numPerPage);
 		String pageBar="";
 		int pageSizeBar=5;   //   12345/678910/...
@@ -65,7 +95,7 @@ public class OwnerListServlet extends HttpServlet {
 		System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
 		int pageEnd=pageNo+pageSizeBar-1;
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
+			pageBar+="<span>이전</span>";
 		}
 		else {
 			pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+(pageNo-1)+">[이전]</a>";
@@ -80,11 +110,11 @@ public class OwnerListServlet extends HttpServlet {
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span>다음</span>";
 		}
 		else {
 			pageBar+="<a href="+request.getContextPath()+
-			"/master/ownerList?cPage="+(pageNo)+">[다음]</a>";
+			"/master/ownerList?cPage="+(pageNo)+">다음</a>";
 		}
 		
 		

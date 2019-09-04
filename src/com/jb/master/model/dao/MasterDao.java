@@ -19,7 +19,7 @@ public class MasterDao {
 	private Properties prop = new Properties();
 	
 	public MasterDao() {
-		String path = MasterDao.class.getResource("sql/master/master-query.properties").getPath();
+		String path = MasterDao.class.getResource("/sql/master/master-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		}catch(IOException e) {

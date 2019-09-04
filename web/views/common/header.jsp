@@ -55,6 +55,7 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
+						
 						<li><a class="aa" href="#">공지사항</a></li>
 						<li><a class="aa" href="#">게시판</a></li>
 						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
