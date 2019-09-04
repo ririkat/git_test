@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class JDBCTemplate {
+	
 	public static Connection getConnection() {
 		Properties prop = new Properties();
 		Connection conn=null;
