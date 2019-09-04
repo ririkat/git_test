@@ -29,7 +29,7 @@ public class JDBCTemplate {
 	
 	public static void close(Connection conn) {
 		try {
-			if(conn!=null&&conn.isClosed()) {
+			if(conn!=null&&!conn.isClosed()) {
 				conn.close();
 			}
 		}catch(SQLException e) {
@@ -38,7 +38,7 @@ public class JDBCTemplate {
 	}
 	public static void close(ResultSet rs) {
 		try {
-			if(rs!=null&&rs.isClosed()) {
+			if(rs!=null&&!rs.isClosed()) {
 				rs.close();
 			}
 		}catch(SQLException e) {
@@ -47,7 +47,7 @@ public class JDBCTemplate {
 	}
 	public static void close(Statement stmt) {
 		try {
-			if(stmt!=null&&stmt.isClosed()) {
+			if(stmt!=null&&!stmt.isClosed()) {
 				stmt.close();
 			}
 		}catch(SQLException e) {
@@ -57,7 +57,7 @@ public class JDBCTemplate {
 	
 	public static void commit(Connection conn) {
 		try {
-			if(conn!=null&&conn.isClosed()) {
+			if(conn!=null&&!conn.isClosed()) {
 				conn.commit();
 			}
 		}catch(SQLException e) {
@@ -66,7 +66,7 @@ public class JDBCTemplate {
 	}
 	public static void rollback(Connection conn) {
 		try {
-			if(conn!=null&&conn.isClosed()) {
+			if(conn!=null&&!conn.isClosed()) {
 				conn.rollback();
 			}
 		}catch(SQLException e) {

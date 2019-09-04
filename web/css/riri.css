@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/* 
+#fffcf0 : 누리끼리색 - .ivory
+#dedcee : 옅은 남?보라?색 - .navy
+#6a60a9 : 진한 남?보라?색 - .thNavy
+#fbd14b : 노랭이 - .yellow */
+
+.b-yellow{
+    background-color: #fbd14b;
+}
+.b-navy{
+    background-color: #dedcee;
+}
+.b-thNavy{
+    background-color: #6a60a9 ;
+}
+.b-ivory{
+    background-color: #fffcf0;
+}
+
+.my-btn{
+	background-color: #fbd14b ;
+	color:white;
+}

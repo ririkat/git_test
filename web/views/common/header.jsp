@@ -29,13 +29,13 @@
 #fbd14b : 노랭이
 -->
 
-
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">
 
-<script src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
 
 </head>
 
@@ -62,6 +62,9 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
 						<li><a class="aa" href="#">공지사항</a></li>
+						<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
+						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
+						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 						<li><a class="aa" href="#">게시판</a></li>
 						<% if (loginClient == null) {%>
 						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
