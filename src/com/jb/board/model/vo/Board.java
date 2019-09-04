@@ -3,18 +3,46 @@ package com.jb.board.model.vo;
 import java.sql.Date;
 
 public class Board {
+	
 	private int bNo;
 	private String title;
 	private Date entDate;
-	private Date modDate;
 	private String content;
 	private String category;
-	private String file;
+	private String originalFilename;
+	private String renameFilename;
 	private int boardCnt;
-	private String cId;
+	private String cId;//클라이언트 id
+	private int viewCnt;//조회수
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Board(String title, String content, String originalFilename, String renameFilename, String cId) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.originalFilename = originalFilename;
+		this.renameFilename = renameFilename;
+		this.cId = cId;
+	}
+
+
+	public Board(int bNo, String title, Date entDate, String content, String category, String originalFilename,
+			String renameFilename, int boardCnt, String cId, int viewCnt) {
+		super();
+		this.bNo = bNo;
+		this.title = title;
+		this.entDate = entDate;
+		this.content = content;
+		this.category = category;
+		this.originalFilename = originalFilename;
+		this.renameFilename = renameFilename;
+		this.boardCnt = boardCnt;
+		this.cId = cId;
+		this.viewCnt = viewCnt;
 	}
 
 	public int getbNo() {
@@ -41,14 +69,6 @@ public class Board {
 		this.entDate = entDate;
 	}
 
-	public Date getModDate() {
-		return modDate;
-	}
-
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -65,12 +85,20 @@ public class Board {
 		this.category = category;
 	}
 
-	public String getFile() {
-		return file;
+	public String getOriginalFilename() {
+		return originalFilename;
 	}
 
-	public void setFile(String file) {
-		this.file = file;
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+
+	public String getRenameFilename() {
+		return renameFilename;
+	}
+
+	public void setRenameFilename(String renameFilename) {
+		this.renameFilename = renameFilename;
 	}
 
 	public int getBoardCnt() {
@@ -89,12 +117,21 @@ public class Board {
 		this.cId = cId;
 	}
 
+	public int getViewCnt() {
+		return viewCnt;
+	}
+
+	public void setViewCnt(int viewCnt) {
+		this.viewCnt = viewCnt;
+	}
+
 	@Override
 	public String toString() {
-		return "Board [bNo=" + bNo + ", title=" + title + ", entDate=" + entDate + ", modDate=" + modDate + ", content="
-				+ content + ", category=" + category + ", file=" + file + ", boardCnt=" + boardCnt + ", cId=" + cId
-				+ "]";
+		return "Board [bNo=" + bNo + ", title=" + title + ", entDate=" + entDate + ", content=" + content
+				+ ", category=" + category + ", originalFilename=" + originalFilename + ", renameFilename="
+				+ renameFilename + ", boardCnt=" + boardCnt + ", cId=" + cId + ", viewCnt=" + viewCnt + "]";
 	}
-	
 
+	
+	
 }
