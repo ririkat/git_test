@@ -28,13 +28,13 @@
 
 					<ul class="nav nav-pills nav-stacked">
 						<br>
-						
+						<%-- 
                         <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         
                         <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li  class="active"><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
 					</ul>
 					<br>
 				</div>
@@ -70,8 +70,8 @@
 							<tr>
 								<th class="point" style="vertical-align: middle"><strong
 									class="point">*</strong>이름</th>
-								<td><input type="hidden" name="cId"
-									value="<%=c.getcId()%>" required></td>
+								<td><input type="hidden" name="cName"
+									value="<%=c.getcName()%>" required></td>
 							</tr>
 							<tr>
                                     <th class="point"><strong class="point">*</strong>생년월일</th>
@@ -111,30 +111,16 @@
 							
 							<tr>
 								<th class="point"><strong class="point">*</strong>아이디</th>
-								<td>  <input type="text" value="<%=c.getcId() %>"
+								<td><input type="text" value="<%=c.getcId()%>"
 	                     name="cId" id="cId" readonly></td>
 							</tr>
-							<tr>
-								<th class="point"><strong class="point">*</strong>현재비밀번호</th>
-								<td><input type="password" name="cPw" id="password" required="required"/></td>
-							</tr>
-						
-							<tr>
-								<th class="point"><strong class="point">*</strong>변경할비밀번호</th>
-								<td><input type="password" name="cPwNew" id="passwordNew" required="required"> 정보보호를 위해
-									6~20자로 사용(영문/숫자 조합)</td>
-							</tr>
-						
-							<tr>
-								<th class="point"><strong class="point">*</strong>비밀번호확인</th>
-								<td><input type="password" name="cPwCk" id="passwordCk" required/></td>
-							</tr>
+							
 							<tr>
 								<th class="point"><strong class="point">*</strong>이메일</th>
 								<td><input type="text" name="emailId"
 									style="IME-MODE: disabled" value=""> @ <input
 									type="text" name="email2" id="email3"
-									style="IME-MODE: disabled" value="<%=c.getcEmailSelect()%>"> 
+									style="IME-MODE: disabled" value=""> 
 									
 									
 									
@@ -151,22 +137,14 @@
 								</select></td>
 							</tr>
 
-							<tr>
-								<th class="point"><strong class="point">*</strong>핸드폰번호</th>
-								<td><select name="hp1" id="hp1" onchange="changePC('hp2')">
-										<option value="">선택</option>
-										<option value="010" selected="">010</option>
-										<option value="011">011</option>
-										<option value="016">016</option>
-										<option value="017">017</option>
-										<option value="018">018</option>
-										<option value="019">019</option>
-								</select> <input type="text" name="hp2" id="hp2" class="w50px"
-									maxlength="4" onkeyup="FocusNext('hp2','hp3',4)"
-									style="IME-MODE: disabled" value="9376"> <input
-									type="text" name="hp3" id="hp3" class="w50px" maxlength="4"
-									style="IME-MODE: disabled" value="8120"></td>
-							</tr>
+							 <tr>
+				                <th class="point"><strong class="point">*</strong>휴대폰번호</th>
+				                <td>
+				                    <input type="tel" placeholder="(-없이)01012345678"
+				                    name="cPhone" id="cPhone"
+				                    value='<%=c.getcPhone()%>'><br/>
+				                </td>
+				            </tr>
 
 							<tr>
 								<th class="point">지역</th>
@@ -215,7 +193,7 @@
 
 					<input type="submit" id="btn-update" onclick="updateClient();" value="수정"> 
 					<input
-						type="reset" onclick="" value="취소">
+						type="reset" onclick="" value="뒤로가기">
 
 				</div>
 
@@ -230,27 +208,11 @@
 
 
 
- $("#btn-update").click(function(){
-	 
-	 var pwd_new=$("#passwordNew").val().trim();
-	 var pwd_ck=$("#passwordCk").val().trim();
-	 if(pwd_new!=pwd_ck){
-		 
-		 alert('변경 할 비밀번호가 일치하지 않습니다.');
-		 $("#passwordNew").select();
-		 return false;
-	 }
-	 
-	 return true;
-	 
-	 
- });
-
-
 
 //메일 뒤에바뀌게 
 
 function mailChange(val,id_name){
+	
 	obj = document.getElementById(id_name);
 	obj.value = val;
 	obj.focus();
@@ -260,6 +222,14 @@ function updateClient(){
 	
 	var frm=$('#clientFrm');
 	var url="<%=request.getContextPath()%>/client/clientUpdate";
+	frm.attr("action",url);
+	frm.submit();
+}
+
+
+function update_validate(){
+
+	return true;
 }
 
 
@@ -292,12 +262,12 @@ function updateClient(){
     }
  */
    
-	
+	<%-- 
 	function init(){
 		
 	setEmail("<%=c.getcEmailSelect()%>");
 	
-	}
+	} --%>
 	
 	function setEmail(val){
 		
@@ -329,37 +299,10 @@ function updateClient()
 				alert("성별을 선택해 주십시오.");
 				form.cGender[0].focus();
 				return;
-		}
+		
+		}else if(!form.cEmail)
 
-		//수정이라 비밀번호를 수정해야만 스크립트 작동함
-		else if((form.cPw.value =="") && form.cPw.value && form.cPwNew.value){
-				alert("비밀번호를 입력해 주십시오.");
-				form.cPw.focus();
-				return;
-		}
-		else if((form.cPw.value.length < 6) && form.cPw.value && form.cPwNew.value){
-				alert("비밀번호는 6자리 이상 입력해 주십시오");
-				form.cPw.focus();
-				return;
-		}
-		else if((form.cPwNew.value =="") && form.cPw.value && form.cPwNew.value){
-				alert("비밀번호 확인을 입력해 주십시오.");
-				form.cPwNew.focus();
-				return;
-		}
-		else if((form.cPwNew.value.length < 6) && form.cPw.value && form.cPwNew.value){
-				alert("비밀번호는 4자리 이상 입력해 주십시오");
-				form.cPwNew.focus();
-				return;
-		}
-		else if((form.cPw.value !=form.cPwNew.value) && form.cPw.value && form.cPwNew.value){
-				alert("비밀번호가 올바르지 않습니다.");
-				form.cPw.focus();
-				return;
-		}
-
-		//////////////////////////// 비밀번호 수정 /////
-
+		
 
 
 /*
@@ -377,7 +320,7 @@ function only_number() {
     var messageArea = document.getElementById("ssnMessage");
 
     if (!(key == 8 || key == 9 || key == 13 || key == 46 || key == 144 || (key >= 48 && key <= 57) || (key >=  96 && key <= 105) || key == 110 || key == 190)) {
-        alert("Please enter telephone number with only numbers.");
+        alert("숫자만 입력하세요.");
         event.returnValue = false;
     }
 }

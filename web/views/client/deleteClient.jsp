@@ -7,12 +7,8 @@
     <%
     
     Client c = new Client();
-    
-    String[] why=new String[5];
-    
-    
-    
-    
+
+   
     %>
 
     
