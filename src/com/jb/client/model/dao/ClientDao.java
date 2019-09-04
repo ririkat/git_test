@@ -20,7 +20,7 @@ public class ClientDao {
 	private Properties prop = new Properties();
 
 	public ClientDao() {
-		String path=ClientDao.class.getResource("/sql/client/client-query.properties").getPath();
+		String path=ClientDao.class.getResource("/sql/member/client-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
