@@ -10,17 +10,7 @@
     String id=(String)session.getAttribute("cId");
     String[] why=new String[5];
     
-    for(String w : why){
-    switch(w){
     
-    case "이용X" : whyDelete[0]="checked"; break;
-    case "혜택X" : whyDelete[1]="checked"; break;
-    case "어려움" : whyDelete[2]="checked"; break;
-    case "불친절" : whyDelete[3]="checked"; break;
-    case "기타" : whyDelete[4]="checked"; break;
-    
-    }
-    }
     
     
     %>
@@ -45,7 +35,7 @@
                      
                         <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         
-                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한객실</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/?cId=<%=c.getcId()%>">회원탈퇴</a></li>
                     </ul><br>
@@ -80,23 +70,23 @@
                                     
                                     
                                         <p>
-                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="이용X" <%=whyDelete[0] %>>
+                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="이용X" >
                                             <label for="">중개사이트를 이용하지 않아서</label>
                                         </p>
                                         <p>
-                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="혜택X" <%=whyDelete[1] %>>
+                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="혜택X" >
                                             <label for="">이용에 대한 혜택사항이 적어서</label>
                                         </p>
                                         <p>
-                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="어려움" <%=whyDelete[2] %>>
+                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="어려움">
                                             <label for="">사이트 이용방법이 어려워서</label>
                                         </p>
                                         <p>
-                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="불친절" <%=whyDelete[3] %>>
+                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="불친절" >
                                             <label for="">고객상담이 불친절해서</label>
                                         </p>
                                         <p>
-                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="기타" <%=whyDelete[4] %>>
+                                            <input type="radio" id="" name="usece" title="탈퇴사유" value="기타" >
                                             <label for="">기타</label>
                                             <input class="mgl5" type="text" name="nreason" title="기타 탈퇴사유"
                                                 style="width:300px;"></p>
@@ -130,14 +120,14 @@
     
     <script>
     
-    function whyDelete(why) {
+  /*   function whyDelete(why) {
         for( var i=0, len=why.length; i < len; i++ ) {
             if (why[i].checked == true) {
                 var chk = why[i].value;
             }
         }
     	return chk;
-    }
+    } */
     
     
     

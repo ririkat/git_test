@@ -29,7 +29,7 @@
 					<ul class="nav nav-pills nav-stacked">
 						<br>
 						<li><a href="mypage.html">&nbsp;&nbsp;예약확인/취소</a></li>
-						<li><a href="jjim.html">&nbsp;&nbsp;내가찜한객실</a></li>
+						<li><a href="jjim.html">&nbsp;&nbsp;내가찜한펜션</a></li>
 						<li class="active"><a href="updateUserInfo.html">&nbsp;&nbsp;회원정보수정</a></li>
 						<li><a href="DeleteUserInfo.html">&nbsp;&nbsp;회원탈퇴</a></li>
 					</ul>

@@ -3,6 +3,7 @@ package com.jb.client.model.vo;
 import java.sql.Date;
 
 public class Client {
+	
 	private String cId;
 	private String cPw;
 	private String cName;
