@@ -38,7 +38,7 @@ private Properties prop = new Properties();
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result=rs.getInt(1);
+				result=rs.getInt("cnt");
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public List<Board> selectNotice(Connection conn, int cPage, int numPerPage) {
+	public List<Board> selectBoard(Connection conn, int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -63,16 +63,15 @@ private Properties prop = new Properties();
 			while(rs.next()) {
 				Board b=new Board();
 				b.setbNo(rs.getInt("b_no"));
-				b.setTitle(rs.getString("b_title"));
+				b.setTitle(rs.getString("title"));
 				b.setEntDate(rs.getDate("ent_date"));
-				b.setModDate(rs.getDate("mode_date"));
 				b.setContent(rs.getString("content"));
 				b.setCategory(rs.getString("category"));
-				b.setFile(rs.getString("file"));
+				b.setOriginalFilename(rs.getString("original_filename"));
+				b.setRenameFilename(rs.getString("rename_filename"));
 				b.setBoardCnt(rs.getInt("board_cnt"));
 				b.setcId(rs.getString("c_id"));
 				list.add(b);
-				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -81,6 +80,26 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int insertBoard(Connection conn, Board b) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setString(3, b.getOriginalFilename());
+			pstmt.setString(4, b.getRenameFilename());
+			pstmt.setString(5, b.getcId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
