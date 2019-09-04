@@ -141,7 +141,7 @@
 			
 			var pwck=$('#cPw').val().trim(); 
 			
-			if(pwck=<%=clientLogin.getcPw()%>){
+			if(!pwck=<%=clientLogin.getcPw()%>){
 				alert("비밀번호가 일치하지 않습니다.");
 				$(this).val("");
 				$('#cPw').val("").focus();
