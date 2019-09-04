@@ -8,10 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static common.template.JDBCTemplate.close;
 
 import com.jb.client.model.vo.Client;
 
@@ -130,7 +130,69 @@ public class ClientDao {
 			close(pstmt);
 		}
 		return list;
-	}	
+	}
+	
+	//오버로딩
+	//일반회원 검색
+	public int selectCountClient(Connection conn, String type, String keyword) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) as cnt from client where "+type+" like '%"+keyword+"%'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+	
+	public List<Client> selectClientList(Connection conn, String type, String keyword, int cPage, int numPerPage){
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Client> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from client where "
+				+ type + " like '%" + keyword + "%' )a) "
+				+ "where rnum between " + start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Client c = new Client();
+				c.setcId(rs.getString("c_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcBirth(rs.getDate("c_birth"));
+				c.setcGender(rs.getString("c_gender"));
+				c.setcEmail(rs.getString("c_email"));
+				c.setcPhone(rs.getString("c_phone"));
+				c.setcAddr(rs.getString("c_addr"));
+				c.setcEd(rs.getDate("c_ed"));
+				c.setcBLCount(rs.getInt("c_blcount"));
+				
+				list.add(c);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+	
 
 	public int deleteClient(Connection conn, String id, String pw) {
 		PreparedStatement pstmt = null;

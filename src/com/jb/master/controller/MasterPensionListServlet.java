@@ -53,7 +53,7 @@ public class MasterPensionListServlet extends HttpServlet {
 		if (pageNo == 1) { // 1일때는 이전이 없다
 			pageBar += "<span>&laquo;</span>";
 		} else {
-			pageBar += "<a href=" + request.getContextPath() + "/master/pensionList?cPage=" + (pageNo - 1) + ">[이전]</a>";
+			pageBar += "<a href=" + request.getContextPath() + "/master/pensionList?cPage=" + (pageNo - 1) + ">&laquo;</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
@@ -68,7 +68,7 @@ public class MasterPensionListServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span>&raquo;</span>";
 		} else {
-			pageBar += "<a href=" + request.getContextPath() + "/master/pensionList?cPage=" + (pageNo) + ">[다음]</a>";
+			pageBar += "<a href=" + request.getContextPath() + "/master/pensionList?cPage=" + (pageNo) + ">&raquo;</a>";
 		}
 
 		request.setAttribute("pageBar", pageBar);
