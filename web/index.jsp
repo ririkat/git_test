@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="views/common/header.jsp"%>
+<%@ include file="/views/common/header.jsp"%>
 <section class="marginB100">
 	<!-- 배너 슬라이더 -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -21,6 +21,7 @@
 					<p>Money Money.</p>
 				</div> -->
 			</div>
+			
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
 				<!-- <div class="carousel-caption">
@@ -28,6 +29,7 @@
 					<p>Lorem ipsum...</p>
 				</div> -->
 			</div>
+
 
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
@@ -137,4 +139,4 @@
 			<br>
 		</div>
 </section>
-<%@ include file="views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>
