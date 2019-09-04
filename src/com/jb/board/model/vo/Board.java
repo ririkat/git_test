@@ -12,7 +12,7 @@ public class Board {
 	private String originalFilename;
 	private String renameFilename;
 	private int boardCnt;
-	private String cId;
+	private String cId;//클라이언트 id
 	private int viewCnt;//조회수
 	
 	public Board() {
