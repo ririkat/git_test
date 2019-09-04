@@ -51,7 +51,7 @@ public class MasterClientListServlet extends HttpServlet {
 		int pageEnd = pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {	//1일때는 이전이 없다
-			pageBar += "<span>[이전]</span>";
+			pageBar += "<span>&laquo;</span>";
 		}
 		else {
 			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">[이전]</a>";
@@ -67,7 +67,7 @@ public class MasterClientListServlet extends HttpServlet {
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar += "<span>[다음]</span>";
+			pageBar += "<span>&raquo;</span>";
 		}
 		else {
 			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">[다음]</a>";
