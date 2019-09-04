@@ -31,6 +31,7 @@ public class UpdateClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//업데이트 위한 로직
 		Client c = new Client();
 		c.setcId(request.getParameter("cId"));
 		c.setcPw(request.getParameter("cPw"));
@@ -46,7 +47,8 @@ public class UpdateClientServlet extends HttpServlet {
 		
 		int result = new ClientService().updateClient(c);
 		
-		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
+		String msg="";
+		msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
 		String loc="/client/clientUpdate/?cId="+c.getcId();
 		
 		request.setAttribute("msg", msg);

@@ -56,4 +56,29 @@ public class ClientService {
 		return result;
 
 	}
+	
+	public int updatePassword(String cId, String cPw, String cPwNew) {
+		Connection conn = getConnection();
+		
+		Client c = dao.selectId(conn, cId, cPw);
+		int result = 0;
+		if (c != null) {
+			
+			result = dao.updatePassword(conn, cId, cPwNew);
+		} else {
+			
+			result = -1;
+			
+			
+		}
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
 }

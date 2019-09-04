@@ -148,4 +148,23 @@ public class ClientDao {
 		}
 		return result;
 	}
+	
+	public int updatePassword(Connection conn, String cId, String cPw) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePassword");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cPw);
+			pstmt.setString(2, cId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }

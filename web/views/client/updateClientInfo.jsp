@@ -28,10 +28,13 @@
 
 					<ul class="nav nav-pills nav-stacked">
 						<br>
-						<li><a href="mypage.html">&nbsp;&nbsp;예약확인/취소</a></li>
-						<li><a href="jjim.html">&nbsp;&nbsp;내가찜한펜션</a></li>
-						<li class="active"><a href="updateUserInfo.html">&nbsp;&nbsp;회원정보수정</a></li>
-						<li><a href="DeleteUserInfo.html">&nbsp;&nbsp;회원탈퇴</a></li>
+						
+                        <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
+                        
+                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
+                        <li  class="active"><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li>
 					</ul>
 					<br>
 				</div>
@@ -113,18 +116,18 @@
 							</tr>
 							<tr>
 								<th class="point"><strong class="point">*</strong>현재비밀번호</th>
-								<td><input type="password" name="cPw" id="cPw" required="required"/></td>
+								<td><input type="password" name="cPw" id="password" required="required"/></td>
 							</tr>
 						
 							<tr>
 								<th class="point"><strong class="point">*</strong>변경할비밀번호</th>
-								<td><input type="password" name="cPwNew" required="required"> 정보보호를 위해
+								<td><input type="password" name="cPwNew" id="passwordNew" required="required"> 정보보호를 위해
 									6~20자로 사용(영문/숫자 조합)</td>
 							</tr>
 						
 							<tr>
 								<th class="point"><strong class="point">*</strong>비밀번호확인</th>
-								<td><input type="password" name="cPwCk" required/></td>
+								<td><input type="password" name="cPwCk" id="passwordCk" required/></td>
 							</tr>
 							<tr>
 								<th class="point"><strong class="point">*</strong>이메일</th>
@@ -210,9 +213,9 @@
 				<br>
 				<div class="button">
 
-					<input type="submit" onclick="updateClient();" value="수정"> 
+					<input type="submit" id="btn-update" onclick="updateClient();" value="수정"> 
 					<input
-						type="reset" onclick="location.href='mypage.html' " value="취소">
+						type="reset" onclick="" value="취소">
 
 				</div>
 
@@ -224,6 +227,26 @@
 </section>
 
 <script>
+
+
+
+ $("#btn-update").click(function(){
+	 
+	 var pwd_new=$("#passwordNew").val().trim();
+	 var pwd_ck=$("#passwordCk").val().trim();
+	 if(pwd_new!=pwd_ck){
+		 
+		 alert('변경 할 비밀번호가 일치하지 않습니다.');
+		 $("#passwordNew").select();
+		 return false;
+	 }
+	 
+	 return true;
+	 
+	 
+ });
+
+
 
 //메일 뒤에바뀌게 
 

@@ -7,7 +7,7 @@
     <%
     
     Client c = new Client();
-    String id=(String)session.getAttribute("cId");
+    
     String[] why=new String[5];
     
     
@@ -37,6 +37,7 @@
                         
                         <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/?cId=<%=c.getcId()%>">회원탈퇴</a></li>
                     </ul><br>
                 </div>
@@ -133,15 +134,15 @@
     
 
     
-    
+ /*    
 	$(function(){
 		
-	}
+	} */
 		$('.btn-delete').click(function(){
 			
 			var pwck=$('#cPw').val().trim(); 
 			
-			if(!pwck=<%=clientLogin.getcPw()%>){
+			if(!pwck=<%=loginClient.getcPw()%>){
 				alert("비밀번호가 일치하지 않습니다.");
 				$(this).val("");
 				$('#cPw').val("").focus();
@@ -154,6 +155,10 @@
 				
 			
 			}
+			
+		}
+		
+		}
 			
 			
 
