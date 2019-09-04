@@ -21,6 +21,7 @@
 					<p>Money Money.</p>
 				</div> -->
 			</div>
+			
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
 				<!-- <div class="carousel-caption">
@@ -28,6 +29,7 @@
 					<p>Lorem ipsum...</p>
 				</div> -->
 			</div>
+
 
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
