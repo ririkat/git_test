@@ -96,7 +96,7 @@
 
                         <div class="button">
 
-                            <input type="button" class="btn-delete" value="탈퇴">
+                            <input type="button" id="btn-delete" onclick="deleteClient();"; value="탈퇴">
                             <input type="reset" onclick="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>" value="취소">
 
                         </div>
@@ -134,11 +134,13 @@
 	$(function(){
 		
 	} */
-		$('.btn-delete').click(function(){
+	/* 	$('.btn-delete').click(function(){ */
+		
+		function deleteClient() {
 			
-			var pwck=$('#cPw').val().trim(); 
+			var pwck=$('#cPw').val(); 
 			
-			if(!pwck=<%=loginClient.getcPw()%>){
+			if(!pwck=<%=.getcPw()%>){
 				alert("비밀번호가 일치하지 않습니다.");
 				$(this).val("");
 				$('#cPw').val("").focus();
@@ -151,6 +153,7 @@
 				
 			
 			}
+	}
 			
 		}
 		
