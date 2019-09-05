@@ -23,7 +23,7 @@
                         <ul class="nav nav-pills nav-stacked">
                             <br>
                             <li>
-                                <a class="nav-link active" href="jang.html">
+                                <a class="nav-link active" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 펜션관리 <span class="sr-only">(current)</span>
                                 </a>
@@ -35,7 +35,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="jang3.html">
+                                <a class="nav-link" href="<%=request.getContextPath()%>/master/clientList">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                 회원관리
                                 </a>
@@ -50,7 +50,7 @@
            
            
            
-           <!-- 예약내역 시작 -->
+           <!-- 업주리스트 시작 -->
            
         <br><br><br>
         <div class="col-sm-9 col-md-9">
@@ -69,13 +69,14 @@
                             <th>전화번호</th>
                             <th>주소</th>
                             <th>가입일</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                       
+                    <tbody id="ownerActive">
                         <%if(owners!=null&&!owners.isEmpty()){
-	                       for(Owner o : owners){%>
-                        <tr>
-                           
+                           for(Owner o : owners){%>
+                        <tr onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'">
                             <td><%=o.getoId() %></td>
                             <td><%=o.getoName() %></td>
                             <td><%=o.getoBirth() %></td>
@@ -84,16 +85,18 @@
                             <td><%=o.getoPhone() %></td>
                             <td><%=o.getoAddr() %></td>
                             <td><%=o.getoEd() %></td>
+                            <td><button type="button" onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'"
+                                    onclick="modifyConfirm();">수정</button></td>
                         </tr>
                         <%} 
                          }%> 
 				            
                     </tbody>
                     </table>
-                   s
+                   
 					<div class="text-center">
-						<ul class="pagination">
-							<li><%=request.getAttribute("pageBar") %></li>
+						<ul class="pagination" id='liactive'>
+							<%=request.getAttribute("pageBar") %>
 						</ul>
 					</div>
                 </div>
@@ -101,6 +104,17 @@
           </div>
           </div>
           </div>
-     <!-- 예약내역 끝 -->
+		  <style>
+		  	.selected{ background-color: lightgray; }
+		  </style>
+     <!-- 업주리스트 끝 -->
 
      <%@ include file="/views/common/footer.jsp" %>
+          <script>
+              
+              $("#ownerActive>tr").hover(function(){
+            	  $(this).addClass('active');
+              },  function(){
+            	  $(this).removeClass('active');
+              });
+          </script>

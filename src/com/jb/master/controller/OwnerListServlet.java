@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.master.model.service.MasterService;
-import com.jb.master.model.vo.Master;
+import com.jb.owner.model.service.OwnerService;
 import com.jb.owner.model.vo.Owner;
 
 /**
@@ -53,41 +53,11 @@ public class OwnerListServlet extends HttpServlet {
 		int numPerPage=5;//페이지당 출력할 데이터
 		//DB에서 데이터 현황(총수), 필요한 데이터 만큼만 조회해서
 		//가져옴(공식에 의해)
-		int totalOwner=new MasterService().selectCountOwner();
+		int totalOwner=new OwnerService().selectCountOwner();
 		System.out.println(totalOwner);
-		List<Owner> list=new MasterService().selectListPage(cPage,numPerPage);
+		List<Owner> list=new OwnerService().selectListPage(cPage,numPerPage);
 		System.out.println(list);
 		
-		//pageBar구성! 구성하는 문자열작성(코드)
-//		int totalPage=(int)Math.ceil((double)totalOwner/numPerPage);
-//		String pageBar="";
-//		int pageSizeBar=5;   //   12345/678910/...
-//		System.out.println("cpage : "+cPage);
-//		int pageNo=((cPage-1)/pageSizeBar)*pageSizeBar+1;
-//		System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
-//		int pageEnd=pageNo+pageSizeBar-1;
-//		if(pageNo==1) {
-//			pageBar+="<span>[이전]</span>";
-//		}
-//		else {
-//			pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+(pageNo-1)+">[이전]</a>";
-//		}
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(pageNo==cPage) {
-//				pageBar+="<span class='cPage'>"+pageNo+"</span>";
-//			}
-//			else {
-//				pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+pageNo+">"+pageNo+"</a>";
-//			}
-//			pageNo++;
-//		}
-//		if(pageNo>totalPage) {
-//			pageBar+="<span>[다음]</span>";
-//		}
-//		else {
-//			pageBar+="<a href="+request.getContextPath()+
-//			"/master/ownerList?cPage="+(pageNo)+">[다음]</a>";
-//		}
 		
 		int totalPage=(int)Math.ceil((double)totalOwner/numPerPage);
 		String pageBar="";
@@ -97,26 +67,27 @@ public class OwnerListServlet extends HttpServlet {
 		System.out.println("pageNo : "+(cPage-1)/pageSizeBar*pageSizeBar);
 		int pageEnd=pageNo+pageSizeBar-1;
 		if(pageNo==1) {
-			pageBar+="<span>이전</span>";
+			pageBar+="<li><span>&laquo;</span></li>";   //1페이지 일때 pageBar에 왼쪽버튼
 		}
-		else {
-			pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+(pageNo-1)+">[이전]</a>";
+		else {  //2페이지 이상일때
+			pageBar+="<li><a href="+request.getContextPath()+"/master/ownerList?cPage="+(pageNo-1)+">&laquo;</a></li>";
+			//전페이지로 가는 왼쪽버튼 링크
 		}
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<span class='cPage'>"+pageNo+"</span>";
+		while(!(pageNo>pageEnd||pageNo>totalPage)) { //현제 페이지가 페이지바의 가장끝보다 크거나 전체페이지보다 크지않을때 계속 돈다
+			if(pageNo==cPage) {  //현재페이지 표시
+				pageBar+="<li class='active'><span class='cPage'>"+pageNo+"</span></li>";
 			}
-			else {
-				pageBar+="<a href="+request.getContextPath()+"/master/ownerList?cPage="+pageNo+">"+pageNo+"</a>";
+			else { //보고있는 페이지와 현재페이지가 다를때 그페이지로 이동하는 버튼생성
+				pageBar+="<li><a href="+request.getContextPath()+"/master/ownerList?cPage="+pageNo+">"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
-			pageBar+="<span>다음</span>";
+			pageBar+="<li><span>&raquo;</span></li>";
 		}
 		else {
-			pageBar+="<a href="+request.getContextPath()+
-			"/master/ownerList?cPage="+(pageNo)+">다음</a>";
+			pageBar+="<li><a href="+request.getContextPath()+
+			"/master/ownerList?cPage="+(pageNo)+">&raquo;</a></li>";
 		}
 		
 		

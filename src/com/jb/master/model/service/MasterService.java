@@ -12,20 +12,7 @@ import com.jb.owner.model.vo.Owner;;
 public class MasterService {
 	private MasterDao dao = new MasterDao();
 	
-	public int selectCountOwner() {
-		Connection conn = getConnection();
-		int count= dao.selectCountOwner(conn);
-		close(conn);
-		return count;
-	}
 	
-	public List<Owner> selectListPage(int cPage, int numPerPage){
-		Connection conn =getConnection();
-		List<Owner> list=dao.selectListPage(conn,cPage,numPerPage);
-		close(conn);
-		return list;
-		
-	}
 	
 	
 }
