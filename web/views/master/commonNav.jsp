@@ -2,13 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <section>
-	<stytle>
-        
-    </stytle>
     <div class="container-fluid">
         <div class="row content">
         	<!--사이드바-->
-            <div class="col-sm-3 col-md-3 sidenav"> 
+            <div class="col-sm-3 col-md-2 sidenav"> 
                 <br>
                 <br>
                 <h4 id="mypagetitle"><a href="mypage.html">&nbsp;&nbsp;관리 메뉴</a></h4>
@@ -53,4 +50,3 @@
                     </ul><br>
                 </div>
             </div>
-
