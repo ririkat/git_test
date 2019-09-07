@@ -1,12 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.jb.client.model.vo.WishList"%>
 <%
-	Client c = (Client) request.getAttribute("client");
+	/* Client c = (Client) request.getAttribute("client");
+	
+	Cookie[] cookies = request.getCookies();
+	String pCode="";
+	if(cookies!=null){
+		
+		for(int i = 0; i<cookies.length; i++){
+			
+			String key = cookies[i].getName();
+			
+			if(key!=null && key.trim().equals("pCode")){
+				
+				pCode=cookies[i].getValue();
+			}
+		}
+	} */
 
+	//세션에 있는 하나의 찜목록을 빼내서 list를 정의해줌
 
-    
-    
+	ArrayList<WishList> wishList = (ArrayList<WishList>) session.getAttribute("wishList");
 %>
 
 <style>
@@ -34,13 +51,11 @@ table.wish-list {
 }
 
 table.wish-list th {
-
 	width: 150px;
 	padding: 10px;
 	font-weight: bold;
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
-	
 }
 
 table.wish-list td {
@@ -72,7 +87,7 @@ th, td {
 				<a href="mypage.html">&nbsp;&nbsp;마이페이지</a>
 			</h4>
 			<div id="mypageList">
-				<ul class="nav nav-pills nav-stacked">
+				<%-- <ul class="nav nav-pills nav-stacked">
 					<br>
 					
                         <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
@@ -81,7 +96,7 @@ th, td {
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li>
 					
-				</ul>
+				</ul> --%>
 				<br>
 			</div>
 
@@ -102,11 +117,19 @@ th, td {
 
 
 
-			 <div class="all-clear">
-                    <button class="btn btn-warning" id="all-clear" onclick="">목록모두삭제</button>
+			<div class="all-clear">
+				<button class="btn btn-warning" id="all-clear" onclick="">목록모두삭제</button>
+			</div>
 
-
-                </div>
+			<%
+				if (wishList == null || wishList.size() <= 0) {
+			%>
+			
+			<h1>찜한 펜션이 없습니다.</h1>
+			
+			<%
+				} else {
+			%>
 
 			<table class="wish-list">
 				<colgroup>
@@ -134,20 +157,24 @@ th, td {
 							<th scope="row">펜션이름</th>
 							<th scope="row">펜션주소</th>
 							<th scope="row">전화번호</th>
-							<th scope="row">펜션테마</th>
+							<th scope="row">상세정보</th>
 							<th scope="row">처리</th>
 						</tr>
 					</thead>
+
 					<tbody>
 
+						<%
+							for (int i = 0; i < wishList.size(); i++) {
+									WishList w = wishList.get(i);
+						%>
+
 						<form name="pension-jjim-match-Frm" method="post">
-							<input type="hidden" id="" name="pCode" value="" />
+							<input type="hidden" id="" name="pCode"
+								value="<%=w.getpCode()%>" />
 						</form>
 						<tr>
-							<td>
-							
-								
-							</td>
+							<td></td>
 							<td>
 								<div class="">
 									<a href=""><img
@@ -155,104 +182,29 @@ th, td {
 										width="80px" height="80px" /></a>
 								</div>
 							</td>
-							<td class="td-name">허니펜션</td>
-							<td class="td-addr">경기도 화성시 동탄반석로42</td>
-							<td class="td-phone">031-8888-0000</td>
-							<td class="td-theme">수영장</td>
-							<td class=""> <button class="btn btn-warning" onclick="">삭제</button></td>
+							<td class="td-name"><%=w.getpName()%></td>
+							<td class="td-addr"><%=w.getpAddr()%></td>
+							<td class="td-phone"><%=w.getpTel()%></td>
+							<td class=""><button class="btn btn-warning">보기</button></td>
+							<td class="">
+								<button class="btn btn-warning">삭제</button>
+							</td>
 						</tr>
-					</tbody>
-				</form>
-				<form name="pension-jjim-match-Frm" method="post">
-					<input type="hidden" id="" name="pCode" value="" />
-				</form>
-				<tr>
-					<td>
-						
-					</td>
-					<td>
-						<div class="">
-							<a href=""><img
-								src="<%=request.getContextPath()%>/images/펜션사진.jpg" width="80px"
-								height="80px" /></a>
-						</div>
-					</td>
-					<td class="td-name">허니펜션</td>
-					<td class="td-addr">경기도 화성시 동탄반석로42</td>
-					<td class="td-phone">031-8888-0000</td>
-					<td class="td-theme">수영장</td>
-					<td class=""> <button class="btn btn-warning">삭제</button></td>
-				</tr>
-				</tbody>
-				</form>
-				<form name="pension-jjim-match-Frm" method="post">
-					<input type="hidden" id="" name="pCode" value="" />
-				</form>
-				<tr>
-					<td>
-						
-					</td>
-					<td>
-						<div class="">
-							<a href=""><img
-								src="<%=request.getContextPath()%>/images/펜션사진.jpg" width="80px"
-								height="80px" /></a>
-						</div>
-					</td>
-					<td class="td-name">허니펜션</td>
-					<td class="td-addr">경기도 화성시 동탄반석로42</td>
-					<td class="td-phone">031-8888-0000</td>
-					<td class="td-theme">수영장</td>
-					<td class=""> <button class="btn btn-warning">삭제</button></td>
-				</tr>
-				</tbody>
-				</form>
-				<form name="pension-jjim-match-Frm" method="post">
-					<input type="hidden" id="" name="pCode" value="" />
-				</form>
-				<tr>
-					<td>
-						
-					</td>
-					<td>
-						<div class="">
-							<a href=""><img
-								src="<%=request.getContextPath()%>/images/펜션사진.jpg" width="80px"
-								height="80px" /></a>
-						</div>
-					</td>
-					<td class="td-name">허니펜션</td>
-					<td class="td-addr">경기도 화성시 동탄반석로42</td>
-					<td class="td-phone">031-8888-0000</td>
-					<td class="td-theme">수영장</td>
-					<td class=""> <button class="btn btn-warning">삭제</button></td>
-				</tr>
-				</tbody>
-				</form>
-				<form name="pension-jjim-match-Frm" method="post">
-					<input type="hidden" id="" name="pCode" value="" />
-				</form>
-				<tr>
-					<td></td>
-					<td>
-						<div class="">
-							<a href=""><img
-								src="<%=request.getContextPath()%>/images/펜션사진.jpg" width="80px"
-								height="80px" /></a>
-						</div>
-					</td>
-					<td class="td-name">허니펜션</td>
-					<td class="td-addr">경기도 화성시 동탄반석로42</td>
-					<td class="td-phone">031-8888-0000</td>
-					<td class="td-theme">수영장</td>
-					<td class=""> <button class="btn btn-warning">삭제</button></td>
-				</tr>
-				</tbody>
-				</form>
 
+						<%
+							}
+						%>
+
+
+					</tbody>
+
+				</form>
 
 
 			</table>
+			<%
+				}
+			%>
 
 
 		</section>
