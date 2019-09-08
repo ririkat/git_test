@@ -47,8 +47,8 @@ public class MasterRoomListServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 9;
-		int totalRoom = new RoomService().selectCountRoom();
-		List<Room> rooms = new RoomService().selectListPage(cPage, numPerPage);
+		int totalRoom = new RoomService().selectCountRoom(pCode);
+		List<Room> rooms = new RoomService().selectListPage(cPage, numPerPage, pCode);
 		int totalPage = (int) Math.ceil((double) totalRoom / numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;

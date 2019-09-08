@@ -27,14 +27,15 @@ public class RoomDao {
 		}
 	}
 	
-	//전체 객실 수
-	public int selectCountRoom(Connection conn) {
+	//선택된 펜션의 전체 객실 수
+	public int selectCountRoom(Connection conn, String pCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
 		String sql = prop.getProperty("selectCountRoom");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pCode);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -48,15 +49,16 @@ public class RoomDao {
 		return result;
 	}
 	
-	public List<Room> selectListPage(Connection conn, int cPage, int numPerPage){
+	public List<Room> selectListPage(Connection conn, int cPage, int numPerPage, String pCode){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("selectListPage");
 		List<Room> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setString(1, pCode);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Room r = new Room();
