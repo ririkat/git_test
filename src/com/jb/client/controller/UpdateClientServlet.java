@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jb.client.model.service.ClientService;
 import com.jb.client.model.vo.Client;
@@ -31,9 +32,32 @@ public class UpdateClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//업데이트 위한 로직
+		
+		//login하지 않으면 수정할 수 없게 
+		HttpSession session= request.getSession();
+		Object object = session.getAttribute("loginClient");
+		if(object ==null) {
+			
+			response.sendRedirect("/");
+			return;
+		}
+		
 		Client c = new Client();
+	    
+		String sessionCId = (String)object;
+		
 		c.setcId(request.getParameter("cId"));
+		
+		//자기만 수정할 수 있게 처리 
+		
+		if(!sessionCId.equals(request.getParameter("cId"))) {
+			
+			response.sendRedirect("/");
+			return;
+		}
+		
+		
+		
 		c.setcPw(request.getParameter("cPw"));
 		c.setcName(request.getParameter("cName"));
 		

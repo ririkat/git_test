@@ -33,7 +33,8 @@ public class updatePasswordServlet extends HttpServlet {
 		  String cId=request.getParameter("cId");
 		  request.setAttribute("cId", cId);
 		  request.getRequestDispatcher("/views/client/updatePassword.jsp").forward(request, response);
-		
+		  
+
 			
 			
 		}

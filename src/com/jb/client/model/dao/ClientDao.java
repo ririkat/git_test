@@ -132,14 +132,14 @@ public class ClientDao {
 		return list;
 	}	
 
-	public int deleteClient(Connection conn, String id, String pw) {
+	public int deleteClient(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleteClient");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

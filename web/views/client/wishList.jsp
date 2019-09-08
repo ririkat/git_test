@@ -187,7 +187,7 @@ th, td {
 							<td class="td-phone"><%=w.getpTel()%></td>
 							<td class=""><button class="btn btn-warning">보기</button></td>
 							<td class="">
-								<button class="btn btn-warning">삭제</button>
+								<button class="btn btn-warning" id="btn-delete">삭제</button>
 							</td>
 						</tr>
 
@@ -210,5 +210,35 @@ th, td {
 		</section>
 
 		<!-- 내가 찜한 객실 끝 -->
+		
+		
+		
+		<script>
+		
+		$(function(){
+			
+			$('#btn-delete').click(function(){
+				
+				
+					
+				if(confirm("정말로 삭제하시겠습니까?")){
+					
+					session.removeAttribute("wishList");
+				}
+			}
+		}
+		
+		}
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		</script>
 
 		<%@ include file="/views/common/footer.jsp"%>

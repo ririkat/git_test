@@ -6,7 +6,9 @@
     
     <%
     
-    Client c = new Client();
+   /*   Client c=(Client)request.getSession("loginClient");*/
+   Client c =(Client)request.getAttribute("client");
+    
 
    
     %>
@@ -96,7 +98,7 @@
 
                         <div class="button">
 
-                            <input type="button" id="btn-delete" onclick="deleteClient();"; value="탈퇴">
+                            <input type="button" id="btn-delete" name="btn-delete" onclick="deleteClient();"; value="탈퇴">
                             <input type="reset" onclick="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>" value="취소">
 
                         </div>
@@ -135,7 +137,7 @@
 		
 	} */
 	/* 	$('.btn-delete').click(function(){ */
-		
+		<%-- 
 		function deleteClient() {
 			
 			var pwck=$('#cPw').val(); 
@@ -157,7 +159,7 @@
 			
 		}
 		
-		}
+		} --%>
 			
 			
 

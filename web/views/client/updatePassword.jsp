@@ -89,7 +89,7 @@
 				<br> <br>
 				<div class="button">
 
-					<input type="submit" id="btn-update" onclick="password_validate();"
+					<input type="submit" id="btn-update" name="btn-update" onclick="password_validate();"
 						value="변경"> <input type="reset" onclick="" value="뒤로가기">
 
 				</div>

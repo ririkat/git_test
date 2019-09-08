@@ -33,15 +33,18 @@ public class DeleteClientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("cId");
-		String pw = request.getParameter("cPw");
+	
 		
-		 int result=new ClientService().deleteClient(id,pw);
+		
+		 int result=new ClientService().deleteClient(id);
 		 
 		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
 		 String loc = result>0?"/logout":"/client/clientDelete?cId="+id;
 		 request.setAttribute("msg", msg);
 		 request.setAttribute("loc", loc);
 		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		 
+	
 		 
 		
 		 

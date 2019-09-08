@@ -44,9 +44,9 @@ public class ClientService {
 		return list;
 	}
 
-	public int deleteClient(String id, String pw) {
+	public int deleteClient(String id) {
 		Connection conn = getConnection();
-		int result = dao.deleteClient(conn, id,pw);
+		int result = dao.deleteClient(conn, id);
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -79,6 +79,22 @@ public class ClientService {
 		close(conn);
 		return result;
 	}
+	
+	
+//	public int insertWishList(Client c) {
+//		
+//		Connection conn = getConnection();
+//		int result = dao.insertWishList(conn, c);
+//		
+//		if (result > 0) {
+//			commit(conn);
+//		} else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//		
+//	}
 	
 	
 }

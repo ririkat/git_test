@@ -5,7 +5,7 @@
 	Client c = (Client) request.getAttribute("client");
 /* String id = (String)session.getAttribute("cId");  */
  String cEmailSelect = (String)request.getAttribute("cEmailSelect");
-    
+   
 
     
     
@@ -182,7 +182,7 @@
 				<br>
 				<div class="button">
 
-					<input type="submit" id="btn-update" onclick="updateClient();" value="수정"> 
+					<input type="submit" id="btn-update"  onclick="updateClient();" value="수정"> 
 					<input
 						type="reset" onclick="" value="뒤로가기">
 
@@ -196,6 +196,27 @@
 </section>
 
 <script>
+
+// 휴대폰번호에 숫자만 입력받게 
+
+function onlynumber() {
+
+	var regexp = /^[0-9]*$/
+
+
+	v = $('#cPhone').val();
+
+	if( !regexp.test(v) ) {
+
+		alert("숫자만 입력하세요.");
+
+		$('#cPhone').val(v.replace(regexp,""));
+	    $('#cPhone').val("");
+
+	}
+
+	}
+
 
 
 
