@@ -60,12 +60,12 @@
 	                    	 for(Pension p : pensions) { %>
 		                        <tr>
 		                        	<td style="text-align:left"><input type="checkbox" name="selected" value="ROW"></td>
-		                            <td><%=p.getpCode() %></td>
 		                            <td style="cursor:pointer">
-		                            	<a href="<%=request.getContextPath()%>/master/roomList?pensionName=<%=p.getpName()%>">
-		                            		<%=p.getpName() %>
+		                            	<a href="<%=request.getContextPath()%>/master/roomList?pensionCode=<%=p.getpCode()%>">
+		                            		<%=p.getpCode() %>
 		                            	</a>
 		                            </td>
+		                            <td><%=p.getpName() %></td>
 		                            <td><%=p.getpAddr() %></td>
 		                            <td><%=p.getpTel() %></td>
 		                            <td><%=p.getoId() %></td>

@@ -29,6 +29,33 @@ public class PensionDao {
 		}
 	}
 	
+	//pCode로 받아온 한개의 펜션 정보
+	public Pension selectPension(Connection conn, String pCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Pension p = null;
+		String sql = prop.getProperty("selectPension");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pCode);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				p = new Pension();
+				p.setpCode(rs.getString("p_code"));
+				p.setpName(rs.getString("p_name"));
+				p.setpAddr(rs.getString("p_addr"));
+				p.setpTel(rs.getString("p_tel"));
+				p.setoId(rs.getString("o_id"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return p;
+		
+	}
+	
 	//전체 펜션 수
 	public int selectCountPension(Connection conn) {
 		PreparedStatement pstmt = null;

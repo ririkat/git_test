@@ -13,6 +13,14 @@ import com.jb.pension.model.vo.Pension;
 public class PensionService {
 	
 	private PensionDao dao = new PensionDao();
+	
+	//pCode로 받아온 한개의 펜션 정보
+	public Pension selectPension(String pCode) {
+		Connection conn = getConnection();
+		Pension p = dao.selectPension(conn,pCode);
+		close(conn);
+		return p;
+	}
 
 	//전체 펜션 수
 	public int selectCountPension() {
