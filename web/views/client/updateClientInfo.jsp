@@ -74,7 +74,32 @@
 							</tr>
 						<tr>
 							<th class="point"><strong class="point">*</strong>아이디</th>
-							<td><input type="text" value="<%=c.getcId()%>" name="cId" id="cId" readonly></td>
+							<td><input type="text" value="<%=c.getcId()%>" name="cId" id="cId" readonly>
+							   
+							   
+			        <!-- Trigger the modal with a button -->
+			        <button type="button" id="btn-cIdCheck"class="btn btn-warning" data-toggle="modal" onclick="cIdCheck();" data-target="#cIdCheck">중복확인</button>
+			      
+			        <!-- Modal -->
+			        <div class="modal fade" id="cIdCheck" role="dialog">
+			          <div class="modal-dialog modal-sm">
+			            <div class="modal-content">
+			              <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title" text-align="center">아이디 중복확인</h4>
+			              </div>
+			              <div class="modal-body">
+			                <p>사용할 수 있는 아이디 입니다.</p>
+			              </div>
+			              <div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+   
+							
+							</td>
 						</tr>
 				<tr>
                              <th class="point"><strong class="point">*</strong>생년월일</th>
@@ -112,7 +137,7 @@
 								<th class="point"><strong class="point">*</strong>이메일</th>
 								<td>
 								<input type="text" name="cEmailId" style="IME-MODE: disabled" value="" id="cEmailId"> @ 
-								<input type="text" name="email2" id="cEmail2"style="IME-MODE: disabled" value=""> 
+								<input type="text" name="cEmail2" id="cEmail2"style="IME-MODE: disabled" value=""> 
 								
 									
 						<select name="cEmailSelect" id="cEmailSelect" onchange="mailChange(this.value,'uemail02');">
@@ -174,17 +199,22 @@
 						</tbody>
 					</table>
 
-         <input type="hidden" name="cId" value='<%=(String)request.getAttribute("cId")%>'/>
+         
 
 
 				</form>
+				
+				
+	<form name="cIdCheckFrm" method="post">
+		<input type="hidden" name="cId" value='<%=(String)request.getAttribute("cId")%>'/>
+	</form>
 				<br>
 				<br>
 				<div class="button">
 
-					<input type="submit" id="btn-update"  onclick="updateClient();" value="수정"> 
+					<input type="submit" class="btn btn-warning" id="btn-update"  onclick="updateClient();" value="수정"> 
 					<input
-						type="reset" onclick="" value="뒤로가기">
+						type="reset" onclick="" class="btn btn-warning"  value="뒤로가기">
 
 				</div>
 
@@ -333,6 +363,27 @@ function only_number() {
         alert("숫자만 입력하세요.");
         event.returnValue = false;
     }
+}
+
+//아이디 중복검사
+
+function cIdCheck() {
+
+	var cId = $("#cId").val().trim();
+	if (!cId || cId.length < 4) {
+		alert("아이디는 4글자 이상 가능합니다.");
+		return;
+	}
+	
+
+	var url="<%=request.getContextPath()%>/cIdCheck";
+	var title = "cIdCheck";
+	var status = "left=500px, top=100px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes";
+	var popup = open("", title, status);
+	cIdCheckFrm.cId.value = cId;
+	cIdCheckFrm.target=title;
+	cIdCheckFrm.action=url;
+	cIdCheckFrm.submit();
 }
 	
 	

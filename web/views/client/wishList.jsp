@@ -179,7 +179,7 @@ th, td {
 								<div class="">
 									<a href=""><img
 										src="<%=request.getContextPath()%>/images/펜션사진.jpg"
-										width="80px" height="80px" /></a>
+										width="80px" height="80px" class="img-thumbnail" /></a>
 								</div>
 							</td>
 							<td class="td-name"><%=w.getpName()%></td>
