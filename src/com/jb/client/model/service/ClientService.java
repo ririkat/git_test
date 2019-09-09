@@ -70,6 +70,19 @@ public class ClientService {
 		}
 		close(conn);
 		return result;
-
+	}
+	
+	//관리자 회원 삭제
+	//	보완할 점 : 관리자인지 확인
+	public int deleteClientList(String delList) {
+		Connection conn = getConnection();
+		int result = dao.deleteClientList(conn, delList);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

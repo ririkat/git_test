@@ -136,6 +136,9 @@
 								tdArr.push(clientId);
 							});
 							console.log(tdArr);
+							
+							//삭제할 고객들을 서블릿으로 보내기
+							location.href="<%=request.getContextPath()%>/master/clientDelete?delClientList="+tdArr;
 		        		}
 					});
 		        	

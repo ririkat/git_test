@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -207,6 +208,42 @@ public class ClientDao {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	//관리자 회원 삭제
+	public int deleteClientList(Connection conn, String delList) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "delete from client where c_id in (";
+		
+		String[] arrDelList = delList.split(",");
+		for(int i=0; i<arrDelList.length; i++) {
+			arrDelList[i] = "'"+arrDelList[i]+"'";
+			System.out.println(arrDelList[i]);
+		}
+		
+		if(arrDelList.length<2) {
+			sql += arrDelList[0] + ")";
+		}
+		else {
+			sql += arrDelList[0];
+			for(int i=1; i<arrDelList.length; i++) {
+				sql += ","+arrDelList[i];
+			}
+			sql += ")";
+		}
+		
+		System.out.println(sql);
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
 		}
 		return result;
 	}
