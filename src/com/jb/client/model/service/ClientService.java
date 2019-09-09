@@ -56,4 +56,26 @@ public class ClientService {
 		return result;
 
 	}
+	//회원가입
+	public int insertClient(Client c) {
+		Connection conn = getConnection();
+		int result = dao.insertClient(conn,c);
+		if(result>0) {	
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	//중복체크
+	
+	public boolean selectCheckId(String id) {
+		Connection conn = getConnection();
+		boolean result = dao.selectCheckId(conn,id);
+		close(conn);
+		return result;
+	}
 }

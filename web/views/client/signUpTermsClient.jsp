@@ -1,24 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp"%>
 
 <br>
 
-    <section>
-        <!-- <div class="jumbotron well"> -->
-        <div class="jumbotron">
-            <div class="container border">
-                <div class="row">
-                    <div class="m-0">
-                        <div class="account-wall" style="text-align: center">
-                            <h2>자바방 사용자 이용약관</h2><br>
-                            <table width="100%" cellpadding="4" cellspacing="0" bgcolor=#EEEEEE>
-                                <tr>
-                                    <td height=40>&nbsp; <b>이용약관동의(필수)</b></td>
-                                </tr>
-                                <tr>
-                                    <td align="center" valign="top"><textarea style="width: 98%" rows=10 readonly
-                                            class=ed>
+<section>
+	<!-- <div class="jumbotron well"> -->
+	<div class="jumbotron">
+		<div class="container border">
+			<div class="row">
+				<div class="m-0">
+					<div class="account-wall" style="text-align: center">
+						<h2>자바방 사용자 이용약관</h2>
+						<br>
+						
+						<table width="100%" cellpadding="4" cellspacing="0"
+							bgcolor=#EEEEEE>
+							<tr>
+								<td height=40>&nbsp; <b>이용약관동의(필수)</b></td>
+							</tr>
+							<tr>
+								<td align="center" valign="top"><textarea
+										style="width: 98%" rows=10 readonly class=ed>
 
 자바방 이용약관
 제1조(목적)
@@ -218,25 +221,28 @@
 본 약관은 2019년 06월 12일부터 적용합니다.
 
                                     </textarea></td>
-                                </tr>
-                                <tr>
-                                    <td height=40>
-                                        &nbsp; <input type=radio value=1 name=agree id=agree11>&nbsp;<label
-                                            for=agree11>동의합니다.</label>
-                                        &nbsp; <input type=radio value=0 name=agree id=agree10>&nbsp;<label
-                                            for=agree10>동의하지
-                                            않습니다.</label>
-                                    </td>
-                                </tr>
-                            </table><br><br>
+							</tr>
+							<tr>
+								<td height=40>&nbsp; 
+								<input type="checkbox" name="agree" id="chk1">
+								&nbsp;<label for=agree11>동의합니다.</label>
+									&nbsp; 
+<!-- 								<input type="checkbox" value=0 name="agree" id="agree10"> -->
+<!-- 								&nbsp;<label -->
+<!-- 									for=agree10>동의하지 않습니다.</label> -->
+								</td>
+							</tr>
+						</table>
+						<br> <br>
 
-                            <table width="100%" cellpadding="4" cellspacing="0" bgcolor=#EEEEEE>
-                                <tr>
-                                    <td height=40>&nbsp; <b>개인정보 수집 및 이용 동의 (필수)</b></td>
-                                </tr>
-                                <tr>
-                                    <td align="center" valign="top"><textarea style="width: 98%" rows=10 readonly
-                                            class=ed>
+						<table width="100%" cellpadding="4" cellspacing="0"
+							bgcolor=#EEEEEE>
+							<tr>
+								<td height=40>&nbsp; <b>개인정보 수집 및 이용 동의 (필수)</b></td>
+							</tr>
+							<tr>
+								<td align="center" valign="top"><textarea
+										style="width: 98%" rows=10 readonly class=ed>
 
 자바방 개인정보 처리방침
 주식회사 위드이노베이션(이하 "회사")은 이용자의 개인정보를 소중하게 생각하며 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」과 「개인정보보호법」 등 개인정보 보호 법령을 준수하고자 노력하고 있습니다.
@@ -251,36 +257,67 @@
                 
                 
                                     </textarea></td>
-                                </tr>
-                                <tr>
-                                    <td height=40>
-                                        &nbsp; <input type=radio value=1 name=agree id=agree11>&nbsp;<label
-                                            for=agree11>동의합니다.</label>
-                                        &nbsp; <input type=radio value=0 name=agree id=agree10>&nbsp;<label
-                                            for=agree10>동의하지
-                                            않습니다.</label>
-                                    </td>
-                                </tr>
-                            </table><br><br>
-                            <tr>
-                                <td>
-                                    &nbsp; <input type=radio value=1 name=agree id=agree11>&nbsp;<label
-                                        for=agree11>이용약관,
-                                        개인정보 수집 및 이용 모두 동의합니다.</label>
-                                </td>
-                            </tr>
-                            <br><br>
-                            <input type="button" value="다음" 
-                            onclick="location.href='<%=request.getContextPath()%>/views/client/signUpclient.jsp'">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
+							</tr>
+							<tr>
+								<td height=40>&nbsp; 
+								<input type="checkbox" name="agree" id="chk2">
+								&nbsp; <label for=agree11>동의합니다.</label>
+									&nbsp; 
+<!-- 								<input type="checkbox" value=0 name="agree" id="agree10"> -->
+<!-- 								&nbsp; -->
+<!-- 									<label for=agree10>동의하지 않습니다.</label> -->
+								</td>
+							</tr>
+						</table>
+						<br> <br>
+<!-- 						<tr> -->
+<!-- 							<td>&nbsp; <input type=radio value=1 name=agree id=agree11>&nbsp;<label -->
+<!-- 								for=agree11>이용약관, 개인정보 수집 및 이용 모두 동의합니다.</label> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+						<br> <br> 
+						<input type="button" value="다음"
+							onclick="agree();">
+<%-- 							onclick="location.href='<%=request.getContextPath()%>/views/client/signUpclient.jsp'"> --%>
+	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</section>
+<script> 
 
-<%@ include file="/views/common/footer.jsp" %>
+ 	function agree() {
+		
+		var chkbox = document.getElementsByName('agree');
+		var num = 0;
+		for (var i = 0; i < chkbox.length; i++) {
+			if (chkbox[i].checked==true) {
+				num += 1;	
+			}
+		}
+		if (num == 2 ) {
+			alert("모든 약관에 동의함.");
+			location.href='<%=request.getContextPath()%>/views/client/signUpclient.jsp';
+			return false;
+		} else {
+			alert("모든 약관에 동의해 주세요.");
+		}
+	} 
+	
+
+</script>
+
+
+
+	
+
+	</script>
+	
+</script>
+<%@ include file="/views/common/footer.jsp"%>
 
 
 

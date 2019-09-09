@@ -20,7 +20,7 @@ public class ClientDao {
 	private Properties prop = new Properties();
 
 	public ClientDao() {
-		String path=ClientDao.class.getResource("/sql/client/client-query.properties").getPath();
+		String path=ClientDao.class.getResource("/sql/member/client-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
@@ -148,4 +148,51 @@ public class ClientDao {
 		}
 		return result;
 	}
+	//회원가입
+	public int insertClient(Connection conn, Client c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertClient");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getcId());
+			pstmt.setString(2, c.getcPw());
+			pstmt.setString(3, c.getcName());
+			pstmt.setDate(4, c.getcBirth());
+			pstmt.setString(5, c.getcGender());
+			pstmt.setString(6, c.getcEmail());
+			pstmt.setString(7, c.getcPhone());
+			pstmt.setString(8, c.getcAddr());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//아이디 중복체크
+	public boolean selectCheckId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		String sql = prop.getProperty("selectCheckId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (!rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
