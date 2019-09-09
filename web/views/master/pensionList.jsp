@@ -82,6 +82,7 @@
                </div>
                
                <script>
+               		//검색창 숨기기, 정렬
 		        	$(function(){
 		        		var p_name = $("#search-pensionName");
 		        		var o_id = $("#search-ownerId");
@@ -113,12 +114,17 @@
 								var td = tr.children();
 								
 								// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-								var clientId = td.eq(1).text();
+								var pensionCode = td.eq(1).children().text().trim();
+
+								console.log("펜션코드 : "+pensionCode);
 								
 								// 가져온 값을 배열에 담는다.
-								tdArr.push(clientId);
+								tdArr.push(pensionCode);
 							});
 							console.log(tdArr);
+							
+							//삭제할 고객들을 서블릿으로 보내기
+							location.href="<%=request.getContextPath()%>/master/pensionDelete?delPensionList="+tdArr;
 		        		}
 					});
 		        	

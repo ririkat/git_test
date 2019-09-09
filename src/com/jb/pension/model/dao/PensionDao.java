@@ -162,5 +162,37 @@ public class PensionDao {
 		}
 		return list;
 	}
+	
+	//관리자 펜션관리 선택삭제
+	public int deletePensionList(Connection conn, String delList) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "delete from pension where p_code in (";
+		
+		String[] arrDelList = delList.split(",");
+		for(int i=0; i<arrDelList.length; i++) {
+			arrDelList[i] = "'"+arrDelList[i]+"'";
+		}
+		if(arrDelList.length<2) {
+			sql += arrDelList[0]+")";
+		}
+		else {
+			sql += arrDelList[0];
+			for(int i=1; i<arrDelList.length; i++) {
+				sql += ","+arrDelList[i];
+			}
+			sql += ")";
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
 
 }

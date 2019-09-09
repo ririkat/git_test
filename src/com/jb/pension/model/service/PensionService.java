@@ -52,4 +52,12 @@ public class PensionService {
 		close(conn);
 		return list;
 	}
+	
+	//관리자 펜션관리 선택삭제
+	public int deletePensionList(String delList) {
+		Connection conn = getConnection();
+		int result = dao.deletePensionList(conn,delList);
+		close(conn);
+		return result;
+	}
 }
