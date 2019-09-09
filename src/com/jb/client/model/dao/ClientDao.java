@@ -167,4 +167,60 @@ public class ClientDao {
 		return result;
 	}
 	
+	//아이디 중복확인
+		public boolean selectCheckId(Connection conn, String cId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			boolean result=false;
+			String sql=prop.getProperty("selectCheckId");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cId);
+				rs=pstmt.executeQuery();
+				if(!rs.next()) {
+					result=true;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		public Client selectClient(Connection conn, String cId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Client c=null;
+			String sql=prop.getProperty("selectCheckId");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					c = new Client();
+					c.setcId(rs.getString("c_id"));
+					c.setcName(rs.getString("c_name"));
+					c.setcBirth(rs.getDate("c_birth"));
+					c.setcGender(rs.getString("c_gender"));
+					c.setcEmail(rs.getString("c_email"));
+					c.setcPhone(rs.getString("c_phone"));
+					c.setcAddr(rs.getString("c_addr"));
+					c.setcEd(rs.getDate("c_ed"));
+					c.setcBLCount(rs.getInt("c_blcount"));
+					
+				
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(rs);
+				close(pstmt);
+			}
+			return c;
+		}
+	
 }

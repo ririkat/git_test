@@ -3,11 +3,16 @@
 <%@ page import="com.jb.client.model.vo.Client"%>
 <%
 	Client c = (Client) request.getAttribute("client");
-/* String id = (String)session.getAttribute("cId");  */
- String cEmailSelect = (String)request.getAttribute("cEmailSelect");
-   
+ 
+  String cId = (String) request.getAttribute("cId");
+  boolean isUseable = (boolean) request.getAttribute("isUseable");
 
-    
+
+ String cEmail=c.getcEmail();
+ int idx=cEmail.indexOf("@");
+ String cEmailId = cEmail.substring(0, idx);
+ String cEmailSelect = cEmail.substring(idx+1);
+
     
 %>
 
@@ -88,9 +93,35 @@
 			                <button type="button" class="close" data-dismiss="modal">&times;</button>
 			                <h4 class="modal-title" text-align="center">아이디 중복확인</h4>
 			              </div>
+			          
+			           
+			          
 			              <div class="modal-body">
-			                <p>사용할 수 있는 아이디 입니다.</p>
+			                 <%
+						if (isUseable) {
+					        %>
+			          
+			                <p><strong class="point"><%=cId %></strong>는 사용할 수 있는 아이디 입니다.</p>
+			                <%
+			              } else {
+	                     	%>
+	                     	
+	                     	<p><strong class="point"><%=cId %></strong>는 이미 사용중인 아이디 입니다.</p>
+	                     	<br>
+		<form action="<%=request.getContextPath()%>/client/checkIdDuplicate"
+			method="post" name="checkId">
+			<input type="text" name="cId" id="cId" placeholder="아이디를 입력하세요" />&nbsp;&nbsp;
+			<button type='button' class="btn btn-warning"  onclick="checkIdDuplicate();">중복검사</button>
+		</form>
+		<%
+			}
+		%>
+			             
+			             
+			             
 			              </div>
+			              
+			           
 			              <div class="modal-footer">
 			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			              </div>
@@ -136,8 +167,8 @@
 						<tr>
 								<th class="point"><strong class="point">*</strong>이메일</th>
 								<td>
-								<input type="text" name="cEmailId" style="IME-MODE: disabled" value="" id="cEmailId"> @ 
-								<input type="text" name="cEmail2" id="cEmail2"style="IME-MODE: disabled" value=""> 
+								<input type="text" name="cEmailId" style="IME-MODE: disabled" value="<%=cEmailId %>" id="cEmailId"> @ 
+								<input type="text" name="cEmail2" id="cEmail2"style="IME-MODE: disabled" value="<%=cEmailSelect%>"> 
 								
 									
 						<select name="cEmailSelect" id="cEmailSelect" onchange="mailChange(this.value,'uemail02');">
@@ -203,6 +234,7 @@
 
 
 				</form>
+				
 				
 				
 	<form name="cIdCheckFrm" method="post">
@@ -367,25 +399,15 @@ function only_number() {
 
 //아이디 중복검사
 
-function cIdCheck() {
-
-	var cId = $("#cId").val().trim();
-	if (!cId || cId.length < 4) {
-		alert("아이디는 4글자 이상 가능합니다.");
-		return;
-	}
-	
-
-	var url="<%=request.getContextPath()%>/cIdCheck";
-	var title = "cIdCheck";
-	var status = "left=500px, top=100px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes";
-	var popup = open("", title, status);
-	cIdCheckFrm.cId.value = cId;
-	cIdCheckFrm.target=title;
-	cIdCheckFrm.action=url;
-	cIdCheckFrm.submit();
-}
-	
+function checkIdDuplicate() {
+			var cId = document.getElementById("cId").value;
+			if (!cId || cId.trim().length < 4) {
+				alert("아이디는 4글자 이상 가능합니다.");
+				return;
+			}
+			checkId.cId.value = cId.trim();
+			checkId.submit();
+		}
 	
 	
 

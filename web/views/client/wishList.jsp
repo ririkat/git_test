@@ -23,7 +23,7 @@
 
 	//세션에 있는 하나의 찜목록을 빼내서 list를 정의해줌
 
-	ArrayList<WishList> wishList = (ArrayList<WishList>) session.getAttribute("wishList");
+	ArrayList<WishList> wishList = (ArrayList<WishList>)session.getAttribute("wishList");
 %>
 
 <style>
