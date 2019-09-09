@@ -1,13 +1,12 @@
 package com.jb.master.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.jasper.tagplugins.jstl.core.Out;
 
 import com.jb.owner.model.service.OwnerService;
 
@@ -30,15 +29,16 @@ public class OwnerMultiDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] ids = request.getParameterValues("oIds");
-		for(int i=0; i<ids.length;i++) {
-			System.out.println(ids[i]);
+		String ids = request.getParameter("oIds");
+		String[] idss=ids.split(",");
+		for(int i=0; i<idss.length;i++) {
+			System.out.println(idss[i]);
 		}
-//		System.out.println("받아온값들: "+ids);
+//		System.out.println("dd= "+request.getParameterValues("name_ownerId"));
 		
 		
-//		int result = new OwnerService().deleteOwner(id);
-		int result=1;
+//		int result=1;
+		int result = new OwnerService().multiDeleteOwner(idss);
 		String msg = result>0?"업주삭제완료":"업주삭제실패";
 		String loc = result>0?"/master/ownerList":"/master/ownerList";
 		

@@ -125,4 +125,23 @@ public class OwnerDao {
 	}
 	
 
+	public int multiDeleteOwner(Connection conn, String[] idss) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		String sql = prop.getProperty("deleteOwner");
+		for(int i=0; i<idss.length; i++) {
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, idss[i]);
+				result = pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+	
+		}
+		return result;
+	}
 }

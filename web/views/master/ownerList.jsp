@@ -92,7 +92,7 @@
                             <td><%=o.getoPhone() %></td>
                             <td><%=o.getoAddr() %></td>
                             <td><%=o.getoEd() %></td>
-                            <td><button type="button" onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'"
+                            <td><button type="button" style="margin-top: -2px;" onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'"
                                     onclick="modifyConfirm();">상세보기</button></td>
                         </tr>
                         <%} 

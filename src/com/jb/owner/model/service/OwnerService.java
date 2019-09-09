@@ -49,5 +49,17 @@ public class OwnerService {
 		close(conn);
 		return result;
 	}
+	
+	public int multiDeleteOwner(String[] idss) {
+		Connection conn =getConnection();
+		int result = dao.multiDeleteOwner(conn, idss);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
