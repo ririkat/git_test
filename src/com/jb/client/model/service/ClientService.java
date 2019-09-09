@@ -78,4 +78,12 @@ public class ClientService {
 		close(conn);
 		return result;
 	}
+	
+	//아이디찾기
+	public Client findId(String name,String email) {
+		Connection conn =getConnection();
+		Client c=dao.findId(conn,name,email);
+		close(conn);
+		return c;
+	}
 }

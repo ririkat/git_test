@@ -195,4 +195,31 @@ public class ClientDao {
 		return result;
 	}
 	
+	//아이디 찾기
+	public Client findId(Connection conn, String name, String email) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("findId");
+		Client c = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				c = new Client();
+				c.setcId(rs.getString("c_Id"));
+				c.setcName(rs.getString("c_Name"));
+				c.setcEmail(rs.getString("c_Email"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return c;
+	}
+	
 }
