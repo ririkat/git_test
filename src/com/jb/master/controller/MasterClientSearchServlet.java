@@ -13,16 +13,16 @@ import com.jb.client.model.service.ClientService;
 import com.jb.client.model.vo.Client;
 
 /**
- * Servlet implementation class MasterClientListServlet
+ * Servlet implementation class MasterClientSearchServlet
  */
-@WebServlet("/master/clientList")
-public class MasterClientListServlet extends HttpServlet {
+@WebServlet("/master/clientSearch")
+public class MasterClientSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MasterClientListServlet() {
+    public MasterClientSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +31,8 @@ public class MasterClientListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//미완성.
-		//관리자 메뉴이기 때문에 관리자가 아닐 경우
-		//주소입력을 통해 실행되지 않게 처리하는 로직 구현해야함
+		String type = request.getParameter("searchType");
+		String keyword = request.getParameter("searchKeyword");
 		
 		int cPage;
 		try {
@@ -42,8 +41,8 @@ public class MasterClientListServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 10;
-		int totalClient = new ClientService().selectCountClient();
-		List<Client> clients = new ClientService().selectListPage(cPage,numPerPage);
+		int totalClient = new ClientService().selectCountClient(type,keyword);
+		List<Client> clients = new ClientService().selectClientList(type,keyword,cPage,numPerPage);
 		int totalPage = (int)Math.ceil((double)totalClient/numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -54,14 +53,20 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>&laquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">&laquo;</a>";
+			pageBar += "<a href="+request.getContextPath()
+					+ "/master/clientSearch?cPage=" + (pageNo-1)
+					+ "&searchType=" + type + "&searchKeyword=" + keyword
+					+">&laquo;</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo == cPage) {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>";
 			}
 			else {
-				pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+pageNo+">"+pageNo+"</a>";
+				pageBar += "<a href="+request.getContextPath()
+						+ "/master/clientSearch?cPage=" + pageNo
+						+ "&searchType=" + type + "&searchKeyword=" + keyword
+						+">" + pageNo + "&laquo;</a>";
 			}
 			pageNo++;
 		}
@@ -70,12 +75,17 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>&raquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">&raquo;</a>";
+			pageBar += "<a href="+request.getContextPath()
+					+ "/master/clientSearch?cPage=" + pageNo
+					+ "&searchType=" + type + "&searchKeyword=" + keyword
+					+">&laquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("clients", clients);
+		request.setAttribute("searchType", type);
+		request.setAttribute("searchKeyword", keyword);
 		request.getRequestDispatcher("/views/master/clientList.jsp").forward(request, response);
 	}
 

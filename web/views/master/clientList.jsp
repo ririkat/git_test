@@ -3,86 +3,76 @@
 <%@ page import="java.util.List, com.jb.client.model.vo.Client" %>
 <%
 	List<Client> clients = (List)request.getAttribute("clients");
+	int cPage = (int)request.getAttribute("cPage");
+	String searchType = (String)request.getAttribute("searchType");
+	String searchKey = (String)request.getAttribute("searchKeyword");
 %>
 
 <%@ include file="/views/common/header.jsp"%>
-
-    <section>
-    <stytle>
-        
-    </stytle>
-    <div class="container-fluid">
-        <div class="row content">
-        	<!--사이드바-->
-            <div class="col-sm-3 col-md-3 sidenav"> 
-                <br>
-                <br>
-                <h4 id="mypagetitle"><a href="mypage.html">&nbsp;&nbsp;관리 메뉴</a></h4>
-                <div id="mypageList">
-                    <ul class="nav nav-pills nav-stacked">
-                        <br>
-                        <li class="active">
-                            <a class="nav-link active" href="jang.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-home">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                펜션관리 <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="jang2.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-file">
-                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                    <polyline points="13 2 13 9 20 9"></polyline>
-                                </svg>
-                                업주관리
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/master/clientList">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-users">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                                회원관리
-                            </a>
-                        </li>
-                    </ul><br>
-                </div>
-            </div>
-
-
+<%@ include file="/views/master/commonNav.jsp"%>
             <!--content영역-->
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <br><br><br>
-                <h2 style="text-align:center";>회원관리</h2> <br>
+                <h2 style="text-align:center">회원관리</h2> <br>
+                
+                <div class="pull-left">
+                	검색타입 : 
+                	<select id="searchType" style="width:90px;height:25px;">
+                		<option value="clientId" <%="c_id".equals(searchType)?"selected":"" %>>아이디</option>
+                		<option value="clientName" <%="c_name".equals(searchType)?"selected":"" %> >이름</option>
+                		<option value="clientPhone" <%="c_phone".equals(searchType)?"selected":"" %> >전화번호</option>
+                	</select>
+                	<div id="search-clientId">
+                		<form action="<%=request.getContextPath()%>/master/clientSearch">
+                			<input type="hidden" name="searchType" value="c_id"/>
+                			<input type="hidden" name="cPage" value="<%=cPage %>"/>
+                			<input type="text" placeholder="아이디  검색" name="searchKeyword"
+                				value='<%="c_id".equals(searchType)?searchKey:"" %>' style="width:150px;height:25px"/>
+                			<button type="submit">검색</button>
+                		</form>
+                	</div>
+                	<div id="search-clientName">
+                		<form action="<%=request.getContextPath()%>/master/clientSearch">
+                			<input type="hidden" name="searchType" value="c_name"/>
+                			<input type="hidden" name="cPage" value="<%=cPage %>"/>
+                			<input type="text" placeholder="이름 검색" name="searchKeyword"
+                				value='<%="c_name".equals(searchType)?searchKey:"" %>' style="width:150px;height:25px"/>
+                			<button type="submit">검색</button>
+                		</form>
+                	</div>
+                	<div id="search-clientPhone">
+                		<form action="<%=request.getContextPath()%>/master/clientSearch">
+                			<input type="hidden" name="searchType" value="c_phone"/>
+                			<input type="hidden" name="cPage" value="<%=cPage %>"/>
+                			<input type="text" placeholder="전화번호" name="searchKeyword"
+                				value='<%="c_phone".equals(searchType)?searchKey:"" %>' style="width:150px;height:25px"/>
+                			<button type="submit">검색</button>
+                		</form>
+                	</div>
+                </div>
+                <button id="deleteBtn" class="pull-right">삭제</button>
+                <br><br><br>
+                
                 <table id="tbl-clientList" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>아이디</th>
-                            <th>이름</th>
-                            <th>생년월일</th>
-                            <th>성별</th>
-                            <th>이메일</th>
-                            <th>전화번호</th>
-                            <th>주소</th>
-                            <th>가입일</th>
-                            <th>블랙카운트</th>
+                        	<th style="text-align:left"><input type="checkbox" name="selected_all"></th>
+                            <th style="text-align:center">아이디</th>
+                            <th style="text-align:center">이름</th>
+                            <th style="text-align:center">생년월일</th>
+                            <th style="text-align:center">성별</th>
+                            <th style="text-align:center">이메일</th>
+                            <th style="text-align:center">전화번호</th>
+                            <th style="text-align:center">주소</th>
+                            <th style="text-align:center">가입일</th>
+                            <th style="text-align:center">블랙카운트</th>
                         </tr>
                     </thead>
                     <tbody>
                     	<% if(clients!=null && !clients.isEmpty()) {
 	                    	 for(Client c : clients) { %>
 		                        <tr>
+		                        	<td style="text-align:left"><input type="checkbox" name="selected" value="ROW"></td>
 		                            <td><%=c.getcId() %></td>
 		                            <td><%=c.getcName() %></td>
 		                            <td><%=c.getcBirth() %></td>
@@ -98,26 +88,59 @@
                     </tbody>
                 </table>
                 
-                <div id="pageBar">
-		        	<%=request.getAttribute("pageBar") %>
-		        </div>
-        
-                <div class="text-center">
-                    <ul class="pagination">
-                    	<li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
+                <!-- 페이지바 -->
+        		<div class="text-center">
+                  <ul class="pagination">
+                     <li><%=request.getAttribute("pageBar") %></li>
+                  </ul>
+               </div>
+               
+               <script>
+               		//검색창 숨기기, 정렬
+		        	$(function(){
+		        		var c_id = $("#search-clientId");
+		        		var c_name = $("#search-clientName");
+		        		var c_phone = $("#search-clientPhone");
+		        		var searchType = $("#searchType");
+		        		searchType.change(function(){
+		        			c_id.hide();
+		        			c_name.hide();
+		        			c_phone.hide();
+		        			$("#search-"+this.value).css("display","inline-block");
+		        		});
+		        		$("#searchType").trigger('change');
+		        	});
+		        	
+		        	//전체 선택 및 해제
+		        	$('input[name=selected_all]').on('change', function(){
+		        		$('input[name=selected]').prop('checked', this.checked);
+		        	});
+		        	
+		        	//삭제버튼 동작
+		        	$("#deleteBtn").click(function(){
+		        		if(confirm("정말로 삭제하시겠습니까?")){
+							var tdArr = new Array();
+							var checkbox = $("input[name=selected]:checked");
+							
+							// 체크된 체크박스 값을 가져온다
+							checkbox.each(function(i) {
+								// checkbox.parent() : checkbox의 부모는 <td>이다.
+								// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+								var tr = checkbox.parent().parent().eq(i);
+								var td = tr.children();
+								
+								// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+								var clientId = td.eq(1).text();
+								
+								// 가져온 값을 배열에 담는다.
+								tdArr.push(clientId);
+							});
+							console.log(tdArr);
+		        		}
+					});
+		        	
+		        </script>
+               
             </div>
             
-
-        </div>
-    </div>
-	</section>
-
 <%@ include file="/views/common/footer.jsp"%>

@@ -7,17 +7,14 @@ public class Client {
 	private String cId;
 	private String cPw;
 	private String cName;
-	private Date cBirthYY;
-	private Date cBirthMM;
-	private Date cBirthDD;
+	private Date cBirth;
 	private String cGender;
 	private String cEmail;
-	private String cEmailSelect;
 	private String cPhone;
 	private String cAddr;
 	private Date cEd;
 	private int cBLCount;
-	private int Authority;
+	private int authority;
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -37,25 +34,7 @@ public class Client {
 		this.cAddr = cAddr;
 		this.cEd = cEd;
 		this.cBLCount = cBLCount;
-		Authority = authority;
-	}
-
-
-	public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cEmailSelect,
-			String cPhone, String cAddr, Date cEd, int cBLCount, int authority) {
-		super();
-		this.cId = cId;
-		this.cPw = cPw;
-		this.cName = cName;
-		this.cBirth = cBirth;
-		this.cGender = cGender;
-		this.cEmail = cEmail;
-		this.cEmailSelect = cEmailSelect;
-		this.cPhone = cPhone;
-		this.cAddr = cAddr;
-		this.cEd = cEd;
-		this.cBLCount = cBLCount;
-		Authority = authority;
+		this.authority = authority;
 	}
 
 	public String getcId() {
@@ -106,14 +85,6 @@ public class Client {
 		this.cEmail = cEmail;
 	}
 
-	public String getcEmailSelect() {
-		return cEmailSelect;
-	}
-
-	public void setcEmailSelect(String cEmailSelect) {
-		this.cEmailSelect = cEmailSelect;
-	}
-
 	public String getcPhone() {
 		return cPhone;
 	}
@@ -147,18 +118,18 @@ public class Client {
 	}
 
 	public int getAuthority() {
-		return Authority;
+		return authority;
 	}
 
 	public void setAuthority(int authority) {
-		Authority = authority;
+		this.authority = authority;
 	}
 
 	@Override
 	public String toString() {
 		return "Client [cId=" + cId + ", cPw=" + cPw + ", cName=" + cName + ", cBirth=" + cBirth + ", cGender="
-				+ cGender + ", cEmail=" + cEmail + ", cEmailSelect=" + cEmailSelect + ", cPhone=" + cPhone + ", cAddr="
-				+ cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", Authority=" + Authority + "]";
+				+ cGender + ", cEmail=" + cEmail + ", cPhone=" + cPhone + ", cAddr="
+				+ cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", authority=" + authority + "]";
 	}
 	
 	

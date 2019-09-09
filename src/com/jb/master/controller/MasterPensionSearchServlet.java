@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ClientService;
-import com.jb.client.model.vo.Client;
+import com.jb.pension.model.service.PensionService;
+import com.jb.pension.model.vo.Pension;
 
 /**
- * Servlet implementation class MasterClientListServlet
+ * Servlet implementation class MasterPensionSearchServlet
  */
-@WebServlet("/master/clientList")
-public class MasterClientListServlet extends HttpServlet {
+@WebServlet("/master/pensionSearch")
+public class MasterPensionSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MasterClientListServlet() {
+    public MasterPensionSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +31,8 @@ public class MasterClientListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//미완성.
-		//관리자 메뉴이기 때문에 관리자가 아닐 경우
-		//주소입력을 통해 실행되지 않게 처리하는 로직 구현해야함
+		String type = request.getParameter("searchType");
+		String keyword = request.getParameter("searchKeyword");
 		
 		int cPage;
 		try {
@@ -42,9 +41,9 @@ public class MasterClientListServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 10;
-		int totalClient = new ClientService().selectCountClient();
-		List<Client> clients = new ClientService().selectListPage(cPage,numPerPage);
-		int totalPage = (int)Math.ceil((double)totalClient/numPerPage);
+		int totalPension = new PensionService().selectCountPension(type,keyword);
+		List<Pension> pensions = new PensionService().selectPensionList(type,keyword,cPage,numPerPage);
+		int totalPage = (int)Math.ceil((double)totalPension/numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -54,14 +53,20 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>&laquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">&laquo;</a>";
+			pageBar += "<a href="+request.getContextPath()
+					+ "/master/pensionSearch?cPage=" + (pageNo-1)
+					+ "&searchType=" + type + "&searchKeyword=" + keyword
+					+">&laquo;</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo == cPage) {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>";
 			}
 			else {
-				pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+pageNo+">"+pageNo+"</a>";
+				pageBar += "<a href="+request.getContextPath()
+						+ "/master/pensionSearch?cPage=" + pageNo
+						+ "&searchType=" + type + "&searchKeyword=" + keyword
+						+">" + pageNo + "&laquo;</a>";
 			}
 			pageNo++;
 		}
@@ -70,13 +75,18 @@ public class MasterClientListServlet extends HttpServlet {
 			pageBar += "<span>&raquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">&raquo;</a>";
+			pageBar += "<a href="+request.getContextPath()
+					+ "/master/pensionSearch?cPage=" + pageNo
+					+ "&searchType=" + type + "&searchKeyword=" + keyword
+					+">&laquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("clients", clients);
-		request.getRequestDispatcher("/views/master/clientList.jsp").forward(request, response);
+		request.setAttribute("pensions", pensions);
+		request.setAttribute("searchType", type);
+		request.setAttribute("searchKeyword", keyword);
+		request.getRequestDispatcher("/views/master/pensionList.jsp").forward(request, response);
 	}
 
 	/**
