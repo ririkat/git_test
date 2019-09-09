@@ -4,7 +4,7 @@
     
 <%@ include file="/views/common/header.jsp"%>
 
-	<section>
+<section>
 
 </section>
     

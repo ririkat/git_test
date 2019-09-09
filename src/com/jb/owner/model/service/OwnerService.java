@@ -1,6 +1,8 @@
 package com.jb.owner.model.service;
 
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.rollback;
 import static common.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -34,6 +36,18 @@ public class OwnerService {
 		Owner o = dao.selectOwnerOne(conn, oId);
 		close(conn);
 		return o;
+	}
+	
+	public int deleteOwner(String id) {
+		Connection conn = getConnection();
+		int result = dao.deleteOwner(conn, id);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }

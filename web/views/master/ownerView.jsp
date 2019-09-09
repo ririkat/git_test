@@ -168,8 +168,8 @@
                 <br><br>
                 <div class="button">
 
-                        <input type="button" onclick="updateUser();" value="수정">
-                        <input type="reset" onclick="location.href='mypage.html' " value="취소">
+                        <input type="button" onclick="deleteOwner();" value="삭제">
+                        <input type="reset" onclick="location.href='<%=request.getContextPath()%>/master/ownerList'" value="취소">
     
                     </div>
 
@@ -181,4 +181,11 @@
         </div>
         </div>
         
+        <script>
+        	function deleteOwner(){
+        		if(confirm('정말로 삭제하시겠습니까?')){
+        			location.href='<%=request.getContextPath()%>/master/ownerDelete?oId=<%=o.getoId()%>';
+        		}
+        	}
+        </script>
          <%@ include file="/views/common/footer.jsp" %>

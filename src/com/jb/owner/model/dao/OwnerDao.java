@@ -108,5 +108,21 @@ public class OwnerDao {
 		}return o;
 	}
 	
+	public int deleteOwner(Connection conn , String id) {
+		PreparedStatement pstmt= null;
+		int result =0 ;
+		String sql = prop.getProperty("deleteOwner");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 
 }

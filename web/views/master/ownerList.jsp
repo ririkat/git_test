@@ -9,6 +9,11 @@
 <%@ include file="/views/common/header.jsp"%>
     <!-- 헤더 끝 -->
 
+    <style>
+        th{
+            text-align: center;
+        }
+    </style>
 
     <!-- 마이페이지 nav -->
     <div class="container-fluid">
@@ -60,7 +65,7 @@
                     <table class="table table-striped  table-sm" >
                     <thead>
                         <tr>
-                            
+                            <th><input type="checkbox" id="allCheck" onclick="allCheckClick()"></th>
                             <th>업주아이디</th>
                             <th>이름</th>
                             <th>생년월일</th>
@@ -76,7 +81,9 @@
                     <tbody id="ownerActive">
                         <%if(owners!=null&&!owners.isEmpty()){
                            for(Owner o : owners){%>
-                        <tr onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'">
+                        <!-- <tr onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'"> -->
+                        <tr> 
+                            <td><input type="checkBox" id="chk_ownerId" name="name_ownerId" value="<%=o.getoId()%>"></td>
                             <td><%=o.getoId() %></td>
                             <td><%=o.getoName() %></td>
                             <td><%=o.getoBirth() %></td>
@@ -86,13 +93,17 @@
                             <td><%=o.getoAddr() %></td>
                             <td><%=o.getoEd() %></td>
                             <td><button type="button" onclick="location.href='<%=request.getContextPath()%>/master/ownerView?oId=<%=o.getoId()%>'"
-                                    onclick="modifyConfirm();">수정</button></td>
+                                    onclick="modifyConfirm();">상세보기</button></td>
                         </tr>
                         <%} 
                          }%> 
 				            
                     </tbody>
                     </table>
+
+                    <div id="delete_div" style="float:right; margin-right: 10px;">
+                        <button id="ownerDelete_btn" value="삭제" onclick="ownerDelete()">삭제</button>
+                    </div>
                    
 					<div class="text-center">
 						<ul class="pagination" id='liactive'>
@@ -111,10 +122,42 @@
 
      <%@ include file="/views/common/footer.jsp" %>
           <script>
-              
-              $("#ownerActive>tr").hover(function(){
+              $("#ownerActive>tr").hover(function(){   //마우스가 올라갔을때 active
             	  $(this).addClass('active');
               },  function(){
             	  $(this).removeClass('active');
-              });
+                });
+                
+                //List화면에서의 (전체포함)삭제
+                function ownerDelete(){
+                    var deleteConfirm = confirm('정말로 삭제하시겠습니까?');
+                    if(deleteConfirm==true){
+                        var chkOwnerId =[];
+                        var chkLength;
+                        var count=0;
+
+<%--                         location.href="<%=request.getContextPath()%>/master/owenrMultiDelete"; --%>
+
+                       
+                        $("#chk_ownerId:checked").each(function(){  //체크 박스 값들
+                            chkOwnerId += $(this).val()+',';
+                            chkLength=$("#chk_ownerId:checked").length; 
+                         });
+                        alert('chkLength : '+chkLength+'\nchkOwnerId : '+chkOwnerId.substring(0,chkOwnerId.lastIndexOf(',')));
+                         location.href='<%=request.getContextPath()%>/master/ownerMultiDelete?oIds='+chkOwnerId.substring(0,chkOwnerId.lastIndexOf(','));
+                         }
+                        
+                    }
+            
+
+              function allCheckClick(){
+                  if($("#allCheck").prop("checked")){
+                      //전체 checkbox 체크
+                      $("input[type=checkbox]").prop("checked",true);
+                  }else{
+                    $("input[type=checkbox]").prop("checked",false);
+                  }
+              }
+
+              
           </script>
