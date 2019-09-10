@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.Session;
-
 import com.jb.client.model.service.ClientService;
 
 /**
- * Servlet implementation class DeleteClientServlet
+ * Servlet implementation class CheckIdServlet
  */
-@WebServlet("/client/deleteClient")
-
-public class DeleteClientServlet extends HttpServlet {
+@WebServlet("/client/checkIdDuplicate")
+public class CheckIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClientServlet() {
+    public CheckIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,21 @@ public class DeleteClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id = request.getParameter("cId");
 
-		 int result=new ClientService().deleteClient(id);
-		 
-		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
-		 String loc = result>0?"/logout":"/client/deleteLoad?cId="+id;
-				 
-				
-		 request.setAttribute("msg", msg);
-		 request.setAttribute("loc", loc);
-		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		String cId = request.getParameter("userId");
+		
+		ClientService service = new ClientService();
+		boolean isUseable = service.selectCheckId(cId);
+
+	
+
+		request.setAttribute("cId", cId);
+		request.setAttribute("isUseable", isUseable);
+		request.getRequestDispatcher("/views/client/updateClientInfo.jsp").forward(request, response);
+	    
 
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

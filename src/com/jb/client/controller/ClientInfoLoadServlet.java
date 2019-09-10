@@ -6,23 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.Session;
+import javax.servlet.http.HttpSession;
 
 import com.jb.client.model.service.ClientService;
+import com.jb.client.model.vo.Client;
 
 /**
- * Servlet implementation class DeleteClientServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet("/client/deleteClient")
-
-public class DeleteClientServlet extends HttpServlet {
+@WebServlet("/client/infoLoad")
+public class ClientInfoLoadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClientServlet() {
+    public ClientInfoLoadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,23 @@ public class DeleteClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = request.getParameter("cId");
+		//1.여기가 뭘하는 서블릿인지 파악 -> 수정할 회원 1명의 정보를 가져와서 뷰(updateClientInfo.jsp) 화면으로 넘겨줘야함.
+				//2.서블릿에서 서비스->dao로 뭘 넘기고? 뭘 가져와야 하는지 파악 
+		
+		HttpSession session = request.getSession();
+		
+		    session.getAttribute("loginClient");
+				String cId=request.getParameter("cId");
 
-		 int result=new ClientService().deleteClient(id);
-		 
-		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
-		 String loc = result>0?"/logout":"/client/deleteLoad?cId="+id;
-				 
 				
-		 request.setAttribute("msg", msg);
-		 request.setAttribute("loc", loc);
-		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
+				
+				Client c= new ClientService().selectClient(cId);
+				request.setAttribute("client", c);
+				
+				request.getRequestDispatcher("/views/client/updateClientInfo.jsp")
+				.forward(request,response);		
+			
+		
 	}
 
 	/**

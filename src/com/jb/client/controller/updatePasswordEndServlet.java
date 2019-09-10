@@ -7,22 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.Session;
-
 import com.jb.client.model.service.ClientService;
 
 /**
- * Servlet implementation class DeleteClientServlet
+ * Servlet implementation class updatePasswordEndServlet
  */
-@WebServlet("/client/deleteClient")
-
-public class DeleteClientServlet extends HttpServlet {
+@WebServlet("/client/updatePasswordEnd")
+public class updatePasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClientServlet() {
+    public updatePasswordEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +28,37 @@ public class DeleteClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String cId=request.getParameter("cId");
+		String cPw=request.getParameter("cPw");
+		String cPwNew=request.getParameter("cPwNew");
+	
 		
-		String id = request.getParameter("cId");
+		int result = new ClientService().updatePassword(cId,cPw,cPwNew);
+		
+		String msg ="";
+		String loc="/client/updatePassword?cId="+cId;
+		
+		
+		
+		switch(result) {
+		case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;
+		case -1 : msg="현재 비밀번호와 다른 비밀번호를 입력하셨습니다.";break;
+		default : msg="비밀번호  변경 완료"; break;
+						
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
 
-		 int result=new ClientService().deleteClient(id);
-		 
-		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
-		 String loc = result>0?"/logout":"/client/deleteLoad?cId="+id;
-				 
-				
-		 request.setAttribute("msg", msg);
-		 request.setAttribute("loc", loc);
-		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
+		
+		
+	
+		
+		
+		
 	}
 
 	/**
