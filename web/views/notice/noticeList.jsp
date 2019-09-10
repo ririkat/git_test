@@ -9,26 +9,17 @@
 <%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">게시판</a>
-			</h4>
-
-			<div id="boardList">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="mypage.html">공지사항</a></li>
-					<li><a href="jjim.html">커뮤니티</a></li>
-					<li><a href="updateUserInfo.html">FAQ</a></li>
-				</ul>
-				<br>
-			</div>
-
-		</div>
+		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container">
 			<div class="col-sm-9">
 				<h2>공지사항</h2>
-
+				<div id="search-container">
+					<form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
+						<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
+						​​​​​​​<button type="submit">검색</button>
+					</form>
+				</div>
+				
 				<table id="tbl-notice" class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -51,11 +42,11 @@
 							<td>
 								<%
 									if (n.getnOriginFile() != null) {
-								%> <img
-								src="<%=request.getContextPath()%>/images/file.png" alt="첨부파일"
-								width="16px" /> <%
- 	}
- %>
+								%>
+								<img src="<%=request.getContextPath()%>/images/file.png" alt="첨부파일" width="16px" />
+								<%
+								 }
+								%>
 							</td>
 							<td><%=n.getnEntDate()%></td>
 							<td><%=n.getnViewCnt()%></td>
@@ -66,8 +57,13 @@
 						%>
 					</tbody>
 				</table>
-				<input type="button" value="글쓰기" onclick="wirteNotice();"
-					class="btn my-btn pull-right" />
+				<%
+					if (loginClient != null && loginClient.getAuthority() == 1) {
+				%>
+				<input type="button" value="글쓰기" onclick="wirteNotice();" class="btn my-btn pull-right" />
+				<%
+					}
+				%>
 				<div id="pageBar" class="text-center">
 					<ul class="pagination">
 						<li><%=pageBar%></li>
@@ -76,10 +72,9 @@
 			</div>
 
 			<script>
-      function wirteNotice(){
-        location.href="<%=request.getContextPath()%>
-				/notice/noticeWrite";
-				}
+		    function wirteNotice(){
+		    	location.href="<%=request.getContextPath()%>/notice/noticeWrite";
+			}
 			</script>
 		</section>
 	</div>

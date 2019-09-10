@@ -62,7 +62,7 @@ public class NoticeWriteEndServlet extends HttpServlet {
 		String oldFile= mr.getOriginalFileName("up_file");//원래이름
 		String reFile = mr.getFilesystemName("up_file");//rename된 이름
 		Notice n = new Notice(title, writer, content, oldFile, reFile);
-		
+
 		int result = new NoticeService().insertNotice(n);
 		String msg="";
 		String loc="";

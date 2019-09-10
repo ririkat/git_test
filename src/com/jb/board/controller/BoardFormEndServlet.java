@@ -46,11 +46,16 @@ public class BoardFormEndServlet extends HttpServlet {
 		
 		String root=getServletContext().getRealPath("/");
 		String saveDir=root+"/upload/board";
-		System.out.println(root);
+		
+		File dir = new File(saveDir);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		
 		
 		int maxSize=1024*1024*500;
 		
-		MultipartRequest mr=new MultipartRequest(request, saveDir, maxSize, "UTF-8", new MyFileRenamePolicy());
+		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
 		String title=mr.getParameter("title");
 		String writer=mr.getParameter("writer");
@@ -78,6 +83,7 @@ public class BoardFormEndServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
+		System.out.println(saveDir);
 	}
 
 	/**
