@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.jb.board.model.dao.BoardDao;
 import com.jb.board.model.vo.Board;
+import com.jb.board.model.vo.BoardComment;
 
 public class BoardService {
 	private BoardDao dao = new BoardDao();
@@ -53,5 +54,61 @@ public class BoardService {
 		close(conn);
 		return null;
 	}
+
+	public Board selectBoardOne(int bNo) {
+		Connection conn=getConnection();
+		Board b=dao.selectBoardOne(conn, bNo);
+		close(conn);
+		return b;
+	}
+
+	public int deleteBoard(int bNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteBoard(conn, bNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int updateBoard(Board b) {
+		Connection conn=getConnection();
+		int result=dao.updateBoard(conn, b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int insertComment(BoardComment bc) {
+		Connection conn=getConnection();
+		int result=dao.insertComment(conn, bc);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public int deleteComment(int bNo, int coNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn, bNo, coNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public List<BoardComment> selectBoardComment(int bNo) {
+		Connection conn=getConnection();
+		List<BoardComment> list=dao.selectBoardComment(conn, bNo);
+		close(conn);
+		return list;
+	}
+
+	
 
 }

@@ -19,14 +19,23 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	public Board(String title, String content, String originalFilename, String renameFilename, String cId) {
+	public Board(int bNo, String title, String cId, String content, String originalFilename, String renameFilename) {
 		super();
+		this.bNo = bNo;
 		this.title = title;
+		this.cId = cId;
 		this.content = content;
 		this.originalFilename = originalFilename;
 		this.renameFilename = renameFilename;
+	}
+
+	public Board(String title, String cId, String content, String originalFilename, String renameFilename) {
+		super();
+		this.title = title;
 		this.cId = cId;
+		this.content = content;
+		this.originalFilename = originalFilename;
+		this.renameFilename = renameFilename;
 	}
 
 

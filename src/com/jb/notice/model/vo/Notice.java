@@ -27,6 +27,19 @@ public class Notice {
 		this.nOriginFile = nOriginFile;
 		this.nRenamedFile = nRenamedFile;
 	}
+	
+	
+
+	public Notice(int nNo, String nTitle,String writer, String nContent, String nOriginFile,
+			String nRenamedFile) {
+		super();
+		this.nNo = nNo;
+		this.nTitle = nTitle;
+		this.mId=writer;
+		this.nContent = nContent;
+		this.nOriginFile = nOriginFile;
+		this.nRenamedFile = nRenamedFile;
+	}
 
 	public int getnNo() {
 		return nNo;

@@ -1,27 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.jb.client.model.vo.Client"%>
 <%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">게시판</a>
-			</h4>
-			<div id="boardList">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="mypage.html">공지사항</a></li>
-					<li><a href="jjim.html">커뮤니티</a></li>
-					<li><a href="updateUserInfo.html">FAQ</a></li>
-				</ul>
-				<br>
-			</div>
-
-		</div>
+		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
 				<h2 class="text-center">공지사항 작성</h2>
-				<form action="<%=request.getContextPath() %>/notice/noticeFormEnd"
+				<form action="<%=request.getContextPath() %>/notice/noticeWriteEnd"
 					method="post" enctype="multipart/form-data">
 
 					<table id="tbl-notice" class="table table-bordered">
@@ -31,7 +18,7 @@
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><input type="text" name="writer"></td>
+							<td><input type="text" name="writer" value="<%=loginClient.getcId()%>" readonly/></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
@@ -42,12 +29,14 @@
 							<td><textarea rows="5" cols="20" name="content"></textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2" style="text-align: center"><input
-								type="submit" value="등록" class="btn my-btn"> <input
-								type="reset" value="취소" class="btn my-btn"></td>
+							<td colspan="2" style="text-align: center">
+							<input type="submit" value="등록" class="btn my-btn">
+							<input type="reset" value="취소" class="btn my-btn"></td>
 						</tr>
 					</table>
 				</form>
+				</div>
 		</section>
+		</div>
 	</div>
 	<%@ include file="/views/common/footer.jsp"%>

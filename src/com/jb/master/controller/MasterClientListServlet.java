@@ -31,9 +31,13 @@ public class MasterClientListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//미완성.
-		//관리자 메뉴이기 때문에 관리자가 아닐 경우
-		//주소입력을 통해 실행되지 않게 처리하는 로직 구현해야함
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		
 		int cPage;
 		try {
@@ -51,10 +55,10 @@ public class MasterClientListServlet extends HttpServlet {
 		int pageEnd = pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {	//1일때는 이전이 없다
-			pageBar += "<span>[이전]</span>";
+			pageBar += "<span>&laquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">[이전]</a>";
+			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo-1)+">&laquo;</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo == cPage) {
@@ -67,10 +71,10 @@ public class MasterClientListServlet extends HttpServlet {
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar += "<span>[다음]</span>";
+			pageBar += "<span>&raquo;</span>";
 		}
 		else {
-			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">[다음]</a>";
+			pageBar += "<a href="+request.getContextPath()+"/master/clientList?cPage="+(pageNo)+">&raquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
