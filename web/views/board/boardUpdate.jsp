@@ -59,7 +59,4 @@
 		if(result) location.href="<%=request.getContextPath() %>/board/boardList";
 	}
 </script>
-	
-
-
 <%@ include file="/views/common/footer.jsp"%>
