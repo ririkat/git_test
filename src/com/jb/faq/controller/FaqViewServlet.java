@@ -1,4 +1,4 @@
-package com.jb.notice.controller;
+package com.jb.faq.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.board.model.service.BoardService;
-import com.jb.board.model.vo.Board;
-import com.jb.notice.model.service.NoticeService;
-import com.jb.notice.model.vo.Notice;
-import com.jb.notice.model.vo.NoticeComment;
+import com.jb.faq.model.service.FaqService;
+import com.jb.faq.model.vo.Faq;
+import com.jb.faq.model.vo.FaqComment;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class FaqViewServlet
  */
-@WebServlet("/notice/noticeView")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/FaqViewServlet")
+public class FaqViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public FaqViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +33,8 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//번호를 받아와서 해당 notice 객체 하나를 받아와야함
 		Cookie[] cookies = request.getCookies();
-		String noticeCookieVal="";
+		String faqCookieVal="";
 		boolean hasRead=false;//이 게시글을 읽었는지 확인
 		
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -47,8 +44,8 @@ public class NoticeViewServlet extends HttpServlet {
 				for(Cookie c : cookies) {
 					String name=c.getName();
 					String value=c.getValue();
-					if("noticeCookie".equals(name)) {
-						noticeCookieVal=value;
+					if("faqCookieVal".equals(name)) {
+						faqCookieVal=value;
 						if(value.contains("|"+no+"|")) {
 							hasRead=true;
 							break out;
@@ -57,16 +54,16 @@ public class NoticeViewServlet extends HttpServlet {
 				}
 		}
 		if(!hasRead) {
-			Cookie noticeCookie=new Cookie("noticeCookie",noticeCookieVal+"|"+no+"|");
-			noticeCookie.setMaxAge(-1);
-			response.addCookie(noticeCookie);
+			Cookie faqCookie=new Cookie("faqCookieVal",faqCookieVal+"|"+no+"|");
+			faqCookie.setMaxAge(-1);
+			response.addCookie(faqCookie);
 		}
-		Notice n=new NoticeService().selectNoticeOne(no,hasRead);
-		List<NoticeComment> list = new NoticeService().selectNoticeComment(no);
+		Faq f=new FaqService().selectFaqOne(no,hasRead);
+//		List<FaqComment> list = new FaqService().selectFaqComment(no);
 		
-		request.setAttribute("notice", n);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/notice/noticeView.jsp").forward(request, response);
+		request.setAttribute("faq", f);
+//		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/faq/faqView.jsp").forward(request, response);
 	}
 
 	/**

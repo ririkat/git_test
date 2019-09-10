@@ -4,8 +4,6 @@
 <% 
 	Client loginClient = (Client)session.getAttribute("loginClient"); 
 %>
-	
-	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,8 +62,7 @@
 						<li><a class="aa" href="#">공지사항</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
-						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-						<li><a class="aa" href="#">게시판</a></li>
+						<!-- <li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li> -->
 						<% if (loginClient == null) {%>
 						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 						 <%} else {%>

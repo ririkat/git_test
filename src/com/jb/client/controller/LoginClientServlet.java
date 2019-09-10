@@ -38,7 +38,6 @@ public class LoginClientServlet extends HttpServlet {
 		System.out.println(id);
 		System.out.println(pw);
 		
-		
 		ClientService service = new ClientService();
 		Client c = service.selectId(id, pw);
 		System.out.println(c);
