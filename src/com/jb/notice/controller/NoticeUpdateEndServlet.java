@@ -18,19 +18,19 @@ import com.oreilly.servlet.MultipartRequest;
 import common.filerename.MyFileRenamePolicy;
 
 /**
- * Servlet implementation class NoticeWriteEndServlet
+ * Servlet implementation class NoticeUpdateEndServlet
  */
-@WebServlet("/notice/noticeWriteEnd")
-public class NoticeWriteEndServlet extends HttpServlet {
+@WebServlet("/notice/noticeUpdateEnd")
+public class NoticeUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public NoticeWriteEndServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public NoticeUpdateEndServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,9 +44,8 @@ public class NoticeWriteEndServlet extends HttpServlet {
 		}
 
 		String root = getServletContext().getRealPath("/");
-		String saveDir = root+"/upload/notice";
+		String saveDir = root+"/upload/notice/";
 		//경로 한번에 설정하기
-//		String saveDir=getServletContext().getRealPath(File.separator+"upload"+File.separator+"board");
 		File dir = new File(saveDir);
 		if(!dir.exists()) {
 			dir.mkdirs();
@@ -55,31 +54,37 @@ public class NoticeWriteEndServlet extends HttpServlet {
 		int maxSize = 1024 * 1024 * 10;
 		//Multipartrequest 객체 생성
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new MyFileRenamePolicy());
-		
+
+		int no = Integer.parseInt(mr.getParameter("noticeNo"));
 		String title = mr.getParameter("title");
 		String writer = mr.getParameter("writer");
 		String content = mr.getParameter("content");
 		String oldFile= mr.getOriginalFileName("up_file");//원래이름
 		String reFile = mr.getFilesystemName("up_file");//rename된 이름
-		Notice n = new Notice(title, writer, content, oldFile, reFile);
+		Notice n = new Notice(no, title, writer, content, oldFile, reFile);
 
-		int result = new NoticeService().insertNotice(n);
+
+		int result = new NoticeService().updateNotice(n);
 		String msg="";
 		String loc="";
-		
+
 		if (result > 0) {
-	         msg="게시글 등록완료";
-	         loc="/notice/noticeList";
-	      } else {
-	    	 File remove=new File(saveDir+n.getnRenamedFile());
-	    	 remove.delete();//파일삭제
-	         msg="게시글 등록실패";
-	         loc="/notice/noticeWrite";
-	      }
-	      
-	      request.setAttribute("msg", msg);
-	      request.setAttribute("loc", loc);
-	      request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			String renFile=mr.getParameter("oriren");
+			System.out.println(renFile);
+			File remove=new File(saveDir+renFile);
+			remove.delete();//원래 있던 파일은 삭제
+			msg="게시글 수정 완료";
+			loc="/notice/noticeView?no="+no;
+		} else {
+			File remove=new File(saveDir+n.getnRenamedFile());
+			remove.delete();//파일삭제
+			msg="게시글 수정실패";
+			loc="/notice/noticeUpdate?noticeNo="+no;
+		}
+
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
 	}
 
