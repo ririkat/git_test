@@ -68,9 +68,9 @@ public class BoardListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo)+"'> > </a>";
 		}
-		System.out.println(pageBar);
-		System.out.println(cPage);
-		System.out.println(list);
+		
+		
+		
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("cPage",cPage);
 		request.setAttribute("list",list);

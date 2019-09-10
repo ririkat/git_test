@@ -11,8 +11,29 @@
     
 <%@ include file="/views/common/header.jsp"%>
 
+<div class="container-fluid">
+	<div class="row content">
+		<div class="col-sm-3 sidenav">
+			<br> <br>
+			<h4 id="mypagetitle">
+				<a href="mypage.html">게시판</a>
+			</h4>
+
+			<div id="boardList">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="mypage.html">공지사항</a></li>
+					<li><a href="jjim.html">커뮤니티</a></li>
+					<li><a href="updateUserInfo.html">FAQ</a></li>
+				</ul>
+				<br>
+			</div>
+		</div>
+		
+	
+	
 	<section>
-		<div class="container">
+		<div class="col-sm-9">
+			<div class="container">
 		<h2> 게시판 </h2>
         <table class="table table-striped">
             <thead>
@@ -30,8 +51,8 @@
             	<tr>
                     <td><%=b.getbNo() %></td>
                     <td>
-                    	<a href="<%=request.getContextPath() %>/board/baordView?bNo=<%=b.getbNo() %>"></a>
-                    	<%=b.getTitle() %>
+                    	<a href="<%=request.getContextPath()%>/board/boardView?bNo=<%=b.getbNo() %>">
+                    	<%=b.getTitle() %></a>
                     </td>
                     <td><%=b.getcId() %></td>
                     <td><%=b.getEntDate() %></td>
@@ -47,22 +68,22 @@
         <!-- 로그인시에만 보이는 보이는 로직 필요 -->
         <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()";/>
         <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()";/>
-        
 
         <div class="text-center">
             <ul class="pagination">
                 <li><%=request.getAttribute("pageBar") %></li>
             </ul>
-        </div>
-    </div>
-    <script>
-       	function writeBoard(){
-       		location.href="<%=request.getContextPath()%>/board/boardForm";
-       	}
-    </script>
-		
+		</div>
+    		</div>
+			    <script>
+			       	function writeBoard(){
+			       		location.href="<%=request.getContextPath()%>/board/boardForm";
+			       	}
+			    </script>
+		</div>
 	</section>
-    
+    </div>
+</div>
 
 
 

@@ -22,7 +22,7 @@
             <tr>
                 <th>작성자 : </th>
                 <td>
-                	<input type="text" value="아직 ID값 못받아옴" name="writer" class="form-control" /> <!-- readonly -->
+                	<input type="text" value="<%=loginClient.getcId() %>" name="writer" class="form-control" readonly/> <!-- readonly -->
                 </td>
             </tr>
                 <th>내용 : </th>

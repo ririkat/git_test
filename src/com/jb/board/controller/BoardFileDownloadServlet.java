@@ -33,48 +33,43 @@ public class BoardFileDownloadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//사용자가 업로드한 파일명
-				String ori=request.getParameter("file");
-				
-				
-				//실제로 보낼 파일명
-				String re=request.getParameter("renameFile");
-				
-				//1. 경로
-				String saveDir=getServletContext().getRealPath("/upload/board/");
-				
-				//파일오픈!
-				File f=new File(saveDir+"/"+re);
-				BufferedInputStream bis=new BufferedInputStream(new FileInputStream(f));
-				
-				//보낼 스트림 생성
-				BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
-				
-				//브라우저에 따른 인코딩처리
-				String resFileName="";
-				boolean isMSIE=request.getHeader("user-agent").indexOf("MSIE")!=-1 || request.getHeader("user-agent").indexOf("Trident")!=-1;
-				
-				if(isMSIE) {
-					resFileName=URLEncoder.encode(ori,"UTF-8");
-					resFileName=resFileName.replaceAll("\\+", "%20");
-				}else {
-					resFileName=new String(ori.getBytes("UTF-8"),"ISO-8859-1");
-				}
-				
-				//responese헤더 설정
-				response.setContentType("application/octet-stream");
-				response.setHeader("Content-Disposition", "attachment;filename="+resFileName);
-				
-				//파일 쓰기
-				int read=-1;
-				while((read=bis.read())!=-1) {
-					bos.write(read);
-				}
-				bos.close();
-				bis.close();
-		
-		
-	}
+		 //1.실제파일경로 가져오기
+	      String root=getServletContext().getRealPath("/");
+	      String saveDir=root+File.separator+"upload"+File.separator+"board";
+	      
+	      String ori=request.getParameter("orifileName");
+	      String re=request.getParameter("refileName");
+	      //스트림열기
+	      //대상 파일을 HARD에서 RAM으로 불러온 것!
+	      File downFile=new File(saveDir+"/"+re);
+	      BufferedInputStream bis=new BufferedInputStream(new FileInputStream(downFile));
+	      //파일을 보낼곳 stream 열기
+//	      ServletOutputStream sos=response.getOutputStream();
+	      BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
+
+	      //브라우저에 따른 인코딩처리
+	      //한글파일명을 보낼때 깨지지않게 인코딩처리
+	      String resFileName="";
+	      boolean isMSIE=request.getHeader("user-agent").indexOf("MSIE")!=-1
+	    		  ||request.getHeader("user-agent").indexOf("Trident")!=-1;
+	      if(isMSIE) {
+	         resFileName=URLEncoder.encode(ori,"UTF-8").replaceAll("\\+","%20");
+	      }else {
+	         resFileName=new String(ori.getBytes("UTF-8"),"ISO-8859-1");
+	      }
+	      //response헤더 작성
+	      response.setContentType("application/octet-stream");
+	      response.setHeader("Content-Disposition", "attachment;filename="+resFileName);
+
+	      //파일전송
+	      int read=-1;
+	      while((read=bis.read())!=-1) {
+	         bos.write(read);
+	      }
+	      bos.close();
+	      bis.close();
+	   }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
