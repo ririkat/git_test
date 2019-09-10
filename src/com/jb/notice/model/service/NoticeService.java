@@ -50,7 +50,6 @@ public class NoticeService {
 			}
 		}
 			
-		
 		Notice n = dao.selectNoticeOne(conn,no);
 		close(conn);
 		return n;

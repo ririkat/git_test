@@ -2,12 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 
-    <section>
+   
 
         <!-- 회원정보 수정 form -->
         <br><br><br><br>
-
-
+        
         <section id="enroll-container">
 
             <div class="tit_contents">회원가입</div>
@@ -15,7 +14,8 @@
             <hr>
             <br>
 
-            <form name="form1" method="post">
+            <form name="form1" method="post" action="<%=request.getContextPath()%>/client/signupclient"
+            onsubmit="return signUp_validate();">
                 <table class="updateTable">
                     <colgroup>
                         <col width="160px">
@@ -26,10 +26,9 @@
                             <th class="point" style="vertical-align: middle"><strong class="point"></strong>아이디
                             </th>
                             <td>
-                            <input type="text" name="cid" placeholder="영문으로 8글자 이상">
-                            <button>중복확인</button>
+                            <input type="text" name="cid" id="cid_" placeholder="영문+숫자로 4글자 이상">
+                            <input type="button" value="중복검사" onclick="checkId();">
                             </td>
-                            
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>비밀번호</th>
@@ -46,11 +45,10 @@
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>생년월일</th>
-
                             <td>
-                            <input check-join-date input-number type="number" name="cbirth" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
-                            <input check-join-date input-number type="number" name="cbirth" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
-                            <input check-join-date input-number type="number" name="cbirth" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
+                            <input check-join-date input-number type="number" name="cbirthYY" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
+                            <input check-join-date input-number type="number" name="cbirthMM" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
+                            <input check-join-date input-number type="number" name="cbirthDD" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
                             </td>
                         </tr>
                         <tr>
@@ -58,76 +56,218 @@
                             <td>
                                 <input type="radio" name="cgender" id="cgender0" value="M">남
                                 &nbsp;
-                                <input type="radio" name="cgender" id="cgender1" value="F" checked="checked">여
+                                <input type="radio" name="cgender" id="cgender1" value="F">여
                             </td>
                         </tr>
                         
                         <tr>
                             <th class="point"><strong class="point"></strong>이메일</th>
-                            
-                            	
-                            	<td><input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" ></td>
-<!--                             	<td> -->
-<!--                                 <input type="text" name="cemail01" style="IME-MODE: disabled"> -->
-<!--                                 @ -->
-<!--                                 <input type="text" name="cemail02" id="uemail02" style="IME-MODE: disabled" -->
-<!--                                     value="hanmail.net"> -->
-<!--                                 <select name="uemail03" id="uemail03" onchange="mailChange(this.value,'uemail02');"> -->
-<!--                                     <option>메일을 선택하세요</option> -->
-<!--                                     <option value="naver.com">naver.com</option> -->
-<!--                                     <option value="hanmail.net" selected="selected">hanmail.net</option> -->
-<!--                                     <option value="nate.com">nate.com</option> -->
-<!--                                     <option value="gmail.com">gmail.com</option> -->
-<!--                                     <option value="hotmail.com">hotmail.com</option> -->
-<!--                                     <option value="">직접입력</option> -->
-<!--                                 </select> -->
-<!--                             </td> -->
+                            <td><input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" ></td>
                         </tr>
 
                         <tr>
                             <th class="point"><strong class="point"></strong>핸드폰번호</th>
-                           
-                                
-                                <td><input type="tel" name="cphone" id=cphone placeholder="' - '빼고 입력하시오" maxlength="11"></td>
-                                
-<!--                                 	<td> -->
-<!--                                 <select name="hp1" id="hp1" onchange="changePC('hp2')"> -->
-<!--                                     <option value="">선택</option> -->
-<!--                                     <option value="010" selected="">010</option> -->
-<!--                                     <option value="011">011</option> -->
-<!--                                     <option value="016">016</option> -->
-<!--                                     <option value="017">017</option> -->
-<!--                                     <option value="018">018</option> -->
-<!--                                     <option value="019">019</option> -->
-<!--                                 </select> -->
-<!--                                 <input type="text" name="hp2" id="hp2" class="w50px" maxlength="4" -->
-<!--                                     onkeyup="FocusNext('hp2','hp3',4)" style="IME-MODE: disabled"> -->
-<!--                                 <input type="text" name="hp3" id="hp3" class="w50px" maxlength="4" -->
-<!--                                     style="IME-MODE: disabled"> -->
-<!--                             	</td> -->
+                            <td><input type="tel" name="cphone" id=cphone placeholder="' - '빼고 입력하시오" maxlength="11"></td>
                         </tr>
-
-                        <tr>
-                            <th class="point">주소</th>
-                            <td><input type="text" class="form-control" name="caddr" id="caddr" placeholder="주소" required><br></td>
-                        </tr>
+                        
+						<tr>
+						<th class="point">주소</th>
+						<td>
+						<input id="postcode1" name="postcode1" type="text" value="" style="width:50px;" readonly/>
+						&nbsp;-&nbsp;
+						<input id="postcode2" name="postcode2" type="text" value="" style="width:50px;" readonly/>
+						&nbsp;&nbsp;
+						&nbsp;
+						<input type="button" onClick="openDaumZipAddress();" value = "주소 찾기" />
+						<br/>
+						<input type="text" id="address" name="address" value="" style="width:240px;" readonly/>
+						<input type="text" id="address_etc" name="address_etc" value="" style="width:200px;"/>
+						
+						</td>
+						
+						</tr>
+<!--                         <tr> -->
+<!--                             <th class="point">주소</th> -->
+<!--                             <td><input type="text" class="form-control" name="caddr" id="caddr" placeholder="주소" required><br></td> -->
+<!--                         </tr> -->
                     </tbody>
+                    
                 </table>
-            </form>
-           <br>
-            <div class="button">
-
-                <input type="button" onclick="updateUser();" value="회원가입">
-                <input type="reset" onclick="location.href='mypage.html' " value="취소">
+            	<div class="button">
+				<br><br>
+                <input type="submit" value="회원가입">
+              
 
             </div>
+            </form>
+            <form name="checkIdDuplicateFrm" method="post">
+			<input type="hidden" name="userId" />
+			</form>
+           <br>
             <hr>
-            
-      
-            
-
         </section>
+        
+      
+    <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>    
+	<script>
+	
+	$(function(){
+        $('#cpass2').blur(function(){
+            var pw=$('#cpass').val();
+            var pw2=$(this).val();
+            if(pw!=pw2){
+                alert("패스워드가 일치하지 않습니다.");
+                $(this).val("");
+                $('#cpass').val("").focus();
+            }
+        })
+    });
+	
+	
+	//회원가입 유효성검사
+	function signUp_validate() {
+		
+        var userId=$("#cid_");
+        
+        //아이디 유효성 소문자+숫자
+        var regExpId = /^[a-z0-9]{4,12}$/;
+		if(!regExpId.test(form1.cid_.value)) {
+			alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
+			return false;
+		}
+          
+        //비밀번호 빈칸
+        if (form1.cpass.value=="" || form1.cpass2.value=="") {
+            alert("비밀번호를 입력하지 않았습니다.")
+            cpass2.focus()
+            return false;
+        }
+        
+        //비밀번호길이 6,20
+        if(form1.cpass.value.length<6 || form1.cpass.value.length>20) {
+       		alert("비밀번호를 6자이상,20자이하로 입력해주세요")
+       		cpass.focus();
+       		return false;
+       	}
 
+       	// 아이디 != 비밀번호
+        if (form1.cpass.value == form1.cid_.value) {
+            alert("아이디와 비밀번호가 같습니다.")
+            cpass.focus()
+            return false;
+        }
+       	
+      	//이름 유효성
+      	var namePattern = /^[가-힣]{2,10}$/;
+        if(!namePattern.test(form1.cname.value)){
+			alert("이름은 한글만 입력이 가능합니다..");
+			cname.focus();
+			return false;
+		}
+       	
+        //이름 빈칸
+        if(form1.cname.value==""){
+			alert("이름을 입력해 주십시오.");
+			cname.focus();
+			return false;
+		}
+        
+      	//생년월일 빈칸
+        if(form1.cbirthYY.value=="" ||form1.cbirthMM.value=="" ||form1.cbirthDD.value==""){
+			alert("생년월일을 입력해 주십시오.");
+			cbirthYY.focus();
+			return false;
+		}
+       	//성별 빈칸
+      	if(!form1.cgender0.checked && !form1.cgender1.checked) {
+      		alert("성별을 선택해 주십시오.");
+			form1.cgender0.focus();
+			return false;
+      	}
+        
+        //이메일 빈칸
+        if(form1.cemail.value==""){
+			alert("이메일을 입력해 주십시오.");
+			cemail.focus();
+			return false;
+		}
+      	//핸드폰 빈칸
+        if(form1.cphone.value==""){
+			alert("핸드폰번호를 입력해 주십시오.");
+			cphone.focus();
+			return false;
+		}
+		//주소 빈칸
+        if(form1.postcode1.value=="" || form1.postcode2.value==""){
+			alert("우편번호를 입력해주세요.");
+			postcode1.focus();
+			return false;
+		}
+		
+        if(form1.address.value=="" || form1.address_etc.value==""){
+			alert("상세주소를 입력해주세요.");
+			address_etc.focus();
+			return false;
+		}
+      	
+        
+        return true;
+    }
+	
+
+	function checkId() {
+		var userId=$("#cid_").val().trim();
+		if(!userId || userId.length<4) {
+			alert("아이디를 4글자 이상가능합니다.");
+			return;
+		}
+		
+		var regExpId = /^[a-z0-9]{4,12}$/;
+		if(!regExpId.test(form1.cid_.value)) {
+			alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
+			return false;
+		}
+	
+	
+	var url = "<%=request.getContextPath()%>/checkId";
+	var title = "checkId";
+	var status = "left=500px,top100px width=500px, height=300px,menubar=no,status=no,scrollbars=yes";
+	var popup = open("",title,status);
+	checkIdDuplicateFrm.userId.value=userId;
+	checkIdDuplicateFrm.target=title;
+	checkIdDuplicateFrm.action=url;
+	checkIdDuplicateFrm.submit();
+	
+	}
+	
+	//다음 주소 API
+	function openDaumZipAddress() {
+
+	new daum.Postcode({
+
+		oncomplete:function(data) {
+
+			jQuery("#postcode1").val(data.postcode1);
+
+			jQuery("#postcode2").val(data.postcode2);
+
+			jQuery("#zonecode").val(data.zonecode);
+
+			jQuery("#address").val(data.address);
+
+			jQuery("#address_etc").focus();
+
+			console.log(data);
+
+		}
+
+	}).open();
+
+}
+	
+	
+	</script>
 <%@ include file="/views/common/footer.jsp" %>
 
 

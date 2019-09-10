@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import ="com.jb.client.model.vo.Client" %>
+<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner" %>
 <% 
 	Client loginClient = (Client)session.getAttribute("loginClient"); 
+	Owner loginOwner = (Owner)session.getAttribute("loginOwner");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,11 +70,24 @@
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
 						<!-- <li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li> -->
 						<% if (loginClient == null) {%>
-						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-						 <%} else {%>
-                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
-                        <li><a class="aa" href='<%=request.getContextPath()%>/logout'/>로그아웃</a></li>
-                        <%} %>
+							<li><a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴(임시)</a></li>
+							<li><a class="aa" href="#">공지사항</a></li>
+							<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
+							<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
+							<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+							<li><a class="aa" href="#">게시판</a></li>
+						<%
+						}
+						%>
+						<% if (loginClient == null && loginOwner == null) {%>
+							<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						<%} else if(loginClient != null && loginOwner == null){%>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+                        <%} else if(loginClient != null && loginOwner == null){%>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/owner/ownerMypage.jsp">업주 마이페이지</a></li>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+                        <%}%>
 					</ul>
 				</div>
 			</div>

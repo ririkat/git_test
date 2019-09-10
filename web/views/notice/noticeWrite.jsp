@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="com.jb.client.model.vo.Client"%>
+	pageEncoding="UTF-8" import="com.jb.client.model.vo.Client"%>
 <%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">

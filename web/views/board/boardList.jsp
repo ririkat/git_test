@@ -59,6 +59,7 @@
                     <td><%=b.getViewCnt() %></td>
                 </tr>
             <%}
+            }
             }%>
             </tbody>
         </table>
