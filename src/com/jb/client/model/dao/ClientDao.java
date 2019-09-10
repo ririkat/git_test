@@ -29,37 +29,38 @@ public class ClientDao {
 	}
 	
 	public Client selectId(Connection conn, String id, String pw) {
-
+		System.out.println("dao!!");
+		System.out.println(id+pw);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("selectId");
 		Client c = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				c = new Client();
-				c.setcId(rs.getString("c_Id"));
-//				c.setcPw(rs.getString("cPw"));
-				c.setcName(rs.getString("c_Name"));
-				c.setcBirth(rs.getDate("c_Birth"));
-				c.setcGender(rs.getString("c_Gender"));
-				c.setcEmail(rs.getString("c_Email"));
-				c.setcPhone(rs.getString("c_Phone"));
-				c.setcAddr(rs.getString("c_Addr"));
-				c.setcEd(rs.getDate("c_Ed"));
-				c.setcBLCount(rs.getInt("c_BLCount"));
-				c.setAuthority(rs.getInt("Authority"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return c;
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         pstmt.setString(2, pw);
+	         rs = pstmt.executeQuery();
+	         if(rs.next()) {
+	            c = new Client();
+	            c.setcId(rs.getString("c_Id"));
+//	            c.setcPw(rs.getString("cPw"));
+	            c.setcName(rs.getString("c_Name"));
+	            c.setcBirth(rs.getDate("c_Birth"));
+	            c.setcGender(rs.getString("c_Gender"));
+	            c.setcEmail(rs.getString("c_Email"));
+	            c.setcPhone(rs.getString("c_Phone"));
+	            c.setcAddr(rs.getString("c_Addr"));
+	            c.setcEd(rs.getDate("c_Ed"));
+	            c.setcBLCount(rs.getInt("c_BLCount"));
+	            c.setAuthority(rs.getInt("Authority"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      return c;
 	}
 	
 	public int updateClient(Connection conn, Client c){

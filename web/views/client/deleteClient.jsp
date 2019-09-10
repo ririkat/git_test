@@ -174,6 +174,10 @@
 <%-- 
 
 		function deleteClient() {
+
+	$(function(){
+		$('.btn-delete').click(function(){
+
 			
 			var pwck=$('#cPw').val(); 
 			
@@ -192,8 +196,12 @@
 				
 			
 			}
+
 	}
 			  --%>
+		
+
+		}
 		
 			
 
