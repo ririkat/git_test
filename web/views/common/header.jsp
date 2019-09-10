@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import ="com.jb.client.model.vo.Client" %>
+<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner" %>
 <% 
 	Client loginClient = (Client)session.getAttribute("loginClient"); 
+	Owner loginOwner = (Owner)session.getAttribute("loginOwner");
 %>
 	
 	
@@ -71,10 +72,13 @@
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
 						<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 						<li><a class="aa" href="#">게시판</a></li>
-						<% if (loginClient == null) {%>
+						<% if (loginClient == null && loginOwner == null) {%>
 						<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-						 <%} else {%>
+						 <%} else if(loginClient != null && loginOwner == null){%>
                         <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
+                        <li><a class="aa" href='<%=request.getContextPath()%>/logout'/>로그아웃</a></li>
+                        <%} else if(loginClient != null && loginOwner == null){%>
+                        <li><a class="aa" href="<%=request.getContextPath()%>/views/owner/ownerMypage.jsp">업주 마이페이지</a></li>
                         <li><a class="aa" href='<%=request.getContextPath()%>/logout'/>로그아웃</a></li>
                         <%} %>
 					</ul>
