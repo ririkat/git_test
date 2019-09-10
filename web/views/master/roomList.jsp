@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/master/commonNav.jsp"%>
+<%@ include file="/views/common/sideMaster.jsp"%>
 
 <%@ page import="java.util.List, com.jb.pension.model.vo.Room, com.jb.pension.model.vo.Pension" %>
 

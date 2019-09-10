@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/owner/commonNav.jsp"%>
+<%@ include file="/views/common/sideOwner.jsp"%>
     <section>
 
     </section>

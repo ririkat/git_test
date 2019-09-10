@@ -9,7 +9,7 @@
 %>
 
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/master/commonNav.jsp"%>
+<%@ include file="/views/common/sideMaster.jsp"%>
             <!--content영역-->
             <div class="col-md-10">
                 <br><br><br>
