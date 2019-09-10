@@ -44,6 +44,7 @@ public class FindIdClientServlet extends HttpServlet {
 		System.out.println(c.getcId());
 		System.out.println(c.getcEmail());
 		
+		//담아서 넘겨주기
 		request.setAttribute("findClient", c);
 		
 		request.getRequestDispatcher("/views/client/findCheck.jsp").forward(request, response);
