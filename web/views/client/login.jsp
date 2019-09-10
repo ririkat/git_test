@@ -20,8 +20,10 @@
                                 <input id="loginpw" name="loginpw" type="password" class="form-control" placeholder="비밀번호 입력" required><br>
                                 <button class="btn btn-lg btn-warning btn-block" type="submit">
                                     			로그인</button><br>
-                                <button class="btn btn-lg btn-warning btn-block" type="submit">
-                                    ID / PW 찾기</button><br>
+                                <input type="button" class="btn btn-sm btn-warning btn-block" value="ID 찾기"
+                                onclick="location.href='<%=request.getContextPath()%>/views/client/findID.jsp'">
+                                <input type="button" class="btn btn-sm btn-warning btn-block" value="PW 찾기"
+                                onclick="location.href='<%=request.getContextPath()%>/views/client/findPW.jsp'"><br>
                                     
 <!--                                 	업체일반 회원뷰로 전환 -->
                                 <a href="<%=request.getContextPath()%>/views/client/singUpChoice.jsp" class="text-center new-account">회원가입</a>

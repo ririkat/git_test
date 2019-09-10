@@ -4,24 +4,36 @@ package com.jb.client.model.vo;
 import java.sql.Date;
 
 public class Client {
+   
+   private String cId;
+   private String cPw;
+   private String cName;
+   private Date cBirth;
+   private String cGender;
+   private String cEmail;
+   private String cPhone;
+   private String cAddr;
+   private Date cEd;
+   private int cBLCount;
+   private int authority;
+   
+   public Client() {
+      // TODO Auto-generated constructor stub
+   }
+   
+   
+   public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
+		String cAddr) {
+	super();
+	this.cId = cId;
+	this.cPw = cPw;
+	this.cName = cName;
+	this.cBirth = cBirth;
+	this.cGender = cGender;
+	this.cEmail = cEmail;
+	this.cPhone = cPhone;
+	this.cAddr = cAddr;
 	
-	private String cId;
-	private String cPw;
-	private String cName;
-	private Date cBirth;
-	private String cGender;
-	private String cEmail;
-	private String cPhone;
-	private String cAddr;
-	private Date cEd;
-	private int cBLCount;
-	private int authority;
-	
-	public Client() {
-		// TODO Auto-generated constructor stub
-	}
-	
-
 	public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
 			String cAddr, Date cEd, int cBLCount, int authority) {
 		super();
@@ -133,5 +145,5 @@ public class Client {
 				+ cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", authority=" + authority + "]";
 	}
 
-	
+
 }
