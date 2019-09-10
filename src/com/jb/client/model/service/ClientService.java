@@ -127,7 +127,7 @@ public class ClientService {
 	public boolean selectCheckId(String id) {
 		Connection conn = getConnection();
 		boolean result = dao.selectCheckId(conn,id);
-  close(conn);
+		close(conn);
 		return result;
 	}
 
@@ -159,13 +159,6 @@ public class ClientService {
 	}
 
 	
-	// 아이디중복조회
-		public boolean selectCheckId(String cId) {
-			Connection conn = getConnection();
-			boolean result = dao.selectCheckId(conn, cId);
-			close(conn);
-			return result;
-		}
 		
 		public Client selectClient(String cId) {
 			Connection conn = getConnection();

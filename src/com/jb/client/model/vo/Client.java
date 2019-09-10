@@ -33,6 +33,7 @@ public class Client {
 	this.cEmail = cEmail;
 	this.cPhone = cPhone;
 	this.cAddr = cAddr;
+   }
 	
 	public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
 			String cAddr, Date cEd, int cBLCount, int authority) {

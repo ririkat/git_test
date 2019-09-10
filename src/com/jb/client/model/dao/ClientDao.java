@@ -352,6 +352,9 @@ public class ClientDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	//관리자 회원 삭제
@@ -433,28 +436,6 @@ public class ClientDao {
 		}
 		return c;
 	}
-	//아이디 중복확인
-		public boolean selectCheckId(Connection conn, String cId) {
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			boolean result=false;
-			String sql=prop.getProperty("selectCheckId");
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, cId);
-				rs=pstmt.executeQuery();
-				if(!rs.next()) {
-					result=true;
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
-			finally {
-				close(rs);
-				close(pstmt);
-			}
-			return result;
-		}
 		
 		public Client selectClient(Connection conn, String cId) {
 			PreparedStatement pstmt=null;
