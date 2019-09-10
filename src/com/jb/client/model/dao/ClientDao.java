@@ -121,6 +121,7 @@ public class ClientDao {
 				c.setcAddr(rs.getString("c_addr"));
 				c.setcEd(rs.getDate("c_ed"));
 				c.setcBLCount(rs.getInt("c_blcount"));
+				c.setAuthority(rs.getInt("Authority"));
 				
 				list.add(c);
 			}
@@ -134,7 +135,7 @@ public class ClientDao {
 	}
 	
 	//오버로딩
-	//일반회원 검색
+	//일반회원 검색 (수)
 	public int selectCountClient(Connection conn, String type, String keyword) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -156,6 +157,38 @@ public class ClientDao {
 		return result;
 	}
 	
+	//블랙리스트 검색 (수)
+	public int selectCountForBlack(Connection conn, String type, String keyword) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "";
+		
+		//3이상. 블랙리스트
+		if(keyword.equals("overThree")) {
+			sql = "select count(*) as cnt from client where "+type+" >=3";			
+		}
+		else if(keyword.equals("underThree")) {
+			sql = "select count(*) as cnt from client where "+type+" <3";	
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+	
+	//일반회원 검색 (리스트)
 	public List<Client> selectClientList(Connection conn, String type, String keyword, int cPage, int numPerPage){
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -181,6 +214,60 @@ public class ClientDao {
 				c.setcAddr(rs.getString("c_addr"));
 				c.setcEd(rs.getDate("c_ed"));
 				c.setcBLCount(rs.getInt("c_blcount"));
+				c.setAuthority(rs.getInt("Authority"));
+				
+				list.add(c);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	//블랙리스트 검색 (리스트)
+	public List<Client> selectBlackList(Connection conn, String type, String keyword, int cPage, int numPerPage) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Client> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "";
+		
+		//3이상. 블랙리스트
+		if(keyword.equals("overThree")) {
+			sql = "select * from ("
+					+ "select rownum as rnum, a.* from("
+					+ "select * from client where "
+					+ type + "  >=3)a) "
+					+ "where rnum between " + start + " and " + end;	
+		}
+		else if(keyword.equals("underThree")) {
+			sql = "select * from ("
+					+ "select rownum as rnum, a.* from("
+					+ "select * from client where "
+					+ type + "  <3)a) "
+					+ "where rnum between " + start + " and " + end;
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Client c = new Client();
+				c.setcId(rs.getString("c_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcBirth(rs.getDate("c_birth"));
+				c.setcGender(rs.getString("c_gender"));
+				c.setcEmail(rs.getString("c_email"));
+				c.setcPhone(rs.getString("c_phone"));
+				c.setcAddr(rs.getString("c_addr"));
+				c.setcEd(rs.getDate("c_ed"));
+				c.setcBLCount(rs.getInt("c_blcount"));
+				c.setAuthority(rs.getInt("Authority"));
 				
 				list.add(c);
 			}

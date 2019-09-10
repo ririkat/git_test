@@ -21,7 +21,9 @@
                 		<option value="clientId" <%="c_id".equals(searchType)?"selected":"" %>>아이디</option>
                 		<option value="clientName" <%="c_name".equals(searchType)?"selected":"" %> >이름</option>
                 		<option value="clientPhone" <%="c_phone".equals(searchType)?"selected":"" %> >전화번호</option>
+                		<option value="blackCount" <%="c_blcount".equals(searchType)?"selected":""%>>블랙카운트</option>
                 	</select>
+                	
                 	<div id="search-clientId">
                 		<form action="<%=request.getContextPath()%>/master/clientSearch">
                 			<input type="hidden" name="searchType" value="c_id"/>
@@ -31,6 +33,7 @@
                 			<button type="submit">검색</button>
                 		</form>
                 	</div>
+                	
                 	<div id="search-clientName">
                 		<form action="<%=request.getContextPath()%>/master/clientSearch">
                 			<input type="hidden" name="searchType" value="c_name"/>
@@ -40,6 +43,7 @@
                 			<button type="submit">검색</button>
                 		</form>
                 	</div>
+                	
                 	<div id="search-clientPhone">
                 		<form action="<%=request.getContextPath()%>/master/clientSearch">
                 			<input type="hidden" name="searchType" value="c_phone"/>
@@ -49,7 +53,23 @@
                 			<button type="submit">검색</button>
                 		</form>
                 	</div>
+                	
+                	<div id="search-blackCount">
+                		<form action="<%=request.getContextPath()%>/master/clientSearch">
+                			<input type="hidden" name="searchType" value="c_blcount"/>
+                			<input type="hidden" name="cPage" value="<%=cPage %>"/>
+                			
+                			<select name="searchKeyword"style="width:90px;height:25px;">
+		                		<option value="overThree">3이상</option>
+		                		<option value="underThree">3미만</option>
+		                	</select>
+
+                			<button type="submit">검색</button>
+                		</form>
+                	</div>
+                	
                 </div>
+                
                 <button id="deleteBtn" class="pull-right">삭제</button>
                 <br><br><br>
                 
@@ -66,6 +86,7 @@
                             <th style="text-align:center">주소</th>
                             <th style="text-align:center">가입일</th>
                             <th style="text-align:center">블랙카운트</th>
+                            <th style="text-align:center">관리자</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,6 +103,7 @@
 		                            <td><%=c.getcAddr() %></td>
 		                            <td><%=c.getcEd() %></td>
 		                            <td><%=c.getcBLCount() %></td>
+		                            <td><%=c.getAuthority()==1?"O":"X" %></td>
 		                        </tr>
 		                <%	}
 	                    }%>
@@ -101,11 +123,13 @@
 		        		var c_id = $("#search-clientId");
 		        		var c_name = $("#search-clientName");
 		        		var c_phone = $("#search-clientPhone");
+		        		var c_blcount = $("#search-blackCount");
 		        		var searchType = $("#searchType");
 		        		searchType.change(function(){
 		        			c_id.hide();
 		        			c_name.hide();
 		        			c_phone.hide();
+		        			c_blcount.hide();
 		        			$("#search-"+this.value).css("display","inline-block");
 		        		});
 		        		$("#searchType").trigger('change');

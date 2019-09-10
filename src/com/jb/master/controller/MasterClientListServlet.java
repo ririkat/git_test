@@ -31,9 +31,13 @@ public class MasterClientListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//미완성.
-		//관리자 메뉴이기 때문에 관리자가 아닐 경우
-		//주소입력을 통해 실행되지 않게 처리하는 로직 구현해야함
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		
 		int cPage;
 		try {

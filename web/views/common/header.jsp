@@ -61,7 +61,11 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
-						<li><a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴(임시)</a></li>
+						<%if(loginClient!=null && loginClient.getAuthority()==1) { %>
+							<li>
+								<a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴(임시)</a>
+							</li>
+						<%} %>
 						<li><a class="aa" href="#">공지사항</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>

@@ -45,7 +45,7 @@ public class ClientService {
 	}
 	
 	//오버로딩
-	//일반회원 검색
+	//일반회원 검색 (수)
 	public int selectCountClient(String type, String keyword) {
 		Connection conn = getConnection();
 		int result = dao.selectCountClient(conn,type,keyword);
@@ -53,9 +53,26 @@ public class ClientService {
 		return result;
 	}
 	
+	//블랙리스트 검색 (수)
+	public int selectCountForBlack(String type, String keyword) {
+		Connection conn = getConnection();
+		int result = dao.selectCountForBlack(conn,type,keyword);
+		close(conn);
+		return result;
+	}
+	
+	//일반회원 검색 (리스트)
 	public List<Client> selectClientList(String type, String keyword, int cPage, int numPerPage){
 		Connection conn = getConnection();
 		List<Client> list = dao.selectClientList(conn,type,keyword,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	//블랙리스트 검색 (리스트)
+	public List<Client> selectBlackList(String type, String keyword, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Client> list = dao.selectBlackList(conn,type,keyword,cPage,numPerPage);
 		close(conn);
 		return list;
 	}

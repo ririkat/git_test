@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.client.model.vo.Client;
 import com.jb.pension.model.service.PensionService;
 import com.jb.pension.model.vo.Pension;
 
@@ -31,6 +32,14 @@ public class MasterPensionSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
+		
 		String type = request.getParameter("searchType");
 		String keyword = request.getParameter("searchKeyword");
 		

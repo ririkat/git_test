@@ -31,8 +31,13 @@ public class MasterClientSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("searchType");
-		String keyword = request.getParameter("searchKeyword");
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		
 		int cPage;
 		try {
@@ -41,8 +46,26 @@ public class MasterClientSearchServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 10;
-		int totalClient = new ClientService().selectCountClient(type,keyword);
-		List<Client> clients = new ClientService().selectClientList(type,keyword,cPage,numPerPage);
+
+		int totalClient = 0;
+		List<Client> clients = null;
+		
+		String type = request.getParameter("searchType");
+		String keyword = request.getParameter("searchKeyword");
+
+		//블랙리스트카운트로 검색시
+		if(type.equals("c_blcount")) {
+			totalClient = new ClientService().selectCountForBlack(type,keyword);
+			clients = new ClientService().selectBlackList(type,keyword,cPage,numPerPage);
+		}
+		
+		//그 외(아이디,이름,전화번호)로 검색시
+		else {
+			totalClient = new ClientService().selectCountClient(type,keyword);
+			clients = new ClientService().selectClientList(type,keyword,cPage,numPerPage);
+		}
+		
+		
 		int totalPage = (int)Math.ceil((double)totalClient/numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -54,9 +77,9 @@ public class MasterClientSearchServlet extends HttpServlet {
 		}
 		else {
 			pageBar += "<a href="+request.getContextPath()
-					+ "/master/clientSearch?cPage=" + (pageNo-1)
-					+ "&searchType=" + type + "&searchKeyword=" + keyword
-					+">&laquo;</a>";
+			+ "/master/clientSearch?cPage=" + (pageNo-1)
+			+ "&searchType=" + type + "&searchKeyword=" + keyword
+			+">&laquo;</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo == cPage) {
@@ -64,9 +87,9 @@ public class MasterClientSearchServlet extends HttpServlet {
 			}
 			else {
 				pageBar += "<a href="+request.getContextPath()
-						+ "/master/clientSearch?cPage=" + pageNo
-						+ "&searchType=" + type + "&searchKeyword=" + keyword
-						+">" + pageNo + "&laquo;</a>";
+				+ "/master/clientSearch?cPage=" + pageNo
+				+ "&searchType=" + type + "&searchKeyword=" + keyword
+				+">" + pageNo + "</a>";
 			}
 			pageNo++;
 		}
@@ -76,9 +99,9 @@ public class MasterClientSearchServlet extends HttpServlet {
 		}
 		else {
 			pageBar += "<a href="+request.getContextPath()
-					+ "/master/clientSearch?cPage=" + pageNo
-					+ "&searchType=" + type + "&searchKeyword=" + keyword
-					+">&laquo;</a>";
+			+ "/master/clientSearch?cPage=" + pageNo
+			+ "&searchType=" + type + "&searchKeyword=" + keyword
+			+">&laquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
@@ -86,6 +109,7 @@ public class MasterClientSearchServlet extends HttpServlet {
 		request.setAttribute("clients", clients);
 		request.setAttribute("searchType", type);
 		request.setAttribute("searchKeyword", keyword);
+		
 		request.getRequestDispatcher("/views/master/clientList.jsp").forward(request, response);
 	}
 

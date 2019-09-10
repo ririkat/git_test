@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.client.model.vo.Client;
 import com.jb.pension.model.service.PensionService;
 import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
@@ -35,6 +36,14 @@ public class MasterRoomListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//pensionList.jsp에서 보낸 펜션이름 받아서 DB에서 펜션정보(펜션코드,이름,주소,번호,주인아이디) 불러와 roomList.jsp에 보내기
 		//pensionList.jsp에서 보낸 펜션이름으로 그에 딸린 객실들도 불러와야함.
+		
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		
 		//펜션정보 받아오기
 		String pCode = request.getParameter("pensionCode");

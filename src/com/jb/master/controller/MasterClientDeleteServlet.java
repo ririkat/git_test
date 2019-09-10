@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.client.model.service.ClientService;
+import com.jb.client.model.vo.Client;
 
 /**
  * Servlet implementation class MasterClientDeleteServlet
@@ -30,6 +31,14 @@ public class MasterClientDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
+		
 		// 삭제할 회원 아이디 받아오기
 		System.out.println(request.getParameter("delClientList"));
 		String delList = request.getParameter("delClientList");
