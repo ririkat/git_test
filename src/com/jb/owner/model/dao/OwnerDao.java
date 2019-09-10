@@ -211,4 +211,39 @@ public class OwnerDao {
 		}
 		return result;
 	}
+	
+	
+	public Owner selectId(Connection conn, String id, String pw) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql =prop.getProperty("selectId");
+		Owner o = null;
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				o = new Owner();
+				o.setoId(rs.getString("o_id"));
+//				o.setoPw(rs.getString("o_pw"));
+				o.setoName(rs.getString("o_name"));
+				o.setoBirth(rs.getDate("o_birth"));
+				o.setoGender(rs.getString("o_gender"));
+				o.setoEmail(rs.getString("o_email"));
+				o.setoPhone(rs.getString("o_phone"));
+				o.setoAddr(rs.getString("o_addr"));
+				o.setoEd(rs.getDate("o_ed"));
+				o.setoBLCount(rs.getInt("o_blcount"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return o;
+	}
+	
+	
 }

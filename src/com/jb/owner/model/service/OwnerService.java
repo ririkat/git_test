@@ -76,5 +76,14 @@ public class OwnerService {
 		close(conn);
 		return result;
 	}
+	
+	
+	public Owner selectId(String id, String pw) {
+		Connection conn = getConnection();
+		Owner o = dao.selectId(conn, id, pw);
+		close(conn);
+		return o;
+	}
+	
 
 }
