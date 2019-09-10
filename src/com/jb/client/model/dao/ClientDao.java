@@ -71,6 +71,15 @@ public class ClientDao {
 			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeUpdate();
 			//setString 작성 필요 
+			
+			pstmt.setString(1, c.getcName());
+//			pstmt.setDate(2, new java.sql.Date(java.util.Date.getTime(c.getcBirth())));
+			pstmt.setString(3, c.getcGender());
+			pstmt.setString(4, c.getcEmail());
+			pstmt.setString(5, c.getcPhone());
+			pstmt.setString(6, c.getcAddr());
+			pstmt.setString(7, c.getcId());
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,6 +88,7 @@ public class ClientDao {
 	}
 	
 	//전체 일반회원 수
+	
 	public int selectCountClient(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -133,14 +143,14 @@ public class ClientDao {
 		return list;
 	}	
 
-	public int deleteClient(Connection conn, String id, String pw) {
+	public int deleteClient(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleteClient");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -149,4 +159,79 @@ public class ClientDao {
 		}
 		return result;
 	}
+	
+	public int updatePassword(Connection conn, String cId, String cPw) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePassWord");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cPw);
+			pstmt.setString(2, cId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//아이디 중복확인
+		public boolean selectCheckId(Connection conn, String cId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			boolean result=false;
+			String sql=prop.getProperty("selectCheckId");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cId);
+				rs=pstmt.executeQuery();
+				if(!rs.next()) {
+					result=true;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		public Client selectClient(Connection conn, String cId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Client c=null;
+			String sql=prop.getProperty("selectCheckId");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					c = new Client();
+					c.setcId(rs.getString("c_id"));
+					c.setcName(rs.getString("c_name"));
+					c.setcBirth(rs.getDate("c_birth"));
+					c.setcGender(rs.getString("c_gender"));
+					c.setcEmail(rs.getString("c_email"));
+					c.setcPhone(rs.getString("c_phone"));
+					c.setcAddr(rs.getString("c_addr"));
+					c.setcEd(rs.getDate("c_ed"));
+					c.setcBLCount(rs.getInt("c_blcount"));
+					
+				
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(rs);
+				close(pstmt);
+			}
+			return c;
+		}
+	
 }

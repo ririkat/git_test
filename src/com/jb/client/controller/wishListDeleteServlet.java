@@ -1,28 +1,28 @@
 package com.jb.client.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-
-import com.jb.client.model.service.ClientService;
+import com.jb.client.model.vo.WishList;
 
 /**
- * Servlet implementation class DeleteClientServlet
+ * Servlet implementation class wishListDeleteServlet
  */
-@WebServlet("/client/deleteClient")
-
-public class DeleteClientServlet extends HttpServlet {
+@WebServlet("/client/wishListDelete")
+public class wishListDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClientServlet() {
+    public wishListDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +32,33 @@ public class DeleteClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = request.getParameter("cId");
-
-		 int result=new ClientService().deleteClient(id);
-		 
-		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
-		 String loc = result>0?"/logout":"/client/deleteLoad?cId="+id;
-				 
-				
-		 request.setAttribute("msg", msg);
-		 request.setAttribute("loc", loc);
-		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
+		HttpSession session = request.getSession(false);
+		
+		if(session==null) {
+			return;
+		}
+		
+		ArrayList<WishList> wishList = (ArrayList<WishList>)session.getAttribute("wishList");
+		
+		if(wishList==null) {
+			
+			return;
+		}
+		
+		//해당 클라이언트의 모든 섹션 삭제
+		
+//	     session.invalidate();
+		
+		
+		//상품목록 세션삭제
+		session.removeAttribute("wishList");
+		
+		
+			
+		
 	}
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -6,23 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.Session;
+import javax.servlet.http.HttpSession;
 
 import com.jb.client.model.service.ClientService;
+import com.jb.client.model.vo.Client;
 
 /**
- * Servlet implementation class DeleteClientServlet
+ * Servlet implementation class DeleteClientLoadServlet
  */
-@WebServlet("/client/deleteClient")
-
-public class DeleteClientServlet extends HttpServlet {
+@WebServlet("/client/deleteLoad")
+public class DeleteClientLoadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClientServlet() {
+    public DeleteClientLoadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,20 @@ public class DeleteClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		HttpSession session = request.getSession();
 		
-		String id = request.getParameter("cId");
+	    session.getAttribute("loginClient");
+			String cId=request.getParameter("cId");
 
-		 int result=new ClientService().deleteClient(id);
-		 
-		 String msg = result>0?"회원탈퇴완료":"회원탈퇴실패";
-		 String loc = result>0?"/logout":"/client/deleteLoad?cId="+id;
-				 
+			
+			
+			Client c= new ClientService().selectClient(cId);
+			request.setAttribute("client", c);
+			
 				
-		 request.setAttribute("msg", msg);
-		 request.setAttribute("loc", loc);
-		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
+			request.getRequestDispatcher("/views/client/deleteClient.jsp")
+			.forward(request,response);	
 	}
 
 	/**

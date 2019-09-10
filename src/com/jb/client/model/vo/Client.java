@@ -1,3 +1,4 @@
+
 package com.jb.client.model.vo;
 
 import java.sql.Date;
@@ -132,8 +133,5 @@ public class Client {
             + cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", authority=" + authority + "]";
    }
    
-   
-   
-   
-   
+ 
 }
