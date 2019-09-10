@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.owner.model.service.OwnerService;
-import com.jb.owner.model.vo.Owner;
 
 /**
- * Servlet implementation class OwnerViewServlet
+ * Servlet implementation class OwnerDeleteServlet
  */
-@WebServlet("/master/ownerView")
-public class OwnerViewServlet extends HttpServlet {
+@WebServlet("/master/ownerDelete")
+public class MasterOwnerDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerViewServlet() {
+    public MasterOwnerDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,16 @@ public class OwnerViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("oId");
-		System.out.println("id111"+id);
-		Owner o = new OwnerService().selectOwnerOne(id);
-		System.out.println("2===="+o);
 		
-		request.setAttribute("owner", o);
-		request.getRequestDispatcher("/views/master/ownerView.jsp").forward(request, response);
+		int result = new OwnerService().deleteOwner(id);
+		
+		String msg = result>0?"업주삭제완료":"업주삭제실패";
+		String loc = result>0?"/master/ownerList":"/master/ownerView?oId="+id;
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

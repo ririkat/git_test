@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.owner.model.service.OwnerService;
+import com.jb.owner.model.vo.Owner;
 
 /**
- * Servlet implementation class OwnerMultiDeleteServlet
+ * Servlet implementation class OwnerViewServlet
  */
-@WebServlet("/master/ownerMultiDelete")
-public class OwnerMultiDeleteServlet extends HttpServlet {
+@WebServlet("/master/ownerView")
+public class MasterOwnerViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerMultiDeleteServlet() {
+    public MasterOwnerViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +30,13 @@ public class OwnerMultiDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ids = request.getParameter("oIds");
-		String[] idss=ids.split(",");
-		for(int i=0; i<idss.length;i++) {
-			System.out.println(idss[i]);
-		}
-//		System.out.println("dd= "+request.getParameterValues("name_ownerId"));
+		String id = request.getParameter("oId");
+		System.out.println("id111"+id);
+		Owner o = new OwnerService().selectOwnerOne(id);
+		System.out.println("2===="+o);
 		
-		
-//		int result=1;
-		int result = new OwnerService().multiDeleteOwner(idss);
-		String msg = result>0?"업주삭제완료":"업주삭제실패";
-		String loc = result>0?"/master/ownerList":"/master/ownerList";
-		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
+		request.setAttribute("owner", o);
+		request.getRequestDispatcher("/views/master/ownerView.jsp").forward(request, response);
 	}
 
 	/**

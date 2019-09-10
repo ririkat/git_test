@@ -8,10 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.jb.client.model.vo.Client;
 import com.jb.owner.model.vo.Owner;
 
 public class OwnerDao {
@@ -27,6 +29,7 @@ public class OwnerDao {
 		}
 	}
 	
+	//전체 업주회원 수
 	public int selectCountOwner(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
@@ -77,6 +80,70 @@ public class OwnerDao {
 			close(pstmt);
 		}return list;
 	}
+	
+	//오버로딩
+	//업주회원 검색
+	public int selectCountOwner(Connection conn, String type, String keyword) {
+		Statement stmt=null;
+		ResultSet rs= null;
+		int result =0;
+		String sql = "select count(*) as cnt from owner where "+type+" like '%"+keyword+"%'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+	
+	
+	public List<Owner> selectOwnerList(Connection conn, String type, String keyword, int cPage, int numPerPage){
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Owner> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from owner where "
+				+ type + " like '%" + keyword + "%' )a) "
+				+ "where rnum between " + start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Owner o = new Owner();
+				o.setoId(rs.getString("o_id"));
+				o.setoName(rs.getString("o_name"));
+				o.setoBirth(rs.getDate("o_birth"));
+				o.setoGender(rs.getString("o_gender"));
+				o.setoEmail(rs.getString("o_email"));
+				o.setoPhone(rs.getString("o_phone"));
+				o.setoAddr(rs.getString("o_addr"));
+				o.setoEd(rs.getDate("o_ed"));
+				o.setoBLCount(rs.getInt("o_blcount"));
+				
+				list.add(o);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	
 	
 	
 	public Owner selectOwnerOne(Connection conn, String oId) {

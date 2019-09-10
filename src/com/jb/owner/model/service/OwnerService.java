@@ -16,6 +16,7 @@ public class OwnerService {
 	
 	
 	
+	//전체 업주회원수
 	public int selectCountOwner() {
 		Connection conn = getConnection();
 		int count= dao.selectCountOwner(conn);
@@ -23,12 +24,26 @@ public class OwnerService {
 		return count;
 	}
 	
+	
 	public List<Owner> selectListPage(int cPage, int numPerPage){
 		Connection conn =getConnection();
 		List<Owner> list=dao.selectListPage(conn,cPage,numPerPage);
 		close(conn);
+		return list;		
+	}
+	
+	//오버로딩 /검색
+	public int selectCountOwner(String type, String keyword) {
+		Connection conn = getConnection();
+		int result = dao.selectCountOwner(conn, type,keyword);
+		close(conn);
+		return result;
+	}
+	public List<Owner> selectOwnerList(String type, String keyword, int cPage, int numPerPage){
+		Connection conn = getConnection();
+		List<Owner> list = dao.selectOwnerList(conn,type,keyword,cPage,numPerPage);
+		close(conn);
 		return list;
-		
 	}
 	
 	public Owner selectOwnerOne(String oId) {

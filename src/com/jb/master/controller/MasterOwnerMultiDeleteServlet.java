@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.jb.owner.model.service.OwnerService;
 
 /**
- * Servlet implementation class OwnerDeleteServlet
+ * Servlet implementation class OwnerMultiDeleteServlet
  */
-@WebServlet("/master/ownerDelete")
-public class OwnerDeleteServlet extends HttpServlet {
+@WebServlet("/master/ownerMultiDelete")
+public class MasterOwnerMultiDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerDeleteServlet() {
+    public MasterOwnerMultiDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,12 +29,18 @@ public class OwnerDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("oId");
+		String ids = request.getParameter("oIds");
+		String[] idss=ids.split(",");
+		for(int i=0; i<idss.length;i++) {
+			System.out.println(idss[i]);
+		}
+//		System.out.println("dd= "+request.getParameterValues("name_ownerId"));
 		
-		int result = new OwnerService().deleteOwner(id);
 		
+//		int result=1;
+		int result = new OwnerService().multiDeleteOwner(idss);
 		String msg = result>0?"업주삭제완료":"업주삭제실패";
-		String loc = result>0?"/master/ownerList":"/master/ownerView?oId="+id;
+		String loc = result>0?"/master/ownerList":"/master/ownerList";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
