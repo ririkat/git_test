@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+</div> <!-- commonNav의 div닫기 -->
+</div> <!-- commonNav의 div닫기 -->
+</section> <!-- commonNav의 section닫기 -->
+
 <!-- 풋터 -->
 <footer>
 	<div class="container-fluid footerbg">
@@ -18,6 +23,7 @@
 	</div>
 </footer>
 <!-- 풋터 끝 -->
+
 </body>
 
 </html>
