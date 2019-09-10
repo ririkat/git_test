@@ -98,6 +98,9 @@
                <script>
                		//검색창 숨기기, 정렬
 		        	$(function(){
+		        		$('#mypageList li').removeClass("active");
+						$('#mypageList li').eq(2).addClass("active");
+		        		
 		        		var c_id = $("#search-clientId");
 		        		var c_name = $("#search-clientName");
 		        		var c_phone = $("#search-clientPhone");

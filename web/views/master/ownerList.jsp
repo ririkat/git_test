@@ -81,7 +81,13 @@
 
      <%@ include file="/views/common/footer.jsp" %>
           <script>
-              $("#ownerActive>tr").hover(function(){   //마우스가 올라갔을때 active
+          	 $(function(){
+          		$('#mypageList li').removeClass("active");
+				$('#mypageList li').eq(1).addClass("active");
+          	 });
+          
+          
+              $("#ownerActive>tr").hover(function(){   //리스트에 마우스가 올라갔을때 active
             	  $(this).addClass('active');
               },  function(){
             	  $(this).removeClass('active');
@@ -109,7 +115,7 @@
                     }
             
 
-              function allCheckClick(){
+              function allCheckClick(){  //체크박스 전체선택
                   if($("#allCheck").prop("checked")){
                       //전체 checkbox 체크
                       $("input[type=checkbox]").prop("checked",true);

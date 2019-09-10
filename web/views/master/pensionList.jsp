@@ -92,6 +92,10 @@
 		        			$("#search-"+this.value).css("display","inline-block");
 		        		});
 		        		$("#searchType").trigger('change');
+						
+						$('#mypageList li').removeClass("active");
+						$('#mypageList li').eq(0).addClass("active");
+
 		        	});
 
 		        	//전체 선택 및 해제
