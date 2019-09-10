@@ -12,16 +12,16 @@ import com.jb.client.model.service.ClientService;
 import com.jb.client.model.vo.Client;
 
 /**
- * Servlet implementation class updatePasswordServlet
+ * Servlet implementation class DeleteClientLoadServlet
  */
-@WebServlet("/client/updatePassword")
-public class updatePasswordServlet extends HttpServlet {
+@WebServlet("/client/deleteLoad")
+public class DeleteClientLoadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updatePasswordServlet() {
+    public DeleteClientLoadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +31,20 @@ public class updatePasswordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-			HttpSession session = request.getSession();
-			
-			    session.getAttribute("loginClient");
-					String cId=request.getParameter("cId");
-
-					
-					
-					Client c= new ClientService().selectClient(cId);
-					request.setAttribute("client", c);
-					request.setAttribute("cId", cId);
-					
-					request.getRequestDispatcher("/views/client/updatePassword.jsp")
-					.forward(request,response);		
+		HttpSession session = request.getSession();
 		
-	
-	
-				
-		  
+	    session.getAttribute("loginClient");
+			String cId=request.getParameter("cId");
 
 			
 			
-		}
-	
+			Client c= new ClientService().selectClient(cId);
+			request.setAttribute("client", c);
+			
+				
+			request.getRequestDispatcher("/views/client/deleteClient.jsp")
+			.forward(request,response);	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

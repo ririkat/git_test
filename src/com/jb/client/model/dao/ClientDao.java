@@ -20,7 +20,7 @@ public class ClientDao {
 	private Properties prop = new Properties();
 
 	public ClientDao() {
-		String path=ClientDao.class.getResource("/sql/client/client-query.properties").getPath();
+		String path=ClientDao.class.getResource("/sql/member/client-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
@@ -70,6 +70,15 @@ public class ClientDao {
 			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeUpdate();
 			//setString 작성 필요 
+			
+			pstmt.setString(1, c.getcName());
+//			pstmt.setDate(2, new java.sql.Date(java.util.Date.getTime(c.getcBirth())));
+			pstmt.setString(3, c.getcGender());
+			pstmt.setString(4, c.getcEmail());
+			pstmt.setString(5, c.getcPhone());
+			pstmt.setString(6, c.getcAddr());
+			pstmt.setString(7, c.getcId());
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,6 +87,7 @@ public class ClientDao {
 	}
 	
 	//전체 일반회원 수
+	
 	public int selectCountClient(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -152,7 +162,7 @@ public class ClientDao {
 	public int updatePassword(Connection conn, String cId, String cPw) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("updatePassword");
+		String sql=prop.getProperty("updatePassWord");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, cPw);

@@ -37,7 +37,9 @@ public class updatePasswordEndServlet extends HttpServlet {
 		int result = new ClientService().updatePassword(cId,cPw,cPwNew);
 		
 		String msg ="";
-		String loc="/client/updatePassword";
+		String loc="/client/updatePassword?cId="+cId;
+		
+		
 		
 		switch(result) {
 		case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;

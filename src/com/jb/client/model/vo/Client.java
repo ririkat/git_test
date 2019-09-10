@@ -131,7 +131,8 @@ public class Client {
             + cGender + ", cEmail=" + cEmail + ", cPhone=" + cPhone + ", cAddr="
             + cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", authority=" + authority + "]";
    }
-   
+
+
    
    
    

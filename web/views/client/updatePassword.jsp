@@ -3,8 +3,9 @@
 <%@ page import="com.jb.client.model.vo.Client"%>
 <%
 	Client c = (Client) request.getAttribute("client");
-	/* String id = (String)session.getAttribute("cId");  */
-	String cEmailSelect = (String) request.getAttribute("cEmailSelect");
+	
+	
+
 %>
 
 
@@ -31,6 +32,13 @@
                         <li><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
+                        <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/infoLoad">&nbsp;&nbsp;회원정보수정</a></li>
+                        <li class="active"><a href="<%=request.getContextPath()%>/client/updatePassword">&nbsp;&nbsp;비밀번호변경</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/deleteLoad">회원탈퇴</a></li>
+                        
+                        
 					</ul>
 					<br>
 				</div>
@@ -52,7 +60,7 @@
 				<hr>
 				<br>
 
-				<form name="updatePwdFrm" method="post"
+				<form name ="updatePwdFrm" id="updatePwdFrm" method="post"
 					action="<%=request.getContextPath()%>/client/updatePasswordEnd">
 					<table class="updateTable">
 						<colgroup>
@@ -80,19 +88,19 @@
 
 						</tbody>
 					</table>
+					<input type="submit" class="btn btn-warning" id="btn-update" name="btn-update" onclick="return password_validate();"
+						value="변경"> 
+						
+						<input type="reset" class="btn btn-warning" onclick="" value="뒤로가기">
 
-					<input type="hidden" name="cId"
-						value='<%=(String) request.getAttribute("cId")%>' />
+					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("cId")%>' />
+						
+						<input type="hidden" name="cPw_" id="cPw_" value='<%=loginClient.getcPw()%>' />
 
 
 				</form>
 				<br> <br>
-				<div class="button">
-
-					<input type="submit" id="btn-update" name="btn-update" onclick="password_validate();"
-						value="변경"> <input type="reset" onclick="" value="뒤로가기">
-
-				</div>
+				
 
 
 				<hr>
@@ -112,43 +120,67 @@ function password_validate(){
 
 
   
-  var cPwNew=$("#cPwNew").val(); 
-  var cPwCk=$('#cPwCk').val();
-  var cPw=$('#cPw').val();
+  var cPwNew=$("#cPwNew").val().trim(); 
+  var cPwCk=$('#cPwCk').val().trim();
+  var cPw=$('#cPw').val().trim();
+ /*   var cPw_=$('#cPw_').val(); */
    
 
-   if((cPwNew!=""&&cPwCk!="")&&cPwNew!=cPwCk){
+   if(cPwNew!=cPwCk){
         alert('변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
         $('#cPwNew').focus();
-        return; 
+        return false; 
         
       }else if(cPw==""){
     	 
     	 alert("비밀번호를 입력해주십시오.");
     	 $("#cPw").focus();
-			return;
+    	 return false;
     
     
        }else if(cPwNew ==""){
 				alert("비밀번호를 입력해 주십시오.");
 				$("#cPwNew").focus();
-				return;
+				 return false;
 		}
-		else if((cPwNew.length < 6) && cPwNew && cPwCk){
+      
+		/* else if((cPwNew.length < 6) && cPwNew && cPwCk){
 				alert("비밀번호는 6자리 이상 입력해 주십시오");
 				$("#cPwNew").focus();
 				return;
-		}
+		} */
 		else if(cPwCk ==""){
 				alert("비밀번호 확인을 입력해 주십시오.");
-				$('#cPwNewCk').focus();
-				return;
-		}
-		else if((cPwCk.length < 6) && cPwNew && cPwCk){
-				alert("비밀번호는 6자리 이상 입력해 주십시오");
-				$('#cPwNewCk').focus();
-				return;
-		}
+				$('#cPwCk').focus();
+				 return false;
+	
+		}else if(!cPw=<%=loginClient.getcPw()%>){
+			alert("현재 비밀번호가 틀립니다.");
+			$('#cPw').focus();
+			 return false;
+	}
+ 
+ return true;
+ 
+}
+	
+	
+	
+	
+	
+	
+	<%-- else{
+		
+		alert("비밀번호 변경이 완료되었습니다.");
+		return true;
+	
+		var frm=$('#updatePwdFrm');
+		var url="<%=request.getContextPath()%>/client/updatePasswordEnd?cId=<%=loginClient.getcId()%>";
+		frm.attr("action",url);
+		frm.submit();			
+		
+	} --%>
+		
 		
     
      console.log(cPwNew+cPwCk);

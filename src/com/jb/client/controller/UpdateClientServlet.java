@@ -32,29 +32,31 @@ public class UpdateClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String cId=request.getParameter("cId");
 		
-		//login하지 않으면 수정할 수 없게 
-		HttpSession session= request.getSession();
-		Object object = session.getAttribute("loginClient");
-		if(object ==null) {
-			
-			response.sendRedirect("/");
-			return;
-		}
+//		
+//		//login하지 않으면 수정할 수 없게 
+//		HttpSession session= request.getSession();
+//		Object object = session.getAttribute("loginClient");
+//		if(object ==null) {
+//			
+//			response.sendRedirect("/");
+//			return;
+//		}
 		
 		Client c = new Client();
 	    
-		String sessionCId = (String)object;
-		
+//		String sessionCId = (String)object;
+//		
 		c.setcId(request.getParameter("cId"));
 		
 		//자기만 수정할 수 있게 처리 
-		
-		if(!sessionCId.equals(request.getParameter("cId"))) {
-			
-			response.sendRedirect("/");
-			return;
-		}
+//		
+//		if(!sessionCId.equals(request.getParameter("cId"))) {
+//			
+//			response.sendRedirect("/");
+//			return;
+//		}
 		
 		
 		
@@ -65,19 +67,23 @@ public class UpdateClientServlet extends HttpServlet {
 		java.sql.Date aBirth = java.sql.Date.valueOf(bBirth);
 		
 		c.setcBirth(aBirth); 
+		
+//		c.setcBirth(request.getParameter("cBirth"));
+	
 		c.setcEmail(request.getParameter("cEmail"));
 		c.setcPhone(request.getParameter("cPhone"));
 		c.setcAddr(request.getParameter("cAddr"));
 		
-		int result = new ClientService().updateClient(c);
+	    
+     int result=new ClientService().updateClient(c);
 		
-		String msg="";
-		msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
-		String loc="/client/clientUpdate/?cId="+c.getcId();
+		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
+		String loc="/client/infoLoad?cId="+cId;
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/client/updateClientInfo.jsp");
+	
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);	
 		
 	}
 

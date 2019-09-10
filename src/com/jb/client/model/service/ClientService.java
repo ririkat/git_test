@@ -80,22 +80,7 @@ public class ClientService {
 		return result;
 	}
 	
-	
-//	public int insertWishList(Client c) {
-//		
-//		Connection conn = getConnection();
-//		int result = dao.insertWishList(conn, c);
-//		
-//		if (result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		return result;
-//		
-//	}
-	
+
 	
 	// 아이디중복조회
 		public boolean selectCheckId(String cId) {
