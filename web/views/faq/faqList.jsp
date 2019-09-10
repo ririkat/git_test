@@ -1,24 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="com.jb.notice.model.vo.Notice, java.util.List"%>
-<%
-	List<Notice> list = (List) request.getAttribute("list");
-	String pageBar = (String) request.getAttribute("pageBar");
-	int cPage = (int) request.getAttribute("cPage");
-%>
+	pageEncoding="UTF-8" import="com.jb.faq.model.vo.Faq, java.util.List"%>
+	<%
+		List<Faq> list=(List)request.getAttribute("list");
+		String pageBar=(String)request.getAttribute("pageBar");
+		int cPage=(int)request.getAttribute("cPage");
+	%>
 <%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container">
 			<div class="col-sm-9">
-				<h2>공지사항</h2>
-				<div id="search-container">
-					<form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
+				<h2>FAQ</h2>
+				<!-- <div id="search-container">
+					<form method="get" action="<%=request.getContextPath()%>/faq/faqFinder">
 						<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
 						​​​​​​​<button type="submit">검색</button>
 					</form>
-				</div>
+				</div> -->
 				
 				<table id="tbl-notice" class="table table-striped table-hover">
 					<thead>
@@ -33,23 +32,23 @@
 					<tbody>
 						<%
 							if (list != null && !list.isEmpty()) {
-								for (Notice n : list) {
+								for (Faq f : list) {
 						%>
 						<tr>
-							<td><%=n.getnNo()%></td>
+							<td><%=f.getfNo()%></td>
 							<td><a
-								href="<%=request.getContextPath()%>/notice/noticeView?no=<%=n.getnNo()%>"><%=n.getnTitle()%></a></td>
+								href="<%=request.getContextPath()%>/faq/faqView?no=<%=f.getfNo()%>"><%=f.getfTitle()%></a></td>
 							<td>
 								<%
-									if (n.getnOriginFile() != null) {
+									if (f.getfOriginFilename() != null) {
 								%>
 								<img src="<%=request.getContextPath()%>/images/file.png" alt="첨부파일" width="16px" />
 								<%
 								 }
 								%>
 							</td>
-							<td><%=n.getnEntDate()%></td>
-							<td><%=n.getnViewCnt()%></td>
+							<td><%=f.getfEntDate()%></td>
+							<td><%=f.getfReadCount()%></td>
 						</tr>
 						<%
 							}
@@ -60,7 +59,7 @@
 				<%
 					if (loginClient != null && loginClient.getAuthority() == 1) {
 				%>
-				<input type="button" value="글쓰기" onclick="wirteNotice();" class="btn my-btn pull-right" />
+				<input type="button" value="글쓰기" onclick="wirteFaq();" class="btn my-btn pull-right" />
 				<%
 					}
 				%>
@@ -72,8 +71,8 @@
 			</div>
 
 			<script>
-		    function wirteNotice(){
-		    	location.href="<%=request.getContextPath()%>/notice/noticeWrite";
+		    function wirteFaq(){
+		    	location.href="<%=request.getContextPath()%>/faq/faqWrite";
 			}
 			</script>
 		</section>

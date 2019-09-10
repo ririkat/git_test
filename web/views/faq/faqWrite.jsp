@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.jb.client.model.vo.Client"%>
 <%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
-				<h2 class="text-center">공지사항 작성</h2>
-				<form action="<%=request.getContextPath() %>/notice/noticeWriteEnd"
+				<h2 class="text-center">fAQ 작성</h2>
+				<form action="<%=request.getContextPath() %>/faq/faqWriteEnd"
 					method="post" enctype="multipart/form-data">
 
 					<table id="tbl-notice" class="table table-bordered">
@@ -39,4 +38,4 @@
 		</section>
 		</div>
 	</div>
-	<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>
