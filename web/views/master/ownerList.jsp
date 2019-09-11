@@ -10,7 +10,7 @@
 %>
 	
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/common/sideOwner.jsp" %>
+<%@ include file="/views/common/sideMaster.jsp" %>
     <!-- 헤더 끝 -->
 
     <style>
