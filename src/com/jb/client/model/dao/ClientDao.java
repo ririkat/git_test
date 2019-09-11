@@ -309,6 +309,52 @@ public class ClientDao {
 		}
 		return result;
 	}
+
+	//회원가입
+	public int insertClient(Connection conn, Client c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertClient");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getcId());
+			pstmt.setString(2, c.getcPw());
+			pstmt.setString(3, c.getcName());
+			pstmt.setDate(4, c.getcBirth());
+			pstmt.setString(5, c.getcGender());
+			pstmt.setString(6, c.getcEmail());
+			pstmt.setString(7, c.getcPhone());
+			pstmt.setString(8, c.getcAddr());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//아이디 중복체크
+	public boolean selectCheckId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		String sql = prop.getProperty("selectCheckId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (!rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	//관리자 회원 삭제
@@ -364,28 +410,32 @@ public class ClientDao {
 		return result;
 	}
 	
-	//아이디 중복확인
-		public boolean selectCheckId(Connection conn, String cId) {
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			boolean result=false;
-			String sql=prop.getProperty("selectCheckId");
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, cId);
-				rs=pstmt.executeQuery();
-				if(!rs.next()) {
-					result=true;
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
+	//아이디 찾기
+	public Client findId(Connection conn, String name, String email) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("findId");
+		Client c = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				c = new Client();
+				c.setcId(rs.getString("c_Id"));
+				c.setcName(rs.getString("c_Name"));
+				c.setcEmail(rs.getString("c_Email"));
 			}
-			finally {
-				close(rs);
-				close(pstmt);
-			}
-			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+		return c;
+	}
 		
 		public Client selectClient(Connection conn, String cId) {
 			PreparedStatement pstmt=null;

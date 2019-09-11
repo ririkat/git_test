@@ -92,6 +92,20 @@ public class ClientService {
 		close(conn);
 		return result;
 	}
+
+	//회원가입
+	public int insertClient(Client c) {
+		Connection conn = getConnection();
+		int result = dao.insertClient(conn,c);
+		if(result>0) {	
+			commit(conn);
+			
+		}else {
+      rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	//관리자 회원 삭제
 	//	보완할 점 : 관리자인지 확인
@@ -107,19 +121,25 @@ public class ClientService {
 		return result;
 	}
 	
+
+	//중복체크
+	
+	public boolean selectCheckId(String id) {
+		Connection conn = getConnection();
+		boolean result = dao.selectCheckId(conn,id);
+		close(conn);
+		return result;
+	}
+
 	public int updatePassword(String cId, String cPw, String cPwNew) {
 		Connection conn = getConnection();
 		
 		Client c = dao.selectId(conn, cId, cPw);
 		int result = 0;
 		if (c != null) {
-			
 			result = dao.updatePassword(conn, cId, cPwNew);
 		} else {
-			
 			result = -1;
-			
-			
 		}
 		if (result > 0) {
 			commit(conn);
@@ -129,16 +149,16 @@ public class ClientService {
 		close(conn);
 		return result;
 	}
-	
+
+	//아이디찾기
+	public Client findId(String name,String email) {
+		Connection conn =getConnection();
+		Client c=dao.findId(conn,name,email);
+		close(conn);
+		return c;
+	}
 
 	
-	// 아이디중복조회
-		public boolean selectCheckId(String cId) {
-			Connection conn = getConnection();
-			boolean result = dao.selectCheckId(conn, cId);
-			close(conn);
-			return result;
-		}
 		
 		public Client selectClient(String cId) {
 			Connection conn = getConnection();
