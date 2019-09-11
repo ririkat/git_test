@@ -73,15 +73,12 @@
 						<tr>
 						<th class="point">주소</th>
 						<td>
-						<input id="postcode1" name="postcode1" type="text" value="" style="width:50px;" readonly/>
-						&nbsp;-&nbsp;
-						<input id="postcode2" name="postcode2" type="text" value="" style="width:50px;" readonly/>
-						&nbsp;&nbsp;
-						&nbsp;
+						<input type="text" id="zonecode" name="zonecode" type="text" value="" style="width:50px;" readonly/>
+	&nbsp;
 						<input type="button" onClick="openDaumZipAddress();" value = "주소 찾기" />
 						<br/>
 						<input type="text" id="address" name="address" value="" style="width:240px;" readonly/>
-						<input type="text" id="address_etc" name="address_etc" value="" style="width:200px;"/>
+						<input type="text" id="address_etc" name="address_etc" placeholder="상세주소 입력"  value="" style="width:200px;"/>
 						
 						</td>
 						
