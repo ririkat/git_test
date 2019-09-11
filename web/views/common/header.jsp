@@ -60,34 +60,28 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right font2">
-						<%if(loginClient!=null && loginClient.getAuthority()==1) { %>
+					<!-- 로그인 정책 
+					1. 회원로그인/업주 로그인 두종류로 구성
+					2. 관리자는 회원로그인에서 권한이 1인 경우 관리자로 설정 -->
+						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">게시판</a></li>
+						<% if (loginClient == null&&loginOwner==null) {%>
+							<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						<%}%>
+						<%if(loginClient!=null&&loginOwner==null){//1.회원로그인 된 경우
+							if(loginClient.getAuthority()==1 ) { %><!-- 회원 중 관리자로 로그인 된 경우 -->
 							<li>
 								<a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴</a>
 							</li>
-						<%} %>
-						<li><a class="aa" href="#">공지사항</a></li>
-						<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
-						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
-						<!-- <li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li> -->
-						<% if (loginClient == null) {%>
-							<li><a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴</a></li>
-							<li><a class="aa" href="#">공지사항</a></li>
-							<li><a class="aa" href="<%=request.getContextPath()%>/board/boardList">board</a></li>
-							<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">notice</a></li>
-							<li><a class="aa" href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-							<li><a class="aa" href="#">게시판</a></li>
-						<%
-						}
-						%>
-						<% if (loginClient == null && loginOwner == null) {%>
-							<li><a class="aa" href="<%=request.getContextPath()%>/views/client/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-						<%} else if(loginClient != null && loginOwner == null){%>
+						<%}%>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
-                        <%} else if(loginClient != null && loginOwner == null){%>
-	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/owner/ownerMypage.jsp">업주 마이페이지</a></li>
+						<%}%>
+						
+						<%if(loginClient==null&&loginOwner!=null){%>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/owner/ownerMypage.jsp">마이페이지</a></li>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
-                        <%}%>
+						<%}%>
+						
 					</ul>
 				</div>
 			</div>
