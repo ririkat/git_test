@@ -75,7 +75,7 @@ public class UpdateClientServlet extends HttpServlet {
 		c.setcAddr(request.getParameter("cAddr"));
 		
 	    
-     int result=new ClientService().updateClient(c);
+        int result=new ClientService().updateClient(c);
 		
 		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
 		String loc="/client/infoLoad?cId="+cId;

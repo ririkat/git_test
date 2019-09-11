@@ -301,6 +301,7 @@ public class ClientDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
