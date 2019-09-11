@@ -26,21 +26,7 @@
 
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">게시판</a>
-			</h4>
-
-			<div id="boardList">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="mypage.html">공지사항</a></li>
-					<li><a href="jjim.html">커뮤니티</a></li>
-					<li><a href="updateUserInfo.html">FAQ</a></li>
-				</ul>
-				<br>
-			</div>
-		</div>
+		<%@ include file="/views/common/sideBoard.jsp"%>
 
 <section>
 	<div class="col-sm-9">
@@ -106,8 +92,6 @@
 			var result=confirm("정말로 삭제합니까?");
 			if(result){
 				location.href="<%=request.getContextPath() %>/board/deleteBoard?bNo=<%=b.getbNo()%>";
-			}else{
-				
 			}
 		}
 	</script>		
@@ -239,7 +223,7 @@
 </script>
 	
 </section>
-
+</div>
 </div>
 
 
