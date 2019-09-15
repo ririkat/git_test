@@ -115,7 +115,7 @@ public class PensionDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select count(*) as cnt from pension where "+type+" like '%"+keyword+"%'";
+		String sql = "select count(*) as cnt from pension where enrollyn='Y' and "+type+" like '%"+keyword+"%'";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -140,7 +140,7 @@ public class PensionDao {
 		int end = cPage*numPerPage;
 		String sql = "select * from ("
 				+ "select rownum as rnum, a.* from("
-				+ "select * from pension where "
+				+ "select * from pension where enrollyn='Y' and "
 				+ type + " like '%" + keyword + "%' )a) "
 				+ "where rnum between " + start + " and " + end;
 		try {

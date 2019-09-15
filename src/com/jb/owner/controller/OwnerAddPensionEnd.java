@@ -62,9 +62,22 @@ public class OwnerAddPensionEnd extends HttpServlet {
 		}
 		
 		//펜션객체에 담아 DB에 추가하기
-		int result = new PensionService().addPension(pName,addr,tel,oId);
+		int result = new PensionService().addPension(pName,addr,tel,oId);		
 		
 		//이미지,부대시설은 따로 담아 DB에 추가(펜션부대시설 테이블)
+		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg = "펜션 등록 신청 완료";
+			loc = "/owner/pensionList?oId="+oId;
+		} else {
+			msg = "펜션 등록 신청 실패";
+			loc = "/owner/addPension?oId="+oId;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
