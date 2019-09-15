@@ -32,8 +32,8 @@ public class BoardDeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
-		int result=new BoardService().deleteBoard(bNo);
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
+		int result=new BoardService().deleteBoard(cmmNo);
 		
 		String loc="/board/boardList";
 		String msg=result>0?"게시물 삭제완료":"게시물 삭제 실패";
