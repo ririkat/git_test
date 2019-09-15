@@ -65,6 +65,7 @@ public class BoardSMTPServlet extends HttpServlet {
 			Transport.send(message);
 			
 			System.out.println("메세지 발신 성공~");
+			System.out.println("패치 수정");
 			
 		}catch(AddressException e) {
 			e.printStackTrace();
