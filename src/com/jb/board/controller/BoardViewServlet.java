@@ -33,17 +33,13 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
-		Board b=new BoardService().selectBoardOne(bNo);
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
+		Board b=new BoardService().selectBoardOne(cmmNo);
 		
+		List<BoardComment> list=new BoardService().selectBoardComment(cmmNo);
+		request.setAttribute("list", list);
 		request.setAttribute("board", b);
 		request.getRequestDispatcher("/views/board/boardView.jsp").forward(request, response);
-		
-		
-		List<BoardComment> list=new BoardService().selectBoardComment(bNo);
-		request.setAttribute("list", list);
-		
-		
 //		//새로고침을 통해 조회수가 올라가는 현상은
 //		//쿠키를 통해서 제한
 //		Cookie[] cookies=request.getCookies();

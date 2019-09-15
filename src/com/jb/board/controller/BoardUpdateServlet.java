@@ -31,8 +31,8 @@ public class BoardUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
-		Board b = new BoardService().selectBoardOne(bNo);
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
+		Board b = new BoardService().selectBoardOne(cmmNo);
 		
 		request.setAttribute("board", b);
 		
