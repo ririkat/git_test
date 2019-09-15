@@ -3,7 +3,7 @@
     
 <%
 	boolean isUseable = (boolean)request.getAttribute("isUseable");
-	String id = (String)request.getAttribute("cid");
+	String id = (String)request.getAttribute("oid");
 %>
     
 <!DOCTYPE html>
@@ -17,6 +17,7 @@
 </style>
 </head>
 <body>
+
 	<div id="checkid-container">
 	
 		<%if(isUseable) { %>
@@ -26,7 +27,7 @@
 		<%} else {%>
 		[<span id="duplicated"><%=id %></span>]는 이미 사용중입니다.
 		<br><br>
-		<form action="<%=request.getContextPath()%>/checkId" method="post" name="checkId">
+		<form action="<%=request.getContextPath()%>/checkIdOwner" method="post" name="checkId">
 			<input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요"/>&nbsp;&nbsp;
 			<button type="button" onclick="checkIdDuplicate();">중복검사</button>
 		</form>
@@ -36,6 +37,7 @@
 	<script>
 	
 	function checkIdDuplicate() {
+	
 		
 		var userId=document.getElementById("userId").value;
 		
@@ -56,14 +58,19 @@
 	}
 		
 		
-		
-		
 		function setUserId() {
-			opener.document.getElementById("cid_").value='<%=id%>';
-			opener.document.getElementById("cpass").focus();
+			opener.document.getElementById("oid_").value='<%=id%>';
+			opener.document.getElementById("opass").focus();
 			self.close();
 		}
 		
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+

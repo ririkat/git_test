@@ -7,12 +7,12 @@
         
         <section id="enroll-container">
 
-            <div class="tit_contents">회원가입</div>
+            <div class="tit_contents">업체 회원가입</div>
             <br>
             <hr>
             <br>
 
-            <form name="form1" method="post" action="<%=request.getContextPath()%>/client/signupclient"
+            <form name="form1" method="post" action="<%=request.getContextPath()%>/owner/signUp"
             onsubmit="return signUp_validate();">
                 <table class="updateTable">
                     <colgroup>
@@ -24,48 +24,48 @@
                             <th class="point" style="vertical-align: middle"><strong class="point"></strong>아이디
                             </th>
                             <td>
-                            <input type="text" name="cid" id="cid_" placeholder="영문+숫자로 4글자 이상">
+                            <input type="text" name="oid" id="oid_" placeholder="영문+숫자로 4글자 이상">
                             <input type="button" name="idDuplication" value="중복검사" onclick="checkId();">
                             </td>
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>비밀번호</th>
-                            <td><input type="password" name="cpass" id="cpass" placeholder="6~20자로 사용(영문/숫자)"></td>
+                            <td><input type="password" name="opass" id="opass" placeholder="6~20자로 사용(영문/숫자)"></td>
                         </tr>
                         
                         <tr>
                             <th class="point"><strong class="point"></strong>비밀번호확인</th>
-                            <td><input type="password" id="cpass2" placeholder="6~20자로 사용(영문/숫자)"></td>
+                            <td><input type="password" id="opass2" placeholder="6~20자로 사용(영문/숫자)"></td>
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>이름</th>
-                            <td><input type="text" name="cname" id=cname></td>
+                            <td><input type="text" name="oname" id=oname></td>
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>생년월일</th>
                             <td>
-                            <input check-join-date input-number type="number" name="cbirthYY" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
-                            <input check-join-date input-number type="number" name="cbirthMM" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
-                            <input check-join-date input-number type="number" name="cbirthDD" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
+                            <input check-join-date input-number type="number" name="obirthYY" id="obirthYY" class="" min="1900" max="2005" maxlength="4">년                            
+                            <input check-join-date input-number type="number" name="obirthMM" id="obirthMM" class="" min="1" max="12" maxlength="2" >월                            
+                            <input check-join-date input-number type="number" name="obirthDD" id="obirthDD" class="" min="1" max="31" maxlength="2"  >일                           
                             </td>
                         </tr>
                         <tr>
                             <th class="point"><strong class="point"></strong>성별</th>
                             <td>
-                                <input type="radio" name="cgender" id="cgender0" value="M">남
+                                <input type="radio" name="ogender" id="ogender0" value="M">남
                                 &nbsp;
-                                <input type="radio" name="cgender" id="cgender1" value="F">여
+                                <input type="radio" name="ogender" id="ogender1" value="F">여
                             </td>
                         </tr>
                         
                         <tr>
                             <th class="point"><strong class="point"></strong>이메일</th>
-                            <td><input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" ></td>
+                            <td><input type="email" name="oemail" id="oemail" placeholder="' @ '포함 입력하시오" ></td>
                         </tr>
 
                         <tr>
                             <th class="point"><strong class="point"></strong>핸드폰번호</th>
-                            <td><input type="tel" name="cphone" id=cphone placeholder="' - '빼고 입력하시오" maxlength="11"></td>
+                            <td><input type="tel" name="ophone" id=ophone placeholder="' - '빼고 입력하시오" maxlength="11"></td>
                         </tr>
                         
 						<tr>
@@ -108,13 +108,13 @@
 	<script>
 	
 	$(function(){
-        $('#cpass2').blur(function(){
-            var pw=$('#cpass').val();
+        $('#opass2').blur(function(){
+            var pw=$('#opass').val();
             var pw2=$(this).val();
             if(pw!=pw2){
                 alert("패스워드가 일치하지 않습니다.");
                 $(this).val("");
-                $('#cpass').val("").focus();
+                $('#opass').val("").focus();
             }
         })
     });
@@ -123,11 +123,11 @@
 	//회원가입 유효성검사
 	function signUp_validate() {
 		
-        var userId=$("#cid_");
+        var userId=$("#oid_");
         
         //아이디 유효성 소문자+숫자
         var regExpId = /^[a-z0-9]{4,12}$/;
-		if(!regExpId.test(form1.cid_.value)) {
+		if(!regExpId.test(form1.oid_.value)) {
 			alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
 			return false;
 		}
@@ -137,66 +137,66 @@
 			alert("아이디 중복체크를 해주세요");
 			return false;
 		}
-		
+          
         //비밀번호 빈칸
-        if (form1.cpass.value=="" || form1.cpass2.value=="") {
+        if (form1.opass.value=="" || form1.opass2.value=="") {
             alert("비밀번호를 입력하지 않았습니다.")
-            cpass2.focus()
+            opass2.focus()
             return false;
         }
         
         //비밀번호길이 6,20
-        if(form1.cpass.value.length<6 || form1.cpass.value.length>20) {
+        if(form1.opass.value.length<6 || form1.opass.value.length>20) {
        		alert("비밀번호를 6자이상,20자이하로 입력해주세요")
-       		cpass.focus();
+       		opass.focus();
        		return false;
        	}
 
        	// 아이디 != 비밀번호
-        if (form1.cpass.value == form1.cid_.value) {
+        if (form1.opass.value == form1.oid_.value) {
             alert("아이디와 비밀번호가 같습니다.")
-            cpass.focus()
+            opass.focus()
             return false;
         }
        	
       	//이름 유효성
       	var namePattern = /^[가-힣]{2,10}$/;
-        if(!namePattern.test(form1.cname.value)){
+        if(!namePattern.test(form1.oname.value)){
 			alert("이름은 한글만 입력이 가능합니다..");
-			cname.focus();
+			oname.focus();
 			return false;
 		}
        	
         //이름 빈칸
-        if(form1.cname.value==""){
+        if(form1.oname.value==""){
 			alert("이름을 입력해 주십시오.");
-			cname.focus();
+			oname.focus();
 			return false;
 		}
         
       	//생년월일 빈칸
-        if(form1.cbirthYY.value=="" ||form1.cbirthMM.value=="" ||form1.cbirthDD.value==""){
+        if(form1.obirthYY.value=="" ||form1.obirthMM.value=="" ||form1.obirthDD.value==""){
 			alert("생년월일을 입력해 주십시오.");
-			cbirthYY.focus();
+			obirthYY.focus();
 			return false;
 		}
        	//성별 빈칸
-      	if(!form1.cgender0.checked && !form1.cgender1.checked) {
+      	if(!form1.ogender0.checked && !form1.ogender1.checked) {
       		alert("성별을 선택해 주십시오.");
-			form1.cgender0.focus();
+			form1.ogender0.focus();
 			return false;
       	}
         
         //이메일 빈칸
-        if(form1.cemail.value==""){
+        if(form1.oemail.value==""){
 			alert("이메일을 입력해 주십시오.");
-			cemail.focus();
+			oemail.focus();
 			return false;
 		}
       	//핸드폰 빈칸
-        if(form1.cphone.value==""){
+        if(form1.ophone.value==""){
 			alert("핸드폰번호를 입력해 주십시오.");
-			cphone.focus();
+			ophone.focus();
 			return false;
 		}
 		//주소 빈칸
@@ -218,20 +218,20 @@
 	
 
 	function checkId() {
-		var userId=$("#cid_").val().trim();
+		var userId=$("#oid_").val().trim();
 		if(!userId || userId.length<4) {
 			alert("아이디를 4글자 이상가능합니다.");
 			return;
 		}
 		
 		var regExpId = /^[a-z0-9]{4,12}$/;
-		if(!regExpId.test(form1.cid_.value)) {
+		if(!regExpId.test(form1.oid_.value)) {
 			alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
 			return false;
 		}
 	
 	
-	var url = "<%=request.getContextPath()%>/checkId";
+	var url = "<%=request.getContextPath()%>/checkIdOwner";
 	var title = "checkId";
 	var status = "left=500px,top100px width=500px, height=300px,menubar=no,status=no,scrollbars=yes";
 	var popup = open("",title,status);

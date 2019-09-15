@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import ="com.jb.client.model.vo.Client" %>
+<%@ page import ="com.jb.owner.model.vo.Owner" %>
 
 <%
-Client c = (Client)request.getAttribute("findClient");
+Owner o = (Owner)request.getAttribute("findOwner");
 %>
   <section>
   		<br><br><br><br><br><br><br><br><br><br><br><br>
@@ -18,8 +18,8 @@ Client c = (Client)request.getAttribute("findClient");
     {
   		console.log("ddddd")
 
-    	var ID = "${findClient.getcId()}"
-    	var EMAIL = "${findClient.getcEmail()}"
+    	var ID = "${findOwner.getoId()}"
+    	var EMAIL = "${findOwner.getoEmail()}"
     	
     	
     	var TO = EMAIL

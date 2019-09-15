@@ -1,25 +1,27 @@
-package com.jb.client.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ClientService;
+import com.jb.owner.model.service.OwnerService;
+import com.jb.owner.model.vo.Owner;
 
 /**
- * Servlet implementation class CheckIdServlet
+ * Servlet implementation class FindIdOwnerServlet
  */
-@WebServlet("/client/checkIdDuplicate")
-public class CheckIdServlet extends HttpServlet {
+@WebServlet("/owner/findId")
+public class FindIdOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckIdServlet() {
+    public FindIdOwnerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +30,24 @@ public class CheckIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-		String cId = request.getParameter("userId");
+		String name = request.getParameter("uname");
+		String email = request.getParameter("cemail");
+		System.out.println(name);
+		System.out.println(email);
 		
-		ClientService service = new ClientService();
-		boolean isUseable = service.selectCheckId(cId);
-
-
-		request.setAttribute("cId", cId);
-		request.setAttribute("isUseable", isUseable);
-		request.getRequestDispatcher("/views/client/updateClientInfo.jsp").forward(request, response);
-	    
-
+		
+		OwnerService service = new OwnerService();
+		Owner o = service.findId(name,email);
+		
+		System.out.println(o.getoId());
+		System.out.println(o.getoEmail());
+		
+		request.setAttribute("findOwner", o);
+		request.getRequestDispatcher("/views/owner/findCheckOwner.jsp").forward(request, response);
+		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

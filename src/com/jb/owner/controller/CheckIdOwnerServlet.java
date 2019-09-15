@@ -1,25 +1,26 @@
-package com.jb.client.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ClientService;
+import com.jb.owner.model.service.OwnerService;
 
 /**
- * Servlet implementation class CheckIdServlet
+ * Servlet implementation class CheckIdOwnerServlet
  */
-@WebServlet("/client/checkIdDuplicate")
-public class CheckIdServlet extends HttpServlet {
+@WebServlet("/checkIdOwner")
+public class CheckIdOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckIdServlet() {
+    public CheckIdOwnerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +29,18 @@ public class CheckIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-		String cId = request.getParameter("userId");
+		String id = request.getParameter("userId");
+		System.out.println(id);
 		
-		ClientService service = new ClientService();
-		boolean isUseable = service.selectCheckId(cId);
-
-
-		request.setAttribute("cId", cId);
+		OwnerService service = new OwnerService();
+		boolean isUseable = service.selectCheckId(id);
+		System.out.println(isUseable);
+		request.setAttribute("oid", id);
 		request.setAttribute("isUseable", isUseable);
-		request.getRequestDispatcher("/views/client/updateClientInfo.jsp").forward(request, response);
-	    
-
+		request.getRequestDispatcher("/views/owner/checkIdOwner.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
