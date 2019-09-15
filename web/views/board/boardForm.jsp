@@ -25,7 +25,7 @@
 								<tr>
 									<th>작성자 :</th>
 									<td><input type="text" value="<%=loginClient.getcId() %>"
-										name="writer" class="form-control" readonly /> <!-- readonly -->
+										name="writer" class="form-control" readonly />
 									</td>
 								</tr>
 								<th>내용 :</th>
