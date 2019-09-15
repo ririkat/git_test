@@ -57,7 +57,7 @@ public class PensionDao {
 		
 	}
 	
-	//전체 펜션 수
+	//전체 승인된 펜션 수
 	public int selectCountPension(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -79,6 +79,7 @@ public class PensionDao {
 		return result;
 	}
 	
+	//페이징 - 승인된 펜션
 	public List<Pension> selectListPage(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -109,8 +110,61 @@ public class PensionDao {
 		return list;
 	}
 	
+	//전체 미승인 펜션 수
+	public int selectCountWait(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selectCountWait");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//페이징 - 승인 대기중인 펜션
+	public List<Pension> waitListPage(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("waitListPage");
+		List<Pension> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Pension p = new Pension();
+				p.setpCode(rs.getString("p_code"));
+				p.setpName(rs.getString("p_name"));
+				p.setpAddr(rs.getString("p_addr"));
+				p.setpTel(rs.getString("p_tel"));
+				p.setoId(rs.getString("o_id"));
+				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setEnrollDate(rs.getDate("enrollDate"));
+				list.add(p);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	//오버로딩
-	//펜션검색
+	//펜션검색 - 승인
 	public int selectCountPension(Connection conn, String type, String keyword) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -132,6 +186,7 @@ public class PensionDao {
 		return result;
 	}
 	
+	//페이징 - 승인된펜션
 	public List<Pension> selectPensionList(Connection conn, String type, String keyword, int cPage, int numPerPage){
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -161,6 +216,60 @@ public class PensionDao {
 			e.printStackTrace();
 		}
 		finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	// 펜션검색 - 미승인
+	public int selectCountPension2(Connection conn, String type, String keyword) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) as cnt from pension where enrollyn='N' and " + type + " like '%" + keyword + "%'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
+
+	// 페이징 - 미승인된펜션
+	public List<Pension> selectPensionList2(Connection conn, String type, String keyword, int cPage, int numPerPage) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Pension> list = new ArrayList();
+		int start = (cPage - 1) * numPerPage + 1;
+		int end = cPage * numPerPage;
+		String sql = "select * from (" + "select rownum as rnum, a.* from("
+				+ "select * from pension where enrollyn='N' and " + type + " like '%" + keyword + "%' )a) "
+				+ "where rnum between " + start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Pension p = new Pension();
+				p.setpCode(rs.getString("p_code"));
+				p.setpName(rs.getString("p_name"));
+				p.setpAddr(rs.getString("p_addr"));
+				p.setpTel(rs.getString("p_tel"));
+				p.setoId(rs.getString("o_id"));
+				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setEnrollDate(rs.getDate("enrollDate"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(rs);
 			close(stmt);
 		}
@@ -199,7 +308,7 @@ public class PensionDao {
 		return result;
 	}
 	
-	//승인대기중인 펜션 수
+	//업주 미승인 펜션 수
 	public int selectWaitPension(Connection conn, String oId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -220,6 +329,7 @@ public class PensionDao {
 		} return result;
 	}
 
+	//페이징 - 업주 미승인 펜션
 	public List<Pension> selectWaitList(Connection conn, int cPage, int numPerPage, String oId){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
