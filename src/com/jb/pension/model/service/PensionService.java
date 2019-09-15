@@ -60,4 +60,27 @@ public class PensionService {
 		close(conn);
 		return result;
 	}
+	
+	//승인대기중인 펜션 수
+	public int selectWaitPension(String oId) {
+		Connection conn = getConnection();
+		int result = dao.selectWaitPension(conn,oId);
+		close(conn);
+		return result;
+	}
+	
+	public List<Pension> selectWaitList(int cPage, int numPerPage, String oId){
+		Connection conn = getConnection();
+		List<Pension> list = dao.selectWaitList(conn, cPage, numPerPage, oId);
+		close(conn);
+		return list;
+	}
+	
+	//펜션 추가
+	public int addPension(String pName, String addr, String tel, String oId) {
+		Connection conn = getConnection();
+		int result = dao.addPension(conn,pName,addr,tel,oId);
+		close(conn);
+		return result;
+	}
 }

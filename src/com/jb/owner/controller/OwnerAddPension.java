@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class OwnerPensionEnrollServlet
+ * Servlet implementation class OwnerAddPension
  */
-@WebServlet("/owner/pensionEnroll")
-public class OwnerPensionEnrollServlet extends HttpServlet {
+@WebServlet("/owner/addPension")
+public class OwnerAddPension extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerPensionEnrollServlet() {
+    public OwnerAddPension() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +26,10 @@ public class OwnerPensionEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//업주 아이디 받아와서 업주소유의 펜션만 불러오기.
-		//리스트 위쪽에 추가버튼 필요.
-		//펜션 리스트에는 승인여부도 표시해주기
-		//승인되지 않은 펜션은 클릭도 되지 x
-		//승인된 펜션은 클릭-> 정보 띄워주고 수정버튼, 아래에 객실리스트 및 객실 추가버튼
+		//페이지 전환
+		String oId = request.getParameter("oId");
+		request.setAttribute("oId", oId);
+		request.getRequestDispatcher("/views/owner/pensionEnroll.jsp").forward(request, response);
 	}
 
 	/**
