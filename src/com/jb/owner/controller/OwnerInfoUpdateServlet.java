@@ -83,7 +83,7 @@ public class OwnerInfoUpdateServlet extends HttpServlet {
         String zonecode = request.getParameter("zonecode");
         String addr = request.getParameter("address");
 		String addrEtc = request.getParameter("address_etc");
-		String oAddr = "우)"+zonecode+addr+addrEtc;
+		String oAddr = "우)"+zonecode+"|"+addr+"|"+addrEtc;
 		 
 		o.setoAddr(oAddr);
 		System.out.println("주소:"+oAddr);
