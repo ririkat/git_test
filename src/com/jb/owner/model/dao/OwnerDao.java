@@ -245,5 +245,77 @@ public class OwnerDao {
 		return o;
 	}
 	
+	//업체 회원가입
+	public int insertOwner(Connection conn, Owner o) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertOwner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, o.getoId());
+			pstmt.setString(2, o.getoPw());
+			pstmt.setString(3, o.getoName());
+			pstmt.setDate(4, o.getoBirth());
+			pstmt.setString(5, o.getoGender());
+			pstmt.setString(6, o.getoEmail());
+			pstmt.setString(7, o.getoPhone());
+			pstmt.setString(8, o.getoAddr());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//아이디 중복 확인
+	public boolean selectCheckId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		String sql = prop.getProperty("selectCheckId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (!rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	//업체 아이디 찾기
+	public Owner findId(Connection conn,String name,String email) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("findId");
+		Owner o = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				o = new Owner();
+				o.setoId(rs.getString("o_id"));
+				o.setoName(rs.getString("o_name"));
+				o.setoEmail(rs.getString("o_email"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return o;
+	}
 	
 }

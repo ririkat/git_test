@@ -19,7 +19,7 @@
                                     ><br>
                                     <br>
                                     <input type="button" class="btn btn-lg btn-warning btn-block" value="업체회원가입"
-                                    onclick="location.href='<%=request.getContextPath()%>/views/client/signUpTermsClient.jsp'" 
+                                    onclick="location.href='<%=request.getContextPath()%>/views/owner/signUpTermsOwner.jsp'" 
                                     ><br>
                                 </form>
                             </div>

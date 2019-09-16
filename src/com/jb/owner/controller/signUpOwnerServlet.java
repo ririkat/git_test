@@ -1,4 +1,4 @@
-package com.jb.client.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ClientService;
-import com.jb.client.model.vo.Client;
+import com.jb.owner.model.service.OwnerService;
+import com.jb.owner.model.vo.Owner;
 
 /**
- * Servlet implementation class SignUpClientServlet
+ * Servlet implementation class signUpOwnerServlet
  */
-@WebServlet(name="SignUpClient",urlPatterns="/client/signupclient")
-public class SignUpClientServlet extends HttpServlet {
+@WebServlet(name="SignUpOwner",urlPatterns="/owner/signUp")
+public class signUpOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignUpClientServlet() {
+    public signUpOwnerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +31,20 @@ public class SignUpClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String id = request.getParameter("cid");
-		String pw = request.getParameter("cpass");
-		String name = request.getParameter("cname");
+		String id = request.getParameter("oid");
+		String pw = request.getParameter("opass");
+		String name = request.getParameter("oname");
 		
-		String birthYY = request.getParameter("cbirthYY"); 
-		String birthMM = request.getParameter("cbirthMM"); 
-		String birthDD = request.getParameter("cbirthDD"); 
+		String birthYY = request.getParameter("obirthYY"); 
+		String birthMM = request.getParameter("obirthMM"); 
+		String birthDD = request.getParameter("obirthDD"); 
 		Date birth = Date.valueOf(birthYY+"-"+birthMM+"-"+birthDD);
 		
 		
-		String gender = request.getParameter("cgender");
-		String email = request.getParameter("cemail");
-		String phone = request.getParameter("cphone");
+		String gender = request.getParameter("ogender");
+		String email = request.getParameter("oemail");
+		String phone = request.getParameter("ophone");
 		
 		String addr1 = request.getParameter("zonecode");
 		String addr3 = request.getParameter("address");
@@ -53,17 +52,20 @@ public class SignUpClientServlet extends HttpServlet {
 		
 		String addr = (addr1+" "+addr3+" "+addr4);
 		
-		Client c = new Client(id,pw,name,birth,gender,email,phone,addr);
-		ClientService service = new ClientService();
-		int result = service.insertClient(c);
+		Owner o = new Owner(id,pw,name,birth,gender,email,phone,addr);
+		OwnerService service = new OwnerService();
+		int result = service.insertOwner(o);
 		
 		String msg = "";
 		String loc = "/";
-		msg = result>0? "회원가입 축하드립니다.":"회원가입이 실패하였습니다.";
+		msg = result>0? "회원가입 축하드립니다 (승인 대기중 입니다).":"회원가입이 실패하였습니다.";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+	
 	}
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -74,4 +76,3 @@ public class SignUpClientServlet extends HttpServlet {
 	}
 
 }
-

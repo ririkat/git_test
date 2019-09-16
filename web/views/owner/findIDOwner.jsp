@@ -12,12 +12,12 @@
 
 
 
-                    <div class="tit_contents">회원 아이디찾기</div>
+                    <div class="tit_contents">업체회원 아이디찾기</div>
                     <br>
                     <hr>
                     <br>
 
-                    <form name="form1" method="post" action="<%=request.getContextPath()%>/client/findId">
+                    <form name="form1" method="post" action="<%=request.getContextPath()%>/owner/findId">
                         <table class="updateTable">
                             <colgroup>
                                 <col width="160px">
