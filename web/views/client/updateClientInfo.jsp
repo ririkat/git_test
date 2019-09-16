@@ -5,7 +5,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 <%@ include file="/views/common/header.jsp"%>
 
-<section onload="init()">
+<section>
 
 	<div class="container-fluid">
 		<div class="row content">
@@ -19,14 +19,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 					<ul class="nav nav-pills nav-stacked">
 						<br>
-						<%-- 
-                        <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
-                        
-                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
-                        <li  class="active"><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
-                  
+				
                         <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
@@ -72,66 +65,18 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 							</tr>
 						<tr>
 							<th class="point"><strong class="point">*</strong>아이디</th>
-							<td><input type="text" value="<%=loginClient.getcId()%>" name="cId" id="cId" readonly>
-							   
-							   
-			        <!-- Trigger the modal with a button -->
-			        <button type="button" id="btn-cIdCheck"class="btn btn-warning" data-toggle="modal" onclick="cIdCheck();" data-target="#cIdCheck">중복확인</button>
-			      
-			        <!-- Modal -->
-			        <div class="modal fade" id="cIdCheck" role="dialog">
-			          <div class="modal-dialog modal-sm">
-			            <div class="modal-content">
-			              <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal">&times;</button>
-			                <h4 class="modal-title" text-align="center">아이디 중복확인</h4>
-			              </div>
-			          
-			           
-			          
-			              <div class="modal-body">
-			           <%--       <%
-						if (isUseable) {
-					        %>
-			          
-			                <p><strong class="point"><%=loginClient.getcId() %></strong>는 사용할 수 있는 아이디 입니다.</p>
-			                <%
-			              } else {
-	                     	%> --%>
-	                     	
-	                     	<p><strong class="point"><%=loginClient.getcId() %></strong>는 이미 사용중인 아이디 입니다.</p>
-	                     	<br>
-		<form action="<%=request.getContextPath()%>/client/checkIdDuplicate"
-			method="post" name="checkId">
-			<input type="text" name="cId" id="cId" placeholder="아이디를 입력하세요" />&nbsp;&nbsp;
-			<button type='button' class="btn btn-warning"  onclick="checkIdDuplicate();">중복검사</button>
-		</form>
-	<%-- 	<%
-			}
-		%>
-			    --%>          
-			             
-			             
-			              </div>
-			              
-			           
-			              <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			              </div>
-			            </div>
-			          </div>
-			        </div>
-   
-							
+							<td><input type="hidden" value="<%=loginClient.getcId()%>" name="cId" id="cId" readonly><%=loginClient.getcId()%>
+					   
+									
 							</td>
 						</tr>
 				<tr>
                              <th class="point"><strong class="point">*</strong>생년월일</th>
                              <td>
-                             <!--  <input check-join-date input-number type="number" name="cBirthYY" id="cBirthYY" min="1900" max="2005" maxlength="4">년                            
+                              <input check-join-date input-number type="number" name="cBirthYY" id="cBirthYY" min="1900" max="2005" maxlength="4">년                            
                               <input check-join-date input-number type="number" name="cBirthMM" id="cBirthMM" min="01" max="12" maxlength="2" >월                            
                               <input check-join-date input-number type="number" name="cBirthDD" id="cBirthDD" min="01" max="31" maxlength="2"  >일                           
-                            -->
+                            
                             
                             
                                       
@@ -189,24 +134,25 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 				             </td>
 	            </tr>
 
+
+
 							<tr>
 								<th class="point">지역</th>
 								<td>
-								<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required>
-								<!-- <td><select name="cAddr" id="cAddr">
-										<option value="서울">서울</option>
-										<option value="경기도" selected="">경기도</option>
-										<option value="강원도">강원도</option>
-										<option value="충청북도">충청북도</option>
-										<option value="충남남도">충남남도</option>
-										<option value="전라북도">전라북도</option>
-										<option value="전라남도">전라남도</option>
-										<option value="경상북도">경상북도</option>
-										<option value="경상남도">경상남도</option>
-										<option value="제주도">제주도</option>
-								</select></td> -->
+ 							<%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
+
+	<input id="zonecode" name="zonecode" type="text" value="" style="width:70px;" readonly/>
+	&nbsp;
+	<input type="button"  onClick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
+	<br/>
+	<input type="text" id="address" name="address" value="" style="width:240px;" value="<%=loginClient.getcAddr()%>" required  readonly/>
+	<input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="" style="width:200px;"/>
 								</td>
 							</tr>
+							
+							
+							
+							
 							
 							 <tr>
                                     <th class="point"><strong class="point">*</strong>이메일 수신여부</th>
@@ -230,14 +176,14 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
          
 
-
+	<input type="hidden" name="cId" value='<%=(String)request.getAttribute("cId")%>'/>
 				</form>
 				
 				
 				
-	<form name="cIdCheckFrm" method="post">
-		<input type="hidden" name="cId" value='<%=(String)request.getAttribute("cId")%>'/>
-	</form>
+
+	
+	
 				<br>
 				<br>
 				<div class="button">
@@ -255,9 +201,71 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 </section>
 
+<script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-
-	function update_validate(){
+	//주소 API
+			function openDaumZipAddress() {
+			new daum.Postcode({
+				oncomplete:function(data) {
+				/* 	jQuery("#postcode1").val(data.postcode1);
+					jQuery("#postcode2").val(data.postcode2); */
+					jQuery("#zonecode").val(data.zonecode);
+					jQuery("#address").val(data.address);
+					jQuery("#address_etc").focus();
+					console.log(data);
+				}
+			}).open();
+		}
+	
+	 function update_validate(){
+		
+		 /* var cBirthYY=$("#cBirthYY").val(); 
+		  var cBirthMM=$("#cBirthMM").val();
+		  var cBirthDD=$("#cBirthDD").val();
+		  var cGender1=$('#cGender1').val();
+		  var cGender2=$('#cGender2').val();
+		  var cEmailId=$('#cEmailId').val();
+		  var cEmail2=$('#cEmail2').val();
+		  var cEmailSelectnull=$('#cEmailSelectnull').val();
+		  var cAddr=$('#cAddr').val();
+		  var cPhone=$('#cPhone').val();
+		  
+			if(cBirthYY==""){
+				alert("생년월일을 입력해 주십시오.");
+				cBirthYY.focus();
+				return false;
+				
+			}else if(cBirthMM==""){
+				alert("생년월일을 입력해 주십시오.");
+				cBirthMM.focus();
+				return false;
+			}else if(cBirthMM==""){
+				alert("생년월일을 입력해 주십시오.");
+				cBirthDD.focus();
+				return false;
+			}else if(!cGender1.checked&&!cGender2.checked){
+				alert("성별을 선택해 주십시오.");
+				cGender1.focus();
+				return false; */
+			/* }else if(cEmailId==""){
+				alert("이메일을 입력해 주십시오.");
+				cEmailId.focus();
+				return false; */
+			/* }else if(!cEmailSelectnull.selected||cEmail2==""){
+				alert("이메일을 입력해 주십시오.");
+				cEmail2.focus();
+				return false; */
+	/* 		}else if(cAddr==""){
+				alert("주소를 입력해 주십시오.");
+				cAddr.focus();
+				return false;
+			}else if(cPhone==""){
+				alert("휴대폰 번호를 입력해 주십시오.");
+				cPhone.focus();
+				return false;
+				
+			} */
 	
 		return true;
 	}
@@ -270,6 +278,40 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 		frm.attr("action",url);
 		frm.submit();			
 	}
+	
+
+	 // 휴대폰번호에 숫자만 입력받게 
+
+	 function onlynumber() {
+
+		var regexp = /^[0-9]*$/
+
+
+		v = $('#cPhone').val();
+
+		if( !regexp.test(v) ) {
+
+			alert("숫자만 입력하세요.");
+
+			$('#cPhone').val(v.replace(regexp,""));
+		    $('#cPhone').val("");
+
+		}
+
+		}
+	 
+
+	//메일 뒤에 선택하면 바뀌게 
+
+	function mailChange(val,id_name){
+		
+		obj = document.getElementById(id_name);
+		obj.value = val;
+		obj.focus();
+	}
+
+	
+
 
 
 
