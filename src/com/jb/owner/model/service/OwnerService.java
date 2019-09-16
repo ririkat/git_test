@@ -105,5 +105,25 @@ public class OwnerService {
 		return result;
 	}
 	
+	public int updateOwnerPassword(String oId, String oPw, String oPwNew) {
+		Connection conn = getConnection();
+		
+		Owner o = dao.selectId(conn, oId, oPw);
+		int result = 0;
+		if(o!=null) {
+			result = dao.updateOwnerPassword(conn, oId, oPwNew);
+		}else {
+			result = -1;
+		}
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+		
+	}
 
 }
