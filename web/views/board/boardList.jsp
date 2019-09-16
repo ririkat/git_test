@@ -13,24 +13,7 @@
 
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">게시판</a>
-			</h4>
-
-			<div id="boardList">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="mypage.html">공지사항</a></li>
-					<li><a href="jjim.html">커뮤니티</a></li>
-					<li><a href="updateUserInfo.html">FAQ</a></li>
-				</ul>
-				<br>
-			</div>
-		</div>
-		
-	
-	
+		<%@ include file="/views/common/sideBoard.jsp"%>
 	<section>
 		<div class="col-sm-9">
 			<div class="container">
@@ -49,9 +32,9 @@
             <%if(list!=null && !list.isEmpty()){
             	for(Board b : list){%>
             	<tr>
-                    <td><%=b.getbNo() %></td>
+                    <td><%=b.getCmmNo() %></td>
                     <td>
-                    	<a href="<%=request.getContextPath()%>/board/boardView?bNo=<%=b.getbNo() %>">
+                    	<a href="<%=request.getContextPath()%>/board/boardView?cmmNo=<%=b.getCmmNo() %>">
                     	<%=b.getTitle() %></a>
                     </td>
                     <td><%=b.getcId() %></td>
@@ -60,15 +43,16 @@
                 </tr>
             <%}
             }
-            }%>
+            %>
             </tbody>
         </table>
         <hr/>
 
         <!-- 글쓰기 버튼 좌우 정렬 pull-right / pull-left -->
         <!-- 로그인시에만 보이는 보이는 로직 필요 -->
-        <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()";/>
-        <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()";/>
+        <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()"/>
+        <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()"/>
+        <input type="button" value="SMTP Test" class="btn btn-default pull-left" onclick="SMTP()"/>
 
         <div class="text-center">
             <ul class="pagination">
@@ -79,6 +63,9 @@
 			    <script>
 			       	function writeBoard(){
 			       		location.href="<%=request.getContextPath()%>/board/boardForm";
+			       	}
+			       	function SMTP(){
+			       		location.href="<%=request.getContextPath()%>/board/SMTPTest";
 			       	}
 			    </script>
 		</div>
