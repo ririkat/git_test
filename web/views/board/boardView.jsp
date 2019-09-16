@@ -5,42 +5,14 @@
 	Board b=(Board)request.getAttribute("board");
 	List<BoardComment> list=(List)request.getAttribute("list");
 %>
-<style>
-	table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; } 
-    table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
-    table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
-    table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
-    table#tbl-comment button.btn-reply{display:none;}
-    table#tbl-comment tr:hover {background:lightgray;}
-    table#tbl-comment tr:hover button.btn-reply{display:inline;}
-    table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
-    table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
-    table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
-    table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
-    table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
-    table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
-</style>
+
 
 
 <%@ include file="/views/common/header.jsp"%>
 
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">게시판</a>
-			</h4>
-
-			<div id="boardList">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="mypage.html">공지사항</a></li>
-					<li><a href="jjim.html">커뮤니티</a></li>
-					<li><a href="updateUserInfo.html">FAQ</a></li>
-				</ul>
-				<br>
-			</div>
-		</div>
+		<%@ include file="/views/common/sideBoard.jsp"%>
 
 <section>
 	<div class="col-sm-9">
@@ -48,7 +20,7 @@
 	<table>
 		<tr>
 			<td>게시번호</td>
-			<td><%=b.getbNo() %></td>
+			<td><%=b.getCmmNo() %></td>
 		</tr>
 		<tr>
 			<td>제목</td>
@@ -88,27 +60,29 @@
 			</td>
 		</tr>
 	</table>
-	<input type="button" id="toSend" class="btn btn-default pull-left" value="글목록으로" onclick="toList()";/>
+	<input type="button" id="toSend" class="btn btn-default pull-left" value="글목록으로" onclick="toList()"/>
 		<%if(loginClient!=null && (loginClient.getcId().equals(b.getcId()) || loginClient.getcId().equals("admin"))) { %>
-			<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()";/>
-			<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()";/>
+			<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()"/>
+			<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()"/>
 		<%} %>
+		<input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>
 	<script>
 		function toList(){
 			location.href="<%=request.getContextPath() %>/board/boardList";
 		}
 		function updateBoard(){
 			
-<%-- 		location.href="<%=request.getContextPath()%>/board/updateBoard?bNo=<%=b.getbNo()%>"; --%>
-			location.href="<%=request.getContextPath()%>/board/updateBoard?bNo=<%=b.getbNo() %>";
+<%-- 		location.href="<%=request.getContextPath()%>/board/updateBoard?cmmNo=<%=b.getCmmNo()%>"; --%>
+			location.href="<%=request.getContextPath()%>/board/updateBoard?cmmNo=<%=b.getCmmNo() %>";
 		}
 		function deleteBoard(){
 			var result=confirm("정말로 삭제합니까?");
 			if(result){
-				location.href="<%=request.getContextPath() %>/board/deleteBoard?bNo=<%=b.getbNo()%>";
-			}else{
-				
+				location.href="<%=request.getContextPath() %>/board/deleteBoard?cmmNo=<%=b.getCmmNo()%>";
 			}
+		}
+		function out(){
+			location.href="<%=request.getContextPath() %>/board/outBoard?cmmNo=<%=b.getCmmNo()%>";
 		}
 	</script>		
 	
@@ -116,7 +90,7 @@
 	<div id="comment-container">
 		<div class="comment-editor">
 			<form action="<%=request.getContextPath() %>/boardcomment/commentInsert" method="post">
-				<input type="hidden" name="bNo" value="<%=b.getbNo() %>"/>
+				<input type="hidden" name="cmmNo" value="<%=b.getCmmNo() %>"/>
 				<input type="hidden" name="boardCommentWriter" value="<%=loginClient!=null?loginClient.getcId():"" %>"/>
 				<input type="hidden" name="boardCommentLevel" value="1"/>
 				<input type="hidden" name="boardCommentRef" value="0">
@@ -151,10 +125,10 @@
 					<%=bc.getComment() %>
 				</td>
 				<td>
-					<button class="btn-reply" value="<%=bc.getCoNo() %>">답글</button>
+					<button class="btn-reply" value="<%=bc.getCommentNo() %>">답글</button>
 					<%if(loginClient!=null
 						&&("admin".equals(loginClient.getcId())||bc.getcId().equals(loginClient.getcId()))) {%>
-						<button class="btn-delete" value="<%=bc.getCoNo()%>">삭제</button>
+						<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
 						<%} %>
 					</td>
 				</tr>
@@ -171,6 +145,10 @@
 					<%=bc.getComment() %>
 				</td>
 				<td>
+					<%if(loginClient!=null
+						&&("admin".equals(loginClient.getcId())||bc.getcId().equals(loginClient.getcId()))) {%>
+					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
+					<%} %>
 				</td>
 			</tr>
 			<%}
@@ -184,18 +162,20 @@
 				alert("로그인 후 사용가능합니다.");
 				return
 			}if(confirm("정말로 삭제하시겠습니까?")){
-				location.href="<%=request.getContextPath()%>/board/boardCommentDelete?bNo=<%=b.getbNo()%>&coNo="+$(this).val();
+				location.href="<%=request.getContextPath()%>/board/boardCommentDelete?cmmNo=<%=b.getCmmNo()%>&commentNo="+$(this).val();
 			}
 		})
 		$('.btn-reply').click(function(){
 			if(<%=loginClient!=null%>){
 				var tr=$('<tr>');
 				var td=$("<td>").css({"display":"none","text-align":"left"}).attr("colspan",2);
+				
+// 				대댓글
 				var form=$("<form>").attr({
 					"action":"<%=request.getContextPath()%>/board/boardCommentInsert","method":"post"
 				});
-				var bNo=$("<input>").attr({
-					"type":"hidden","name":"bNo","value":"<%=b.getbNo()%>"
+				var cmmNo=$("<input>").attr({
+					"type":"hidden","name":"cmmNo","value":"<%=b.getCmmNo()%>"
 				});
 				var writer=$("<input>").attr({
 					"type":"hidden","name":"writer","value":"<%=loginClient!=null?loginClient.getcId():"" %>"
@@ -203,17 +183,17 @@
 				var level=$("<input>").attr({
 					"type":"hidden","name":"level","value":"2"
 					});
-				var commentRef=$("<input>").attr({
-					"type":"hidden","name":"commentRef","value":$(this).val()
-					});
 				var comment=$("<textarea>").attr({
 						"name":"comment","cols":"60","rows":"2"
+					});
+				var commentRef=$("<input>").attr({
+					"type":"hidden","name":"commentRef","value":$(this).val()
 					});
 				var btn=$("<button>").attr({
 						"type":"submit","class":"btn-insert2"
 					}).html("등록");
 				
-				form.append(bNo).append(writer).append(level).append(comment).append(commentRef).append(btn);
+				form.append(cmmNo).append(writer).append(level).append(comment).append(commentRef).append(btn);
 				td.append(form);
 				tr.html(td);
 				tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
@@ -239,7 +219,7 @@
 </script>
 	
 </section>
-
+</div>
 </div>
 
 
