@@ -62,7 +62,10 @@
                         
                         <tr>
                             <th class="point"><strong class="point"></strong>이메일</th>
-                            <td><input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" ></td>
+                            <td>
+                            	<input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" >
+                            	<button id="emailConfirm">이메일 인증</button>
+                            </td>
                         </tr>
 
                         <tr>
@@ -111,6 +114,9 @@
     <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>    
 	<script>
+	$(function(){
+		$('#emailConfirm').
+	})
 	
 	$(function(){
         $('#cpass2').blur(function(){

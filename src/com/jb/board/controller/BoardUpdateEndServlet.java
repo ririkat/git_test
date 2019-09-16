@@ -63,15 +63,6 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		String oriFile=mr.getOriginalFileName("up_file");
 		String reFile=mr.getFilesystemName("up_file");
 		
-		System.out.println(cmmNo);
-		System.out.println(title);
-		System.out.println(writer);
-		System.out.println(content);
-		System.out.println(oriFile);
-		System.out.println(reFile);
-		
-		
-		
 		
 		Board b=new Board(cmmNo, title, writer, content, oriFile, reFile);
 		int result=new BoardService().updateBoard(b);
@@ -92,10 +83,6 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
-		System.out.println(saveDir);
-		
-		
 		
 		
 	}
