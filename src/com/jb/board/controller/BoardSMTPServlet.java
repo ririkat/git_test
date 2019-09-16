@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardSMTPServlet
  */
-@WebServlet("/board/SMTPTest")
+@WebServlet("/board/SMTPout")
 public class BoardSMTPServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -65,7 +65,6 @@ public class BoardSMTPServlet extends HttpServlet {
 			Transport.send(message);
 			
 			System.out.println("메세지 발신 성공~");
-			System.out.println("패치 수정");
 			
 		}catch(AddressException e) {
 			e.printStackTrace();

@@ -5,21 +5,7 @@
 	Board b=(Board)request.getAttribute("board");
 	List<BoardComment> list=(List)request.getAttribute("list");
 %>
-<style>
-	table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; } 
-    table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
-    table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
-    table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
-    table#tbl-comment button.btn-reply{display:none;}
-    table#tbl-comment tr:hover {background:lightgray;}
-    table#tbl-comment tr:hover button.btn-reply{display:inline;}
-    table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
-    table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
-    table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
-    table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
-    table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
-    table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
-</style>
+
 
 
 <%@ include file="/views/common/header.jsp"%>
@@ -79,6 +65,7 @@
 			<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()"/>
 			<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()"/>
 		<%} %>
+		<input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>
 	<script>
 		function toList(){
 			location.href="<%=request.getContextPath() %>/board/boardList";
@@ -93,6 +80,9 @@
 			if(result){
 				location.href="<%=request.getContextPath() %>/board/deleteBoard?cmmNo=<%=b.getCmmNo()%>";
 			}
+		}
+		function out(){
+			location.href="<%=request.getContextPath() %>/board/outBoard?cmmNo=<%=b.getCmmNo()%>";
 		}
 	</script>		
 	
