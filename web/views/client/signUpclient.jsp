@@ -44,9 +44,9 @@
                         <tr>
                             <th class="point"><strong class="point"></strong>생년월일</th>
                             <td>
-                            <input check-join-date input-number type="number" name="cbirthYY" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
-                            <input check-join-date input-number type="number" name="cbirthMM" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
-                            <input check-join-date input-number type="number" name="cbirthDD" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
+                            <input type="number" name="cbirthYY" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
+                            <input type="number" name="cbirthMM" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
+                            <input type="number" name="cbirthDD" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
                             </td>
                         </tr>
                         <tr>
@@ -133,10 +133,10 @@
 		}
 		
 		//중복확인 체크 유효성검사
-		if(form1.idDuplication.value != "checkId") {
-			alert("아이디 중복체크를 해주세요");
-			return false;
-		}
+// 		if(form1.idDuplication.value != "checkId") {
+// 			alert("아이디 중복체크를 해주세요");
+// 			return false;
+// 		}
 		
         //비밀번호 빈칸
         if (form1.cpass.value=="" || form1.cpass2.value=="") {

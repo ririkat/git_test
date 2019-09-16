@@ -15,7 +15,7 @@ import com.jb.owner.model.vo.Owner;
 /**
  * Servlet implementation class signUpOwnerServlet
  */
-@WebServlet("/owner/signUp")
+@WebServlet(name="SignUpOwner",urlPatterns="/owner/signUp")
 public class signUpOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
