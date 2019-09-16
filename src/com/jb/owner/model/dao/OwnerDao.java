@@ -158,6 +158,7 @@ public class OwnerDao {
 			if(rs.next()) {
 				o= new Owner();
 				o.setoId(rs.getString("o_id"));
+				o.setoPw(rs.getString("o_pw"));
 				o.setoName(rs.getString("o_name"));
 				o.setoBirth(rs.getDate("o_birth"));
 				o.setoGender(rs.getString("o_gender"));
