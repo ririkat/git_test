@@ -42,7 +42,7 @@
                                     <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
                                     <polyline points="13 2 13 9 20 9"></polyline>
                                 </svg>
-                                업주관리
+                                업주관리 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li>
@@ -55,7 +55,7 @@
                                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
-                                회원관리
+                                회원관리 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                     </ul><br>

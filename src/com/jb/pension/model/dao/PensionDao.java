@@ -46,7 +46,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
 		} catch(SQLException e) {
@@ -151,7 +151,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
 		} catch(SQLException e) {
@@ -209,7 +209,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
 		} catch(SQLException e) {
@@ -264,7 +264,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
 		} catch (SQLException e) {
@@ -301,6 +301,71 @@ public class PensionDao {
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);
 		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
+	//관리자 승인대기->펜션상세->반려 (펜션 한개 삭제)
+	public int deleteOnePension(Connection conn, String pCode, String oId) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "delete from pension where p_code='"+pCode+"' and o_id='"+oId+"'";
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
+	//관리자 펜션관리 선택승인 (승인대기목록)
+	public int acceptPensionList(Connection conn, String accList) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "update pension set enrollyn='Y' where p_code in (";
+
+		String[] accDelList = accList.split(",");
+		for (int i = 0; i < accDelList.length; i++) {
+			accDelList[i] = "'" + accDelList[i] + "'";
+		}
+		if (accDelList.length < 2) {
+			sql += accDelList[0] + ")";
+		} else {
+			sql += accDelList[0];
+			for (int i = 1; i < accDelList.length; i++) {
+				sql += "," + accDelList[i];
+			}
+			sql += ")";
+		}
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
+	//관리자 승인대기->펜션상세->승인 (펜션 한개 승인)
+	public int acceptOnePension(Connection conn, String pCode, String oId) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "update pension set enrollyn='Y' where p_code='"+pCode+"' and o_id='"+oId+"'";
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(stmt);
@@ -349,7 +414,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
-				p.setEnrollDate(rs.getDate("enrollDate"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
 		} catch(SQLException e) {

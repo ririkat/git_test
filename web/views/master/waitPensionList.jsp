@@ -41,6 +41,7 @@
                 	</div>
                 </div>
                 <button id="deleteBtn" class="pull-right">삭제</button>
+                <button id="acceptBtn" class="pull-right">승인</button>
                 <br><br><br>
                 
                                 
@@ -61,7 +62,7 @@
 		                        <tr>
 		                        	<td style="text-align:left"><input type="checkbox" name="selected" value="ROW"></td>
 		                            <td style="cursor:pointer">
-		                            	<a href="<%=request.getContextPath()%>/master/roomList?pensionCode=<%=p.getpCode()%>">
+		                            	<a href="<%=request.getContextPath()%>/master/waitDetail?pensionCode=<%=p.getpCode()%>">
 		                            		<%=p.getpCode() %>
 		                            	</a>
 		                            </td>
@@ -133,11 +134,44 @@
 								console.log(tdArr);
 								
 								//삭제할 펜션들을 서블릿으로 보내기
-								location.href="<%=request.getContextPath()%>/master/pensionDelete?delPensionList="+tdArr;
+								location.href="<%=request.getContextPath()%>/master/oneDelete?delPensionList="+tdArr;
 			        		}		        			
 		        		}
 					});
 		        	
+		        	//승인버튼 동작
+		        	$("#acceptBtn").click(function(){
+		        		var checkbox = $("input[name=selected]:checked");
+		        		
+		        		if(checkbox.length==0){
+		        			alert("승인할 펜션을 선택해주세요.");
+		        		}
+		        		else{
+			        		if(confirm("승인하시겠습니까?")){
+								var tdArr = new Array();
+								
+								// 체크된 체크박스 값을 가져온다
+								checkbox.each(function(i) {
+									// checkbox.parent() : checkbox의 부모는 <td>이다.
+									// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+									var tr = checkbox.parent().parent().eq(i);
+									var td = tr.children();
+									
+									// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+									var pensionCode = td.eq(1).children().text().trim();
+
+									console.log("펜션코드 : "+pensionCode);
+									
+									// 가져온 값을 배열에 담는다.
+									tdArr.push(pensionCode);
+								});
+								console.log(tdArr);
+								
+								//승인할 펜션들을 서블릿으로 보내기
+								location.href="<%=request.getContextPath()%>/master/pensionAcc?accPensionList="+tdArr;
+			        		}		        			
+		        		}
+					});
 		        </script>
 		        
             </div>

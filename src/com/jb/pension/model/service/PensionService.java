@@ -48,7 +48,7 @@ public class PensionService {
 	
 	//승인 대기중인 펜션
 	public List<Pension> waitListPage(int cPage, int numPerPage){
-		Connection conn = null;
+		Connection conn = getConnection();
 		List<Pension> list = dao.waitListPage(conn,cPage,numPerPage);
 		close(conn);
 		return list;
@@ -89,6 +89,30 @@ public class PensionService {
 	public int deletePensionList(String delList) {
 		Connection conn = getConnection();
 		int result = dao.deletePensionList(conn,delList);
+		close(conn);
+		return result;
+	}
+	
+	//관리자 승인대기->펜션상세->반려 (펜션 한개 삭제)
+	public int deleteOnePension(String pCode, String oId) {
+		Connection conn = getConnection();
+		int result = dao.deleteOnePension(conn, pCode, oId);
+		close(conn);
+		return result;
+	}
+	
+	//관리자 펜션관리 선택승인 (승인대기목록)
+	public int acceptPensionList(String accList) {
+		Connection conn = getConnection();
+		int result = dao.acceptPensionList(conn,accList);
+		close(conn);
+		return result;
+	}
+	
+	//관리자 승인대기->펜션상세->승인 (펜션 한개 승인)
+	public int acceptOnePension(String pCode, String oId) {
+		Connection conn = getConnection();
+		int result = dao.acceptOnePension(conn,pCode,oId);
 		close(conn);
 		return result;
 	}

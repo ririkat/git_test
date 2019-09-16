@@ -17,13 +17,13 @@ import com.jb.pension.model.vo.Pension;
  * Servlet implementation class MasterPensionWaitListServlet
  */
 @WebServlet("/master/waitList")
-public class MasterPensionWaitListServlet extends HttpServlet {
+public class MasterWaitPensionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MasterPensionWaitListServlet() {
+    public MasterWaitPensionListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

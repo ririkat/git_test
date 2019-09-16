@@ -39,7 +39,7 @@
 					<td><%=p.getpName() %></td>
 					<td><%=p.getpAddr() %></td>
 					<td><%=p.getpTel() %></td>
-					<td><%=p.getEnrollDate() %></td>
+					<td><%=p.getpEnrollDate() %></td>
 					<td><%=p.getEnrollYn() %></td>
 				</tr>
 				<%	}
