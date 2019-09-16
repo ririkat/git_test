@@ -16,7 +16,7 @@
                         <div class="account-wall">
                                 <h4 id="mypagetitle" style="text-align: center">로그인</h4>
                             <form id="loginTypefrm" class="form-signin" method="post" action="<%=request.getContextPath()%>/client/login">
-                                <input type="radio" name="loginType" value="client">고객
+                                <input type="radio" name="loginType" value="client" checked>고객
                                 <input type="radio" name="loginType" value="owner">업주
                                 <input id="loginid" name="loginid" type="text" class="form-control" placeholder="아이디 입력" required autofocus><br>
                                 <input id="loginpw" name="loginpw" type="password" class="form-control" placeholder="비밀번호 입력" required><br>

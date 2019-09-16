@@ -85,5 +85,25 @@ public class OwnerService {
 		return o;
 	}
 	
+	
+	public int updateOwner(Owner o) {
+		Connection conn=getConnection();
+		int result = 0;
+		if(o!=null) {
+			result=dao.updateOwner(conn,o);
+		}else {
+			result = -1;
+		}
+		
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 
 }

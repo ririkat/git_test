@@ -246,4 +246,28 @@ public class OwnerDao {
 	}
 	
 	
+	public int updateOwner(Connection conn, Owner o) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String sql = prop.getProperty("updateOwner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, o.getoName());
+			pstmt.setDate(2, o.getoBirth());
+			pstmt.setString(3, o.getoGender());
+			pstmt.setString(4, o.getoEmail());
+			pstmt.setString(5, o.getoPhone());
+			pstmt.setString(6, o.getoAddr());
+			pstmt.setString(7, o.getoId());
+			System.out.println("오아이디"+o.getoId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }
