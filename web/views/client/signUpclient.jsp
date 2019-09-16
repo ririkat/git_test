@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-
+	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>  
    
 
         <!-- 회원정보 수정 form -->
@@ -46,9 +46,10 @@
                         <tr>
                             <th class="point"><strong class="point"></strong>생년월일</th>
                             <td>
-                            <input check-join-date input-number type="number" name="cbirthYY" id="cbirthYY" class="" min="1900" max="2005" maxlength="4">년                            
-                            <input check-join-date input-number type="number" name="cbirthMM" id="cbirthMM" class="" min="1" max="12" maxlength="2" >월                            
-                            <input check-join-date input-number type="number" name="cbirthDD" id="cbirthDD" class="" min="1" max="31" maxlength="2"  >일                           
+                            <!-- class="check-join-date input-number" -->
+                            <input  type="number" name="cbirthYY" id="cbirthYY" min="1900" max="2005" maxlength="4">년                            
+                            <input  type="number" name="cbirthMM" id="cbirthMM" min="1" max="12" maxlength="2" >월                            
+                            <input type="number" name="cbirthDD" id="cbirthDD" min="1" max="31" maxlength="2"  >일                           
                             </td>
                         </tr>
                         <tr>
@@ -62,11 +63,9 @@
                         
                         <tr>
                             <th class="point"><strong class="point"></strong>이메일</th>
-                            <td>
-                            	<input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" >
-                            	<button id="emailConfirm">이메일 인증</button>
-                            </td>
+                            <td><input type="hidden" name="confirmYN" id="confirmYN" value="N" ><input type="email" name="cemail" id="cemail" placeholder="' @ '포함 입력하시오" ><input type="button" id="emailConfirm" value="인증번호발송"></td>
                         </tr>
+                        
 
                         <tr>
                             <th class="point"><strong class="point"></strong>핸드폰번호</th>
@@ -74,20 +73,18 @@
                         </tr>
                         
 						<tr>
-						<th class="point">주소</th>
-						<td>
-						<input id="postcode1" name="postcode1" type="text" value="" style="width:50px;" readonly/>
-						&nbsp;-&nbsp;
-						<input id="postcode2" name="postcode2" type="text" value="" style="width:50px;" readonly/>
-						&nbsp;&nbsp;
-						&nbsp;
-						<input type="button" onClick="openDaumZipAddress();" value = "주소 찾기" />
-						<br/>
-						<input type="text" id="address" name="address" value="" style="width:240px;" readonly/>
-						<input type="text" id="address_etc" name="address_etc" value="" style="width:200px;"/>
-						
-						</td>
-						
+							<th class="point">주소</th>
+							<td>
+								<input id="postcode1" name="postcode1" type="text" value="" style="width:50px;" readonly/>
+								&nbsp;-&nbsp;
+								<input id="postcode2" name="postcode2" type="text" value="" style="width:50px;" readonly/>
+								&nbsp;&nbsp;
+								&nbsp;
+								<input type="button" onClick="openDaumZipAddress();" value = "주소 찾기" />
+								<br/>
+								<input type="text" id="address" name="address" value="" style="width:240px;" readonly/>
+								<input type="text" id="address_etc" name="address_etc" value="" style="width:200px;"/>
+							</td>
 						</tr>
 <!--                         <tr> -->
 <!--                             <th class="point">주소</th> -->
@@ -97,26 +94,68 @@
                     
                 </table>
             	<div class="button">
-				<br><br>
-                <input type="submit" value="회원가입">
-              
-
-            </div>
+					<br><br>
+	                <input type="submit" value="회원가입">
+	            </div>
             </form>
             <form name="checkIdDuplicateFrm" method="post">
-			<input type="hidden" name="userId" />
+				<input type="hidden" name="userId" />
 			</form>
            <br>
             <hr>
-        </section>
-        
-      
-    <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
-	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>    
+        </section>  
 	<script>
 	$(function(){
-		$('#emailConfirm').
+		$('#emailConfirm').click(function(){
+			console.log("인증버튼클릭!!");
+			var dataString=$('#cemail').val();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/emailConfirm",
+				type:"post",
+				data:{dataString:dataString},
+				dataType:"html",
+				success:function(data){
+					console.log(data);
+					var br=$('<br/>');
+					var span=$('<span>');
+					var input=$('<input>').attr({
+						"type":"text","name":"confirmCode","id":"confirmCode"
+					});
+					var btn=$('<input>').attr({
+						"type":"button","name":"confirmBtn",
+						"value":"인증번호확인","id":"confirmBtn"
+					});
+					
+					setTimeout(function(){
+						console.log("함수실행")
+						$('#confirmBtn').parent().html("시간초과, 발송버튼을 다시 눌러 인증하세요.").css({"color":"red"});
+					}, 180000);
+					
+					span.append(input).append(btn);
+					$('#cemail').parent().append(br).append(span);
+					
+					$('#confirmBtn').click(function(){
+						var code=$('#confirmCode').val().trim();
+						if(code==data){
+							$(this).parent().html("인증완료").css("color","blue");
+							$('#confirmYN').attr("value","Y");
+						}else{
+							alert('인증번호 불일치 : [인증번호를 다시 확인하세요.]');
+						}
+					}) 
+				},
+				error:function(data){
+				}
+			})
+				
+		})
 	})
+	// 1. email 인증 버튼 클릭 -> 아래에 인증번호 입력칸과 확인버튼, 타이머 활성화
+	// 2. 입력된 email로 인증번호를 발송 (인증번호는 random값 4자리)
+	// 3. interval 등을 사용해서 타이머 제한 (인증번호 유효시간 3:00)
+	// 4. 유효시간 안에 일치하는 인증번호 입력 후, 확인버튼 클릭 -> 칸,버튼,타이머가 인증완료 텍스트로 변환
+	// 5. 인증완료 된 상태에서만 회원가입 가능하게 처리.
+
 	
 	$(function(){
         $('#cpass2').blur(function(){

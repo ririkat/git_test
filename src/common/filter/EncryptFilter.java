@@ -16,7 +16,7 @@ import common.filter.wrapper.EncryptWrapper;
 /**
  * Servlet Filter implementation class EncryptFilter
  */
-@WebFilter(servletNames= {"MemberLogin","MemberEnroll"})
+@WebFilter(servletNames= {"Login","SignUp"})
 public class EncryptFilter implements Filter {
 
     /**

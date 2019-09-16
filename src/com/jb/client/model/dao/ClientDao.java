@@ -34,8 +34,8 @@ public class ClientDao {
 		System.out.println(id+pw);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("selectId");
 		Client c = null;
+		String sql = prop.getProperty("selectId");
 		try {
 	         pstmt = conn.prepareStatement(sql);
 	         pstmt.setString(1, id);

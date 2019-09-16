@@ -30,7 +30,7 @@
 						<tr>
 							<td colspan="2" style="text-align: center">
 							<input type="submit" value="등록" class="btn my-btn">
-							<input type="reset" value="취소" class="btn my-btn"></td>
+							<input type="reset" value="취소" class="btn my-btn" onclick="history.back();"></td>
 						</tr>
 					</table>
 				</form>
