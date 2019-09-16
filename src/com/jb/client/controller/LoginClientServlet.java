@@ -16,7 +16,7 @@ import com.jb.client.model.vo.Client;
 /**
  * Servlet implementation class LoginClientServlet
  */
-@WebServlet("/client/login")
+@WebServlet(name="Login",urlPatterns="/client/login")
 public class LoginClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
