@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Board {
 	
-	private int bNo;
+	private int cmmNo;
 	private String title;
 	private Date entDate;
 	private String content;
 	private String category;
 	private String originalFilename;
 	private String renameFilename;
-	private int boardCnt;
+	private int commuCnt;
 	private String cId;//클라이언트 id
 	private int viewCnt;//조회수
 	
@@ -19,9 +19,9 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Board(int bNo, String title, String cId, String content, String originalFilename, String renameFilename) {
+	public Board(int cmmNo, String title, String cId, String content, String originalFilename, String renameFilename) {
 		super();
-		this.bNo = bNo;
+		this.cmmNo = cmmNo;
 		this.title = title;
 		this.cId = cId;
 		this.content = content;
@@ -39,27 +39,27 @@ public class Board {
 	}
 
 
-	public Board(int bNo, String title, Date entDate, String content, String category, String originalFilename,
-			String renameFilename, int boardCnt, String cId, int viewCnt) {
+	public Board(int cmmNo, String title, Date entDate, String content, String category, String originalFilename,
+			String renameFilename, int commuCnt, String cId, int viewCnt) {
 		super();
-		this.bNo = bNo;
+		this.cmmNo = cmmNo;
 		this.title = title;
 		this.entDate = entDate;
 		this.content = content;
 		this.category = category;
 		this.originalFilename = originalFilename;
 		this.renameFilename = renameFilename;
-		this.boardCnt = boardCnt;
+		this.commuCnt = commuCnt;
 		this.cId = cId;
 		this.viewCnt = viewCnt;
 	}
 
-	public int getbNo() {
-		return bNo;
+	public int getCmmNo() {
+		return cmmNo;
 	}
 
-	public void setbNo(int bNo) {
-		this.bNo = bNo;
+	public void setCmmNo(int cmmNo) {
+		this.cmmNo = cmmNo;
 	}
 
 	public String getTitle() {
@@ -110,12 +110,12 @@ public class Board {
 		this.renameFilename = renameFilename;
 	}
 
-	public int getBoardCnt() {
-		return boardCnt;
+	public int getCommuCnt() {
+		return commuCnt;
 	}
 
-	public void setBoardCnt(int boardCnt) {
-		this.boardCnt = boardCnt;
+	public void setCommuCnt(int commuCnt) {
+		this.commuCnt = commuCnt;
 	}
 
 	public String getcId() {
@@ -134,12 +134,6 @@ public class Board {
 		this.viewCnt = viewCnt;
 	}
 
-	@Override
-	public String toString() {
-		return "Board [bNo=" + bNo + ", title=" + title + ", entDate=" + entDate + ", content=" + content
-				+ ", category=" + category + ", originalFilename=" + originalFilename + ", renameFilename="
-				+ renameFilename + ", boardCnt=" + boardCnt + ", cId=" + cId + ", viewCnt=" + viewCnt + "]";
-	}
 
 	
 	

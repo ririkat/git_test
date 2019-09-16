@@ -30,7 +30,6 @@ private Properties prop = new Properties();
 	}
 
 	public int selectCountBoard(Connection conn) {
-		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("selectCountBoard");
@@ -51,7 +50,6 @@ private Properties prop = new Properties();
 	}
 
 	public List<Board> selectBoard(Connection conn, int cPage, int numPerPage) {
-		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("selectBoard");
@@ -63,14 +61,14 @@ private Properties prop = new Properties();
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Board b=new Board();
-				b.setbNo(rs.getInt("b_no"));
+				b.setCmmNo(rs.getInt("cmm_no"));
 				b.setTitle(rs.getString("title"));
 				b.setEntDate(rs.getDate("ent_date"));
 				b.setContent(rs.getString("content"));
 				b.setCategory(rs.getString("category"));
 				b.setOriginalFilename(rs.getString("original_filename"));
 				b.setRenameFilename(rs.getString("rename_filename"));
-				b.setBoardCnt(rs.getInt("board_cnt"));
+				b.setCommuCnt(rs.getInt("commu_cnt"));
 				b.setcId(rs.getString("c_id"));
 				list.add(b);
 			}
@@ -89,11 +87,11 @@ private Properties prop = new Properties();
 		String sql=prop.getProperty("insertBoard");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getContent());
-			pstmt.setString(3, b.getOriginalFilename());
-			pstmt.setString(4, b.getRenameFilename());
-			pstmt.setString(5, b.getcId());
+			pstmt.setString(1, b.getcId());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getContent());
+			pstmt.setString(4, b.getOriginalFilename());
+			pstmt.setString(5, b.getRenameFilename());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -103,18 +101,18 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public Board selectBoardOne(Connection conn, int bNo) {
+	public Board selectBoardOne(Connection conn, int cmmNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Board b=null;
 		String sql=prop.getProperty("selectBoardOne");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
+			pstmt.setInt(1, cmmNo);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				b=new Board();
-				b.setbNo(rs.getInt("b_no"));
+				b.setCmmNo(rs.getInt("cmm_no"));
 				b.setTitle(rs.getString("title"));
 				b.setcId(rs.getString("c_id"));
 				b.setContent(rs.getString("content"));
@@ -131,13 +129,13 @@ private Properties prop = new Properties();
 		return b;
 	}
 
-	public int deleteBoard(Connection conn, int bNo) {
+	public int deleteBoard(Connection conn, int cmmNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteBoard");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
+			pstmt.setInt(1, cmmNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -157,7 +155,7 @@ private Properties prop = new Properties();
 			pstmt.setString(2, b.getContent());
 			pstmt.setString(3, b.getOriginalFilename());
 			pstmt.setString(4, b.getRenameFilename());
-			pstmt.setInt(5, b.getbNo());
+			pstmt.setInt(5, b.getCmmNo());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -172,7 +170,7 @@ private Properties prop = new Properties();
 		String sql=prop.getProperty("insertComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bc.getbNo());
+			pstmt.setInt(1, bc.getCmmNo());
 			pstmt.setString(2, bc.getComment());
 			pstmt.setString(3, bc.getcId());
 			pstmt.setInt(4, bc.getCommentLevel());
@@ -186,14 +184,14 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public int deleteComment(Connection conn, int bNo, int coNo) {
+	public int deleteComment(Connection conn, int cmmNo, int commentNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
-			pstmt.setInt(2, coNo);
+			pstmt.setInt(1, cmmNo);
+			pstmt.setInt(2, commentNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -203,19 +201,19 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public List<BoardComment> selectBoardComment(Connection conn, int bNo) {
+	public List<BoardComment> selectBoardComment(Connection conn, int cmmNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<BoardComment> list=new ArrayList();
 		String sql=prop.getProperty("selectBoardComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
+			pstmt.setInt(1, cmmNo);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				BoardComment bc=new BoardComment();
-				bc.setCoNo(rs.getInt("co_no"));
-				bc.setbNo(rs.getInt("b_no"));
+				bc.setCommentNo(rs.getInt("comment_no"));
+				bc.setCmmNo(rs.getInt("cmm_no"));
 				bc.setComment(rs.getString("comment"));
 				bc.setCommentDate(rs.getDate("comment_date"));
 				bc.setcId(rs.getString("c_id"));

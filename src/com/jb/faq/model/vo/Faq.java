@@ -17,8 +17,7 @@ public class Faq {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Faq(int fNo, String fTitle, String fWriter, String fContent, String fOriginFilename, String fRenamedFilename,
-			Date fEntDate, Date fModDate, int fReadCount) {
+	public Faq(int fNo, String fTitle, String fWriter, String fContent, String fOriginFilename, String fRenamedFilename) {
 		super();
 		this.fNo = fNo;
 		this.fTitle = fTitle;
@@ -26,9 +25,6 @@ public class Faq {
 		this.fContent = fContent;
 		this.fOriginFilename = fOriginFilename;
 		this.fRenamedFilename = fRenamedFilename;
-		this.fEntDate = fEntDate;
-		this.fModDate = fModDate;
-		this.fReadCount = fReadCount;
 	}
 
 	public Faq(String fTitle, String fWriter, String fContent, String fOriginFilename, String fRenamedFilename) {
