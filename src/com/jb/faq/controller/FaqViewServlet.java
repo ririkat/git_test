@@ -17,7 +17,7 @@ import com.jb.faq.model.vo.FaqComment;
 /**
  * Servlet implementation class FaqViewServlet
  */
-@WebServlet("/FaqViewServlet")
+@WebServlet("/faq/faqView")
 public class FaqViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -59,10 +59,10 @@ public class FaqViewServlet extends HttpServlet {
 			response.addCookie(faqCookie);
 		}
 		Faq f=new FaqService().selectFaqOne(no,hasRead);
-//		List<FaqComment> list = new FaqService().selectFaqComment(no);
+		List<FaqComment> list = new FaqService().selectFaqComment(no);
 		
 		request.setAttribute("faq", f);
-//		request.setAttribute("list", list);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/faq/faqView.jsp").forward(request, response);
 	}
 

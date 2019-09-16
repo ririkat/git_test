@@ -30,14 +30,17 @@ public class BoardCommentDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
-		int coNo=Integer.parseInt(request.getParameter("coNo"));
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
+		int commentNo=Integer.parseInt(request.getParameter("commentNo"));
 		
-		int result=new BoardService().deleteComment(bNo, coNo);
+		System.out.println(cmmNo);
+		System.out.println(commentNo);
 		
-		String loc="/board/boardView?bNo="+bNo;
+		int result=new BoardService().deleteComment(cmmNo, commentNo);
+		
+		String loc="/board/boardView?cmmNo="+cmmNo;
 		String msg=result>0?"댓글삭제완료":"댓글삭제실패";
-		String view="/view/common/msg.jsp";
+		String view="/views/common/msg.jsp";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);

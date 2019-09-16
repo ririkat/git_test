@@ -78,7 +78,10 @@
 						<%}%>
 						
 						<%if(loginClient==null&&loginOwner!=null){%>
+<<<<<<< HEAD
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/owner/mypage?oId=<%=loginOwner.getoId()%>">마이페이지</a></li>
+=======
+>>>>>>> refs/heads/master
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
 						

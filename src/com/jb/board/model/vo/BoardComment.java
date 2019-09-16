@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class BoardComment {
 	
-	private int coNo;
-	private int bNo;
+	private int commentNo;
+	private int cmmNo;
 	private String comment;
 	private Date commentDate;
 	private String cId;
@@ -14,24 +14,23 @@ public class BoardComment {
 	
 	
 	public BoardComment() {
-		// TODO Auto-generated constructor stub
 	}
 	
-	public BoardComment(int commentLevel, String cId, String comment, int bNo, int commentRef) {
+	public BoardComment(int commentLevel, String cId, String comment, int cmmNo, int commentRef) {
 		super();
 		this.commentLevel = commentLevel;
 		this.cId = cId;
 		this.comment = comment;
-		this.bNo = bNo;
+		this.cmmNo = cmmNo;
 		this.commentRef = commentRef;
 	}
 
 
-	public BoardComment(int coNo, int bNo, String comment, Date commentDate, String cId, int commentLevel,
+	public BoardComment(int commentNo, int cmmNo, String comment, Date commentDate, String cId, int commentLevel,
 			int commentRef) {
 		super();
-		this.coNo = coNo;
-		this.bNo = bNo;
+		this.commentNo = commentNo;
+		this.cmmNo = cmmNo;
 		this.comment = comment;
 		this.commentDate = commentDate;
 		this.cId = cId;
@@ -39,23 +38,22 @@ public class BoardComment {
 		this.commentRef = commentRef;
 	}
 
-	public int getCoNo() {
-		return coNo;
+
+	public int getCommentNo() {
+		return commentNo;
+	}
+
+	public void setCommentNo(int commentNo) {
+		this.commentNo = commentNo;
+	}
+
+	public int getCmmNo() {
+		return cmmNo;
 	}
 
 
-	public void setCoNo(int coNo) {
-		this.coNo = coNo;
-	}
-
-
-	public int getbNo() {
-		return bNo;
-	}
-
-
-	public void setbNo(int bNo) {
-		this.bNo = bNo;
+	public void setCmmNo(int cmmNo) {
+		this.cmmNo = cmmNo;
 	}
 
 
@@ -105,12 +103,6 @@ public class BoardComment {
 
 	public void setCommentRef(int commentRef) {
 		this.commentRef = commentRef;
-	}
-
-	@Override
-	public String toString() {
-		return "BoardComment [coNo=" + coNo + ", bNo=" + bNo + ", comment=" + comment + ", commentDate=" + commentDate
-				+ ", cId=" + cId + ", commentLevel=" + commentLevel + ", commentRef=" + commentRef + "]";
 	}
 
 
