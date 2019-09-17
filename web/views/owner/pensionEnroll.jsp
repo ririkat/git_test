@@ -38,7 +38,7 @@
 							<strong class="point">*</strong> 펜션 이름
 						</th>
 						<td>
-							<input type="text" name="pName" id="pName" style="width:200px">
+							<input type="text" name="pName" id="pName" style="width:200px" required>
 						</td>
 					</tr>
 					
@@ -112,20 +112,21 @@
 					<tr>
 						<th class="point"> 부대시설</th>
 						<td>
-							<label><input type="checkbox" name="facilities" value="매점">매점</label>
-							<label><input type="checkbox" name="facilities" value="와이파이">와이파이</label>
-							<label><input type="checkbox" name="facilities" value="애견가능">애견가능</label>
-							<label><input type="checkbox" name="facilities" value="공용수영장">공용수영장</label>
-							<label><input type="checkbox" name="facilities" value="어린이풀장">어린이풀장</label>
-							<label><input type="checkbox" name="facilities" value="워터슬라이드">워터슬라이드</label>
-							<label><input type="checkbox" name="facilities" value="노천탕">노천탕</label>
+							<label><input type="checkbox" name="facilities" value="store">매점</label>
+							<label><input type="checkbox" name="facilities" value="wifi">와이파이</label>
+							<label><input type="checkbox" name="facilities" value="pet">애견가능</label>
+							<label><input type="checkbox" name="facilities" value="pool">공용수영장</label>
+							<label><input type="checkbox" name="facilities" value="s_pool">어린이풀장</label>
+							<label><input type="checkbox" name="facilities" value="slide">워터슬라이드</label>
+							<label><input type="checkbox" name="facilities" value="open_bath">노천탕</label>
 							<br/>
-							<label><input type="checkbox" name="facilities" value="그릴">그릴</label>
-							<label><input type="checkbox" name="facilities" value="바베큐세트">바베큐세트</label>
-							<label><input type="checkbox" name="facilities" value="카페">카페</label>
-							<label><input type="checkbox" name="facilities" value="노래방">노래방</label>
-							<label><input type="checkbox" name="facilities" value="족구장">족구장</label>
-							<label><input type="checkbox" name="facilities" value="농구장">농구장</label>
+							<label><input type="checkbox" name="facilities" value="grill">그릴</label>
+							<label><input type="checkbox" name="facilities" value="smoked">바베큐세트</label>
+							<label><input type="checkbox" name="facilities" value="cafe">카페</label>
+							<label><input type="checkbox" name="facilities" value="sing">노래방</label>
+							<label><input type="checkbox" name="facilities" value="foot">족구장</label>
+							<label><input type="checkbox" name="facilities" value="hand">농구장</label>
+							<label><input type="checkbox" name="facilities" value="car">주차장</label>
 						</td>
 					</tr>
 				</tbody>

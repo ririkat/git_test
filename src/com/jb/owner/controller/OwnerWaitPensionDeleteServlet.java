@@ -1,4 +1,4 @@
-package com.jb.master.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.vo.Client;
+import com.jb.owner.model.vo.Owner;
 import com.jb.pension.model.service.PensionService;
 
 /**
- * Servlet implementation class MasterPensionAddServlet
+ * Servlet implementation class OwnerWaitPensionDeleteServlet
  */
-@WebServlet("/master/pensionAcc")
-public class MasterPensionAcceptServlet extends HttpServlet {
+@WebServlet("/owner/waitDelete")
+public class OwnerWaitPensionDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MasterPensionAcceptServlet() {
+    public OwnerWaitPensionDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +29,15 @@ public class MasterPensionAcceptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
-		if (loginClient==null || loginClient.getAuthority()!=1) {
-			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			return;
-		}
 		
-		//승인(추가)할 펜션들 코드 받아오기
-		String accList = request.getParameter("accPensionList");
-		System.out.println(accList);
-		
-		int result = new PensionService().acceptPensionList(accList);
-		
-		String msg = result>0?"승인 완료":"승인 실패";
-		String loc = "/master/waitList";
+		// 삭제할 펜션 코드, 업주아이디 받아오기
+		String delList = request.getParameter("delPensionList");
+		String oId = request.getParameter("oId");
+
+		int result = new PensionService().deletePensionList(delList);
+
+		String msg = result > 0 ? "펜션 삭제 완료" : "펜션 삭제 실패";
+		String loc = "/owner/pensionList?oId="+oId;
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

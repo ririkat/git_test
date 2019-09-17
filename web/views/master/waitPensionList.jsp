@@ -54,6 +54,7 @@
                             <th style="text-align:center">소재지</th>
                             <th style="text-align:center">전화번호</th>
                             <th style="text-align:center">펜션업주 아이디</th>
+                            <th style="text-align:center">등록신청날짜</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,7 @@
 		                            <td><%=p.getpAddr() %></td>
 		                            <td><%=p.getpTel() %></td>
 		                            <td><%=p.getoId() %></td>
+		                            <td><%=p.getpEnrollDate() %></td>
 		                        </tr>
 		                <%	}
 	                    }%>
@@ -134,7 +136,7 @@
 								console.log(tdArr);
 								
 								//삭제할 펜션들을 서블릿으로 보내기
-								location.href="<%=request.getContextPath()%>/master/oneDelete?delPensionList="+tdArr;
+								location.href="<%=request.getContextPath()%>/master/waitDelete?delPensionList="+tdArr;
 			        		}		        			
 		        		}
 					});
@@ -168,7 +170,7 @@
 								console.log(tdArr);
 								
 								//승인할 펜션들을 서블릿으로 보내기
-								location.href="<%=request.getContextPath()%>/master/pensionAcc?accPensionList="+tdArr;
+								location.href="<%=request.getContextPath()%>/master/waitAccept?accPensionList="+tdArr;
 			        		}		        			
 		        		}
 					});

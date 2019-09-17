@@ -46,6 +46,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 			}
 		} catch(SQLException e) {
@@ -98,6 +99,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
@@ -151,6 +153,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
@@ -209,6 +212,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
@@ -264,6 +268,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
@@ -329,7 +334,7 @@ public class PensionDao {
 	public int acceptPensionList(Connection conn, String accList) {
 		Statement stmt = null;
 		int result = 0;		
-		String sql = "update pension set enrollyn='Y' where p_code in (";
+		String sql = "update pension set enrollyn='Y', p_enrolldate=sysdate where p_code in (";
 
 		String[] accDelList = accList.split(",");
 		for (int i = 0; i < accDelList.length; i++) {
@@ -360,7 +365,7 @@ public class PensionDao {
 	public int acceptOnePension(Connection conn, String pCode, String oId) {
 		Statement stmt = null;
 		int result = 0;		
-		String sql = "update pension set enrollyn='Y' where p_code='"+pCode+"' and o_id='"+oId+"'";
+		String sql = "update pension set enrollyn='Y', p_enrolldate=sysdate where p_code='"+pCode+"' and o_id='"+oId+"'";
 
 		try {
 			stmt = conn.createStatement();
@@ -414,6 +419,7 @@ public class PensionDao {
 				p.setpTel(rs.getString("p_tel"));
 				p.setoId(rs.getString("o_id"));
 				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrollDate"));
 				list.add(p);
 			}
@@ -442,5 +448,53 @@ public class PensionDao {
 		} finally {
 			close(pstmt);
 		} return result;
+	}
+
+	public int getCurrval(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select seq_pension.currval from dual";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return result;
+	}
+	
+	//업주의 승인된 펜션리스트
+	public List<Pension> selectAccList(Connection conn, String oId) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Pension> list = new ArrayList();
+		String sql = "select * from pension where o_id='"+oId+"' and enrollyn='Y'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Pension p = new Pension();
+				p.setpCode(rs.getString("p_code"));
+				p.setpName(rs.getString("p_name"));
+				p.setpAddr(rs.getString("p_addr"));
+				p.setpTel(rs.getString("p_tel"));
+				p.setoId(rs.getString("o_id"));
+				p.setEnrollYn(rs.getString("enrollYn"));
+				p.setpBlcount(rs.getInt("p_blcount"));
+				p.setpEnrollDate(rs.getDate("p_enrollDate"));
+				list.add(p);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return list;
 	}
 }

@@ -10,13 +10,14 @@ public class Pension {
 	private String pTel;
 	private String oId;
 	private String enrollYn;
+	private int pBlcount;
 	private Date pEnrollDate;
 	
 	public Pension() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Pension(String pCode, String pName, String pAddr, String pTel, String oId, String enrollYn,
+	
+	public Pension(String pCode, String pName, String pAddr, String pTel, String oId, String enrollYn, int pBlcount,
 			Date pEnrollDate) {
 		super();
 		this.pCode = pCode;
@@ -25,6 +26,7 @@ public class Pension {
 		this.pTel = pTel;
 		this.oId = oId;
 		this.enrollYn = enrollYn;
+		this.pBlcount = pBlcount;
 		this.pEnrollDate = pEnrollDate;
 	}
 
@@ -84,10 +86,18 @@ public class Pension {
 		this.pEnrollDate = pEnrollDate;
 	}
 
+	public int getpBlcount() {
+		return pBlcount;
+	}
+
+	public void setpBlcount(int pBlcount) {
+		this.pBlcount = pBlcount;
+	}
+
 	@Override
 	public String toString() {
 		return "Pension [pCode=" + pCode + ", pName=" + pName + ", pAddr=" + pAddr + ", pTel=" + pTel + ", oId=" + oId
-				+ ", enrollYn=" + enrollYn + ", pEnrollDate=" + pEnrollDate + "]";
+				+ ", enrollYn=" + enrollYn + ", pBlcount=" + pBlcount + ", pEnrollDate=" + pEnrollDate + "]";
 	}
-	
+
 }

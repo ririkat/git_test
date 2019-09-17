@@ -2,6 +2,8 @@ package com.jb.pension.model.service;
 
 import static common.template.JDBCTemplate.close;
 import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -59,6 +61,11 @@ public class PensionService {
 	public int selectCountPension(String type, String keyword) {
 		Connection conn = getConnection();
 		int result = dao.selectCountPension(conn,type,keyword);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -74,6 +81,11 @@ public class PensionService {
 	public int selectCountPension2(String type, String keyword) {
 		Connection conn = getConnection();
 		int result = dao.selectCountPension2(conn,type,keyword);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -89,6 +101,11 @@ public class PensionService {
 	public int deletePensionList(String delList) {
 		Connection conn = getConnection();
 		int result = dao.deletePensionList(conn,delList);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -97,6 +114,11 @@ public class PensionService {
 	public int deleteOnePension(String pCode, String oId) {
 		Connection conn = getConnection();
 		int result = dao.deleteOnePension(conn, pCode, oId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -105,6 +127,11 @@ public class PensionService {
 	public int acceptPensionList(String accList) {
 		Connection conn = getConnection();
 		int result = dao.acceptPensionList(conn,accList);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -113,6 +140,11 @@ public class PensionService {
 	public int acceptOnePension(String pCode, String oId) {
 		Connection conn = getConnection();
 		int result = dao.acceptOnePension(conn,pCode,oId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -121,6 +153,11 @@ public class PensionService {
 	public int selectWaitPension(String oId) {
 		Connection conn = getConnection();
 		int result = dao.selectWaitPension(conn,oId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -136,7 +173,27 @@ public class PensionService {
 	public int addPension(String pName, String addr, String tel, String oId) {
 		Connection conn = getConnection();
 		int result = dao.addPension(conn,pName,addr,tel,oId);
+		if(result>0) {
+			commit(conn);
+			result = dao.getCurrval(conn);
+			if(result>0) {
+				commit(conn);
+			}
+			else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
+	}
+	
+	//업주의 승인된 펜션리스트
+	public List<Pension> selectAccList(String oId){
+		Connection conn = getConnection();
+		List<Pension> pensions = dao.selectAccList(conn,oId);
+		close(conn);
+		return pensions;
 	}
 }

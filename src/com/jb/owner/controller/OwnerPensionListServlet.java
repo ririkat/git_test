@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.owner.model.vo.Owner;
+import com.jb.pension.model.service.PensionFileService;
 import com.jb.pension.model.service.PensionService;
 import com.jb.pension.model.vo.Pension;
+import com.jb.pension.model.vo.PensionFile;
 
 /**
  * Servlet implementation class OwnerPensionEnrollServlet
@@ -32,11 +33,6 @@ public class OwnerPensionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//업주 아이디 받아와서 업주소유의 펜션만 불러오기.
-		//리스트 위쪽에 추가버튼 필요.
-		//펜션 리스트에는 승인여부도 표시해주기
-		//승인된 펜션은 클릭-> 정보 띄워주고 수정버튼, 아래에 객실리스트 및 객실 추가버튼
-		
 		String oId = request.getParameter("oId");
 		
 		//승인대기중인 펜션 리스트
@@ -46,9 +42,9 @@ public class OwnerPensionListServlet extends HttpServlet {
 		} catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 3;
+		int numPerPage = 10;
 		int totalWaitPension = new PensionService().selectWaitPension(oId);
-		List<Pension> pensions = new PensionService().selectWaitList(cPage, numPerPage, oId);
+		List<Pension> waitPensions = new PensionService().selectWaitList(cPage, numPerPage, oId);
 		int totalPage = (int)Math.ceil((double)totalWaitPension/numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -58,13 +54,13 @@ public class OwnerPensionListServlet extends HttpServlet {
 		if (pageNo == 1) { // 1일때는 이전이 없다
 			pageBar += "<span>&laquo;</span>";
 		} else {
-			pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?cPage=" + (pageNo - 1) + ">&laquo;</a>";
+			pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?oId="+oId+"&cPage=" + (pageNo - 1) + ">&laquo;</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='cPage'>" + pageNo + "</span>";
 			} else {
-				pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?cPage=" + pageNo + ">" + pageNo
+				pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?oId="+oId+"&cPage=" + pageNo + ">" + pageNo
 						+ "</a>";
 			}
 			pageNo++;
@@ -73,12 +69,20 @@ public class OwnerPensionListServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span>&raquo;</span>";
 		} else {
-			pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?cPage=" + (pageNo) + ">&raquo;</a>";
+			pageBar += "<a href=" + request.getContextPath() + "/owner/pensionList?oId="+oId+"&cPage=" + (pageNo) + ">&raquo;</a>";
 		}
 
+		//승인된 펜션
+		List<Pension> accPensions = new PensionService().selectAccList(oId);
+		
+		//펜션 이미지파일
+		List<PensionFile> pensionFiles = new PensionFileService().selectImages();
+		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("waitPensions", pensions);
+		request.setAttribute("waitPensions", waitPensions);
+		request.setAttribute("accPensions", accPensions);
+		request.setAttribute("pensionFiles", pensionFiles);
 		request.getRequestDispatcher("/views/owner/pensionManagement.jsp").forward(request, response);
 	}
 
