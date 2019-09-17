@@ -317,5 +317,45 @@ public class OwnerDao {
 		}
 		return o;
 	}
+
+	public Owner findEmail(Connection conn, String uid) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Owner o = null;
+		String sql = prop.getProperty("findEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				o = new Owner();
+				o.setoId(rs.getString("o_id"));
+				o.setoEmail(rs.getString("o_email"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return o;
+	}
+
+	public int updatePassword(Connection conn, String id, String pw) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePassword");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }

@@ -14,8 +14,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>호텔</title>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -95,7 +95,6 @@
 	<!-- 네이게이션 -->
 	<header>
 		<nav class="navbar navbar-inverse navbg">
-		
 <!--  		<nav class="navbar navbar-inverse navbar-fixed-top navbg"> -->
 			<!--위에 코드로하면 헤더가 바디까지 섹션을 먹어서 바디 윗부분이 짤림,-->
 			
@@ -110,6 +109,7 @@
 					<!-- 로고 -->
 					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>/index.jsp">자바방</a>
 				</div>
+				
 				<!-- <button type="button" class="navbar-nav btn pull-right btn-srch" id="btn-srch">
 						<span class="glyphicon glyphicon-search btn-srch"></span>
 				</button> -->
@@ -124,7 +124,6 @@
 		         </div>
 
 				<div class=" collapse navbar-collapse " >
-					
 					<ul class="nav navbar-nav navbar-left font2" id="myNavbar">
 					<!-- 로그인 정책 
 					1. 회원로그인/업주 로그인 두종류로 구성
@@ -142,11 +141,9 @@
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
-						
 						<%if(loginClient==null&&loginOwner!=null){%>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
-						
 					</ul>
 				</div>
 				
