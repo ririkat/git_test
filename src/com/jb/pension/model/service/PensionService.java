@@ -196,4 +196,12 @@ public class PensionService {
 		close(conn);
 		return pensions;
 	}
+	
+	//펜션코드로 펜션이름 가져오기
+	public String getPensionName(String pCode) {
+		Connection conn = getConnection();
+		String pName = dao.getPensionName(conn,pCode);
+		close(conn);
+		return pName;
+	}
 }

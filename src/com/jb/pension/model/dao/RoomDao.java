@@ -66,6 +66,7 @@ public class RoomDao {
 				r.setrNo(rs.getString("r_no"));
 				r.setrName(rs.getString("r_name"));
 				r.setrPrice(rs.getInt("r_price"));
+				r.setrAddPrice(rs.getInt("r_addPrice"));
 				r.setrNop(rs.getInt("r_nop"));
 				r.setrMaxNop(rs.getInt("r_maxnop"));
 				r.setrSize(rs.getString("r_size"));
@@ -99,6 +100,7 @@ public class RoomDao {
 				r.setrNo(rs.getString("r_no"));
 				r.setrName(rs.getString("r_name"));
 				r.setrPrice(rs.getInt("r_price"));
+				r.setrAddPrice(rs.getInt("r_addPrice"));
 				r.setrNop(rs.getInt("r_nop"));
 				r.setrMaxNop(rs.getInt("r_maxnop"));
 				r.setrSize(rs.getString("r_size"));

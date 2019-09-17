@@ -6,6 +6,7 @@ public class Room {
 	private String rNo;
 	private String rName;
 	private int rPrice;
+	private int rAddPrice;
 	private int rNop;
 	private int rMaxNop;
 	private String rSize;
@@ -16,13 +17,14 @@ public class Room {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Room(String pCode, String rNo, String rName, int rPrice, int rNop, int rMaxNop, String rSize, String rStruc,
-			String rInfo) {
+	public Room(String pCode, String rNo, String rName, int rPrice, int rAddPrice, int rNop, int rMaxNop, String rSize,
+			String rStruc, String rInfo) {
 		super();
 		this.pCode = pCode;
 		this.rNo = rNo;
 		this.rName = rName;
 		this.rPrice = rPrice;
+		this.rAddPrice = rAddPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
 		this.rSize = rSize;
@@ -102,10 +104,19 @@ public class Room {
 		this.rInfo = rInfo;
 	}
 
+	public int getrAddPrice() {
+		return rAddPrice;
+	}
+
+	public void setrAddPrice(int rAddPrice) {
+		this.rAddPrice = rAddPrice;
+	}
+
 	@Override
 	public String toString() {
-		return "Room [pCode=" + pCode + ", rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop
-				+ ", rMaxNop=" + rMaxNop + ", rSize=" + rSize + ", rStruc=" + rStruc + ", rInfo=" + rInfo + "]";
+		return "Room [pCode=" + pCode + ", rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rAddPrice="
+				+ rAddPrice + ", rNop=" + rNop + ", rMaxNop=" + rMaxNop + ", rSize=" + rSize + ", rStruc=" + rStruc
+				+ ", rInfo=" + rInfo + "]";
 	}
 
 }

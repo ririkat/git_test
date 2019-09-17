@@ -497,4 +497,24 @@ public class PensionDao {
 			close(stmt);
 		} return list;
 	}
+	
+	//펜션코드로 펜션이름 가져오기
+	public String getPensionName(Connection conn, String pCode) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		String pName = "";
+		String sql = "select * from pension where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				pName = rs.getString(2);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return pName;
+	}
 }
