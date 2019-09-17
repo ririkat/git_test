@@ -116,6 +116,26 @@ public class OwnerService {
 		return o;
 	
 	}
+
+
+	public Owner findEmail(String uid) {
+		Connection conn=getConnection();
+		Owner o=dao.findEmail(conn, uid);
+		close(conn);
+		return o;
+	}
+
+
+	public int updatePassword(String id, String pw) {
+		Connection conn=getConnection();
+		int result=dao.updatePassword(conn,id,pw);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 	
 }
 
