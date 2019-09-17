@@ -23,13 +23,13 @@ import common.filerename.MyFileRenamePolicy;
  * Servlet implementation class OwnerAddPensionEnd
  */
 @WebServlet("/owner/addPensionEnd")
-public class OwnerAddPensionEnd extends HttpServlet {
+public class OwnerAddPensionEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerAddPensionEnd() {
+    public OwnerAddPensionEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

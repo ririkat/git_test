@@ -105,7 +105,7 @@
 					<tr>
 						<th class="point"><strong class="point">*</strong> 펜션전경사진</th>
 						<td>
-							<input type="file" multiple="multiple" name="panorama">
+							<input type="file" name="panorama">
 						</td>
 					</tr>
 					

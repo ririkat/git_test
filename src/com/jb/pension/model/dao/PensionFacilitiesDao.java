@@ -2,14 +2,12 @@ package com.jb.pension.model.dao;
 
 import static common.template.JDBCTemplate.close;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.Properties;
+
+import com.jb.pension.model.vo.PensionFacilities;
 
 public class PensionFacilitiesDao {
 
@@ -35,6 +33,40 @@ public class PensionFacilitiesDao {
 			close(stmt);
 		}
 		return result;
+	}
+	
+	//펜션 부대시설 불러오기
+	public PensionFacilities selectPensionFac(Connection conn, String pCode) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		PensionFacilities pf = new PensionFacilities();
+		String sql = "select * from pen_fac where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				pf.setpCode(rs.getString("p_code"));
+				pf.setStore(rs.getString("store"));
+				pf.setWifi(rs.getString("wifi"));
+				pf.setPet(rs.getString("pet"));
+				pf.setPool(rs.getString("pool"));
+				pf.setsPool(rs.getString("s_pool"));
+				pf.setSlide(rs.getString("slide"));
+				pf.setOpenBath(rs.getString("open_bath"));
+				pf.setGrill(rs.getString("grill"));
+				pf.setSmoked(rs.getString("smoked"));
+				pf.setCafe(rs.getString("cafe"));
+				pf.setSing(rs.getString("sing"));
+				pf.setFoot(rs.getString("foot"));
+				pf.setHand(rs.getString("hand"));
+				pf.setCar(rs.getString("car"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return pf;
 	}
 
 }

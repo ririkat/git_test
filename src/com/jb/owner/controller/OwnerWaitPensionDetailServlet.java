@@ -31,7 +31,6 @@ public class OwnerWaitPensionDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//펜션정보 받아오기
 		String pCode = request.getParameter("pensionCode");
 		Pension pInfo = new PensionService().selectPension(pCode);

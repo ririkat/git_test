@@ -8,6 +8,7 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.jb.pension.model.dao.PensionFacilitiesDao;
+import com.jb.pension.model.vo.PensionFacilities;
 
 public class PensionFacilitiesService {
 
@@ -24,6 +25,14 @@ public class PensionFacilitiesService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	//펜션 부대시설 불러오기
+	public PensionFacilities selectPensionFac(String pCode) {
+		Connection conn = getConnection();
+		PensionFacilities pFac = dao.selectPensionFac(conn,pCode);
+		close(conn);
+		return pFac;
 	}
 	
 }

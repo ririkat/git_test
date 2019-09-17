@@ -16,9 +16,9 @@
 	<br><br>
 	
 	<div>
+		<h3 align="center">승인대기중인 펜션 목록</h3><hr>
 		<button id="addBtn">펜션추가</button>
-		<button id="deleteBtn" class="pull-right">삭제</button>
-		
+		<button id="deleteBtn" class="pull-right">삭제</button>		
 		<table id="tbl-clientList" class="table table-hover">
 			<thead>
 				<tr>
@@ -61,19 +61,20 @@
 	</div>
 	<br><br>
 	
+	<h3 align="center">운영중인 펜션</h3><hr>
 	<% if(accPensions!=null && !accPensions.isEmpty()) {
 		for(Pension p : accPensions) { %>
-		<div class="row">
+		<div class="row pensionList">
 			<div class="col-lg-6 col-md-6">
-				<a href="#">
+				<p>
 					<%String imgSrc = ""; %>
 					<%for(PensionFile pf : pensionFiles) {%>
 						<%if(p.getpCode().equals(pf.getpCode())) {%>
 							<%imgSrc = pf.getpRenameFile();%>
 						<%} %>
 					<%} %>
-					<img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=imgSrc%>" alt="이미지 준비중">
-				</a>
+					<img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=imgSrc%>" alt="이미지 준비중" style="width:500px; height:300px;">
+				</p>
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<h2><%=p.getpName() %></h2>
@@ -82,7 +83,8 @@
 				<h4>전화번호 : <%=p.getpTel()%></h4>
 				<h4>영업시작일 : <%=p.getpEnrollDate()%></h4>
 				<h4>블랙카운트 : <%=p.getpBlcount()%></h4>
-				<a class="btn btn-primary" href="#">View Detail <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/pensionDetail?pensionCode=<%=p.getpCode()%>&imgSrc=<%=imgSrc%>">Detail <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<a class="btn btn-primary" href="#">Reviews <span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 		</div>
 		<br><br>
