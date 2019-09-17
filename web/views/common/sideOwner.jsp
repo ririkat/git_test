@@ -16,10 +16,16 @@
                 <div id="mypageList">
                     <ul class="nav nav-pills nav-stacked">
                         <br>
-                        <li class="active">
-                            <a class="nav-link active" href="<%=request.getContextPath()%>/owner/pensionEnroll?oId=<%=loginOwner.getoId()%>">
+                        <li>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/pensionEnroll?oId=<%=loginOwner.getoId()%>">
                             	펜션등록 </a>
                         </li>
+                        
+                        <li>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/reviewList?oId=<%=loginOwner.getoId()%>">
+                            	후기 </a>
+                        </li>
+                        
                         <li>
                             <a class="nav-link" href="<%=request.getContextPath()%>/owner/ownerInfo?oId=<%=loginOwner.getoId()%>">
                             	개인정보</a>
@@ -37,3 +43,4 @@
                     </ul><br>
                 </div>
             </div>
+	

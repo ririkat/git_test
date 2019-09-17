@@ -163,8 +163,7 @@
             <div class="button">
 
                <input type="submit" class="btn btn-warning" id="btn-update"  onclick="updateOwner();" value="수정"> 
-               <input
-                  type="reset" onclick="" class="btn btn-warning"  value="뒤로가기">
+               <input type="reset" onclick="" class="btn btn-warning"  value="뒤로가기">
 
             </div>
 
@@ -175,6 +174,12 @@
 <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
 <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
+		$(function(){
+			$('#mypageList li').removeClass("active");
+			$('#mypageList li').eq(1).addClass("active");
+		});
+
 		//주소 API
 		function openDaumZipAddress() {
 		new daum.Postcode({
