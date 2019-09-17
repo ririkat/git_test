@@ -1,4 +1,4 @@
-package com.jb.client.model.service;
+package com.jb.reservation.model.service;
 
 import static common.template.JDBCTemplate.close;
 import static common.template.JDBCTemplate.getConnection;
@@ -6,9 +6,9 @@ import static common.template.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.jb.client.model.dao.ReservationDao;
-import com.jb.client.model.vo.Reservation;
 import com.jb.notice.model.vo.Notice;
+import com.jb.reservation.model.dao.ReservationDao;
+import com.jb.reservation.model.vo.Reservation;
 
 public class ReservationService {
 	

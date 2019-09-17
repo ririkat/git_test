@@ -122,6 +122,86 @@
 
 
 <script>
+
+
+    function deleteClient(){
+			
+			if(confirm("정말로 탈퇴하시겠습니까?")){
+			
+				var url="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>";
+				location.href=url;
+			}
+		}
+	     
+	 
+   
+	
+ 	function deleteClient(){
+
+		 var cPw=$('#cPw').val();
+		 
+		 if(!cPw=<%=loginClient.getcPw()%>) {
+			 
+			 alert("비밀번호가 일치하지 않습니다.");
+				$(this).val("");
+				$('#cPw').val("").focus();
+				
+				return;
+	+	 } 
+	+		
+	+	<%-- else if(confirm("정말로 탈퇴하시겠습니까?")){
+	+		
+	+		  if(cPw=<%=loginClient.getcPw()%>) {
+	+		
+	+			var url="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>";
+	+			location.href=url;
+	+		
+	+		  }else {
+	+			  
+	+			  alert("비밀번호가 일치하지 않습니다.");
+	+				
+	+				$('#cPw').val("").focus();
+	+				
+	+				return;
+	+			  
+	+			  
+	+			  
+	+		   }
+	+		  }
+	+	} --%>
+	+    
+	+ 
+	+    
+	+    
+	+    
+	+<%-- 
+	+
+	 		function deleteClient() {
+	 			
+	 			var pwck=$('#cPw').val(); 
+	 			
+	
+	+			if(!pwck=<%=loginClient.getcPw()%>){
+	 				alert("비밀번호가 일치하지 않습니다.");
+	 				$(this).val("");
+	 				$('#cPw').val("").focus();
+	
+	+				return;
+	 			}
+	 			
+
+	+			else if(confirm("정말로 탈퇴하시겠습니까?")){
+	+				location.href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>&cPw=<%=loginClient.getcId()%>";
+	+				
+	+				
+	 				
+	 			
+	 			}
+	 	}
+	
+	+			  --%>
+	 		
+	
     
     function deleteClient(){
 		

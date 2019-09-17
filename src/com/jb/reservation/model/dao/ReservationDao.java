@@ -1,4 +1,4 @@
-package com.jb.client.model.dao;
+package com.jb.reservation.model.dao;
 
 import static common.template.JDBCTemplate.close;
 
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.jb.client.model.vo.Reservation;
 import com.jb.notice.model.dao.NoticeDao;
 import com.jb.notice.model.vo.Notice;
+import com.jb.reservation.model.vo.Reservation;
 
 public class ReservationDao {
 	

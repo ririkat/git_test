@@ -3,11 +3,14 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-<%@ page import="com.jb.client.model.vo.Reservation, java.util.List"%>
+<%@ page import="com.jb.reservation.model.vo.Reservation, java.util.List"%>
+
 <%
 List<Reservation> list = (List) request.getAttribute("list");
 
 %>
+
+
 
 <style>
 
@@ -137,7 +140,7 @@ th, td {
 
 							<th scope="row">펜션이름</th>
 							<th scope="row">방정보</th>
-							<th scope="row">기간</th>
+							<th scope="row">이용일</th>
 							<th scope="row">결제금액</th>
 							<th scope="row">예약상태</th>
 							<th scope="row">취소</th>
@@ -164,9 +167,9 @@ th, td {
 										width="80px" height="80px" class="img-thumbnail" /></a>
 								</div>
 							</td>
-							<td class="td-name"><%=r.getpName()%></td>
-							<td class="td-addr"><%=r.getpAddr()%></td>
-							<td class="td-phone"><%=r.getpTel()%></td>
+							<td class="td-name"><%=r.getPension().getpName()%></td>
+							<td class="td-addr"><%=r.getPension().getpAddr()%></td>
+							<td class="td-phone"><%=r.getPension().getpTel()%></td>
 							<td class=""><button class="btn btn-warning">보기</button></td>
 							<td class="">
 								<button class="btn btn-warning" id="btn-delete">삭제</button>
@@ -220,12 +223,7 @@ th, td {
 
 <script>
 
-function updatePassword(){ 
-	
-	location.href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>";
-	
-	
-}
+
 
 
 

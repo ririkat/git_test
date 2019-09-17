@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ReservationService;
-import com.jb.client.model.vo.Reservation;
 import com.jb.notice.model.service.NoticeService;
 import com.jb.notice.model.vo.Notice;
+import com.jb.reservation.model.service.ReservationService;
+import com.jb.reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class ReservationListServlet
