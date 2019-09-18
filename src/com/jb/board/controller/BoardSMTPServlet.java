@@ -1,6 +1,7 @@
 package com.jb.board.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -16,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 /**
  * Servlet implementation class BoardSMTPServlet
@@ -37,9 +40,21 @@ public class BoardSMTPServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		String cmmNo=request.getParameter("cmmNo");
+		String category=request.getParameter("category");
+		String content=request.getParameter("content");
+		
+		
 		String host="smtp.gmail.com";
 		String user="ehquf8011@gmail.com";
 		String password="ryustarWkd!1";
+		
+		String msgText="";
+		msgText+=cmmNo+"번에 게시물에 대한 신고 내용입니다.<br/>";
+		msgText+="신고유형 : "+category+"<br/>";
+		msgText+="신고내용 : "+content+"<br/>";
+		msgText+="<a href='localhost:9090"+request.getContextPath()+"/board/boardView?cmmNo="+cmmNo+"'>글내용확인하기</a>";
 		
 		Properties props=new Properties();
 		props.put("mail.smtp.host", host);
@@ -58,19 +73,17 @@ public class BoardSMTPServlet extends HttpServlet {
 			MimeMessage message=new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress("ohgunchul94@naver.com"));
-			
-			message.setSubject("구글 SMTP 보내기");
-			message.setText("ㄱㄱ?");
+			message.setSubject("커뮤니티 "+cmmNo+"번 게시글에 대한 신고가 접수되었습니다.");
+			message.setContent(msgText,"text/html;charset=utf-8");
 			
 			Transport.send(message);
-			
-			System.out.println("메세지 발신 성공~");
 			
 		}catch(AddressException e) {
 			e.printStackTrace();
 		}catch(MessagingException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**

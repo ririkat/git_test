@@ -16,7 +16,8 @@ import common.filter.wrapper.EncryptWrapper;
 /**
  * Servlet Filter implementation class EncryptFilter
  */
-@WebFilter(servletNames= {"MemberLogin","MemberEnroll"})
+@WebFilter(servletNames= {"LoginClient","SignUpClient","LoginOwner","SignUpOwner"})
+
 public class EncryptFilter implements Filter {
 
     /**
@@ -38,7 +39,7 @@ public class EncryptFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		EncryptWrapper enc = new EncryptWrapper((HttpServletRequest)request);
-		chain.doFilter(request, response);
+		chain.doFilter(enc, response);
 	}
 
 	/**

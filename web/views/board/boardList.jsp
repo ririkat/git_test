@@ -52,8 +52,7 @@
         <!-- 로그인시에만 보이는 보이는 로직 필요 -->
         <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()"/>
         <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()"/>
-        <input type="button" value="SMTP Test" class="btn btn-default pull-left" onclick="SMTP()"/>
-
+        
         <div class="text-center">
             <ul class="pagination">
                 <li><%=request.getAttribute("pageBar") %></li>
@@ -72,7 +71,5 @@
 	</section>
     </div>
 </div>
-
-
 
 <%@ include file="/views/common/footer.jsp"%>

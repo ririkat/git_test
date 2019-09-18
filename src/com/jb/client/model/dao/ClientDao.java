@@ -34,8 +34,8 @@ public class ClientDao {
 		System.out.println(id+pw);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("selectId");
 		Client c = null;
+		String sql = prop.getProperty("selectId");
 		try {
 	         pstmt = conn.prepareStatement(sql);
 	         pstmt.setString(1, id);
@@ -393,13 +393,13 @@ public class ClientDao {
 		return result;
 	}
   
-	public int updatePassword(Connection conn, String cId, String cPw) {
+	public int updatePassword(Connection conn, String cId, String cPwNew) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updatePassWord");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, cPw);
+			pstmt.setString(1, cPwNew);
 			pstmt.setString(2, cId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -458,13 +458,34 @@ public class ClientDao {
 					c.setcAddr(rs.getString("c_addr"));
 					c.setcEd(rs.getDate("c_ed"));
 					c.setcBLCount(rs.getInt("c_blcount"));
-					
-				
 				}
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
 			finally {
+				close(rs);
+				close(pstmt);
+			}
+			return c;
+		}
+
+		public Client findEmail(Connection conn, String uid) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Client c=null;
+			String sql=prop.getProperty("findEmail");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, uid);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					c=new Client();
+					c.setcId(rs.getString("c_id"));
+					c.setcEmail(rs.getString("c_email"));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
 				close(rs);
 				close(pstmt);
 			}

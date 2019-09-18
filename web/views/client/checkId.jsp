@@ -35,25 +35,25 @@
 	
 	<script>
 	
-		function checkIdDuplicate() {
-			
-			var userId=document.getElementById("userId").value;
-			
-			if(!userId || userId.trim().length<4 || userId.trim().length>15) {
-				alert("아이디는 4글자 이상,15자이하로 가능합니다");
-				return;
-			}
-			
-		var regExpId = /^[a-z0-9]{4,12}$/;
-		if(!regExpId.test(checkId.userId.value)) {
-			alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
-			return false;
+	function checkIdDuplicate() {
+		
+		var userId=document.getElementById("userId").value;
+		
+		if(!userId || userId.trim().length<4 || userId.trim().length>15) {
+			alert("아이디는 4글자 이상,15자이하로 가능합니다");
+			return;
 		}
-			
-			
-			checkId.userId.value=userId.trim();
-			checkId.submit();
-		}
+		
+	var regExpId = /^[a-z0-9]{4,12}$/;
+	if(!regExpId.test(checkId.userId.value)) {
+		alert("아이디는 소문자,숫자 4글자 이상,15자이하로 가능합니다");
+		return false;
+	}
+		
+		
+		checkId.userId.value=userId.trim();
+		checkId.submit();
+	}
 		
 		
 		

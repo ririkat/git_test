@@ -140,10 +140,11 @@ th, td {
 
 							<th scope="row">펜션이름</th>
 							<th scope="row">방정보</th>
+							<th scope="row">인원수</th>
 							<th scope="row">이용일</th>
 							<th scope="row">결제금액</th>
 							<th scope="row">예약상태</th>
-							<th scope="row">취소</th>
+							
 						</tr>
 					</thead>
 

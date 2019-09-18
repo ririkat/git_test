@@ -34,7 +34,7 @@
         <tr>
             <th colspan="2">
                 <input type="submit" value="수정" onclick="return validate();">
-                <input type="reset" value="취소" onclick="javascript:history.back(-1)">
+                <input type="reset" value="취소" onclick="history.back();">
             </th>
         </tr>
     </table>

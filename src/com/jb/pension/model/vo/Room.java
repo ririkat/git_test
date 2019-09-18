@@ -1,48 +1,38 @@
 package com.jb.pension.model.vo;
 
 public class Room {
-	
-	private String rNo;
+
 	private String pCode;
+	private String rNo;
 	private String rName;
 	private int rPrice;
-	private int rNop;
-	private int rMaxNop;
-	private String rSize,rStruc,rInfo;
 	private int rAddPrice;
 	
+	private int rNop;
+	private int rMaxNop;
+	private int rAddNop;
+	private String rSize;
+	private String rStruc;
+	private String rInfo;
+
 	public Room() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Room(String rNo, String pCode, String rName, int rPrice, int rNop, int rMaxNop, String rSize, String rStruc,
-			String rInfo, int rAddPrice) {
+	public Room(String pCode, String rNo, String rName, int rPrice, int rAddPrice, int rNop, int rMaxNop, int rAddNop,
+			String rSize, String rStruc, String rInfo) {
 		super();
-		this.rNo = rNo;
 		this.pCode = pCode;
+		this.rNo = rNo;
 		this.rName = rName;
 		this.rPrice = rPrice;
+		this.rAddPrice = rAddPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
+		this.rAddNop = rAddNop;
 		this.rSize = rSize;
 		this.rStruc = rStruc;
 		this.rInfo = rInfo;
-		this.rAddPrice = rAddPrice;
-	}
-
-	@Override
-	public String toString() {
-		return "Room [rNo=" + rNo + ", pCode=" + pCode + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop
-				+ ", rMaxNop=" + rMaxNop + ", rSize=" + rSize + ", rStruc=" + rStruc + ", rInfo=" + rInfo
-				+ ", rAddPrice=" + rAddPrice + "]";
-	}
-
-	public String getrNo() {
-		return rNo;
-	}
-
-	public void setrNo(String rNo) {
-		this.rNo = rNo;
 	}
 
 	public String getpCode() {
@@ -51,6 +41,14 @@ public class Room {
 
 	public void setpCode(String pCode) {
 		this.pCode = pCode;
+	}
+
+	public String getrNo() {
+		return rNo;
+	}
+
+	public void setrNo(String rNo) {
+		this.rNo = rNo;
 	}
 
 	public String getrName() {
@@ -69,6 +67,14 @@ public class Room {
 		this.rPrice = rPrice;
 	}
 
+	public int getrAddPrice() {
+		return rAddPrice;
+	}
+
+	public void setrAddPrice(int rAddPrice) {
+		this.rAddPrice = rAddPrice;
+	}
+
 	public int getrNop() {
 		return rNop;
 	}
@@ -83,6 +89,14 @@ public class Room {
 
 	public void setrMaxNop(int rMaxNop) {
 		this.rMaxNop = rMaxNop;
+	}
+
+	public int getrAddNop() {
+		return rAddNop;
+	}
+
+	public void setrAddNop(int rAddNop) {
+		this.rAddNop = rAddNop;
 	}
 
 	public String getrSize() {
@@ -109,13 +123,12 @@ public class Room {
 		this.rInfo = rInfo;
 	}
 
-	public int getrAddPrice() {
-		return rAddPrice;
+	@Override
+	public String toString() {
+		return "Room [pCode=" + pCode + ", rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rAddPrice="
+				+ rAddPrice + ", rNop=" + rNop + ", rMaxNop=" + rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize
+				+ ", rStruc=" + rStruc + ", rInfo=" + rInfo + "]";
 	}
-
-	public void setrAddPrice(int rAddPrice) {
-		this.rAddPrice = rAddPrice;
-	}
 	
 	
 	
@@ -123,5 +136,5 @@ public class Room {
 	
 	
 	
-
+	
 }

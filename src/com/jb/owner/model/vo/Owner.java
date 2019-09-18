@@ -15,6 +15,38 @@ public class Owner {
 	private String oEaYN;
 	private int oBLCount;
 	private int Authority;
+	
+	
+	
+	public Owner(String oId, String oPw, String oName, Date oBirth, String oGender, String oEmail, String oPhone,
+			String oAddr) {
+		super();
+		this.oId = oId;
+		this.oPw = oPw;
+		this.oName = oName;
+		this.oBirth = oBirth;
+		this.oGender = oGender;
+		this.oEmail = oEmail;
+		this.oPhone = oPhone;
+		this.oAddr = oAddr;
+	}
+
+	public Owner(String oId, String oPw, String oName, Date oBirth, String oGender, String oEmail, String oPhone,
+			String oAddr, Date oEd, String oEaYN, int oBLCount, int authority) {
+		super();
+		this.oId = oId;
+		this.oPw = oPw;
+		this.oName = oName;
+		this.oBirth = oBirth;
+		this.oGender = oGender;
+		this.oEmail = oEmail;
+		this.oPhone = oPhone;
+		this.oAddr = oAddr;
+		this.oEd = oEd;
+		this.oEaYN = oEaYN;
+		this.oBLCount = oBLCount;
+		Authority = authority;
+	}
 
 	public Owner() {
 		// TODO Auto-generated constructor stub

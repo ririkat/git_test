@@ -22,6 +22,8 @@ public class Client {
    }
    
    
+   
+   
    public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
 		String cAddr) {
 	super();

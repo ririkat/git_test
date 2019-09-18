@@ -19,7 +19,7 @@
 					<tr>
 						<th>신고글번호 :</th>
 						<td>
-							<input type="text" name="category" class="form-control" value="<%=cmmNo %>" readonly/>
+							<input type="text" name="cmmNo" class="form-control" value="<%=cmmNo %>" readonly/>
 						</td>
 					</tr>
 					<tr>
