@@ -6,8 +6,10 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.jb.review.model.dao.ReviewFileDao;
+import com.jb.review.model.vo.ReviewFile;
 
 public class ReviewFileService {
 	private ReviewFileDao dao = new ReviewFileDao();
@@ -22,6 +24,13 @@ public class ReviewFileService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public List<ReviewFile> selectImages(){
+		Connection conn = getConnection();
+		List<ReviewFile> list = dao.selectImages(conn);
+		close(conn);
+		return list;
 	}
 
 }

@@ -3,8 +3,13 @@ package com.jb.review.model.dao;
 import static common.template.JDBCTemplate.close;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.jb.review.model.vo.ReviewFile;
 
 public class ReviewFileDao {
 	
@@ -20,6 +25,30 @@ public class ReviewFileDao {
 		}finally {
 			close(stmt);
 		}return result;
+	}
+	
+	
+	public List<ReviewFile> selectImages(Connection conn){
+		Statement stmt=null;
+		ResultSet rs = null;
+		List<ReviewFile> list = new ArrayList();
+		String sql = "select * from review_file";
+		try {
+			stmt = conn.createStatement();
+			rs= stmt.executeQuery(sql);
+			while(rs.next()) {
+				ReviewFile rf = new ReviewFile();
+				rf.setrNo(rs.getInt("r_no"));
+				rf.setpOriginalFile(rs.getString("r_original_file"));
+				rf.setpRenameFile(rs.getString("r_rename_file"));
+				list.add(rf);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}return list;
 	}
 
 }

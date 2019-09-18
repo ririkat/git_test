@@ -49,16 +49,8 @@ public class ReviewService {
 		return list;
 	}
 	
-	public Review selectReviewOne(int rNo, boolean hasRead) {
+	public Review selectReviewOne(int rNo) {
 		Connection conn = getConnection();
-		if(!hasRead) {
-			int result=dao.updateCount(conn,rNo);
-			if(result>0) {
-				commit(conn);
-			}else {
-				rollback(conn);
-			}
-		}
 		Review r = dao.selectReviewOne(conn,rNo);
 		close(conn);
 		return r;

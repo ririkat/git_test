@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.pension.model.service.PensionService;
+import com.jb.pension.model.vo.Pension;
 import com.jb.review.model.service.ReviewService;
 import com.jb.review.model.vo.Review;
 
@@ -33,8 +35,11 @@ public class OwnerReviewListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//리스트를 불러오기전 페이징처리 후 ReviewList를 불러오기
 				
-//				String pCode = request.getAttribute("pensionCode");
-				String pCode = "p1001";
+				String pCode = (String) request.getParameter("pensionCode");
+//				String pCode = "p1001";
+				System.out.println(pCode);
+				Pension p = new PensionService().selectPension(pCode);
+				System.out.println("헤헤: "+p);
 				//페이징 처리
 				//1.현재 보고있는 페이지 정보
 				int cPage;
@@ -48,6 +53,7 @@ public class OwnerReviewListServlet extends HttpServlet {
 				
 				//3.DB에 접근하여 필요한 데이터 가져오기(해당페이지 게시글만 가져온다)
 				ReviewService service = new ReviewService();
+						
 				int totalMyPensionReview = service.selectMyPensionReviewCount(pCode);
 				System.out.println(totalMyPensionReview);
 				List<Review> list=service.selectMyPensionReviewList(pCode, cPage,numPerPage);
@@ -81,6 +87,7 @@ public class OwnerReviewListServlet extends HttpServlet {
 					pageBar+="<a href='"+request.getContextPath()+"/owner/reviewList?cPage="+(pageNo)+"'>&gt</a>";
 				}
 				
+				request.setAttribute("pension", p);
 				request.setAttribute("pageBar", pageBar);
 				request.setAttribute("cPage", cPage);
 				request.setAttribute("list", list);
