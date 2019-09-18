@@ -28,7 +28,10 @@
 			<h4>전화번호 : <%=pInfo.getpTel()%></h4>
 			<h4>영업시작일 : <%=pInfo.getpEnrollDate()%></h4>
 			<h4>블랙카운트 : <%=pInfo.getpBlcount()%></h4>
-			<p>부대시설 : <%=pFac %></p>
+			<h4>부대시설 : <%=pFac %></h4>
+			<br>
+			<button id="pModify">수정</button>
+			<button id="pDelete">삭제</button>
 		</div>
 	</div>
 	
@@ -77,6 +80,18 @@
 </div>
 
 <script>
+	//펜션 수정
+	$("#pModify").click(function(){
+		location.href="<%=request.getContextPath()%>/owner/modifyPension?pCode=<%=pInfo.getpCode()%>&oId=<%=pInfo.getoId()%>&pName=<%=pInfo.getpName()%>&pAddr=<%=pInfo.getpAddr()%>";
+	});
+	
+	//펜션 삭제
+	$("#pDelete").click(function(){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			location.href="<%=request.getContextPath()%>/owner/oneDelete?pCode=<%=pInfo.getpCode()%>&oId=<%=pInfo.getoId()%>";
+		}
+	})
+	
 	//객실 추가
 	$("#addBtn").click(function(){
 		location.href="<%=request.getContextPath()%>/owner/addRoom?pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>";

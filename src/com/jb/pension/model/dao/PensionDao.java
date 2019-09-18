@@ -517,4 +517,20 @@ public class PensionDao {
 			close(stmt);
 		} return pName;
 	}
+	
+	//펜션 수정
+	public int modifyPension(Connection conn, String pCode, String tel) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "update pension set p_tel='"+tel+"' where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
 }

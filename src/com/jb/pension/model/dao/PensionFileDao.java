@@ -49,5 +49,21 @@ public class PensionFileDao {
 			close(stmt);
 		} return list;
 	}
+	
+	public int modifyImages(Connection conn, String pCode, String oriFile, String reFile) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "update pen_file set p_original_file='"+oriFile+"', "
+										+"p_rename_file='"+reFile+"' "
+										+"where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		} return result;
+	}
 
 }
