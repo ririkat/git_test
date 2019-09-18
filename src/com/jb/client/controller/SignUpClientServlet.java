@@ -15,7 +15,7 @@ import com.jb.client.model.vo.Client;
 /**
  * Servlet implementation class SignUpClientServlet
  */
-@WebServlet("/client/signupclient")
+@WebServlet(name="SignUpClient",urlPatterns="/client/signupclient")
 public class SignUpClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,12 +47,11 @@ public class SignUpClientServlet extends HttpServlet {
 		String email = request.getParameter("cemail");
 		String phone = request.getParameter("cphone");
 		
-		String addr1 = request.getParameter("postcode1");
-		String addr2 = request.getParameter("postcode2");
+		String addr1 = request.getParameter("zonecode");
 		String addr3 = request.getParameter("address");
 		String addr4 = request.getParameter("address_etc");
 		
-		String addr = (addr1+"-"+addr2+" "+addr3+" "+addr4);
+		String addr = (addr1+" "+addr3+" "+addr4);
 		
 		Client c = new Client(id,pw,name,birth,gender,email,phone,addr);
 		ClientService service = new ClientService();

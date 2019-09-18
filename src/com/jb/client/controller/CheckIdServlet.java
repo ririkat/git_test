@@ -35,7 +35,6 @@ public class CheckIdServlet extends HttpServlet {
 		ClientService service = new ClientService();
 		boolean isUseable = service.selectCheckId(cId);
 
-	
 
 		request.setAttribute("cId", cId);
 		request.setAttribute("isUseable", isUseable);
