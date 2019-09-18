@@ -277,7 +277,6 @@ public class OwnerDao {
 		String sql = prop.getProperty("selectCheckId");
 		try {
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (!rs.next()) {
