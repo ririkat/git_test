@@ -15,7 +15,7 @@
                                 <input type="radio" name="loginType" value="client" checked>고객
                                 <input type="radio" name="loginType" value="owner">업주
                                 <input id="loginid" name="loginid" type="text" class="form-control" placeholder="아이디 입력" required autofocus><br>
-                                <input id="loginpw" name="loginpw" type="password" class="form-control" placeholder="비밀번호 입력" required><br>
+                                <input id="cpass" name="cpass" type="password" class="form-control" placeholder="비밀번호 입력" required><br>
                                 <button onclick="login-btn" class="btn btn-lg btn-warning btn-block">
                                     			로그인</button><br>
                                 <input type="button" class="btn btn-sm btn-warning btn-block" value="ID 찾기"
@@ -43,6 +43,7 @@
                     $('#loginTypefrm').attr('action','<%=request.getContextPath()%>/client/login');
                 }
                 else if(loginType=="owner"){
+                	$('#cpass').attr('name','opass');	//Owner의 서블릿에서는 받는파라미터값이 opass로 되어있어 owner서블릿으로 넘겨주기전에 name값 변경
                     $('#loginTypefrm').attr('action','<%=request.getContextPath()%>/owner/login');
                 }
                 else return;

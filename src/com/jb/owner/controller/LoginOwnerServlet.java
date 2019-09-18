@@ -32,7 +32,7 @@ public class LoginOwnerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("loginid");
-		String pw = request.getParameter("loginpw");
+		String pw = request.getParameter("opass");
 		System.out.println(id);
 		System.out.println(pw);
 		

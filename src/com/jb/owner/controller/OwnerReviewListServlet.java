@@ -33,7 +33,7 @@ public class OwnerReviewListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//리스트를 불러오기전 페이징처리 후 ReviewList를 불러오기
 				
-//				String pCode = request.getAttribute("pCode");
+//				String pCode = request.getAttribute("pensionCode");
 				String pCode = "p01";
 				//페이징 처리
 				//1.현재 보고있는 페이지 정보
