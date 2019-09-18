@@ -22,8 +22,8 @@
                         </li>
                         
                         <li>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/reviewList?oId=<%=loginOwner.getoId()%>">
-                            	후기 </a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/pensionReviewList?oId=<%=loginOwner.getoId()%>">
+                            	내 펜션(후기) </a>
                         </li>
                         
                         <li>

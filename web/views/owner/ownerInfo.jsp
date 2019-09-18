@@ -177,7 +177,7 @@
 
 		$(function(){
 			$('#mypageList li').removeClass("active");
-			$('#mypageList li').eq(1).addClass("active");
+			$('#mypageList li').eq(2).addClass("active");
 		});
 
 		//주소 API
