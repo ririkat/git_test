@@ -177,4 +177,42 @@ public class ReviewDao {
 		}return r;
 	}
 	
+	//리뷰등록
+	public int writeReview(Connection conn, String title, String writer,String content, String pCode) {
+		PreparedStatement pstmt = null;
+		int result= 0;
+		String sql = prop.getProperty("writeReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, pCode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int getCurrval(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select seq_review_no.currval from dual";
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			if(rs.next()	) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}return result;
+	}
+	
 }
