@@ -7,17 +7,16 @@ import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import com.jb.pension.model.dao.RoomFacilitiesDao;
+import com.jb.pension.model.dao.RoomFileDao;
 
-public class RoomFacilitiesService {
+public class RoomFileService {
 	
-	private RoomFacilitiesDao dao = new RoomFacilitiesDao();
-
-	// 객실추가시 부대시설 추가
-	public int addFacilities(int currval, String[] facCheck) {
+	private RoomFileDao dao = new RoomFileDao();
+	
+	public int addImages(int currval, String oriFile, String reFile) {
 		Connection conn = getConnection();
-		int result = dao.addFacilities(conn, currval, facCheck);
-		if (result > 0) {
+		int result = dao.addImages(conn,currval,oriFile,reFile);
+		if(result>0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -25,6 +24,5 @@ public class RoomFacilitiesService {
 		close(conn);
 		return result;
 	}
-		
-		
+
 }

@@ -454,7 +454,7 @@ public class PensionDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select seq_pension.currval from dual";
+		String sql = "select seq_pension_no.currval from dual";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);

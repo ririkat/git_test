@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -115,6 +116,51 @@ public class RoomDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	//객실추가
+	public int addRoom(Connection conn, String pCode, String rName,
+			int rNop, int rMaxNop, int rPrice, int rAddPrice,
+			String rSize, String rStruc, String rInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("addRoom");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rName);
+			pstmt.setInt(2, rPrice);
+			pstmt.setInt(3, rNop);
+			pstmt.setInt(4, rMaxNop);
+			pstmt.setString(5, rSize);
+			pstmt.setString(6, pCode);
+			pstmt.setString(7, rStruc);
+			pstmt.setString(8, rInfo);
+			pstmt.setInt(9, rAddPrice);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
+	public int getCurrval(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select seq_room_no.currval from dual";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return result;
 	}
 
 }

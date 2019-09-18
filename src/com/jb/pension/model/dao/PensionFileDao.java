@@ -16,7 +16,7 @@ public class PensionFileDao {
 	public int addImages(Connection conn, int currval, String oriFile, String reFile) {
 		Statement stmt = null;
 		int result = 0;
-		String sql = "insert into pen_file values('p'||"+currval+",'"+oriFile+"','"+reFile+"')";
+		String sql = "insert into pen_file values(seq_pension_file_no.nextval,'"+oriFile+"','"+reFile+"','p'||"+currval+")";
 		try {
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);

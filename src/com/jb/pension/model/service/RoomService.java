@@ -1,7 +1,9 @@
 package com.jb.pension.model.service;
 
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
 import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -34,6 +36,27 @@ public class RoomService {
 		List<Room> list = dao.selectRoomList(conn,pCode);
 		close(conn);
 		return list;
+	}
+	
+	//객실추가
+	public int addRoom(String pCode, String rName, int rNop, int rMaxNop, int rPrice, int rAddPrice,
+			String rSize, String rStruc, String rInfo) {
+		Connection conn = getConnection();
+		int result = dao.addRoom(conn,pCode,rName,rNop,rMaxNop,rPrice,rAddPrice,rSize,rStruc,rInfo);
+		if(result>0) {
+			commit(conn);
+			result = dao.getCurrval(conn);
+			if(result>0) {
+				commit(conn);
+			}
+			else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 

@@ -95,7 +95,12 @@
 
 <script>
 	$("#addBtn").click(function(){
-		location.href="<%=request.getContextPath()%>/owner/addPension?oId=<%=loginOwner.getoId()%>";
+		console.log("<%=loginOwner.getoEaYN()%>");
+		if("<%=loginOwner.getoEaYN()%>".trim()=="Y"){
+			location.href="<%=request.getContextPath()%>/owner/addPension?oId=<%=loginOwner.getoId()%>";
+		} else {
+			alert("관리자의 승인을 대기중입니다. 승인 후 펜션등록이 가능합니다.");
+		}
 	});
 	
 	//전체 선택 및 해제

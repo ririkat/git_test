@@ -3,7 +3,6 @@ package com.jb.pension.model.vo;
 public class RoomFacilities {
 	
 	private String rNo;
-	private String pCode;
 	private String bed;
 	private String dressTable;
 	private String table;
@@ -29,13 +28,12 @@ public class RoomFacilities {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RoomFacilities(String rNo, String pCode, String bed, String dressTable, String table, String sofa,
+	public RoomFacilities(String rNo, String bed, String dressTable, String table, String sofa,
 			String dressCase, String bath, String spa, String washKit, String tv, String beam, String aircon,
 			String fridge, String cookFac, String cookUten, String rice, String microwave, String rSmoked, String child,
 			String oView, String iPool) {
 		super();
 		this.rNo = rNo;
-		this.pCode = pCode;
 		this.bed = bed;
 		this.dressTable = dressTable;
 		this.table = table;
@@ -64,14 +62,6 @@ public class RoomFacilities {
 
 	public void setrNo(String rNo) {
 		this.rNo = rNo;
-	}
-
-	public String getpCode() {
-		return pCode;
-	}
-
-	public void setpCode(String pCode) {
-		this.pCode = pCode;
 	}
 
 	public String getBed() {
@@ -236,7 +226,7 @@ public class RoomFacilities {
 
 	@Override
 	public String toString() {
-		return "RoomFacilities [rNo=" + rNo + ", pCode=" + pCode + ", bed=" + bed + ", dressTable=" + dressTable
+		return "RoomFacilities [rNo=" + rNo + ", bed=" + bed + ", dressTable=" + dressTable
 				+ ", table=" + table + ", sofa=" + sofa + ", dressCase=" + dressCase + ", bath=" + bath + ", spa=" + spa
 				+ ", washKit=" + washKit + ", tv=" + tv + ", beam=" + beam + ", aircon=" + aircon + ", fridge=" + fridge
 				+ ", cookFac=" + cookFac + ", cookUten=" + cookUten + ", rice=" + rice + ", microwave=" + microwave

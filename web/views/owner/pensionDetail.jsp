@@ -36,11 +36,9 @@
 	<div>
 		<h3 align="center">객실 목록</h3><hr>
 		<button id="addBtn">객실추가</button>
-		<button id="deleteBtn" class="pull-right">객실삭제</button>
 		<table id="tbl-clientList" class="table table-hover">
 			<thead>
 				<tr>
-					<th style="text-align:left"><input type="checkbox" name="selected_all"></th>
 					<th style="text-align:center">객실번호</th>
 					<th style="text-align: center">객실명</th>
 					<th style="text-align: center">기준인원</th>
@@ -53,7 +51,6 @@
 				<% if(roomList!=null && !roomList.isEmpty()) {
 					for(Room r : roomList) { %>
 				<tr>
-					<td style="text-align:left"><input type="checkbox" name="selected" value="ROW"></td>
 		    		<td style="cursor:pointer">
 		            	<a href="#">
 		                	<%=r.getrNo() %>
@@ -82,7 +79,7 @@
 <script>
 	//객실 추가
 	$("#addBtn").click(function(){
-		location.href="<%=request.getContextPath()%>/owner/addRoom?pCode=<%=pInfo.getpCode()%>";
+		location.href="<%=request.getContextPath()%>/owner/addRoom?pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>";
 	});
 </script>
 

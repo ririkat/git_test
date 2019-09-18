@@ -234,7 +234,9 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
