@@ -35,11 +35,10 @@ public class BoardService {
 	public int insertBoard(Board b) {
 		Connection conn=getConnection();
 		int result=dao.insertBoard(conn, b);
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
 		close(conn);
 		return result;
 		
@@ -47,24 +46,24 @@ public class BoardService {
 	
 	
 //	조회수 아직수정중.. 야마터져양
-	public Board selectBoard(String bNo, boolean hasRead) {
+	public Board selectBoard(String cmmNo, boolean hasRead) {
 		Connection conn=getConnection();
-//		Board b=dao.selectBoard(conn, bNo);
+//		Board b=dao.selectBoard(conn, cmmNo);
 		
 		close(conn);
 		return null;
 	}
 
-	public Board selectBoardOne(int bNo) {
+	public Board selectBoardOne(int cmmNo) {
 		Connection conn=getConnection();
-		Board b=dao.selectBoardOne(conn, bNo);
+		Board b=dao.selectBoardOne(conn, cmmNo);
 		close(conn);
 		return b;
 	}
 
-	public int deleteBoard(int bNo) {
+	public int deleteBoard(int cmmNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteBoard(conn, bNo);
+		int result=dao.deleteBoard(conn, cmmNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -87,13 +86,14 @@ public class BoardService {
 		if(result>0) commit(conn);
 		else rollback(conn);
 		
+		
 		close(conn);
 		return result;
 	}
 
-	public int deleteComment(int bNo, int coNo) {
+	public int deleteComment(int cmmNo, int commentNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteComment(conn, bNo, coNo);
+		int result=dao.deleteComment(conn, cmmNo, commentNo);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -102,9 +102,9 @@ public class BoardService {
 		return result;
 	}
 
-	public List<BoardComment> selectBoardComment(int bNo) {
+	public List<BoardComment> selectBoardComment(int cmmNo) {
 		Connection conn=getConnection();
-		List<BoardComment> list=dao.selectBoardComment(conn, bNo);
+		List<BoardComment> list=dao.selectBoardComment(conn, cmmNo);
 		close(conn);
 		return list;
 	}

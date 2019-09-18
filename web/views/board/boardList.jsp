@@ -32,9 +32,9 @@
             <%if(list!=null && !list.isEmpty()){
             	for(Board b : list){%>
             	<tr>
-                    <td><%=b.getbNo() %></td>
+                    <td><%=b.getCmmNo() %></td>
                     <td>
-                    	<a href="<%=request.getContextPath()%>/board/boardView?bNo=<%=b.getbNo() %>">
+                    	<a href="<%=request.getContextPath()%>/board/boardView?cmmNo=<%=b.getCmmNo() %>">
                     	<%=b.getTitle() %></a>
                     </td>
                     <td><%=b.getcId() %></td>
@@ -52,7 +52,7 @@
         <!-- 로그인시에만 보이는 보이는 로직 필요 -->
         <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()"/>
         <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()"/>
-
+        
         <div class="text-center">
             <ul class="pagination">
                 <li><%=request.getAttribute("pageBar") %></li>
@@ -63,12 +63,13 @@
 			       	function writeBoard(){
 			       		location.href="<%=request.getContextPath()%>/board/boardForm";
 			       	}
+			       	function SMTP(){
+			       		location.href="<%=request.getContextPath()%>/board/SMTPTest";
+			       	}
 			    </script>
 		</div>
 	</section>
     </div>
 </div>
-
-
 
 <%@ include file="/views/common/footer.jsp"%>

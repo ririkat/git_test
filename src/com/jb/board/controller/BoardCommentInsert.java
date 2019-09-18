@@ -14,7 +14,7 @@ import com.jb.board.model.vo.BoardComment;
 /**
  * Servlet implementation class BoardCommentInsert
  */
-@WebServlet("/board/commentInsert")
+@WebServlet("/board/boardCommentInsert")//대댓글 구현
 public class BoardCommentInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,17 +31,18 @@ public class BoardCommentInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
 		String writer=request.getParameter("writer");
 		int level=Integer.parseInt(request.getParameter("level"));
 		String comment=request.getParameter("comment");
-		int coNo=Integer.parseInt(request.getParameter("coNo"));
+		int commentRef=Integer.parseInt(request.getParameter("commentRef"));
 		
-		BoardComment bc=new BoardComment(level, writer, comment, bNo, coNo);
+		
+		BoardComment bc=new BoardComment(level, writer, comment, cmmNo, commentRef);
 		int result=new BoardService().insertComment(bc);
 		
 		String msg="";
-		String loc="/board/boardCiew?bNo="+bNo;
+		String loc="/board/boardView?cmmNo="+cmmNo;
 		String view="/views/common/msg.jsp";
 		msg=result>0?"댓글등록 성공":"댓글등록 실패";
 		request.setAttribute("msg", msg);

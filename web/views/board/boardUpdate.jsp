@@ -24,9 +24,10 @@
 								method="post" encType="multipart/form-data">
 								<tr>
 									<th>제목 :</th>
-									<td><input type="hidden" value="<%=b.getbNo() %>"
-										name="bNo" /> <input type="text" value="<%=b.getTitle() %>"
-										name="title" class="form-control" /></td>
+									<td>
+										<input type="hidden" value="<%=b.getCmmNo() %>" name="cmmNo" />
+										<input type="text" value="<%=b.getTitle() %>" name="title" class="form-control" />
+									</td>
 								</tr>
 								<tr>
 								<tr>

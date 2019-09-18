@@ -28,5 +28,13 @@ public class RoomService {
 		return list;
 	}
 	
+	//업주->승인된펜션->디테일->선택된펜션의 객실들 불러오기
+	public List<Room> selectRoomList(String pCode) {
+		Connection conn = getConnection();
+		List<Room> list = dao.selectRoomList(conn,pCode);
+		close(conn);
+		return list;
+	}
+	
 
 }

@@ -55,7 +55,7 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		int bNo=Integer.parseInt(mr.getParameter("bNo"));
+		int cmmNo=Integer.parseInt(mr.getParameter("cmmNo"));
 		String title=mr.getParameter("title");
 		String writer=mr.getParameter("writer");
 		String content=mr.getParameter("content");
@@ -63,17 +63,8 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		String oriFile=mr.getOriginalFileName("up_file");
 		String reFile=mr.getFilesystemName("up_file");
 		
-		System.out.println(bNo);
-		System.out.println(title);
-		System.out.println(writer);
-		System.out.println(content);
-		System.out.println(oriFile);
-		System.out.println(reFile);
 		
-		
-		
-		
-		Board b=new Board(bNo, title, writer, content, oriFile, reFile);
+		Board b=new Board(cmmNo, title, writer, content, oriFile, reFile);
 		int result=new BoardService().updateBoard(b);
 
 		String msg="";
@@ -82,20 +73,16 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		
 		if(result>0) {
 			msg="게시글 수정완료";
-			loc="/board/boardView?bNo="+bNo;
+			loc="/board/boardView?cmmNo="+cmmNo;
 		}else {
 			File remove=new File(saveDir+"/"+b.getOriginalFilename());
 			remove.delete();
 			msg="게시글 수정 실패";
-			loc="/board/boardView?bNo="+bNo;
+			loc="/board/boardView?cmmNo="+cmmNo;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
-		System.out.println(saveDir);
-		
-		
 		
 		
 	}

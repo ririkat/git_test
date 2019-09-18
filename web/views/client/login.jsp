@@ -5,9 +5,7 @@
  <section>
  <br>
         <!-- <div class="jumbotron well"> -->
-        
         <div class="jumbotron">
-       
             <div class="container border">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -20,11 +18,11 @@
                                 <input type="password" id="cpass" name="cpass"  class="form-control" placeholder="비밀번호 입력" required/><br>
                                 <input type="submit" class="btn btn-lg btn-warning btn-block" value="로그인"/>
                                 <input type="button" class="btn btn-sm btn-warning btn-block" value="ID 찾기" onclick="find();"/>
-                                <input type="button" class="btn btn-sm btn-warning btn-block" value="PW 찾기"/><br>
+                                <input type="button" class="btn btn-sm btn-warning btn-block" value="PW 찾기" onclick="findPW();"/>
+                                <br>
                                    <%--  onclick="location.href='<%=request.getContextPath()%>/views/client/findPW.jsp'" --%>
 								<!--업체일반 회원뷰로 전환 -->
                                 <a href="<%=request.getContextPath()%>/views/client/singUpChoice.jsp" class="text-center new-account">회원가입</a>
-                            
                            </form>
                         </div>
                     </div>
@@ -67,6 +65,10 @@
           	}
         	return true;
         }  
+        
+        function findPW(){
+        	location.href="<%=request.getContextPath()%>/views/client/findPW.jsp";
+        }
     </script>
 
 <%@ include file="/views/common/footer.jsp" %>

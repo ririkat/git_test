@@ -32,16 +32,16 @@ public class BoardCommentWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String content=request.getParameter("boardCommentContent");
-		int bNo=Integer.parseInt(request.getParameter("bNo"));
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
 		String writer=request.getParameter("boardCommentWriter");
 		int level=Integer.parseInt(request.getParameter("boardCommentLevel"));
 		int commentRef=Integer.parseInt(request.getParameter("boardCommentRef"));
 		
-		BoardComment bc=new BoardComment(level,writer,content,bNo,commentRef);
+		BoardComment bc=new BoardComment(level,writer,content,cmmNo,commentRef);
 		int result=new BoardService().insertComment(bc);
 		
 		String msg="";
-		String loc="/board/boardView?bNo="+bNo;
+		String loc="/board/boardView?cmmNo="+cmmNo;
 		String view="/views/common/msg.jsp";
 		msg=result>0?"댓글등록을 완료했습니다.":"댓글등록에 실패했습니다.";
 		request.setAttribute("msg", msg);
