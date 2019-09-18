@@ -224,12 +224,9 @@
 							</tr>
 							<tr>
 								<td height=40>&nbsp; 
-								<input type="checkbox" name="agree" id="chk1">
-								&nbsp;<label for=agree11>동의합니다.</label>
+								<fieldset><input type="checkbox" name="agree" id="chk1">&nbsp;<label for="chk1">동의합니다.</label></fieldset>
 									&nbsp; 
-<!-- 								<input type="checkbox" value=0 name="agree" id="agree10"> -->
-<!-- 								&nbsp;<label -->
-<!-- 									for=agree10>동의하지 않습니다.</label> -->
+
 								</td>
 							</tr>
 						</table>
