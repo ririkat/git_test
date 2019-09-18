@@ -75,7 +75,7 @@
 
 
                     <!--인원수 td-->
-                    <td><%=res.getResNop() %></td>
+                    <td><%=res.getResNop() %><br>추가인원수 : <%=r.get %></td>
 
                     <!--요금합계 td-->
                     <td>
