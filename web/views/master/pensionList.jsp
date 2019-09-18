@@ -53,6 +53,7 @@
                             <th style="text-align:center">소재지</th>
                             <th style="text-align:center">전화번호</th>
                             <th style="text-align:center">펜션업주 아이디</th>
+                            <th style="text-align:center">승인날짜</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +70,7 @@
 		                            <td><%=p.getpAddr() %></td>
 		                            <td><%=p.getpTel() %></td>
 		                            <td><%=p.getoId() %></td>
+		                            <td><%=p.getpEnrollDate() %></td>
 		                        </tr>
 		                <%	}
 	                    }%>

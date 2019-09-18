@@ -15,7 +15,7 @@ import com.jb.owner.model.vo.Owner;
 /**
  * Servlet implementation class LoginOwnerServlet
  */
-@WebServlet("/owner/login")
+@WebServlet(name="LoginOwner",urlPatterns="/owner/login")
 public class LoginOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,7 +32,7 @@ public class LoginOwnerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("loginid");
-		String pw = request.getParameter("loginpw");
+		String pw = request.getParameter("cpass");
 		System.out.println(id);
 		System.out.println(pw);
 		

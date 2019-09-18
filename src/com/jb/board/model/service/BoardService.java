@@ -35,11 +35,10 @@ public class BoardService {
 	public int insertBoard(Board b) {
 		Connection conn=getConnection();
 		int result=dao.insertBoard(conn, b);
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
 		close(conn);
 		return result;
 		
@@ -86,6 +85,7 @@ public class BoardService {
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
+		
 		
 		close(conn);
 		return result;

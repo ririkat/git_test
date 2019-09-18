@@ -16,7 +16,7 @@ import com.jb.client.model.vo.Client;
 /**
  * Servlet implementation class LoginClientServlet
  */
-@WebServlet("/client/login")
+@WebServlet(name="LoginClient",urlPatterns="/client/login")
 public class LoginClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class LoginClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("loginid");
-		String pw = request.getParameter("loginpw");
+		String pw = request.getParameter("cpass");
 		
 		System.out.println(id);
 		System.out.println(pw);
