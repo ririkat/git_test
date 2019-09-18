@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.pension.model.vo.Pension;
+import com.jb.reservation.model.vo.Reservation;
+
 /**
  * Servlet implementation class PaymentServlet
  */
@@ -29,6 +32,13 @@ public class PaymentServlet extends HttpServlet {
 		
 		//예약내역확인 후 결제정보 입력으로 전환해주는 서블릿 
 		
+		// id 파라미터로 받아서 db로 회원 id같이 보냄  
+		
+		Reservation res = new Reservation();
+		
+		Pension p =  new Pension();
+		
+	
 		
 		
 		
