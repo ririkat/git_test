@@ -80,12 +80,12 @@ public class UpdateClientServlet extends HttpServlet {
 	  String cbirthYY = request.getParameter("cbirthYY"); 
       String cbirthMM = request.getParameter("cbirthMM"); 
 	      String cbirthDD = request.getParameter("cbirthDD"); 
-	      java.sql.Date cbirth = java.util.Date.valueOf(cbirthYY+"-"+cbirthMM+"-"+cbirthDD);
+//	      java.sql.Date cbirth = java.util.Date.valueOf(cbirthYY+"-"+cbirthMM+"-"+cbirthDD);
 //	      java.util.Date cbirth = java.sql.Date.valueOf(cbirthYY+"-"+cbirthMM+"-"+cbirthDD);
 	      
-	      c.setcBirth(cbirth);
-	      
-	      System.out.println(cbirth);
+//	      c.setcBirth(cbirth);
+//	      
+//	      System.out.println(cbirth);
 	      
 
    

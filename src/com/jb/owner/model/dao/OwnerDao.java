@@ -71,6 +71,9 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
+				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
 				list.add(o);
 			}
 		}catch(SQLException e) {
@@ -129,7 +132,9 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
 				
 				list.add(o);
 			}
@@ -166,7 +171,10 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
+				System.out.println("dao owner객체: "+o);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -235,7 +243,10 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
+				System.out.println("selectId DAO owner객체: "+o);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

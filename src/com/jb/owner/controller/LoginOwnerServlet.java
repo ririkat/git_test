@@ -32,13 +32,12 @@ public class LoginOwnerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("loginid");
-		String pw = request.getParameter("cpass");
+		String pw = request.getParameter("loginpw");
 		System.out.println(id);
 		System.out.println(pw);
 		
 		OwnerService service = new OwnerService();
 		Owner o = service.selectId(id,pw);
-		System.out.println(o);
 		
 		String view = "";
 		if(o!= null) {

@@ -13,7 +13,7 @@ import com.jb.owner.model.service.OwnerService;
 /**
  * Servlet implementation class OwnerUpdatePasswordEndServlet
  */
-@WebServlet("/owner/updatePasswordEnd")
+@WebServlet("/owner/updatePasswordEnd2")
 public class OwnerUpdatePasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

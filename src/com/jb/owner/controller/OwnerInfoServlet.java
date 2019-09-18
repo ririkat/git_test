@@ -34,7 +34,7 @@ public class OwnerInfoServlet extends HttpServlet {
 		OwnerService service = new OwnerService();
 		Owner o = service.selectOwnerOne(id);
 		request.setAttribute("owner", o);
-		System.out.println("info서블릿에서"+o.getoGender());
+		System.out.println("info서블릿에서: "+o);
 		request.getRequestDispatcher("/views/owner/ownerInfo.jsp").forward(request, response);
 	}
 

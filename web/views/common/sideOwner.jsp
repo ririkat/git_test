@@ -16,8 +16,6 @@
                 <div id="mypageList">
                     <ul class="nav nav-pills nav-stacked">
                         <br>
-<<<<<<< HEAD
-=======
                         <li class="active">
                             <a class="nav-link active" href="<%=request.getContextPath()%>/owner/pensionList?oId=<%=loginOwner.getoId() %>">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -28,11 +26,6 @@
                                 </svg>
                                 펜션관리 <span class="sr-only">(current)</span>
                             </a>
-                        </li>
->>>>>>> refs/heads/master
-                        <li>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/pensionEnroll?oId=<%=loginOwner.getoId()%>">
-                            	펜션등록 </a>
                         </li>
                         
                         <li>

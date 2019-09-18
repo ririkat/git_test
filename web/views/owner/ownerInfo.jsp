@@ -110,19 +110,19 @@
 
 
 
-                     <tr>
-                        <th class="point">지역</th>
-                        <td>
-                      <%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
-							<%System.out.println("테스트: "+ o.getoAddr().substring(o.getoAddr().indexOf("^")+1 ,o.getoAddr().indexOf("|")) ); %>
-						   <input id="zonecode" name="zonecode" type="text" value="<%=o.getoAddr().substring(o.getoAddr().indexOf("우")+2, o.getoAddr().indexOf("|"))%>" style="width:70px;" readonly/>
-						   &nbsp;
-						   <input type="button"  onclick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
-						   <br/>
-						   <input type="text" id="address" name="address" value="<%=o.getoAddr().substring(o.getoAddr().indexOf("|")+1 ,o.getoAddr().lastIndexOf("|"))%>" style="width:240px;"  required  readonly/>
-						   <input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="<%=o.getoAddr().substring(o.getoAddr().lastIndexOf("|")+1)%>" style="width:200px;"/>
-                        </td>
-                     </tr>
+                 <tr>
+                    <th class="point">지역</th>
+                    <td>
+                  <%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
+<%-- 							<%System.out.println("테스트: "+ o.getoAddr().substring(o.getoAddr().indexOf("^")+1 ,o.getoAddr().indexOf("|")) ); %> --%>
+					   <input id="zonecode" name="zonecode" type="text" value="<%=o.getoAddr().substring(o.getoAddr().indexOf("우")+2, o.getoAddr().indexOf("|"))%>" style="width:70px;" readonly/>
+					   &nbsp;
+					   <input type="button"  onclick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
+					   <br/>
+					   <input type="text" id="address" name="address" value="<%=o.getoAddr().substring(o.getoAddr().indexOf("|")+1 ,o.getoAddr().lastIndexOf("|"))%>" style="width:240px;"  required  readonly/>
+					   <input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="<%=o.getoAddr().substring(o.getoAddr().lastIndexOf("|")+1)%>" style="width:200px;"/>
+                    </td>
+                 </tr>
                      
                      
                      
@@ -206,7 +206,7 @@
 			var frm=$('#ownerFrm');
 			var url="<%=request.getContextPath()%>/owner/ownerUpdate?oId=<%=o.getoId()%>";
 			frm.attr("action",url);
-			frm.submit();			
+			frm.submit();
 		}
 	}
 </script>
