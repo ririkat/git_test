@@ -62,11 +62,50 @@ public class RoomDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Room r = new Room();
-				r.setrNo(rs.getString("r_no"));
 				r.setpCode(rs.getString("p_code"));
+				r.setrNo(rs.getString("r_no"));
 				r.setrName(rs.getString("r_name"));
 				r.setrPrice(rs.getInt("r_price"));
+				r.setrAddPrice(rs.getInt("r_addPrice"));
 				r.setrNop(rs.getInt("r_nop"));
+				r.setrMaxNop(rs.getInt("r_maxnop"));
+				r.setrSize(rs.getString("r_size"));
+				r.setrStruc(rs.getString("r_struc"));
+				r.setrInfo(rs.getString("r_info"));
+				list.add(r);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	//업주->승인된펜션->디테일->선택된펜션의 객실들 불러오기
+	public List<Room> selectRoomList(Connection conn, String pCode){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectRoomList");
+		List<Room> list = new ArrayList();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pCode);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Room r = new Room();
+				r.setpCode(rs.getString("p_code"));
+				r.setrNo(rs.getString("r_no"));
+				r.setrName(rs.getString("r_name"));
+				r.setrPrice(rs.getInt("r_price"));
+				r.setrAddPrice(rs.getInt("r_addPrice"));
+				r.setrNop(rs.getInt("r_nop"));
+				r.setrMaxNop(rs.getInt("r_maxnop"));
+				r.setrSize(rs.getString("r_size"));
+				r.setrStruc(rs.getString("r_struc"));
+				r.setrInfo(rs.getString("r_info"));
 				list.add(r);
 			}
 		} catch(SQLException e) {

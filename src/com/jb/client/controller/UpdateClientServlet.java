@@ -1,6 +1,7 @@
 package com.jb.client.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,7 +49,7 @@ public class UpdateClientServlet extends HttpServlet {
 	    
 //		String sessionCId = (String)object;
 //		
-		c.setcId(request.getParameter("cId"));
+		
 		
 		//자기만 수정할 수 있게 처리 
 //		
@@ -63,19 +64,45 @@ public class UpdateClientServlet extends HttpServlet {
 		c.setcPw(request.getParameter("cPw"));
 		c.setcName(request.getParameter("cName"));
 		
-		String  bBirth = request.getParameter("cBirth"); // 형식을 지켜야 함 yyyy-mm-dd
-		java.sql.Date aBirth = java.sql.Date.valueOf(bBirth);
-		
-		c.setcBirth(aBirth); 
-		
+	//	String  bBirth = request.getParameter("cBirth"); // 형식을 지켜야 함 yyyy-mm-dd
+		//java.sql.Date aBirth = java.sql.Date.valueOf(bBirth);
+//		
+//		c.setcBirth(aBirth); 
+//		
 //		c.setcBirth(request.getParameter("cBirth"));
-	
+//	
 		c.setcEmail(request.getParameter("cEmail"));
 		c.setcPhone(request.getParameter("cPhone"));
 		c.setcAddr(request.getParameter("cAddr"));
+//		
+//   c.setcBirth(Date.valueOf(request.getParameter("cbirthYY"+"-"+"cbirthMM"+"-"+"cbirthDD")));
+		
+	  String cbirthYY = request.getParameter("cbirthYY"); 
+      String cbirthMM = request.getParameter("cbirthMM"); 
+	      String cbirthDD = request.getParameter("cbirthDD"); 
+	      java.sql.Date cbirth = java.util.Date.valueOf(cbirthYY+"-"+cbirthMM+"-"+cbirthDD);
+//	      java.util.Date cbirth = java.sql.Date.valueOf(cbirthYY+"-"+cbirthMM+"-"+cbirthDD);
+	      
+	      c.setcBirth(cbirth);
+	      
+	      System.out.println(cbirth);
+	      
+
+   
+   String zonecode = request.getParameter("zonecode");
+   String addr = request.getParameter("address");
+   String addrEtc = request.getParameter("address_etc");
+   
+   String cAddr = ("우)"+zonecode+addr+addrEtc);
+   
+   c.setcAddr(cAddr);
+   
+   System.out.println(cAddr);
+	      
+
 		
 	    
-     int result=new ClientService().updateClient(c);
+        int result=new ClientService().updateClient(c);
 		
 		String msg=result>0?"회원수정이 완료되었습니다.":"회원수정을 실패하였습니다.";
 		String loc="/client/infoLoad?cId="+cId;

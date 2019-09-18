@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css">
 
 <script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
@@ -142,6 +143,8 @@
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
 						<%if(loginClient==null&&loginOwner!=null){%>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/owner/pensionList?oId=<%=loginOwner.getoId()%>">마이페이지</a></li>
+
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
 					</ul>
