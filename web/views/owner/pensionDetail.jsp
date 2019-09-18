@@ -37,7 +37,7 @@
 	
 	<br><br>
 	<div>
-		<h3 align="center">객실 목록</h3><hr>
+		<hr><br><h3 align="center">객실 목록</h3>
 		<button id="addBtn">객실추가</button>
 		<table id="tbl-clientList" class="table table-hover">
 			<thead>
@@ -77,9 +77,88 @@
 			</ul>
 		</div>
 	</div>
+	
+	
+	<br>
+	<div>
+		<table class="table_room2">
+			<colgroup>
+				<col width="150">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="*">
+			</colgroup>
+
+			<tbody>
+				<!-- 객실 부대시설, 객실 파일 가져오기 필요! for문 돌리기 -->
+				<tr>
+					<th class="bl2 br2 bb0px pdb0px">
+						<p class="imgBox">
+							<img
+								src="https://www.pensionzava.com/_psjava/_data/ykpension/room/G_1563845206_15643899645.jpg"
+								class="room_img">
+						</p>
+					</th>
+				</tr>
+
+				<tr>
+					<th class="bl2 br2 bb2 pdt5px f0 lsm1">
+						<div id="thum_img">
+							<img src="/_psjava/_image/img/popup/btn_arrow_left.png"
+								style="opacity: 0;">
+							<div class="arrow_gap_left">&nbsp;</div>
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899630.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,1)">
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899631.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,2)">
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899632.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,3)"> 
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899643.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,4)"> 
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899644.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,5)"> 
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899645.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,6)"> 
+							<img
+								src="/_psjava/_data/ykpension/room/G_1563845206_15643899646.jpg"
+								class="room_sum_off" id="sImg"
+								onmouseover="showPhoto(this.src,7)">
+							<div class="arrow_gap_right">&nbsp;</div>
+							<img src="/_psjava/_image/img/popup/btn_arrow_right.png"
+								style="opacity: 0;">
+						</div>
+						<!-- MOBON Shop Log Tracker v3.0 strat -->
+					</th>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <script>
+	function showPhoto(val,page){
+		$(".room_img").attr("src",val);
+		$(".imgBox .img_page").text(page);
+	}
+	
 	//펜션 수정
 	$("#pModify").click(function(){
 		location.href="<%=request.getContextPath()%>/owner/modifyPension?pCode=<%=pInfo.getpCode()%>&oId=<%=pInfo.getoId()%>&pName=<%=pInfo.getpName()%>&pAddr=<%=pInfo.getpAddr()%>";

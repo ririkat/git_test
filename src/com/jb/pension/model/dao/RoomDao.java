@@ -28,6 +28,35 @@ public class RoomDao {
 		}
 	}
 	
+	//객실 한개 정보 받아오기
+	public Room selectRoom(Connection conn, String rNo) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		Room r = new Room();
+		String sql = "select * from room where r_no='"+rNo+"'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				r.setpCode(rs.getString("p_code"));
+				r.setrNo(rs.getString("r_no"));
+				r.setrName(rs.getString("r_name"));
+				r.setrPrice(rs.getInt("r_price"));
+				r.setrAddPrice(rs.getInt("r_addPrice"));
+				r.setrNop(rs.getInt("r_nop"));
+				r.setrMaxNop(rs.getInt("r_maxnop"));
+				r.setrSize(rs.getString("r_size"));
+				r.setrStruc(rs.getString("r_struc"));
+				r.setrInfo(rs.getString("r_info"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return r;
+	}
+	
 	//선택된 펜션의 전체 객실 수
 	public int selectCountRoom(Connection conn, String pCode) {
 		PreparedStatement pstmt = null;
