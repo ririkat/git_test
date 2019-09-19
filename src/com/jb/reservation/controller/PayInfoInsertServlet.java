@@ -52,6 +52,8 @@ public class PayInfoInsertServlet extends HttpServlet {
 		String payMethod = request.getParameter("pay_method");
 		String resCode = request.getParameter("resCode");
 		
+		String nowYear = 
+		
 		Payment pay = new Payment(payCode,payDate,payMethod,resCode);
         
 	

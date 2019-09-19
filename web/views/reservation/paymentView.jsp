@@ -7,7 +7,7 @@
 <%@ page import="java.util.Calendar" %>
 
 <%
-	Reservation res = (Reservation) request.getAttribute("reservation");
+	/* Reservation res = (Reservation) request.getAttribute("reservation");
     Payment pay = res.getPayment();
 
 	Pension p = res.getPension();
@@ -20,7 +20,7 @@
 	int nowYear = now.get(Calendar.YEAR);			// 현재 년
 	int nowMonth = now.get(Calendar.MONTH)+1;		// 현재 월
 	int nowDate = now.get(Calendar.DATE);			// 현재 일
-	out.print(nowYear+"년 "+nowMonth+"월 "+nowDate+"일");
+	out.print(nowYear+"년 "+nowMonth+"월 "+nowDate+"일"); */
 %>
 
 <!-- 결제API script -->
@@ -43,7 +43,7 @@
 				<col width="20%">
 				<col width="">
 			</colgroup>
-			<tbody>
+			<%-- <tbody>
 				<tr>
 					<th class="txt_left"><strong class="point">*예약자명</strong></th>
 					<td class="txt_left">
@@ -217,7 +217,7 @@
 		<input type="hidden" name="resState" value="<%=res.getResState()%>">
 			
 			
-        <input type="reset" onclick="preview();" class="btn btn-warning" value="뒤로가기">
+ --%>        <input type="reset" onclick="preview();" class="btn btn-warning" value="뒤로가기">
         <input type="submit" class="btn btn-warning" id="btn-pay" onclick="" value="결제하기">
 			
 
@@ -259,13 +259,13 @@
   
   /* 이전으로 버튼 */
 
-  function preview(){
+  <%-- function preview(){
   	
 	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=res.getResCode()%>;
 		location.href=url;
   
   }
-  
+   --%>
   /* 결제하기 버튼 */
 
   $(function(){
