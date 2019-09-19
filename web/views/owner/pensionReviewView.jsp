@@ -29,10 +29,15 @@
 		<tr>
 			<td>첨부파일</td>
 			<td>
-				<%if(rf.getRenameFilename()!=null){%>
+				<% if (list != null && !list.isEmpty()) {
+								for (ReviewFile rf : list) {  %>
+				<%if(rf.  !=null){%>
                      <a href="javascript:fn_filedown('<%=b.getOriginalFilename()%>','<%=b.getRenameFilename()%>')">
                      <img src="<%=request.getContextPath()%>/images/file.png" width="16px"/><%=b.getOriginalFilename() %></a>
                  <%}%>
+                 
+                 <%}
+					}%>
                  
 				 <script>
                         function fn_filedown(ori,ren){

@@ -25,7 +25,8 @@
 <!-- 						​​​​​​​<button type="submit">검색</button> -->
 <!-- 					</form> -->
 				</div>
-				
+				<form action="<%=request.getContextPath() %>/review/reviewWrite"
+					method="post" enctype="multipart/form-data">
 				<table id="tbl-review" class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -56,6 +57,13 @@
 					</tbody>
 				</table>
 				
+				<input type="hidden" name="pCode" id="pCode" value="<%=pCode%>">
+				</form>
+				
+				<div>
+					<button type="submit" id="btn-write" onclick="writeReview();">등록</button>
+				</div>
+				
 				<div id="pageBar" class="text-center">
 					<ul class="pagination">
 						<li><%=pageBar%></li>
@@ -68,6 +76,11 @@
 	  		$('#mypageList li').removeClass("active");
 			$('#mypageList li').eq(1).addClass("active");
 	  	 });
+		
+		function writeReview(){
+			location.href="<%=request.getContextPath()%>/review/reviewWrite";
+		}
+		
 	</script>
 
 <%@ include file="/views/common/footer.jsp"%>
