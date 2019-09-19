@@ -136,7 +136,7 @@
 	</div>
 </div>
 
-<script>
+<script>	
 	function showPhoto(val,page){
 		$(".room_img").attr("src",val);
 		$(".imgBox .img_page").text(page);
