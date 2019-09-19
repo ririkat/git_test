@@ -258,7 +258,7 @@
 							<tr>
 								<td height=40>&nbsp; 
 								<input type="checkbox" name="agree" id="chk2">
-								&nbsp; <label for=agree11>동의합니다.</label>
+								&nbsp; <label for="chk2">동의합니다.</label>
 									&nbsp; 
 <!-- 								<input type="checkbox" value=0 name="agree" id="agree10"> -->
 <!-- 								&nbsp; -->

@@ -58,7 +58,7 @@ public class signUpOwnerServlet extends HttpServlet {
 		
 		String msg = "";
 		String loc = "/";
-		msg = result>0? "회원가입 축하드립니다 (승인 대기중 입니다).":"회원가입이 실패하였습니다.";
+		msg = result>0? "회원가입 축하드립니다. (승인후 펜션등록이 가능합니다.)":"회원가입이 실패하였습니다.";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

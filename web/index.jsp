@@ -58,6 +58,20 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
+	
+	
+	
+	
+	<!-- 방정보 테스트 -->
+	
+	<br><br><br><br><br><br><br>
+	<input type="submit" class="btn btn-lg btn-warning btn-block" value="방"
+		onclick="location.href='<%=request.getContextPath()%>/roompage'"/>
+	<br><br><br><br><br><br><br><br>
+	
+	
+	
+	
 	<br>
 	<br>
 	<div class="container-fluid text-center info">
