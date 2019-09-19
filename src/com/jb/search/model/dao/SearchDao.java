@@ -138,14 +138,19 @@ public class SearchDao {
 	}
 	
 	public List<Room> loadRoom(Connection conn, String pCode,String[] rFac){
-		PreparedStatement pstmt=null;
+		Statement stmt=null;
 		ResultSet rs=null;
 		List<Room> list = new ArrayList<Room>();
-		String sql=prop.getProperty("loadRoom");
+		String sql="select * from room r join room_fac rf on r.r_no=rf.r_no "
+		+"where r.p_code="+pCode;
+		for(int i=0; i<rFac.length; i++) {
+			if(!rFac[i].equals("not")) {
+				sql+=" and "+rFac[i]+"='Y'";
+			}
+		}
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pCode);
-			rs=pstmt.executeQuery();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				Room r=new Room();
 				r.setrNo(rs.getString("r_no"));
@@ -172,18 +177,20 @@ public class SearchDao {
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}return list;
 	}
 
-	public List<Pension> findPension(Connection conn, String keyword,String area,String[] pFac, String[] rFac) {
+	public List<Pension> findPension(Connection conn, String keyword,String area,String[] pFac, String[] rFac,int nop) {
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<Pension> list = new ArrayList<Pension>();
 		String sql="select * from pension p join pen_fac pf on p.p_code=pf.p_code "
 		+"where p_name like '%"+keyword+"%' and replace(p_addr,' ','') like '%"+area+"%' and enrollyn='Y' ";
 		for(int i=0; i<pFac.length; i++) {
-			sql+="and "+pFac[i]+"='Y' ";
+			if(!pFac[i].equals("not")) {
+				sql+="and "+pFac[i]+"='Y' ";
+			}
 		}
 		System.out.println(sql);
 		try {
@@ -191,26 +198,37 @@ public class SearchDao {
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				Pension p=new Pension();
-				p.setpCode(rs.getString("p_code"));
-				p.setpName(rs.getString("p_name"));
-				p.setpAddr(rs.getString("p_addr"));
-				p.setpTel(rs.getString("p_tel"));
-				p.setoId(rs.getString("o_id"));
-				p.setEnrollYn(rs.getString("enrollyn"));
-				p.setpBlcount(rs.getInt("p_blcount"));
-				p.setpEnrollDate(rs.getDate("p_enrolldate"));
-				
-				p.setPenFac(new PensionFacilities(rs.getString("p_code"),rs.getString("store"),rs.getString("wifi")
-						,rs.getString("pet"),rs.getString("pool"),rs.getString("s_Pool")
-						,rs.getString("slide"),rs.getString("open_Bath"),rs.getString("grill")
-						,rs.getString("smoked"),rs.getString("cafe"),rs.getString("sing")
-						,rs.getString("foot"),rs.getString("hand"),rs.getString("car")));
-				
-				
-				p.setPenFile(new SearchDao().loadPenFile(conn,rs.getString("p_code")));
-				p.setRoomList(new SearchDao().loadRoom(conn, rs.getString("p_code"),rFac));
-				
-				list.add(p);
+				int result=0;
+				List<Room> rl = new SearchDao().loadRoom(conn, rs.getString("p_code"),rFac);
+				System.out.println("nop : "+nop);
+				System.out.println("rl : "+new SearchDao().loadRoom(conn, rs.getString("p_code"),rFac));
+				for(int i=0; i<rl.size(); i++) {
+					if(rl.get(i).getrMaxNop()>=nop) {
+						result++;
+					}
+				}
+				System.out.println(result);
+				if(result>0) {
+						p.setpCode(rs.getString("p_code"));
+						p.setpName(rs.getString("p_name"));
+						p.setpAddr(rs.getString("p_addr"));
+						p.setpTel(rs.getString("p_tel"));
+						p.setoId(rs.getString("o_id"));
+						p.setEnrollYn(rs.getString("enrollyn"));
+						p.setpBlcount(rs.getInt("p_blcount"));
+						p.setpEnrollDate(rs.getDate("p_enrolldate"));
+						
+						p.setPenFac(new PensionFacilities(rs.getString("p_code"),rs.getString("store"),rs.getString("wifi")
+								,rs.getString("pet"),rs.getString("pool"),rs.getString("s_Pool")
+								,rs.getString("slide"),rs.getString("open_Bath"),rs.getString("grill")
+								,rs.getString("smoked"),rs.getString("cafe"),rs.getString("sing")
+								,rs.getString("foot"),rs.getString("hand"),rs.getString("car")));
+						
+						
+						p.setPenFile(new SearchDao().loadPenFile(conn,rs.getString("p_code")));
+						p.setRoomList(rl);
+						list.add(p);
+				}
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

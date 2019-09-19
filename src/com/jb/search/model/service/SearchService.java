@@ -23,10 +23,9 @@ public class SearchService {
 		return list;
 	}
 
-	public List<Pension> findPension(String keyword,String area,String[] pFac,String[] rFac) {
+	public List<Pension> findPension(String keyword,String area,String[] pFac,String[] rFac, int nop) {
 		Connection conn=getConnection();
-		List<Pension> list=dao.findPension(conn,keyword,area,pFac,rFac);
-		
+		List<Pension> list=dao.findPension(conn,keyword,area,pFac,rFac,nop);
 		close(conn);
 		return list;
 	}

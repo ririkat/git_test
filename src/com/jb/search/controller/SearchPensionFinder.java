@@ -35,8 +35,15 @@ public class SearchPensionFinder extends HttpServlet {
 		String area=request.getParameter("area");
 		String[] pFac=request.getParameterValues("pen_fac");
 		String[] rFac=request.getParameterValues("room_fac");
+		if(pFac==null) {
+			pFac=new String[]{"not"};
+		}
+		if(rFac==null) {
+			rFac=new String[]{"not"};			
+		}
+		int nop=Integer.parseInt(request.getParameter("nop"));
 		
-		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac);
+		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac,nop);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/search/searchAll.jsp").forward(request, response);
 	}
