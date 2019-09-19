@@ -86,15 +86,8 @@
 	<div>
 		<table class="table_room2">
 			<colgroup>
-				<col width="150">
-				<col width="100">
-				<col width="100">
-				<col width="100">
-				<col width="100">
-				<col width="100">
-				<col width="100">
-				<col width="100">
-				<col width="*">
+				<col>
+				<col width="500">
 			</colgroup>
 
 			<tbody>
@@ -102,26 +95,110 @@
 					int cnt = 0;
 					for(Room r : roomList) { %>
 					<tr>
-						<th class="bl2 br2 bb0px pdb0px">
+						<th>
 							<span class="imgBox">
 								<%List<RoomFile> curRfList = new ArrayList();
-								  for(RoomFile rf : rFileList) {
-									if(r.getrNo().equals(rf.getrNo())){
-										curRfList.add(rf);
-									}
-								  }%>
+									for(RoomFile rf : rFileList) {
+										if(r.getrNo().equals(rf.getrNo())){
+											curRfList.add(rf);
+										}
+								  	}
+								%>
 								<a name="move<%=r.getrNo()%>"></a>
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
 								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
 							</span>
 						</th>
 						<th rowspan='2'>
-							<div>객실정보 띄워줄 부분이얌</div>
+							<div>
+								<h2><%=r.getrName() %></h2>
+								<br>
+								<h4>객실번호 : <%=r.getrNo() %></h4>
+								<h4>기준인원 : <%=r.getrNop() %>명</h4>
+								<h4>최대인원 : <%=r.getrMaxNop() %>명</h4>
+								<h4>가격 : <%=r.getrPrice() %>원</h4>
+								<h4>추가인원당 추가요금 : <%=r.getrAddPrice() %>원</h4>
+								<h4>객실 평수 : <%=r.getrSize() %>평</h4>
+								<h4>객실 구조 : <%=r.getrStruc() %></h4>
+								<h4>객실 설명 : <%=r.getrInfo() %></h4>
+								<h4>부대시설 : 
+									<%  String rFac = "";
+										for(RoomFacilities rfc : rFacList) {
+										if(r.getrNo().equals(rfc.getrNo())){
+											if(rfc.getBed().equals("Y")) {
+												rFac += " 침대 /";
+											}
+											if(rfc.getDressTable().equals("Y")) {
+												rFac += " 화장대 /";
+											}
+											if(rfc.getTable().equals("Y")) {
+												rFac += " 테이블 /";
+											}
+											if(rfc.getSofa().equals("Y")) {
+												rFac += " 소파 /";
+											}
+											if(rfc.getDressCase().equals("Y")) {
+												rFac += " 옷장 /";
+											}
+											if(rfc.getBath().equals("Y")) {
+												rFac += " 욕조 /";
+											}
+											if(rfc.getSpa().equals("Y")) {
+												rFac += " 스파 /";
+											}
+											if(rfc.getWashKit().equals("Y")) {
+												rFac += " 세면도구 /";
+											}
+											if(rfc.getTv().equals("Y")) {
+												rFac += " TV /";
+											}
+											if(rfc.getBeam().equals("Y")) {
+												rFac += " 빔프로젝터 /";
+											}
+											if(rfc.getAircon().equals("Y")) {
+												rFac += " 에어컨 /";
+											}
+											if(rfc.getFridge().equals("Y")) {
+												rFac += " 냉장고 /";
+											}
+											if(rfc.getCookFac().equals("Y")) {
+												rFac += " 조리시설 /";
+											}
+											if(rfc.getCookUten().equals("Y")) {
+												rFac += " 조리기구 /";
+											}
+											if(rfc.getRice().equals("Y")) {
+												rFac += " 밥솥 /";
+											}
+											if(rfc.getMicrowave().equals("Y")) {
+												rFac += " 전자레인지 /";
+											}
+											if(rfc.getrSmoked().equals("Y")) {
+												rFac += " 개별바베큐 /";
+											}
+											if(rfc.getChild().equals("Y")) {
+												rFac += " 유아시설 /";
+											}
+											if(rfc.getoView().equals("Y")) {
+												rFac += " 오션뷰 /";
+											}
+											if(rfc.getiPool().equals("Y")) {
+												rFac += " 인피니티풀 /";
+											}
+											rFac += " ...";
+											break;
+										}
+									}%>
+									<%=rFac %>
+								</h4>
+								<a class="btn btn-primary" href="#">수정 <span class="glyphicon glyphicon-chevron-right"></span></a>
+								<a class="btn btn-primary" onclick="return delcheck();" href="<%=request.getContextPath()%>/owner/oneRoomDelete?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>">삭제 <span class="glyphicon glyphicon-chevron-right"></span></a>
+							</div>
 						</th>
 					</tr>
 	
 					<tr>
-						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
+						<th>
 							<div id="thum_img">
 								<%for(int i=0; i<curRfList.size(); i++) { %>
 									<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"
@@ -143,6 +220,10 @@
 	function showPhoto(val,page,cnt){
 		$(".room_img"+cnt).attr("src",val);
 		$(".imgBox .img_page").text(page);
+	}
+	
+	function delcheck(){
+		return confirm("정말로 삭제하시겠습니까?");
 	}
 	
 	//펜션 수정

@@ -191,5 +191,20 @@ public class RoomDao {
 			close(stmt);
 		} return result;
 	}
+	
+	//객실 한개 삭제
+	public int deleteOneRoom(Connection conn, String rNo) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "delete from room where r_no='"+rNo+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		} return result;
+	}
 
 }

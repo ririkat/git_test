@@ -67,5 +67,16 @@ public class RoomService {
 		return result;
 	}
 	
+	//객실 한개 삭제
+	public int deleteOneRoom(String rNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteOneRoom(conn,rNo);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} close(conn);
+		return result;
+	}
 
 }
