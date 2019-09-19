@@ -34,16 +34,14 @@ public class ClientInfoLoadServlet extends HttpServlet {
 		//1.여기가 뭘하는 서블릿인지 파악 -> 수정할 회원 1명의 정보를 가져와서 뷰(updateClientInfo.jsp) 화면으로 넘겨줘야함.
 				//2.서블릿에서 서비스->dao로 뭘 넘기고? 뭘 가져와야 하는지 파악 
 		
-		HttpSession session = request.getSession();
-		
-		    session.getAttribute("loginClient");
 				String cId=request.getParameter("cId");
+				
+				ClientService service = new ClientService();
+				Client c = service.selectClient(cId);
+				request.setAttribute("client", c);
 
 				
-				
-				Client c= new ClientService().selectClient(cId);
-				request.setAttribute("client", c);
-				
+			
 				request.getRequestDispatcher("/views/client/updateClientInfo.jsp")
 				.forward(request,response);		
 			

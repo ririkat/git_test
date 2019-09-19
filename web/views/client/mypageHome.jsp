@@ -7,6 +7,7 @@
 
 <%
 List<Reservation> list = (List) request.getAttribute("list");
+Reservation res = (Reservation)request.getAttribute("reservation");
 
 %>
 
@@ -110,7 +111,7 @@ th, td {
 				if (list == null || list.size() <= 0) {
 			%>
 			
-			<h1>찜한 펜션이 없습니다.</h1>
+			<h1>예약한 펜션이 없습니다.</h1>
 			
 			<%
 				} else {
@@ -191,7 +192,7 @@ th, td {
 			<%
 				}
 			%>
-				
+			
 				
 				
 				
