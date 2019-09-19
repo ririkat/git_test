@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,7 +19,6 @@ import com.jb.pension.model.vo.PensionFacilities;
 import com.jb.pension.model.vo.PensionFile;
 import com.jb.pension.model.vo.Room;
 import com.jb.pension.model.vo.RoomFacilities;
-import com.jb.search.model.service.SearchService;
 
 public class SearchDao {
 	
@@ -72,7 +72,7 @@ public class SearchDao {
 		}return list;
 	}
 	
-	private List<PensionFile> loadPenFile(Connection conn, String pCode) {
+	public List<PensionFile> loadPenFile(Connection conn, String pCode) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<PensionFile> list = new ArrayList<PensionFile>();
@@ -136,17 +136,59 @@ public class SearchDao {
 			close(pstmt);
 		}return list;
 	}
-
-	public List<Pension> findPension(Connection conn, String keyword,String area) {
+	
+	public List<Room> loadRoom(Connection conn, String pCode,String[] rFac){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Pension> list = new ArrayList<Pension>();
-		String sql=prop.getProperty("findPension");
+		List<Room> list = new ArrayList<Room>();
+		String sql=prop.getProperty("loadRoom");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, keyword);
-			pstmt.setString(2, area);
+			pstmt.setString(1, pCode);
 			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Room r=new Room();
+				r.setrNo(rs.getString("r_no"));
+				r.setrName(rs.getString("r_name"));
+				r.setrPrice(rs.getInt("r_price"));
+				r.setrNop(rs.getInt("r_nop"));
+				r.setrMaxNop(rs.getInt("r_maxnop"));
+				r.setrSize(rs.getString("r_size"));
+				r.setpCode(rs.getString("p_code"));
+				r.setrStruc(rs.getString("r_struc"));
+				r.setrInfo(rs.getString("r_info"));
+				r.setrAddPrice(rs.getInt("r_addprice"));
+				
+
+				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("table")
+						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
+						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
+						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
+						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
+				
+				list.add(r);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+	public List<Pension> findPension(Connection conn, String keyword,String area,String[] pFac, String[] rFac) {
+		Statement stmt=null;
+		ResultSet rs=null;
+		List<Pension> list = new ArrayList<Pension>();
+		String sql="select * from pension p join pen_fac pf on p.p_code=pf.p_code "
+		+"where p_name like '%"+keyword+"%' and replace(p_addr,' ','') like '%"+area+"%' and enrollyn='Y' ";
+		for(int i=0; i<pFac.length; i++) {
+			sql+="and "+pFac[i]+"='Y' ";
+		}
+		System.out.println(sql);
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				Pension p=new Pension();
 				p.setpCode(rs.getString("p_code"));
@@ -158,13 +200,23 @@ public class SearchDao {
 				p.setpBlcount(rs.getInt("p_blcount"));
 				p.setpEnrollDate(rs.getDate("p_enrolldate"));
 				
+				p.setPenFac(new PensionFacilities(rs.getString("p_code"),rs.getString("store"),rs.getString("wifi")
+						,rs.getString("pet"),rs.getString("pool"),rs.getString("s_Pool")
+						,rs.getString("slide"),rs.getString("open_Bath"),rs.getString("grill")
+						,rs.getString("smoked"),rs.getString("cafe"),rs.getString("sing")
+						,rs.getString("foot"),rs.getString("hand"),rs.getString("car")));
+				
+				
+				p.setPenFile(new SearchDao().loadPenFile(conn,rs.getString("p_code")));
+				p.setRoomList(new SearchDao().loadRoom(conn, rs.getString("p_code"),rFac));
+				
 				list.add(p);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
 		return list;
 	}
