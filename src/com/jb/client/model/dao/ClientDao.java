@@ -70,17 +70,15 @@ public class ClientDao {
 		String sql = prop.getProperty("updateClient");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			result = pstmt.executeUpdate();
-			//setString 작성 필요 
 			
 			pstmt.setString(1, c.getcName());
-//			pstmt.setDate(2, new java.sql.Date(java.util.Date.getTime(c.getcBirth())));
+            pstmt.setDate(2, c.getcBirth());
 			pstmt.setString(3, c.getcGender());
 			pstmt.setString(4, c.getcEmail());
 			pstmt.setString(5, c.getcPhone());
 			pstmt.setString(6, c.getcAddr());
 			pstmt.setString(7, c.getcId());
-			
+			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -393,13 +391,13 @@ public class ClientDao {
 		return result;
 	}
   
-	public int updatePassword(Connection conn, String cId, String cPwNew) {
+	public int updatePassword(Connection conn, String cId, String cPw) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("updatePassWord");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, cPwNew);
+			pstmt.setString(1, cPw);
 			pstmt.setString(2, cId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {

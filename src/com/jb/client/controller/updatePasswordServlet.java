@@ -31,14 +31,10 @@ public class updatePasswordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-			HttpSession session = request.getSession();
-			
-			    session.getAttribute("loginClient");
 					String cId=request.getParameter("cId");
 
-					
-					
 					Client c= new ClientService().selectClient(cId);
+					
 					request.setAttribute("client", c);
 					request.setAttribute("cId", cId);
 					

@@ -1,7 +1,9 @@
 package com.jb.pension.model.service;
 
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
 import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -12,6 +14,14 @@ import com.jb.pension.model.vo.Room;
 public class RoomService {
 	
 	private RoomDao dao = new RoomDao();
+	
+	//객실 한개 정보 받아오기
+	public Room selectRoom(String rNo) {
+		Connection conn = getConnection();
+		Room room = dao.selectRoom(conn,rNo);
+		close(conn);
+		return room;
+	}
 	
 	//선택된 펜션의 전체 객실 수
 	public int selectCountRoom(String pCode) {
@@ -36,5 +46,27 @@ public class RoomService {
 		return list;
 	}
 	
+	//객실추가
+	public int addRoom(String pCode, String rName, int rNop, int rMaxNop, int rPrice, int rAddPrice,
+			String rSize, String rStruc, String rInfo) {
+		Connection conn = getConnection();
+		int result = dao.addRoom(conn,pCode,rName,rNop,rMaxNop,rPrice,rAddPrice,rSize,rStruc,rInfo);
+		if(result>0) {
+			commit(conn);
+			result = dao.getCurrval(conn);
+			if(result>0) {
+				commit(conn);
+			}
+			else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 
 }
+
