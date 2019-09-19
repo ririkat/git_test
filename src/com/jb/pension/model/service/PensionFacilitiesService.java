@@ -35,4 +35,17 @@ public class PensionFacilitiesService {
 		return pFac;
 	}
 	
+	//펜션 부대시설 수정
+	public int modifyFacilities(String pCode, String[] facCheck) {
+		Connection conn = getConnection();
+		int result = dao.modifyFacilities(conn,pCode,facCheck);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 }

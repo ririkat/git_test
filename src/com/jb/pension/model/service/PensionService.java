@@ -204,4 +204,15 @@ public class PensionService {
 		close(conn);
 		return pName;
 	}
+	
+	//펜션 수정
+	public int modifyPension(String pCode, String tel) {
+		Connection conn = getConnection();
+		int result = dao.modifyPension(conn,pCode,tel);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} return result;
+	}
 }

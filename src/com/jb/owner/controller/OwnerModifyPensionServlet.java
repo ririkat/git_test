@@ -1,26 +1,23 @@
 package com.jb.owner.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.pension.model.service.PensionService;
-
 /**
- * Servlet implementation class OwnerAddRoomServlet
+ * Servlet implementation class OwnerModifyPensionServlet
  */
-@WebServlet("/owner/addRoom")
-public class OwnerAddRoomServlet extends HttpServlet {
+@WebServlet("/owner/modifyPension")
+public class OwnerModifyPensionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerAddRoomServlet() {
+    public OwnerModifyPensionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +26,17 @@ public class OwnerAddRoomServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//페이지 전환
-		String imgSrc = request.getParameter("imgSrc");
+		//화면전환용 서블릿
 		String pCode = request.getParameter("pCode");
-		String pName = new PensionService().getPensionName(pCode);
+		String oId = request.getParameter("oId");
+		String pName = request.getParameter("pName");
+		String pAddr = request.getParameter("pAddr");
 		
-		request.setAttribute("imgSrc", imgSrc);
 		request.setAttribute("pCode", pCode);
+		request.setAttribute("oId", oId);
 		request.setAttribute("pName", pName);
-		request.getRequestDispatcher("/views/owner/roomAdd.jsp").forward(request, response);
+		request.setAttribute("pAddr", pAddr);
+		request.getRequestDispatcher("/views/owner/modifyPension.jsp").forward(request, response);
 	}
 
 	/**

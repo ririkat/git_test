@@ -454,7 +454,7 @@ public class PensionDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select seq_pension.currval from dual";
+		String sql = "select seq_pension_no.currval from dual";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -516,5 +516,21 @@ public class PensionDao {
 			close(rs);
 			close(stmt);
 		} return pName;
+	}
+	
+	//펜션 수정
+	public int modifyPension(Connection conn, String pCode, String tel) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "update pension set p_tel='"+tel+"' where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
 	}
 }

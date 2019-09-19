@@ -28,15 +28,10 @@ public class RoomFacilities {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
-	
-
-
-	public RoomFacilities(String rNo, String bed, String dressTable, String table, String sofa, String dressCase,
-			String bath, String spa, String washKit, String tv, String beam, String aircon, String fridge,
-			String cookFac, String cookUten, String rice, String microwave, String rSmoked, String child, String oView,
-			String iPool) {
+	public RoomFacilities(String rNo, String bed, String dressTable, String table, String sofa,
+			String dressCase, String bath, String spa, String washKit, String tv, String beam, String aircon,
+			String fridge, String cookFac, String cookUten, String rice, String microwave, String rSmoked, String child,
+			String oView, String iPool) {
 		super();
 		this.rNo = rNo;
 		this.bed = bed;
@@ -78,11 +73,6 @@ public class RoomFacilities {
 	public void setrNo(String rNo) {
 		this.rNo = rNo;
 	}
-
-
-
-
-
 
 	public String getBed() {
 		return bed;
@@ -446,11 +436,11 @@ public class RoomFacilities {
 
 	@Override
 	public String toString() {
-		return "RoomFacilities [rNo=" + rNo + ", bed=" + bed + ", dressTable=" + dressTable + ", table=" + table
-				+ ", sofa=" + sofa + ", dressCase=" + dressCase + ", bath=" + bath + ", spa=" + spa + ", washKit="
-				+ washKit + ", tv=" + tv + ", beam=" + beam + ", aircon=" + aircon + ", fridge=" + fridge + ", cookFac="
-				+ cookFac + ", cookUten=" + cookUten + ", rice=" + rice + ", microwave=" + microwave + ", rSmoked="
-				+ rSmoked + ", child=" + child + ", oView=" + oView + ", iPool=" + iPool + "]";
+		return "RoomFacilities [rNo=" + rNo + ", bed=" + bed + ", dressTable=" + dressTable
+				+ ", table=" + table + ", sofa=" + sofa + ", dressCase=" + dressCase + ", bath=" + bath + ", spa=" + spa
+				+ ", washKit=" + washKit + ", tv=" + tv + ", beam=" + beam + ", aircon=" + aircon + ", fridge=" + fridge
+				+ ", cookFac=" + cookFac + ", cookUten=" + cookUten + ", rice=" + rice + ", microwave=" + microwave
+				+ ", rSmoked=" + rSmoked + ", child=" + child + ", oView=" + oView + ", iPool=" + iPool + "]";
 	}
 
 

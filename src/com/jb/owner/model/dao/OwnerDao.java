@@ -246,7 +246,7 @@ public class OwnerDao {
 				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
 				o.setAuthority(rs.getInt("authority"));
-				System.out.println("selectId DAO owner객체: "+o);
+
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

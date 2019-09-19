@@ -8,12 +8,12 @@ import static common.template.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
-import com.jb.pension.model.dao.PensionFileDao;
-import com.jb.pension.model.vo.PensionFile;
+import com.jb.pension.model.dao.RoomFileDao;
+import com.jb.pension.model.vo.RoomFile;
 
-public class PensionFileService {
+public class RoomFileService {
 	
-	private PensionFileDao dao = new PensionFileDao();
+	private RoomFileDao dao = new RoomFileDao();
 	
 	public int addImages(int currval, String oriFile, String reFile) {
 		Connection conn = getConnection();
@@ -27,23 +27,11 @@ public class PensionFileService {
 		return result;
 	}
 	
-	public List<PensionFile> selectImages(){
+	public List<RoomFile> selectRoomFile() {
 		Connection conn = getConnection();
-		List<PensionFile> list = dao.selectImages(conn);
+		List<RoomFile> list = dao.selectRoomFile(conn);
 		close(conn);
 		return list;
-	}
-	
-	public int modifyImages(String pCode, String oriFile, String reFile) {
-		Connection conn = getConnection();
-		int result = dao.modifyImages(conn,pCode,oriFile,reFile);
-		if(result>0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
 	}
 
 }
