@@ -78,6 +78,7 @@ public class RoomDao {
 		}
 		return result;
 	}
+  
 	
 	public List<Room> selectListPage(Connection conn, int cPage, int numPerPage, String pCode){
 		PreparedStatement pstmt = null;
@@ -112,6 +113,7 @@ public class RoomDao {
 		}
 		return list;
 	}
+  
 	
 	//업주->승인된펜션->디테일->선택된펜션의 객실들 불러오기
 	public List<Room> selectRoomList(Connection conn, String pCode){
@@ -192,4 +194,7 @@ public class RoomDao {
 		} return result;
 	}
 
+
 }
+
+

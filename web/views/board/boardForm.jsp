@@ -34,8 +34,7 @@
 								</tr>
 								<tr>
 									<th>첨부파일 :</th>
-									<td><input type="file" placeholder="파일을 선택하세요. "
-										name="up_file"></td>
+									<td><input type="file" placeholder="파일을 선택하세요. " name="up_file"></td>
 								</tr>
 								<tr>
 									<td colspan="2"><input type="submit" value="등록"

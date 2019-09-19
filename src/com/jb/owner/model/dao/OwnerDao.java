@@ -71,6 +71,9 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
+				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
 				list.add(o);
 			}
 		}catch(SQLException e) {
@@ -129,7 +132,9 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
 				
 				list.add(o);
 			}
@@ -158,6 +163,7 @@ public class OwnerDao {
 			if(rs.next()) {
 				o= new Owner();
 				o.setoId(rs.getString("o_id"));
+				o.setoPw(rs.getString("o_pw"));
 				o.setoName(rs.getString("o_name"));
 				o.setoBirth(rs.getDate("o_birth"));
 				o.setoGender(rs.getString("o_gender"));
@@ -165,7 +171,10 @@ public class OwnerDao {
 				o.setoPhone(rs.getString("o_phone"));
 				o.setoAddr(rs.getString("o_addr"));
 				o.setoEd(rs.getDate("o_ed"));
+				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
+				o.setAuthority(rs.getInt("authority"));
+				System.out.println("dao owner객체: "+o);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -237,6 +246,7 @@ public class OwnerDao {
 				o.setoEaYN(rs.getString("o_eayn"));
 				o.setoBLCount(rs.getInt("o_blcount"));
 				o.setAuthority(rs.getInt("authority"));
+
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -279,7 +289,6 @@ public class OwnerDao {
 		String sql = prop.getProperty("selectCheckId");
 		try {
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (!rs.next()) {
@@ -352,6 +361,46 @@ public class OwnerDao {
 			pstmt.setString(1, pw);
 			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateOwner(Connection conn, Owner o) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String sql = prop.getProperty("updateOwner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, o.getoName());
+			pstmt.setDate(2, o.getoBirth());
+			pstmt.setString(3, o.getoGender());
+			pstmt.setString(4, o.getoEmail());
+			pstmt.setString(5, o.getoPhone());
+			pstmt.setString(6, o.getoAddr());
+			pstmt.setString(7, o.getoId());
+			System.out.println("오아이디"+o.getoId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateOwnerPassword(Connection conn, String oId,String oPw) {
+		PreparedStatement pstmt=null;
+		int result =0;
+		String sql = prop.getProperty("updateOwnerPassword");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, oPw);
+			pstmt.setString(2, oId);
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
