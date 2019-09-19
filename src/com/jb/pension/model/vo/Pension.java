@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class Pension {
-	
+	//펜션테이블 정보
 	private String pCode;
 	private String pName;
 	private String pAddr;
@@ -13,9 +13,11 @@ public class Pension {
 	private String enrollYn;
 	private int pBlcount;
 	private Date pEnrollDate;
-	
+	//1:1 펜션 구비시설 객체 PensionFacilities('Y','N','Y,......)[]
 	private PensionFacilities penFac;
+	//1:n 펜션파일 리스트(여러개를 리스트로)[[],[],[]...]
 	private List<PensionFile> penFile;
+	//1:n 방 리스트 [[],[],[],...]
 	private List<Room> roomList;
 	
 	public Pension() {

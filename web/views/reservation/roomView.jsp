@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="com.jb.pension.model.vo.Room" %>
+<%@ page import="com.jb.pension.model.vo.Pension" %>
 
 <%
-	Room r = (Room) request.getAttribute("room"); 
+	Pension p = (Pension) request.getAttribute("pension"); 
 %>
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -78,37 +78,20 @@
     </div>
     
     
-    <form class="reservation-form" method="post" action="<%=request.getContextPath() %>/reservation">
+    <form class="reservation-form" method="post" action="<%=request.getContextPath()%>/reservation">
     <div class="col-sm-4">
     	<div class="well">
-			<!-- 방번호 -->
-    		<input type="hidden" name="rno" id="r_no" value="<%=r.getrNo()%>">
-    		방이름<p name="rname" id="r_name"><%=r.getrName()%></p>
-    		
-    		
-    		가격<p><%=r.getrPrice()%></p>
-    		<input type="hidden" name="rprice" id="r_price" value="<%=r.getrPrice()%>">
-    		
-    		인원수<p><%=r.getrNop()%></p>
-  			<input type="hidden" name="rnop" id="r_nop" value="<%=r.getrNop()%>">
-  			
-  			
-  			최대인원<p name="rmaxnop" id="r_maxnop"><%=r.getrMaxNop()%></p>
-  			평수<p name="rsize" id="r_size"><%=r.getrSize()%></p>
-			<!--펜션코드 -->
-  			<input type="hidden" name="pcode" id="p_code" value="<%=r.getpCode()%>">
-    
+    	<
+		<h1 style="text-align: center"><%=p.getpName()%></h1>
+		<p><%=p.getpAddr()%></p>
+		<p><%=p.getpTel()%></p>
+		
       </div>
       <button class="btn btn-md btn-warning btn-block">
         찜</button>
     <input type="submit" class="btn btn-sm btn-warning btn-block" value="예약" />
   			
-      </div>
-     
-    <!-- <button class="btn btn-md btn-warning btn-block" type="submit">
-        날짜선택</button> -->
-   	
-   
+      </div>  
     </form>
     </div>
   </div>
@@ -144,10 +127,7 @@
   
   <div class="container text-center">
     <h3>기본 정보</h3><br><br>
-    <p><strong>객실구조</strong></p>
-    <p name="rstruc" id="r_struc"><%=r.getrStruc()%></p>
-      <p><strong>객실설명</strong></p>
-    <p name="rinfo" id="r_info"><%=r.getrInfo()%></p>
+   
     </div>
     <hr>
     

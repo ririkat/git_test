@@ -61,14 +61,5 @@ public class RoomService {
    
    
    
- //테스트 룸상세페이지불러오기
-   public Room selectRoomTest(String rNo) {
-   	
-   	Connection conn = getConnection();
-   	Room r = dao.selectRoomTest(conn,rNo);
-   	close(conn);
-   	return r;
-   }
-
 }
 
