@@ -58,7 +58,7 @@
 					for(Room r : roomList) { %>
 				<tr>
 		    		<td style="cursor:pointer">
-		            	<a href="#">
+		            	<a href="#move<%=r.getrNo()%>">
 		                	<%=r.getrNo() %>
 		            	</a>
 		            </td>
@@ -110,6 +110,7 @@
 										curRfList.add(rf);
 									}
 								  }%>
+								<a name="move<%=r.getrNo()%>"></a>
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
 								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
 							</span>
