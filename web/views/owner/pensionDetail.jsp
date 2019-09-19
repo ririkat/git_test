@@ -111,7 +111,6 @@
 									}
 								  }%>
 								<a name="move<%=r.getrNo()%>"></a>
-								<!--  -->
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
 								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
 							</span>
