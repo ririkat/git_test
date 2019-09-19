@@ -26,10 +26,13 @@ public class ReviewWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pCode = request.getParameter("pCode");
 		
 		
 		
-		String pCode="p1001";
+		
+		
+		
 		request.setAttribute("pCode", pCode);
 		request.getRequestDispatcher("/views/review/review.jsp").forward(request, response);
 	}

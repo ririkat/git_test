@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.jb.review.model.vo.Review, com.jb.pension.model.vo.Pension,java.util.List"%>
+<%@ page import="com.jb.review.model.vo.ReviewFile" %>
 <%
 	Pension p = (Pension)request.getAttribute("pension");
 	String pCode = (String)request.getAttribute("pCode");
-	List<Review> list = (List) request.getAttribute("list");
+	List<Review> reviewList = (List) request.getAttribute("reviewList");
+	List<ReviewFile> reviewFileList = (List) request.getAttribute("reviewFileList");
+	
 	String pageBar = (String) request.getAttribute("pageBar");
 	int cPage = (int) request.getAttribute("cPage");
 %>
@@ -39,13 +42,12 @@
 					</thead>
 					<tbody>
 						<%
-							if (list != null && !list.isEmpty()) {
-								for (Review r : list) {
-						%>
+							if(reviewList!=null && !reviewList.isEmpty()){
+								for(Review r : reviewList){ %>
 						<tr>
 							<td style="width: 40px;"><%=r.getrNo()%></td>
 							<td style="width: 100px;">
-								<a href="<%=request.getContextPath()%>/owner/reviewView?rNo=<%=r.getrNo() %>">
+								<a href="<%=request.getContextPath()%>/review/reviewView?rNo=<%=r.getrNo()%>&pCode=<%=pCode%>">
 									<%=r.getrTitle()%></a>
 							</td>
 							<td style="width: 450px;"><%=r.getrContent()%></td>
@@ -59,10 +61,11 @@
 				
 				<input type="hidden" name="pCode" id="pCode" value="<%=pCode%>">
 				</form>
-				
+<%-- 				<%if(loginClient!=null&&loginOwner==null){ %> --%>
 				<div>
 					<button type="submit" id="btn-write" onclick="writeReview();">등록</button>
 				</div>
+<%-- 				<%} %> --%>
 				
 				<div id="pageBar" class="text-center">
 					<ul class="pagination">

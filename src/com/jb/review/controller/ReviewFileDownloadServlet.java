@@ -1,7 +1,7 @@
-package com.jb.owner.controller;
+package com.jb.review.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.review.model.service.ReviewFileService;
-import com.jb.review.model.service.ReviewService;
-import com.jb.review.model.vo.Review;
-import com.jb.review.model.vo.ReviewFile;
-
 /**
- * Servlet implementation class OwnerReviewViewServlet
+ * Servlet implementation class OwnerReviewFileDownloadServlet
  */
-@WebServlet("/owner/reviewView")
-public class OwnerReviewViewServlet extends HttpServlet {
+@WebServlet("/owner/reviewFileDown")
+public class ReviewFileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerReviewViewServlet() {
+    public ReviewFileDownloadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +28,15 @@ public class OwnerReviewViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo= Integer.parseInt(request.getParameter("rNo"));
-		Review r = new ReviewService().selectReviewOne(rNo);
-		List<ReviewFile> list = new ReviewFileService().selectImages();
+		//1. 실제파일경로 가져오기
+		String root = getServletContext().getRealPath("/");
+		String saveDir = root+File.separator+"upload"+File.separator+"owner";
 		
-
-		request.setAttribute("list", list);
-		request.setAttribute("review", r);
-		request.getRequestDispatcher("/views/owner/pensionReviewView.jsp").forward(request, response);
+		String ori = request.getParameter("orifileName");
+		String re = request.getParameter("refileName");
+		
+		
+	   
 	}
 
 	/**
