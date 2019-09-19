@@ -141,7 +141,7 @@
 						<input type="text" name="keyword" placeholder="방 or펜션 이름을 입력하세요" />
 						<input type="text" name="area" placeholder="지역입력" />
 
-						​​​​​​​<input type="submit" value="검색" />
+					<input type="submit" value="검색" />
 					</form>
 				</div>
 			</div>
