@@ -7,8 +7,10 @@ public class Room {
 	private String rNo;
 	private String rName;
 	private int rPrice;
+
 	private int rNop;
 	private int rMaxNop;
+	private int rAddNop;
 	private String rSize;
 	private String pCode;
 	private String rStruc;
@@ -18,10 +20,10 @@ public class Room {
 	private RoomFacilities roomFac;
 //	private List<RoomFile> rfList;
 	
+
 	public Room() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 
 	public Room(String rNo, String rName, int rPrice, int rNop, int rMaxNop, String rSize, String pCode, String rStruc,
@@ -49,6 +51,7 @@ public class Room {
 		this.rPrice = rPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
+		this.rAddNop = rAddNop;
 		this.rSize = rSize;
 		this.pCode = pCode;
 		this.rStruc = rStruc;
@@ -56,7 +59,6 @@ public class Room {
 		this.rAddPrice = rAddPrice;
 		this.roomFac = roomFac;
 	}
-
 
 
 	public String getrNo() {
@@ -64,11 +66,9 @@ public class Room {
 	}
 
 
-
 	public void setrNo(String rNo) {
 		this.rNo = rNo;
 	}
-
 
 
 	public String getrName() {
@@ -76,11 +76,9 @@ public class Room {
 	}
 
 
-
 	public void setrName(String rName) {
 		this.rName = rName;
 	}
-
 
 
 	public int getrPrice() {
@@ -88,11 +86,9 @@ public class Room {
 	}
 
 
-
 	public void setrPrice(int rPrice) {
 		this.rPrice = rPrice;
 	}
-
 
 
 	public int getrNop() {
@@ -100,11 +96,9 @@ public class Room {
 	}
 
 
-
 	public void setrNop(int rNop) {
 		this.rNop = rNop;
 	}
-
 
 
 	public int getrMaxNop() {
@@ -112,11 +106,19 @@ public class Room {
 	}
 
 
-
 	public void setrMaxNop(int rMaxNop) {
 		this.rMaxNop = rMaxNop;
 	}
 
+
+	public int getrAddNop() {
+		return rAddNop;
+	}
+
+
+	public void setrAddNop(int rAddNop) {
+		this.rAddNop = rAddNop;
+	}
 
 
 	public String getrSize() {
@@ -124,11 +126,9 @@ public class Room {
 	}
 
 
-
 	public void setrSize(String rSize) {
 		this.rSize = rSize;
 	}
-
 
 
 	public String getpCode() {
@@ -136,11 +136,9 @@ public class Room {
 	}
 
 
-
 	public void setpCode(String pCode) {
 		this.pCode = pCode;
 	}
-
 
 
 	public String getrStruc() {
@@ -148,11 +146,9 @@ public class Room {
 	}
 
 
-
 	public void setrStruc(String rStruc) {
 		this.rStruc = rStruc;
 	}
-
 
 
 	public String getrInfo() {
@@ -160,11 +156,9 @@ public class Room {
 	}
 
 
-
 	public void setrInfo(String rInfo) {
 		this.rInfo = rInfo;
 	}
-
 
 
 	public int getrAddPrice() {
@@ -172,11 +166,9 @@ public class Room {
 	}
 
 
-
 	public void setrAddPrice(int rAddPrice) {
 		this.rAddPrice = rAddPrice;
 	}
-
 
 
 	public RoomFacilities getRoomFac() {
@@ -184,18 +176,16 @@ public class Room {
 	}
 
 
-
 	public void setRoomFac(RoomFacilities roomFac) {
 		this.roomFac = roomFac;
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "Room [rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop + ", rMaxNop="
-				+ rMaxNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc + ", rInfo=" + rInfo
-				+ ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
+				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
+				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
 	
 	

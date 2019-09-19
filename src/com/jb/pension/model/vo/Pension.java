@@ -13,7 +13,7 @@ public class Pension {
 	private String enrollYn;
 	private int pBlcount;
 	private Date pEnrollDate;
-	
+
 	private PensionFacilities penFac;
 	private List<PensionFile> penFile;
 	private List<Room> roomList;
@@ -170,6 +170,4 @@ public class Pension {
 				+ ", enrollYn=" + enrollYn + ", pBlcount=" + pBlcount + ", pEnrollDate=" + pEnrollDate + ", penFac="
 				+ penFac + ", penFile=" + penFile + ", roomList=" + roomList + "]";
 	}
-	
-	
 }
