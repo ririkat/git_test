@@ -2,6 +2,7 @@ package com.jb.pension.model.vo;
 
 public class PensionFile {
 
+	private int pFileNo;
 	private String pCode;
 	private String pOriginalFile;
 	private String pRenameFile;
@@ -15,6 +16,26 @@ public class PensionFile {
 		this.pCode = pCode;
 		this.pOriginalFile = pOriginalFile;
 		this.pRenameFile = pRenameFile;
+	}
+	
+	
+
+	public PensionFile(int pFileNo, String pCode, String pOriginalFile, String pRenameFile) {
+		super();
+		this.pFileNo = pFileNo;
+		this.pCode = pCode;
+		this.pOriginalFile = pOriginalFile;
+		this.pRenameFile = pRenameFile;
+	}
+	
+	
+
+	public int getpFileNo() {
+		return pFileNo;
+	}
+
+	public void setpFileNo(int pFileNo) {
+		this.pFileNo = pFileNo;
 	}
 
 	public String getpCode() {
@@ -43,8 +64,8 @@ public class PensionFile {
 
 	@Override
 	public String toString() {
-		return "PensionFile [pCode=" + pCode + ", pOriginalFile=" + pOriginalFile + ", pRenameFile=" + pRenameFile
-				+ "]";
+		return "PensionFile [pFileNo=" + pFileNo + ", pCode=" + pCode + ", pOriginalFile=" + pOriginalFile
+				+ ", pRenameFile=" + pRenameFile + "]";
 	}
 	
 }
