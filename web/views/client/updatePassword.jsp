@@ -26,17 +26,12 @@
 					<ul class="nav nav-pills nav-stacked">
 						<br>
 
-						<%-- <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
-                        
-                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
-                        <li class="active"><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
+						
                         <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/infoLoad">&nbsp;&nbsp;회원정보수정</a></li>
-                        <li class="active"><a href="<%=request.getContextPath()%>/client/updatePassword">&nbsp;&nbsp;비밀번호변경</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/deleteLoad">회원탈퇴</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
+                        <li  class="active"><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/deleteLoad?cId=<%=loginClient.getcId()%>">회원탈퇴</a></li>
                         
                         
 					</ul>
@@ -61,7 +56,7 @@
 				<br>
 
 				<form name ="updatePwdFrm" id="updatePwdFrm" method="post"
-					action="<%=request.getContextPath()%>/client/updatePasswordEnd">
+					action="<%=request.getContextPath()%>/client/updatePasswordEnd?cId=<%=c.getcId()%>">
 					<table class="updateTable">
 						<colgroup>
 							<col width="160px">
@@ -95,7 +90,7 @@
 
 					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("cId")%>' />
 						
-						<input type="hidden" name="cPw_" id="cPw_" value='<%=loginClient.getcPw()%>' />
+						<input type="hidden" name="cPw_" id="cPw_" value='<%=c.getcPw()%>' />
 
 
 				</form>
@@ -111,58 +106,78 @@
 
 <script>
 
-
-
+$(function(){
+	$('#mypageList li').removeClass("active");
+	$('#mypageList li').eq(3).addClass("active");
+});
 
 
 function password_validate(){
-	
-
-
-  
+  var cPw=$('#cPw').val().trim();
   var cPwNew=$("#cPwNew").val().trim(); 
   var cPwCk=$('#cPwCk').val().trim();
-  var cPw=$('#cPw').val().trim();
- /*   var cPw_=$('#cPw_').val(); */
-   
+
+   console.log('현재비밀번호: '+cPw);
+   console.log('변경할 비밀번호: '+cPwNew);
+   console.log('변경할 비밀번호 확인: '+cPwCk);
 
    if(cPwNew!=cPwCk){
         alert('변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        $('#cPw').val("");
+        $('#cPwNew').val("");
+        $('#cPwCk').val("");
         $('#cPwNew').focus();
         return false; 
         
-      }else if(cPw==""){
+    }
+   if(cPw==""){
     	 
-    	 alert("비밀번호를 입력해주십시오.");
-    	 $("#cPw").focus();
-    	 return false;
-    
-    
-       }else if(cPwNew ==""){
+   	 alert("비밀번호를 입력해주십시오.");
+   	$('#cPw').val("");
+    $('#cPwNew').val("");
+    $('#cPwCk').val("");
+   	 $("#cPw").focus();
+   	 return false;
+   
+   
+   }
+   if(cPwNew ==""){
 				alert("비밀번호를 입력해 주십시오.");
+				$('#cPw').val("");
+		        $('#cPwNew').val("");
+		        $('#cPwCk').val("");
 				$("#cPwNew").focus();
 				 return false;
-		}
-      
-		/* else if((cPwNew.length < 6) && cPwNew && cPwCk){
-				alert("비밀번호는 6자리 이상 입력해 주십시오");
-				$("#cPwNew").focus();
-				return;
-		} */
-		else if(cPwCk ==""){
-				alert("비밀번호 확인을 입력해 주십시오.");
-				$('#cPwCk').focus();
-				 return false;
-	
-		}else if(!cPw=<%=loginClient.getcPw()%>){
-			alert("현재 비밀번호가 틀립니다.");
-			$('#cPw').focus();
+	}
+     
+	/* else if((cPwNew.length < 6) && cPwNew && cPwCk){
+			alert("비밀번호는 6자리 이상 입력해 주십시오");
+			$("#cPwNew").focus();
+			return;
+	} */
+	if(cPwCk ==""){
+			alert("비밀번호 확인을 입력해 주십시오.");
+			$('#cPw').val("");
+	        $('#cPwNew').val("");
+	        $('#cPwCk').val("");
+			$('#cPwCk').focus();
 			 return false;
+
+	}
+	if(cPw!=<%=c.getcPw()%>){
+		alert("현재 비밀번호가 틀립니다.");
+		$('#cPw').val("");
+        $('#cPwNew').val("");
+        $('#cPwCk').val("");
+		$('#cPw').focus();
+		 return false;
 	}
  
  return true;
  
 }
+
+
 	
 	
 	
