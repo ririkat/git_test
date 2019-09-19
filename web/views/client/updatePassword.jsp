@@ -178,7 +178,7 @@ function password_validate(){
 		
 		
     
-     console.log(cPwNew+cPwCk);
+//      console.log(cPwNew+cPwCk);
     
 
 

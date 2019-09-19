@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css"> --%>
 
 <script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
@@ -70,7 +70,7 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
-  width: 250%;
+  width: 100%;
   border-radius: 4px 25px 25px 4px;
 }
 .search-form .form-group span.form-control-feedback {
@@ -117,9 +117,9 @@
 				<div class="pull-right">
 					<form action="" class="search-form">
 		               <div class="form-group has-feedback">
-		           		<label for="search" class="sr-only">Search</label>
-		           		<input type="text" class="form-control" name="search" id="search" placeholder="search">
-		             		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			           		<label for="search" class="sr-only">Search</label>
+			           		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			           		<input type="text" class="form-control" name="search" id="search" placeholder="search">
 		           		</div>
 		           	</form>
 		         </div>
