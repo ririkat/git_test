@@ -51,7 +51,7 @@ public class signUpOwnerServlet extends HttpServlet {
 		String addr3 = request.getParameter("address");
 		String addr4 = request.getParameter("address_etc");
 		
-		String addr = (addr1+" "+addr3+" "+addr4);
+		String addr = ("우)"+addr1+"|"+addr3+"|"+addr4);
 		
 		Owner o = new Owner(id,pw,name,birth,gender,email,phone,addr);
 		OwnerService service = new OwnerService();

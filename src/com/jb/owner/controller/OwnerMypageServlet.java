@@ -7,22 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jb.owner.model.service.OwnerService;
 import com.jb.owner.model.vo.Owner;
 
 /**
- * Servlet implementation class LoginOwnerServlet
+ * Servlet implementation class OwnerMypageServlet
  */
-@WebServlet(name="LoginOwner",urlPatterns="/owner/login")
-public class LoginOwnerServlet extends HttpServlet {
+@WebServlet("/owner/mypage")
+public class OwnerMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginOwnerServlet() {
+    public OwnerMypageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,34 +30,18 @@ public class LoginOwnerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("loginid");
-		String pw = request.getParameter("opass");
+		//보류   선덕이와 header.jsp에서 마이페이지를 눌렀을때 어떤 서블릿으로 갈지
+		
+		//jsp에서 호출할때 쿼리스트링으로 세션의 id만 넘기고
+		//전환 서블릿에서 id를 가지고 dao에 접근해 vo를 가져온뒤 setAttribute
+		
+		String id = request.getParameter("oId");
 		System.out.println(id);
-		System.out.println(pw);
-		
 		OwnerService service = new OwnerService();
-		Owner o = service.selectId(id,pw);
+		Owner o = service.selectOwnerOne(id);
+		request.setAttribute("owner", o);
 		
-		String view = "";
-		if(o!= null) {
-			//세션생성
-			HttpSession session = request.getSession();
-			session.setAttribute("loginOwner", o);
-			session.setMaxInactiveInterval(600);
-			
-			view = "/"; //index.jsp연결
-			response.sendRedirect(request.getContextPath()+view);
-			
-		}else {
-			String msg = "(업주) 아이디나 비밀번호가 일치하지 않습니다.";
-			request.setAttribute("msg", msg);
-			view ="/views/common/msg.jsp";
-			String loc = "/views/client/login.jsp";
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher(view).forward(request, response);
-			
-		}
-		
+		request.getRequestDispatcher("/views/owner/pensionListEnroll.jsp").forward(request, response);
 	}
 
 	/**
