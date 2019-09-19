@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.jb.pension.model.vo.Pension, com.jb.pension.model.vo.Room" %>
+<%@ page import="java.util.List, java.util.ArrayList, com.jb.pension.model.vo.Pension, com.jb.pension.model.vo.Room" %>
+<%@ page import="com.jb.pension.model.vo.RoomFacilities, com.jb.pension.model.vo.RoomFile" %>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideOwner.jsp"%>
 <%
-	Pension pInfo = (Pension)request.getAttribute("pInfo");
 	String imgSrc = (String)request.getAttribute("imgSrc");
+	Pension pInfo = (Pension)request.getAttribute("pInfo");
 	List<Room> roomList = (List)request.getAttribute("roomList");
+	List<RoomFacilities> rFacList = (List)request.getAttribute("rFacList");
+	List<RoomFile> rFileList = (List)request.getAttribute("rFileList");
 	String pFac = (String)request.getAttribute("pFac");
 %>
 
@@ -96,58 +99,42 @@
 
 			<tbody>
 				<!-- 객실 부대시설, 객실 파일 가져오기 필요! for문 돌리기 -->
-				<tr>
-					<th class="bl2 br2 bb0px pdb0px">
-						<p class="imgBox">
-							<img
-								src="https://www.pensionzava.com/_psjava/_data/ykpension/room/G_1563845206_15643899645.jpg"
-								class="room_img">
-						</p>
-					</th>
-				</tr>
-
-				<tr>
-					<th class="bl2 br2 bb2 pdt5px f0 lsm1">
-						<div id="thum_img">
-							<img src="/_psjava/_image/img/popup/btn_arrow_left.png"
-								style="opacity: 0;">
-							<div class="arrow_gap_left">&nbsp;</div>
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899630.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,1)">
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899631.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,2)">
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899632.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,3)"> 
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899643.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,4)"> 
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899644.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,5)"> 
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899645.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,6)"> 
-							<img
-								src="/_psjava/_data/ykpension/room/G_1563845206_15643899646.jpg"
-								class="room_sum_off" id="sImg"
-								onmouseover="showPhoto(this.src,7)">
-							<div class="arrow_gap_right">&nbsp;</div>
-							<img src="/_psjava/_image/img/popup/btn_arrow_right.png"
-								style="opacity: 0;">
-						</div>
-						<!-- MOBON Shop Log Tracker v3.0 strat -->
-					</th>
-				</tr>
-				
+				<% if(roomList!=null && !roomList.isEmpty()) {
+					for(Room r : roomList) { %>
+					<tr>
+						<th class="bl2 br2 bb0px pdb0px">
+							<span class="imgBox">
+								<%List<RoomFile> curRfList = new ArrayList();
+								  for(RoomFile rf : rFileList) {
+									if(r.getrNo().equals(rf.getrNo())){
+										curRfList.add(rf);
+									}
+								  }%>
+								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img">
+								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
+							</span>
+						</th>
+						<th rowspan='2'>
+							<div>객실정보 띄워줄 부분이얌</div>
+						</th>
+					</tr>
+	
+					<tr>
+						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
+							<div id="thum_img">
+								<%for(int i=0; i<curRfList.size(); i++) { %>
+									<img
+									src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"
+									class="room_sum_off" id="sImg"
+									onmouseover="showPhoto(this.src,i)">
+									<%System.out.println("사진 : "+curRfList.get(i).getrRenameFile()); %>
+								<%}%>
+							</div>
+							<!-- MOBON Shop Log Tracker v3.0 strat -->
+						</th>
+					</tr>
+				<%	}
+			    }%>
 			</tbody>
 		</table>
 	</div>

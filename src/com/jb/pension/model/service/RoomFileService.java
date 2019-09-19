@@ -6,8 +6,10 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.jb.pension.model.dao.RoomFileDao;
+import com.jb.pension.model.vo.RoomFile;
 
 public class RoomFileService {
 	
@@ -23,6 +25,13 @@ public class RoomFileService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public List<RoomFile> selectRoomFile() {
+		Connection conn = getConnection();
+		List<RoomFile> list = dao.selectRoomFile(conn);
+		close(conn);
+		return list;
 	}
 
 }

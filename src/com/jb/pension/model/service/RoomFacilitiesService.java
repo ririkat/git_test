@@ -6,8 +6,10 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.jb.pension.model.dao.RoomFacilitiesDao;
+import com.jb.pension.model.vo.RoomFacilities;
 
 public class RoomFacilitiesService {
 	
@@ -25,6 +27,13 @@ public class RoomFacilitiesService {
 		close(conn);
 		return result;
 	}
-		
+	
+	//부대시설 전부 불러오기
+	public List<RoomFacilities> selectRoomFac(){
+		Connection conn = getConnection();
+		List<RoomFacilities> list = dao.selectRoomFac(conn);
+		close(conn);
+		return list;
+	}
 		
 }
