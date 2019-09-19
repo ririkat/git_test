@@ -16,7 +16,7 @@ public class PensionFileDao {
 	public int addImages(Connection conn, int currval, String oriFile, String reFile) {
 		Statement stmt = null;
 		int result = 0;
-		String sql = "insert into pen_file values('p'||"+currval+",'"+oriFile+"','"+reFile+"')";
+		String sql = "insert into pen_file values(seq_pension_file_no.nextval,'"+oriFile+"','"+reFile+"','p'||"+currval+")";
 		try {
 			stmt = conn.createStatement();
 			result = stmt.executeUpdate(sql);
@@ -48,6 +48,22 @@ public class PensionFileDao {
 			close(rs);
 			close(stmt);
 		} return list;
+	}
+	
+	public int modifyImages(Connection conn, String pCode, String oriFile, String reFile) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "update pen_file set p_original_file='"+oriFile+"', "
+										+"p_rename_file='"+reFile+"' "
+										+"where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		} return result;
 	}
 
 }

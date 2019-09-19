@@ -31,6 +31,7 @@ public class signUpOwnerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
 		String id = request.getParameter("oid");
 		String pw = request.getParameter("opass");
@@ -50,7 +51,7 @@ public class signUpOwnerServlet extends HttpServlet {
 		String addr3 = request.getParameter("address");
 		String addr4 = request.getParameter("address_etc");
 		
-		String addr = (addr1+" "+addr3+" "+addr4);
+		String addr = ("우)"+addr1+"|"+addr3+"|"+addr4);
 		
 		Owner o = new Owner(id,pw,name,birth,gender,email,phone,addr);
 		OwnerService service = new OwnerService();
@@ -58,7 +59,7 @@ public class signUpOwnerServlet extends HttpServlet {
 		
 		String msg = "";
 		String loc = "/";
-		msg = result>0? "회원가입 축하드립니다 (승인 대기중 입니다).":"회원가입이 실패하였습니다.";
+		msg = result>0? "회원가입 축하드립니다. (승인후 펜션등록이 가능합니다.)":"회원가입이 실패하였습니다.";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

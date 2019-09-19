@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-<%@ include file="/views/common/header.jsp"%>
 <%@ page import="com.jb.reservation.model.vo.Reservation, java.util.List"%>
-
+<%@ include file="/views/common/header.jsp"%>
 <%
 List<Reservation> list = (List) request.getAttribute("list");
-Reservation res = (Reservation)request.getAttribute("reservation");
 
+/* Reservation res = (Reservation)request.getAttribute("reservation");
+ */
 %>
 
 

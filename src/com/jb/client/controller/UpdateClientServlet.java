@@ -71,6 +71,7 @@ public class UpdateClientServlet extends HttpServlet {
 		c.setcPhone(request.getParameter("cPhone"));
 		c.setcAddr(request.getParameter("cAddr"));
 
+
 		String cBirthYY = request.getParameter("cBirthYY");
 		String cBirthMM = request.getParameter("cBirthMM");
 		String cBirthDD = request.getParameter("cBirthDD");

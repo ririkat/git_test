@@ -199,12 +199,35 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	//예약데이터 인설트
+	public int insertReservation(Connection conn, Reservation res) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertReservation");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, res.getResCode());
+			pstmt.setString(2, res.getResState());
+			pstmt.setInt(3, res.getResNop());
+			pstmt.setInt(4, res.getTotalPrice());
+			pstmt.setString(5, res.getrNo());
+			pstmt.setString(6, res.getcId());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 		
 		
 	}
+}
 		
 		
 
 
-	
 

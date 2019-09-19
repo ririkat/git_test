@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jb.pension.model.service.PensionFacilitiesService;
 import com.jb.pension.model.service.PensionService;
+import com.jb.pension.model.service.RoomFacilitiesService;
+import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.PensionFacilities;
 import com.jb.pension.model.vo.Room;
+import com.jb.pension.model.vo.RoomFacilities;
+import com.jb.pension.model.vo.RoomFile;
 
 /**
  * Servlet implementation class OwnerPensionDetailServlet
@@ -40,8 +44,10 @@ public class OwnerPensionDetailServlet extends HttpServlet {
 		String imgSrc = request.getParameter("imgSrc");
 		Pension pInfo = new PensionService().selectPension(pCode);
 		List<Room> roomList = new RoomService().selectRoomList(pCode);
+		List<RoomFacilities> rFacList = new RoomFacilitiesService().selectRoomFac();
+		List<RoomFile> rFileList = new RoomFileService().selectRoomFile();
 		PensionFacilities pf = new PensionFacilitiesService().selectPensionFac(pCode);
-
+		
 		String pFac = "";
 		if(pf.getStore().equals("Y")) {
 			pFac += " 매점 /";
@@ -86,7 +92,7 @@ public class OwnerPensionDetailServlet extends HttpServlet {
 			pFac += " 주차장 /";
 		}
 		pFac += " ...";
-
+		
 		
 		// 객실 리스트
 		int cPage;
@@ -130,6 +136,8 @@ public class OwnerPensionDetailServlet extends HttpServlet {
 		request.setAttribute("imgSrc", imgSrc);
 		request.setAttribute("pInfo", pInfo);
 		request.setAttribute("roomList", roomList);
+		request.setAttribute("rFacList", rFacList);
+		request.setAttribute("rFileList", rFileList);
 		request.setAttribute("pFac", pFac);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/owner/pensionDetail.jsp").forward(request, response);

@@ -68,5 +68,39 @@ public class PensionFacilitiesDao {
 			close(stmt);
 		} return pf;
 	}
+	
+	//펜션 부대시설 수정
+	public int modifyFacilities(Connection conn, String pCode, String[] facCheck) {
+		Statement stmt = null;
+		int result = 0;
+		
+		String sql = "update pen_fac set store='"+facCheck[0]+"', "
+										+"wifi='"+facCheck[1]+"', "
+										+"pet='"+facCheck[2]+"', "
+										+"pool='"+facCheck[3]+"', "
+										+"s_pool='"+facCheck[4]+"', "
+										+"slide='"+facCheck[5]+"', "
+										+"open_bath='"+facCheck[6]+"', "
+										+"grill='"+facCheck[7]+"', "
+										+"smoked='"+facCheck[8]+"', "
+										+"cafe='"+facCheck[9]+"', "
+										+"sing='"+facCheck[10]+"', "
+										+"foot='"+facCheck[11]+"', "
+										+"hand='"+facCheck[12]+"', "
+										+"car='"+facCheck[13]+"' "
+										+"where p_code='"+pCode+"'";
+		System.out.println(sql);
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
 
 }

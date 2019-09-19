@@ -33,5 +33,17 @@ public class PensionFileService {
 		close(conn);
 		return list;
 	}
+	
+	public int modifyImages(String pCode, String oriFile, String reFile) {
+		Connection conn = getConnection();
+		int result = dao.modifyImages(conn,pCode,oriFile,reFile);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }

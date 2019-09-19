@@ -30,9 +30,11 @@ public class OwnerAddRoomServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이지 전환
+		String imgSrc = request.getParameter("imgSrc");
 		String pCode = request.getParameter("pCode");
 		String pName = new PensionService().getPensionName(pCode);
 		
+		request.setAttribute("imgSrc", imgSrc);
 		request.setAttribute("pCode", pCode);
 		request.setAttribute("pName", pName);
 		request.getRequestDispatcher("/views/owner/roomAdd.jsp").forward(request, response);

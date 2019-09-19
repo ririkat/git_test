@@ -5,6 +5,7 @@
 <%@ include file="/views/common/sideOwner.jsp"%>
 
 <%
+	String imgSrc = (String)request.getAttribute("imgSrc");
 	String pCode = (String)request.getAttribute("pCode");
 	String pName = (String)request.getAttribute("pName");
 %>
@@ -28,7 +29,7 @@
 							펜션 코드
 						</th>
 						<td>
-							<%=pCode%><input type="hidden" name="pCode" value="<%=pCode%>">
+							<%=pCode%><input type="hidden" name="pCode" value="<%=pCode%>"><input type="hidden" name="imgSrc" value="<%=imgSrc%>">
 						</td>
 					</tr>
 					
@@ -121,7 +122,8 @@
 					<tr>
 						<th class="point"><strong class="point">*</strong> 객실사진</th>
 						<td>
-							<input type="file" multiple="multiple" name="roomImg">
+							<input type="button" id="addFile" value="파일추가">
+							<input type="file" name="roomImg1" id="addRoomImg">
 						</td>
 					</tr>
 					
@@ -166,6 +168,13 @@
 
 
 <script>
+	var cnt = 2;
+	$("#addFile").click(function(){		
+		var input = $('<input>').attr({"type":"file", "name":"roomImg"+cnt, "id":"addRoomImg"});
+		$("#addFile").parent().append(input);
+		cnt++;
+	})
+
 	function add_validate(){		
 		//첨부파일 없음
 		if (addPension.roomImg.value == "") {
