@@ -98,7 +98,6 @@
 			</colgroup>
 
 			<tbody>
-				<!-- 객실 부대시설, 객실 파일 가져오기 필요! for문 돌리기 -->
 				<% if(roomList!=null && !roomList.isEmpty()) {
 					for(Room r : roomList) { %>
 					<tr>
@@ -123,14 +122,11 @@
 						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
 							<div id="thum_img">
 								<%for(int i=0; i<curRfList.size(); i++) { %>
-									<img
-									src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"
-									class="room_sum_off" id="sImg"
-									onmouseover="showPhoto(this.src,i)">
+									<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"
+										 class="room_sum_off" id="sImg" onmouseover="showPhoto(this.src,<%=i+1%>)">
 									<%System.out.println("사진 : "+curRfList.get(i).getrRenameFile()); %>
 								<%}%>
 							</div>
-							<!-- MOBON Shop Log Tracker v3.0 strat -->
 						</th>
 					</tr>
 				<%	}
