@@ -19,7 +19,7 @@ import com.jb.search.model.service.SearchService;
 public class searchLoadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
+    /**-
      * @see HttpServlet#HttpServlet()
      */
     public searchLoadServlet() {
