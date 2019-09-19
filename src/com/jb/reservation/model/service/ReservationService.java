@@ -1,9 +1,8 @@
 package com.jb.reservation.model.service;
 
 import static common.template.JDBCTemplate.close;
-import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.commit;
-
+import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -67,8 +66,24 @@ public class ReservationService {
 		return result;
 		
 	}
+
+	//예약데이터 인설트
+	public int insertReservation(Reservation res) {
+		Connection conn = getConnection();
+		int result = dao.insertReservation(conn,res);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
 	
 	
 	
 
-}
+	}
+	
+

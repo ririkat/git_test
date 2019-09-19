@@ -3,7 +3,7 @@ package com.jb.pension.model.vo;
 import java.util.List;
 
 public class Room {
-	
+  
 	private String rNo;
 	private String rName;
 	private int rPrice;
@@ -25,7 +25,6 @@ public class Room {
 		// TODO Auto-generated constructor stub
 	}
 	
-
 	public Room(String rNo, String rName, int rPrice, int rNop, int rMaxNop, String rSize, String pCode, String rStruc,
 			String rInfo, int rAddPrice) {
 		super();
@@ -40,7 +39,6 @@ public class Room {
 		this.rInfo = rInfo;
 		this.rAddPrice = rAddPrice;
 	}
-
 
 
 	public Room(String rNo, String rName, int rPrice, int rNop, int rMaxNop, String rSize, String pCode, String rStruc,
@@ -65,121 +63,89 @@ public class Room {
 		return rNo;
 	}
 
-
 	public void setrNo(String rNo) {
 		this.rNo = rNo;
 	}
-
 
 	public String getrName() {
 		return rName;
 	}
 
-
 	public void setrName(String rName) {
 		this.rName = rName;
 	}
-
 
 	public int getrPrice() {
 		return rPrice;
 	}
 
-
 	public void setrPrice(int rPrice) {
 		this.rPrice = rPrice;
 	}
-
 
 	public int getrNop() {
 		return rNop;
 	}
 
-
 	public void setrNop(int rNop) {
 		this.rNop = rNop;
 	}
-
 
 	public int getrMaxNop() {
 		return rMaxNop;
 	}
 
-
 	public void setrMaxNop(int rMaxNop) {
 		this.rMaxNop = rMaxNop;
 	}
-
-
-	public int getrAddNop() {
-		return rAddNop;
-	}
-
-
-	public void setrAddNop(int rAddNop) {
-		this.rAddNop = rAddNop;
-	}
-
 
 	public String getrSize() {
 		return rSize;
 	}
 
-
 	public void setrSize(String rSize) {
 		this.rSize = rSize;
 	}
-
 
 	public String getpCode() {
 		return pCode;
 	}
 
-
 	public void setpCode(String pCode) {
 		this.pCode = pCode;
 	}
-
 
 	public String getrStruc() {
 		return rStruc;
 	}
 
-
 	public void setrStruc(String rStruc) {
 		this.rStruc = rStruc;
 	}
-
 
 	public String getrInfo() {
 		return rInfo;
 	}
 
-
 	public void setrInfo(String rInfo) {
 		this.rInfo = rInfo;
 	}
-
 
 	public int getrAddPrice() {
 		return rAddPrice;
 	}
 
-
 	public void setrAddPrice(int rAddPrice) {
 		this.rAddPrice = rAddPrice;
 	}
-
 
 	public RoomFacilities getRoomFac() {
 		return roomFac;
 	}
 
-
 	public void setRoomFac(RoomFacilities roomFac) {
 		this.roomFac = roomFac;
 	}
-
 
 	@Override
 	public String toString() {
@@ -187,7 +153,6 @@ public class Room {
 				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
 				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
-	
 	
 
 }

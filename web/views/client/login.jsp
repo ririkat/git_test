@@ -12,6 +12,7 @@
                         <div class="account-wall">
                             <h4 id="mypagetitle" style="text-align: center">로그인</h4>
                             <form id="loginTypefrm" class="form-signin" method="post" action="<%=request.getContextPath()%>/client/login">
+<%-- <<<<<<< HEAD
                                 <input type="radio" name="loginType" value="client" checked>고객
                                 <input type="radio" name="loginType" value="owner">업주
                                 <input id="loginid" name="loginid" type="text" class="form-control" placeholder="아이디 입력" required autofocus><br>
@@ -24,6 +25,17 @@
                                 onclick="location.href='<%=request.getContextPath()%>/views/client/findPW.jsp'"><br>
                                     
 <!--                                 	업체일반 회원뷰로 전환 -->
+======= --%>
+                                <input type="radio" name="loginType" id="client" value="client" checked/><label for="client">고객</label>
+                                <input type="radio" name="loginType" id="owner" value="owner"/><label for="owner">업주</label>
+                                <input type="text" id="loginid" name="loginid"  class="form-control" placeholder="아이디 입력" required autofocus/><br>
+                                <input type="password" id="cpass" name="cpass"  class="form-control" placeholder="비밀번호 입력" required/><br>
+                                <input type="submit" class="btn btn-lg btn-warning btn-block" value="로그인"/>
+                                <input type="button" class="btn btn-sm btn-warning btn-block" value="ID 찾기" onclick="find();"/>
+                                <input type="button" class="btn btn-sm btn-warning btn-block" value="PW 찾기" onclick="findPW();"/>
+                                <br>
+                                   <%--  onclick="location.href='<%=request.getContextPath()%>/views/client/findPW.jsp'" --%>
+								<!--업체일반 회원뷰로 전환 -->
                                 <a href="<%=request.getContextPath()%>/views/client/singUpChoice.jsp" class="text-center new-account">회원가입</a>
                            </form>
                         </div>
