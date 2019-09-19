@@ -19,7 +19,7 @@ import com.jb.reservation.model.vo.Reservation;
 /**
  * Servlet implementation class PayComplateServlet
  */
-@WebServlet("/reservation/payComplate")
+@WebServlet("/reservation/payComplete")
 public class PayInfoInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,7 +49,7 @@ public class PayInfoInsertServlet extends HttpServlet {
 		
 		String payCode = request.getParameter("payCode");
 //		Date payDate = request.getParameter("");
-		String payMethod = request.getParameter("payMethod");
+		String payMethod = request.getParameter("pay_method");
 		String resCode = request.getParameter("resCode");
 		
 		Payment pay = new Payment(payCode,payDate,payMethod,resCode);

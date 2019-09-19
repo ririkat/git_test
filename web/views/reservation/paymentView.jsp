@@ -4,6 +4,7 @@
 <%@ page import="com.jb.reservation.model.vo.Payment"%>
 <%@ page import="com.jb.pension.model.vo.Pension"%>
 <%@ page import="com.jb.pension.model.vo.Room"%>
+<%@ page import="java.util.Calendar" %>
 
 <%
 	Reservation res = (Reservation) request.getAttribute("reservation");
@@ -14,6 +15,12 @@
 	Client c = res.getClient();
 	
 	int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+	
+	Calendar now = Calendar.getInstance();
+	int nowYear = now.get(Calendar.YEAR);			// 현재 년
+	int nowMonth = now.get(Calendar.MONTH)+1;		// 현재 월
+	int nowDate = now.get(Calendar.DATE);			// 현재 일
+	out.print(nowYear+"년 "+nowMonth+"월 "+nowDate+"일");
 %>
 
 <!-- 결제API script -->
@@ -246,21 +253,9 @@
 
         });
  
-        $(function(){
-      	  
-      	  $('#btn-pay').click(function(){
-      		  
-    	 if ($("#payCard").prop("checked", true)) {
-    		 
-    		 
-    		 
-    	 }else if {
-    		 
-    		 
-    	 }
+      
     	 
-    	 
-     }
+     
   
   /* 이전으로 버튼 */
 
@@ -295,15 +290,17 @@
            amount : <%=totalPrice%>,
            buyer_email : '<%=c.getcEmail()%>',
            buyer_name : '<%=c.getcName()%>',
+           cId : '<%=c.getcId()%>',
            buyer_tel : '<%=c.getcPhone()%>',
            buyer_addr : '<%=c.getcAddr()%>',
-           custom_data : '<%=pay.getPayCode()%>,<%=res.getResCode()%>,<%=c.getcId()%>,<%=r.getrNo()%>'
+           custom_data : '<%=pay.getPayCode()%>,<%=res.getResCode()%>,<%=c.getcId()%>,<%=r.getrNo()%>',
+           resCode : '<%=res.getResCode()%>'
          
        }, function(rsp) {
            if ( rsp.success ) {
                //1. 서블릿에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                jQuery.ajax({
-                   url: "/reservation/payComplete", //cross-domain error가 발생하지 않도록 주의해주세요
+                   url: "/reservation/payComplete",
                    type: 'POST',
                    dataType: 'json',
                    data: {
