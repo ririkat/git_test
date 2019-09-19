@@ -13,6 +13,7 @@ public class Pension {
 	private int pBlcount;
 	private Date pEnrollDate;
 	
+
 	public Pension() {
 		// TODO Auto-generated constructor stub
 	}
@@ -99,5 +100,6 @@ public class Pension {
 		return "Pension [pCode=" + pCode + ", pName=" + pName + ", pAddr=" + pAddr + ", pTel=" + pTel + ", oId=" + oId
 				+ ", enrollYn=" + enrollYn + ", pBlcount=" + pBlcount + ", pEnrollDate=" + pEnrollDate + "]";
 	}
+
 
 }
