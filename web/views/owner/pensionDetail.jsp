@@ -99,6 +99,7 @@
 
 			<tbody>
 				<% if(roomList!=null && !roomList.isEmpty()) {
+					int cnt = 0;
 					for(Room r : roomList) { %>
 					<tr>
 						<th class="bl2 br2 bb0px pdb0px">
@@ -109,7 +110,7 @@
 										curRfList.add(rf);
 									}
 								  }%>
-								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img">
+								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
 								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
 							</span>
 						</th>
@@ -123,13 +124,14 @@
 							<div id="thum_img">
 								<%for(int i=0; i<curRfList.size(); i++) { %>
 									<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"
-										 class="room_sum_off" id="sImg" onmouseover="showPhoto(this.src,<%=i+1%>)">
+										 class="room_sum_off" id="sImg" onmouseover="showPhoto(this.src,<%=i+1%>,<%=cnt%>)">
 									<%System.out.println("사진 : "+curRfList.get(i).getrRenameFile()); %>
 								<%}%>
 							</div>
 						</th>
 					</tr>
-				<%	}
+				<%	cnt++;
+					}
 			    }%>
 			</tbody>
 		</table>
@@ -137,8 +139,8 @@
 </div>
 
 <script>	
-	function showPhoto(val,page){
-		$(".room_img").attr("src",val);
+	function showPhoto(val,page,cnt){
+		$(".room_img"+cnt).attr("src",val);
 		$(".imgBox .img_page").text(page);
 	}
 	
