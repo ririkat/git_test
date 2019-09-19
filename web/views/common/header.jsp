@@ -21,18 +21,29 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	
 <!-- 
 #fffcf0 : 누리끼리색
 #dedcee : 옅은 남?보라?색
 #6a60a9 : 진한 남?보라?색
 #fbd14b : 노랭이
 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css"> --%>
 
 <script src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.4.1.js"></script>
@@ -70,7 +81,7 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
-  width: 250%;
+  width: 100%;
   border-radius: 4px 25px 25px 4px;
 }
 .search-form .form-group span.form-control-feedback {
@@ -117,9 +128,9 @@
 				<div class="pull-right">
 					<form action="" class="search-form">
 		               <div class="form-group has-feedback">
-		           		<label for="search" class="sr-only">Search</label>
-		           		<input type="text" class="form-control" name="search" id="search" placeholder="search">
-		             		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			           		<label for="search" class="sr-only">Search</label>
+			           		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			           		<input type="text" class="form-control" name="search" id="search" placeholder="search">
 		           		</div>
 		           	</form>
 		         </div>
@@ -155,10 +166,8 @@
 			</div>
 		</nav>
 		<script>
-			$(function(){
-				$('#btn-srch').click(function(){
-					
-				})
+			$('#btn-srch').click(function(){
+				
 			})
 		</script>
 	</header>

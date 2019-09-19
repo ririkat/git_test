@@ -12,30 +12,35 @@ public class Reservation {
 	private Date resCheckIn;
 	private Date resCheckOut;
 	private String resState;
-	private String rNo;
 	private String pCode;
 	private int resNop;
-
+	private int totalPrice;
+	private String cId;
+	
+    //룸안에 펜션 넣기 
 	private Pension Pension;
 	private Room Room;
+	
 	private Payment Payment;
+	
 	private Client Client;
 
 	public Reservation() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reservation(String resCode, Date resCheckIn, Date resCheckOut, String resState, String rNo, String pCode,
-			int resNop, com.jb.pension.model.vo.Pension pension, com.jb.pension.model.vo.Room room,
+	public Reservation(String resCode, Date resCheckIn, Date resCheckOut, String resState, String pCode, int resNop,
+			int totalPrice, String cId, com.jb.pension.model.vo.Pension pension, com.jb.pension.model.vo.Room room,
 			com.jb.reservation.model.vo.Payment payment, com.jb.client.model.vo.Client client) {
 		super();
 		this.resCode = resCode;
 		this.resCheckIn = resCheckIn;
 		this.resCheckOut = resCheckOut;
 		this.resState = resState;
-		this.rNo = rNo;
 		this.pCode = pCode;
 		this.resNop = resNop;
+		this.totalPrice = totalPrice;
+		this.cId = cId;
 		Pension = pension;
 		Room = room;
 		Payment = payment;
@@ -74,14 +79,6 @@ public class Reservation {
 		this.resState = resState;
 	}
 
-	public String getrNo() {
-		return rNo;
-	}
-
-	public void setrNo(String rNo) {
-		this.rNo = rNo;
-	}
-
 	public String getpCode() {
 		return pCode;
 	}
@@ -96,6 +93,22 @@ public class Reservation {
 
 	public void setResNop(int resNop) {
 		this.resNop = resNop;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getcId() {
+		return cId;
+	}
+
+	public void setcId(String cId) {
+		this.cId = cId;
 	}
 
 	public Pension getPension() {
@@ -133,11 +146,12 @@ public class Reservation {
 	@Override
 	public String toString() {
 		return "Reservation [resCode=" + resCode + ", resCheckIn=" + resCheckIn + ", resCheckOut=" + resCheckOut
-				+ ", resState=" + resState + ", rNo=" + rNo + ", pCode=" + pCode + ", resNop=" + resNop + ", Pension="
-				+ Pension + ", Room=" + Room + ", Payment=" + Payment + ", Client=" + Client + "]";
+				+ ", resState=" + resState + ", pCode=" + pCode + ", resNop=" + resNop + ", totalPrice=" + totalPrice
+				+ ", cId=" + cId + ", Pension=" + Pension + ", Room=" + Room + ", Payment=" + Payment + ", Client="
+				+ Client + "]";
 	}
-	
-	
+
+   
 	
 	
 	

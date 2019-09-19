@@ -28,13 +28,14 @@ public class updatePasswordEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cId=request.getParameter("cId");
-		String cPw=request.getParameter("cPw");
+		String id = request.getParameter("cId");
+		String pw = request.getParameter("cPw");
+		String pwNew  = request.getParameter("cPwNew");
 	
-		int result = new ClientService().updatePassword(cId,cPw);
+		int result = new ClientService().updatePassword(id,pw,pwNew);
 		
 		String msg ="";
-		String loc="/client/updatePassword?cId="+cId;
+		String loc="/client/updatePassword?cId="+id;
 		
 		switch(result) {
 		case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;
