@@ -81,7 +81,7 @@
 	  	 });
 		
 		function writeReview(){
-			location.href="<%=request.getContextPath()%>/review/reviewWrite";
+			location.href="<%=request.getContextPath()%>/review/reviewWrite?pCode=<%=pCode%>";
 		}
 		
 	</script>
