@@ -35,5 +35,13 @@ public class RoomFacilitiesService {
 		close(conn);
 		return list;
 	}
+	
+	//해당 객실의 부대시설만 불러오기
+	public RoomFacilities curRoomFac(String rNo) {
+		Connection conn = getConnection();
+		RoomFacilities rFac = dao.curRoomFac(conn,rNo);
+		close(conn);
+		return rFac;
+	}
 		
 }

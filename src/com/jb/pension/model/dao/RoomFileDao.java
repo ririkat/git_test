@@ -51,4 +51,29 @@ public class RoomFileDao {
 		} return list;
 	}
 	
+	//해당 객실의 사진들 불러오기
+	public List<RoomFile> curRoomFiles(Connection conn, String rNo){
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<RoomFile> list = new ArrayList();
+		String sql = "select * from room_file where r_no='"+rNo+"'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				RoomFile rf = new RoomFile();
+				rf.setrFileNo(rs.getInt("r_file_no"));
+				rf.setrOriginalFile(rs.getString("r_original_file"));
+				rf.setrRenameFile(rs.getString("r_rename_file"));
+				rf.setrNo(rs.getString("r_no"));
+				list.add(rf);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return list;
+	}
+	
 }

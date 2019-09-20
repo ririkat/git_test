@@ -191,7 +191,7 @@
 									}%>
 									<%=rFac %>
 								</h4>
-								<a class="btn btn-primary" href="#">수정 <span class="glyphicon glyphicon-chevron-right"></span></a>
+								<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/modifyRoom?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&pName=<%=pInfo.getpName()%>&rName=<%=r.getrName()%>&rNop=<%=r.getrNop()%>&rMaxNop=<%=r.getrMaxNop()%>&rPrice=<%=r.getrPrice()%>&rAddPrice=<%=r.getrAddPrice()%>&rSize=<%=r.getrSize()%>&rStruc=<%=r.getrStruc()%>&rInfo=<%=r.getrInfo()%>">수정 <span class="glyphicon glyphicon-chevron-right"></span></a>
 								<a class="btn btn-primary" onclick="return delcheck();" href="<%=request.getContextPath()%>/owner/oneRoomDelete?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>">삭제 <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</th>
