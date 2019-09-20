@@ -17,19 +17,18 @@ import com.jb.review.model.service.ReviewService;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.filerename.MyFileRenamePolicy;
-import oracle.net.aso.e;
 
 /**
- * Servlet implementation class ReviewWriteEndServlet
+ * Servlet implementation class ReviewUpdateEndServlet
  */
-@WebServlet("/review/reviewWriteEnd")
-public class ReviewWriteEndServlet extends HttpServlet {
+@WebServlet("/review/reviewUpdateEnd")
+public class ReviewUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewWriteEndServlet() {
+    public ReviewUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,40 +39,35 @@ public class ReviewWriteEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", "리뷰게시판에러!![form:enctype 관리자에게 문의하세요!]");
+			request.setAttribute("msg", "수정 오류! 관리자 문의 필요");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		String root = getServletContext().getRealPath("/");
-		String saveDir = root+"/upload/review";
+		
+		String root=getServletContext().getRealPath("/");
+		String saveDir=root+"/upload/review";
 		
 		File dir = new File(saveDir);
-		
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
 		
-		
-		int maxSize=1024*1024*50;
+		int maxSize=1024*1024*500;
 		
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
 		String pCode = mr.getParameter("pCode");
-		
+		System.out.println("파라미터;"+pCode);
+		int rNo= Integer.parseInt(mr.getParameter("rNo"));
+		System.out.println("rNo ;"+rNo);
 		String title = mr.getParameter("title");
 		String writer = mr.getParameter("writer");
 		String content = mr.getParameter("content");
 		
-//		String oriFile= mr.getOriginalFileName("upfile");//원래이름
-//		String reFile = mr.getFilesystemName("upfile");//rename된 이름
 		
-		
-//		Review r = new Reveiw(title, writer, content, oldFile, reFile);
-		
-		//리뷰DB추가 /dao insert후 시퀀스넘버반환
-		int currval = new ReviewService().writeReview(title, writer, content, pCode);
-		
+		int result = new ReviewService().updateReview(rNo, title, writer, content, pCode);
+		System.out.println("updateReview갔다온후 end서블릿 result : "+result);
 		//객실 이미지 추가
 		String file="";
 		String oriFile = "";
@@ -84,34 +78,29 @@ public class ReviewWriteEndServlet extends HttpServlet {
 			file = (String)files.nextElement();
 			oriFile = mr.getOriginalFileName(file);
 			reFile = mr.getFilesystemName(file);
-			imgRes = new ReviewFileService().addImages(currval, oriFile, reFile);
+			imgRes = new ReviewFileService().addImages(rNo, oriFile, reFile);
 			if(!(imgRes>0)) {
 				File remove = new File(saveDir+"/"+reFile);
 				remove.delete();
 			}
 		}
-
-		String msg= "";
+		
+		String msg="";
 		String loc="";
 		
-		if(currval>0 && imgRes>0) {
-			msg = "리뷰 등록 완료";
-			loc = "/review/pensionReviewList?pensionCode="+pCode;
-		}
-		else {
-			File remove = new File(saveDir+"/"+reFile);
+		if(result>0 && imgRes>=0) {
+			msg="리뷰 수정완료";
+			loc="/review/pensionReviewList?pensionCode="+pCode;
+		}else {
+			File remove=new File(saveDir+"/"+reFile);
 			remove.delete();
-			msg="리뷰 등록 실패";
-			loc = "/review/pensionReviewList?pensionCode="+pCode;
+			msg="게시글 수정 실패";
+			loc="/review/pensionReviewList?pensionCode="+pCode;
 		}
-		
-//		request.setAttribute("pCode", pCode);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
