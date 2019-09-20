@@ -53,8 +53,8 @@
 							value="변경">	
 						<input type="reset" class="btn btn-warning" onclick="" value="뒤로가기">
 					</div>
-					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("oId")%>' />	
-					<input type="hidden" name="cPw_" id="cPw_" value='<%=o.getoPw()%>' />
+					<input type="hidden" name="oId" value='<%=o.getoId()%>' />	
+					<input type="hidden" name="oPw_" id="oPw_" value='<%=o.getoPw()%>' />
 
 
 				</form>
