@@ -1,3 +1,6 @@
+<%@page import="com.jb.pension.model.vo.PensionFacilities"%>
+<%@page import="com.jb.pension.model.vo.Room"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
@@ -36,6 +39,7 @@
         </div>
     </div>
 </nav>
+
 </br></br></br></br></br></br>
   <div class="container">
   <div class="row">
@@ -78,28 +82,27 @@
     </div>
     
     
-    <form class="reservation-form" method="post" action="<%=request.getContextPath()%>/reservation">
+    <form class="reservation-form" method="post" action="<%=request.getContextPath()%>">
     <div class="col-sm-4">
     	<div class="well">
-    	<
-		<h1 style="text-align: center"><%=p.getpName()%></h1>
-		<p><%=p.getpAddr()%></p>
-		<p><%=p.getpTel()%></p>
+    	<input type="hidden" name="pcode" id="p_code" value="<%=p.getpCode()%>">
+		<h1 style="text-align: center"><%=p.getpName()%></h1><br>
+		<p>펜션주소 : <%=p.getpAddr()%></p>
+		<p>예약문의 : <%=p.getpTel()%></p>
+		<p>입퇴실 안내 : 입실 오후 3시부터 , 퇴실 11시까지<p>
+		
+		<p><%=p.getRoomList().get(0).getrPrice()%>원</p>
 		
       </div>
-      <button class="btn btn-md btn-warning btn-block">
-        찜</button>
-    <input type="submit" class="btn btn-sm btn-warning btn-block" value="예약" />
+<!--       <button class="btn btn-md btn-warning btn-block"> -->
+<!--         찜</button> -->
+<!--     <input type="submit" class="btn btn-sm btn-warning btn-block" value="예약" /> -->
   			
       </div>  
     </form>
     </div>
   </div>
   <hr>
-  <div>
-  
-  
-  
   
   <div class="container text-center">    
     <h3>펜션이미지</h3>
@@ -125,29 +128,114 @@
     <hr>
   </div>
   
+  	<div class="container text-center">
+    <div class="well">
+    <h3>펜션 정보</h3>
+	<p>펜션 정보입니다.</p>
+    </div>
+    </div>
+  
+<%-- 	<form class="reservation-form" method="post" action="<%=request.getContextPath()%>/roomInfo"> --%>
   <div class="container text-center">
-    <h3>기본 정보</h3><br><br>
-   
+    <div class="well">
+    <h3>방 정보</h3>
+    
+<%-- <input type="hidden" name="pcode" id="p_code" value="<%=p.getpCode()%>"> --%>
+    	
+   <%for(Room r : p.getRoomList()) { %>
+		<input type="button" name="roomName" class="roomName_" value="<%=r.getrName()%>|<%=r.getrNo() %>" />
+		<%-- <input type="button" name="roomNo" id="roomNo_" value="<%=r.getrNo()%>"/> --%>
+<%--     	<%="'"+r.getrNo()+"'"%> --%>
+		<div id="room"></div>
+    <%} %>
+    </div>
+    </div>
+    <hr>
+<!-- </form> -->
+  
+  
+  <div class="container text-center">
+  	<div class="well">
+
+    <h3>부대시설</h3><br><br>
+    
+  <p>매점<input type="checkbox" disabled name="penfac" id="fac1" value="<%=p.getPenFac().getStore()%>">
+    와이파이<input type="checkbox" disabled name="penfac" id="fac2" value="<%=p.getPenFac().getWifi() %>">
+    애견가능<input type="checkbox" disabled name="penfac" id="fac3" value="<%=p.getPenFac().getPet() %>">
+    공용수영장<input type="checkbox" disabled name="penfac" id="fac4" value="<%=p.getPenFac().getPool() %>">
+    어린이풀장<input type="checkbox" disabled name="penfac" id="fac5" value="<%=p.getPenFac().getsPool() %>">
+    워터슬라이드<input type="checkbox" disabled name="penfac" id="fac6" value="<%=p.getPenFac().getSlide() %>">
+    노천탕<input type="checkbox" disabled name="penfac" id="fac7" value="<%=p.getPenFac().getOpenBath() %>">
+    그릴<input type="checkbox" disabled name="penfac" id="fac8" value="<%=p.getPenFac().getGrill() %>">
+    바베큐<input type="checkbox" disabled name="penfac" id="fac9" value="<%=p.getPenFac().getSmoked() %>">
+    카페<input type="checkbox" disabled name="penfac" id="fac10" value="<%=p.getPenFac().getCafe() %>">
+    노래방<input type="checkbox" disabled name="penfac" id="fac11" value="<%=p.getPenFac().getSing() %>">
+    족구장<input type="checkbox" disabled name="penfac" id="fac12" value="<%=p.getPenFac().getFoot() %>">
+    농구장<input type="checkbox" disabled name="penfac" id="fac13" value="<%=p.getPenFac().getHand() %>">
+    주차장<input type="checkbox" disabled name="penfac" id="fac14" value="<%=p.getPenFac().getCar() %>"></p>
+
+    </div>
     </div>
     <hr>
     
     
     <div class="container text-center">
       <h3>리뷰게시판</h3>
-      <p>ㅎㅇ</p>
+      <p>리뷰</p>
     </div>
 
-
+			
     <script src="js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-  </section>
+    
+    
+    <script>    
+		$(function(){
+			$(".roomName_").click(function(){
+				/* var rno=$(this).val().split("|")[1]; */
+				
+				$.ajax({
+					url:"<%=request.getContextPath()%>/roomInfo",
+					type:"post",
+					data:{rno:rno},
+					dataType:"html",
+					success:function(data){
+						$("#room").html(data);
+						console.log(data);
+					}
+				});
+				<%-- var rname=<%=p.getRoomList().get(0).getrName()%>
+				var imgSrc=<%=p.getRoomList().get(0).get --%>
+			});
+		});
 	
-	<script>
-// 	function reservationbutton(){
-<%--     	location.href="<%=request.getContextPath()%>/reservation"; --%>
-//     }
+	
 	</script>
+    }
+
+   
+  <script>
+  window.onload = function() {
+	  var chkbox = document.getElementsByName('penfac');
+	  
+	  console.log("length: "+chkbox.length)
+	  
+	  for(var i =0; i<chkbox.length; i++){
+		  if(chkbox[i].value=="Y") {
+			  chkbox[i].checked = true;
+		  }
+		  else
+		  {
+		  chkbox[i].checked = false;
+		  }
+	  }
+
+  }
+  </script>  
+    
+  </section>
 	
 <%@ include file="/views/common/footer.jsp" %>
 
 
+		

@@ -36,6 +36,7 @@ public class searchLoadServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/search/searchAll.jsp").forward(request, response);
+		
 	}
 
 	/**

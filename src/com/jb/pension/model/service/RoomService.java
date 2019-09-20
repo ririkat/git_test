@@ -59,6 +59,14 @@ public class RoomService {
       return result;
    }
    
+   //룸조회
+   public Room roomInFo(String rno) {
+	   Connection conn = getConnection();
+	   Room r = dao.roomInFo(conn,rno);
+	   close(conn);
+	   return r;
+   }
+   
    
    
 }

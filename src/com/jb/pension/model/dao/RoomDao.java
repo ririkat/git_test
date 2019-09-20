@@ -163,7 +163,38 @@ public class RoomDao {
       } return result;
    }
    
-
+   //룸조회
+   public Room roomInFo(Connection conn, String rno) {
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   String sql = prop.getProperty("roomSelect");
+	   Room r = null;
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setString(1, rno);
+		   rs = pstmt.executeQuery();
+		   if(rs.next()) {
+			   r = new Room();
+			   r.setpCode(rs.getString("p_code"));
+	            r.setrNo(rs.getString("r_no"));
+	            r.setrName(rs.getString("r_name"));
+	            r.setrPrice(rs.getInt("r_price"));
+	            r.setrAddPrice(rs.getInt("r_addPrice"));
+	            r.setrNop(rs.getInt("r_nop"));
+	            r.setrMaxNop(rs.getInt("r_maxnop"));
+	            r.setrSize(rs.getString("r_size"));
+	            r.setrStruc(rs.getString("r_struc"));
+	            r.setrInfo(rs.getString("r_info"));
+		   }
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   return r;
+   }
+   
 }
 
 

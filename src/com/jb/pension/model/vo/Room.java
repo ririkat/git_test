@@ -16,7 +16,7 @@ public class Room {
 	private int rAddPrice;
 	
 	private RoomFacilities roomFac;
-//	private List<RoomFile> rfList;
+	/* private List<RoomFile> rfList; */
 	
 	public Room() {
 		// TODO Auto-generated constructor stub
