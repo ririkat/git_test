@@ -180,7 +180,7 @@ public class SearchDao {
 			close(stmt);
 		}return list;
 	}
-
+	
 	public List<Pension> findPension(Connection conn, String keyword,String area,String[] pFac, String[] rFac,int nop) {
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -278,6 +278,23 @@ public class SearchDao {
 			close(pstmt);
 		}
 		return p;
+	}
+	
+	///////test//////////
+
+	public int insertAdd(Connection conn, String addr, Double y, Double x) {
+		Statement stmt=null;
+		int result=0;
+		String sql="insert into prac values(seq_prac_no.nextval,'"+addr+"',"+y+","+x+")";
+		try {
+			stmt=conn.createStatement();
+			result=stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
 	}
 	
 	
