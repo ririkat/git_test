@@ -7,8 +7,10 @@ public class Room {
 	private String rNo;
 	private String rName;
 	private int rPrice;
+
 	private int rNop;
 	private int rMaxNop;
+	private int rAddNop;
 	private String rSize;
 	private String pCode;
 	private String rStruc;
@@ -18,6 +20,7 @@ public class Room {
 	private RoomFacilities roomFac;
 	/* private List<RoomFile> rfList; */
 	
+
 	public Room() {
 		// TODO Auto-generated constructor stub
 	}
@@ -46,6 +49,7 @@ public class Room {
 		this.rPrice = rPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
+		this.rAddNop = rAddNop;
 		this.rSize = rSize;
 		this.pCode = pCode;
 		this.rStruc = rStruc;
@@ -146,8 +150,8 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop + ", rMaxNop="
-				+ rMaxNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc + ", rInfo=" + rInfo
-				+ ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
+				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
+				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
 	
 

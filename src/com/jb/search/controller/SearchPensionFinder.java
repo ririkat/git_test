@@ -33,8 +33,10 @@ public class SearchPensionFinder extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String keyword=request.getParameter("keyword");
 		String area=request.getParameter("area");
+		String[] pFac=request.getParameterValues("pen_fac");
+		String[] rFac=request.getParameterValues("room_fac");
 		
-		List<Pension> list=new SearchService().findPension(keyword,area);
+		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/search/searchAll.jsp").forward(request, response);
 	}

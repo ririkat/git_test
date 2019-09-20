@@ -84,7 +84,7 @@
 				<h4>영업시작일 : <%=p.getpEnrollDate()%></h4>
 				<h4>블랙카운트 : <%=p.getpBlcount()%></h4>
 				<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/pensionDetail?pensionCode=<%=p.getpCode()%>&imgSrc=<%=imgSrc%>">Detail <span class="glyphicon glyphicon-chevron-right"></span></a>
-				<a class="btn btn-primary" href="#">Reviews <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<a class="btn btn-primary" href="<%=request.getContextPath()%>/review/pensionReviewList?pensionCode=<%=p.getpCode()%>">Reviews <span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 		</div>
 		<br><br>
@@ -95,7 +95,12 @@
 
 <script>
 	$("#addBtn").click(function(){
-		location.href="<%=request.getContextPath()%>/owner/addPension?oId=<%=loginOwner.getoId()%>";
+		console.log("<%=loginOwner.getoEaYN()%>");
+		if("<%=loginOwner.getoEaYN()%>".trim()=="Y"){
+			location.href="<%=request.getContextPath()%>/owner/addPension?oId=<%=loginOwner.getoId()%>";
+		} else {
+			alert("관리자의 승인을 대기중입니다. 승인 후 펜션등록이 가능합니다.");
+		}
 	});
 	
 	//전체 선택 및 해제

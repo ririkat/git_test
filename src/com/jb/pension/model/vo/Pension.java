@@ -13,7 +13,7 @@ public class Pension {
 	private String enrollYn;
 	private int pBlcount;
 	private Date pEnrollDate;
-	
+
 	//1:1 펜션 구비시설 객체 PensionFacilities('Y','N','Y,......)[]
 	private PensionFacilities penFac;
 	//1:n 펜션파일 리스트(여러개를 리스트로)[[],[],[]...]
@@ -173,6 +173,4 @@ public class Pension {
 				+ ", enrollYn=" + enrollYn + ", pBlcount=" + pBlcount + ", pEnrollDate=" + pEnrollDate + ", penFac="
 				+ penFac + ", penFile=" + penFile + ", roomList=" + roomList + "]";
 	}
-	
-	
 }

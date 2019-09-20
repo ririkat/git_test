@@ -8,6 +8,7 @@ import com.jb.client.model.vo.Client;
 
 public class Reservation {
 
+
    private String resCode;
    private Date resCheckIn;
    private Date resCheckOut;
@@ -71,6 +72,7 @@ public void setResCode(String resCode) {
 }
 
 
+>>>>>>> 9268b4c6ec8dae7bbd4ebfbd6717906c767674ff
 
 public Date getResCheckIn() {
 	return resCheckIn;

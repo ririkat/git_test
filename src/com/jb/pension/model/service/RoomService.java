@@ -15,6 +15,14 @@ public class RoomService {
    
    private RoomDao dao = new RoomDao();
    
+	//객실 한개 정보 받아오기
+	public Room selectRoom(String rNo) {
+		Connection conn = getConnection();
+		Room room = dao.selectRoom(conn,rNo);
+		close(conn);
+		return room;
+	}
+   
    //선택된 펜션의 전체 객실 수
    public int selectCountRoom(String pCode) {
       Connection conn = getConnection();
@@ -70,4 +78,5 @@ public class RoomService {
    
    
 }
+
 

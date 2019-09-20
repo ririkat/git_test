@@ -21,12 +21,23 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	
 <!-- 
 #fffcf0 : 누리끼리색
 #dedcee : 옅은 남?보라?색
 #6a60a9 : 진한 남?보라?색
 #fbd14b : 노랭이
 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
@@ -144,7 +155,6 @@
 						<%}%>
 						<%if(loginClient==null&&loginOwner!=null){%>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/owner/pensionList?oId=<%=loginOwner.getoId()%>">마이페이지</a></li>
-
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
 					</ul>
@@ -156,10 +166,8 @@
 			</div>
 		</nav>
 		<script>
-			$(function(){
-				$('#btn-srch').click(function(){
-					
-				})
+			$('#btn-srch').click(function(){
+				
 			})
 		</script>
 	</header>
