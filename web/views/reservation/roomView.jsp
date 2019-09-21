@@ -249,7 +249,9 @@
 				for (int i = 0; i < p.getRoomList().size(); i++) {
 			%>
 			<!-- 1 -->
+			
 			<div>
+			
 				<h1><%=p.getRoomList().get(i).getrName()%></h1>
 				
 
@@ -273,8 +275,9 @@
 								</div>
 
 							</div>
-
+	
 							<div class="col-sm-4"><!-- 5-2 -->
+							<br><br><br><br><br><br>
 								<h1><%=p.getRoomList().get(i).getrName()%></h1>
 								<h3>
 									가격 :
