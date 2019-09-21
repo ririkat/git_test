@@ -9,22 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.pension.model.service.RoomService;
-import com.jb.pension.model.vo.Pension;
-import com.jb.pension.model.vo.Room;
 import com.jb.search.model.service.SearchService;
 
 /**
- * Servlet implementation class SearchDetailViewServlet
+ * Servlet implementation class TestServlet
  */
-@WebServlet("/search/detailView")
-public class SearchDetailViewServlet extends HttpServlet {
+@WebServlet("/search/1")
+public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchDetailViewServlet() {
+    public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +30,12 @@ public class SearchDetailViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pCode=request.getParameter("pCode");
+		String addr = request.getParameter("address");
+		double y = Double.parseDouble(request.getParameter("y"));
+		double x =Double.parseDouble(request.getParameter("x"));
 		
-		Pension p = new SearchService().selectDetail(pCode);
-		
-		request.setAttribute("pension", p);
-		request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);
+		int result =new SearchService().insertAdd(addr,y,x);
+		System.out.println(result);
 	}
 
 	/**

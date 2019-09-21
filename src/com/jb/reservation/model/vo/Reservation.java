@@ -71,6 +71,7 @@ public void setResCode(String resCode) {
 	this.resCode = resCode;
 }
 
+
 public Date getResCheckIn() {
 	return resCheckIn;
 }

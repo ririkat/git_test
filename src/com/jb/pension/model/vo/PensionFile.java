@@ -19,25 +19,6 @@ public class PensionFile {
 		this.pCode = pCode;
 	}
 	
-	
-
-	public PensionFile(int pFileNo, String pCode, String pOriginalFile, String pRenameFile) {
-		super();
-		this.pFileNo = pFileNo;
-		this.pCode = pCode;
-		this.pOriginalFile = pOriginalFile;
-		this.pRenameFile = pRenameFile;
-	}
-	
-	
-
-	public int getpFileNo() {
-		return pFileNo;
-	}
-
-	public void setpFileNo(int pFileNo) {
-		this.pFileNo = pFileNo;
-	}
 
 	public int getpFileNo() {
 		return pFileNo;
