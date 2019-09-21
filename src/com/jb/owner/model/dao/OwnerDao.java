@@ -392,21 +392,4 @@ public class OwnerDao {
 		return result;
 	}
 	
-	public int updateOwnerPassword(Connection conn, String oId,String oPw) {
-		PreparedStatement pstmt=null;
-		int result =0;
-		String sql = prop.getProperty("updateOwnerPassword");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, oPw);
-			pstmt.setString(2, oId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
 }

@@ -33,8 +33,8 @@ public class OwnerUpdatePasswordServlet extends HttpServlet {
 		String id = request.getParameter("oId");
 		
 		Owner o = new OwnerService().selectOwnerOne(id);
-		request.setAttribute("owner", o);
 		
+		request.setAttribute("owner", o);
 		request.getRequestDispatcher("/views/owner/ownerUpdatePassword.jsp").forward(request, response);
 	}
 

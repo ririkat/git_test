@@ -200,7 +200,7 @@ public class ReviewDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = "select seq_review_no.currval from dual";
+		String sql = "select seq_review_no.currval from dual";  //현재 r_no받아오기
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
@@ -215,4 +215,53 @@ public class ReviewDao {
 		}return result;
 	}
 	
+	public int deleteReview(Connection conn, int rNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql = prop.getProperty("deleteReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//리뷰 수정
+	public int updateReview(Connection conn, int rNo ,String title, String writer, String content, String pCode) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql = prop.getProperty("updateReview");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, rNo);
+			pstmt.setString(4, writer);
+			pstmt.setString(5, pCode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int imgDelete(Connection conn, int rNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql = prop.getProperty("imgDelete");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
