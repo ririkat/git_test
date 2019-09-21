@@ -37,7 +37,6 @@ public class RoomInfoServlet extends HttpServlet {
 		
 		RoomService service = new RoomService();
 		Room r = service.roomInFo(rno);
-		System.out.println(r);
 		
 		/*
 		 * JSONObject room = new JSONObject(); room.put("room", r);

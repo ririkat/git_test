@@ -121,7 +121,7 @@ public class SearchDao {
 				r.setrAddPrice(rs.getInt("r_addprice"));
 				
 
-				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("table")
+				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
 						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
 						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
 						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
@@ -160,7 +160,7 @@ public class SearchDao {
 				r.setrAddPrice(rs.getInt("r_addprice"));
 				
 
-				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("table")
+				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
 						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
 						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
 						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")

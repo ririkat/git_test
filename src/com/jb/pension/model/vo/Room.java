@@ -7,10 +7,8 @@ public class Room {
 	private String rNo;
 	private String rName;
 	private int rPrice;
-
 	private int rNop;
 	private int rMaxNop;
-	private int rAddNop;
 	private String rSize;
 	private String pCode;
 	private String rStruc;
@@ -18,7 +16,7 @@ public class Room {
 	private int rAddPrice;
 	
 	private RoomFacilities roomFac;
-	/* private List<RoomFile> rfList; */
+	private List<RoomFile> rfList; 
 	
 
 	public Room() {
@@ -49,7 +47,6 @@ public class Room {
 		this.rPrice = rPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
-		this.rAddNop = rAddNop;
 		this.rSize = rSize;
 		this.pCode = pCode;
 		this.rStruc = rStruc;
@@ -58,6 +55,16 @@ public class Room {
 		this.roomFac = roomFac;
 	}
 
+
+	
+
+	public List<RoomFile> getRfList() {
+		return rfList;
+	}
+
+	public void setRfList(List<RoomFile> rfList) {
+		this.rfList = rfList;
+	}
 
 	public String getrNo() {
 		return rNo;
@@ -150,7 +157,7 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop + ", rMaxNop="
-				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
+				+ rMaxNop +", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
 				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
 	
