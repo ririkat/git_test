@@ -167,12 +167,10 @@ public class SearchDao {
 				r.setrAddPrice(rs.getInt("r_addprice"));
 				
 
-				r.setRoomFac(new RoomFacilities(rs.getString("r_no")
-						,rs.getString("BED")
-						,rs.getString("dress_table")
-						,rs.getString("rtable")
-						,rs.getString("sofa"),rs.getString("dress_case"),rs.getString("bath"),rs.getString("spa")
-						,rs.getString("wash_kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
+
+				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
+						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
+						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
 						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
 						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
 				

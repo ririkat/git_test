@@ -105,8 +105,10 @@
 									<label for="room_fac">
 										<input type="checkbox" name="room_fac" value="DRESS_TABLE">화장대
 									</label>
+
 									<label for="room_fac">
-										<input type="checkbox" name="room_fac" value="TABLE">테이블
+								<input type="checkbox" name="room_fac" value="RTABLE">테이블
+
 									</label>
 									<label for="room_fac">
 										<input type="checkbox" name="room_fac" value="SOFA">소파
