@@ -413,8 +413,7 @@ public class OwnerDao {
 		return result;
 	}
 	
-	
-	public Owner selectId(Connection conn, String id, String pw) {
+	public Owner selectId(Connection conn, String id,String pw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql =prop.getProperty("selectId");
@@ -600,5 +599,6 @@ public class OwnerDao {
 		}
 		return result;
 	}
+
 	
 }

@@ -154,10 +154,10 @@ th, td {
 								Reservation r = list.get(i);
 						%>
 
-						<form name="pension-jjim-match-Frm" method="post">
-							<input type="hidden" id="" name="pCode"
-								value="<%=r.getpCode()%>" />
-						</form>
+<!-- 						<form name="pension-jjim-match-Frm" method="post"> -->
+<!-- 							<input type="hidden" id="" name="pCode" -->
+<%-- <%-- 								value="<%=r.getpCode()%>" /> --%> --%>
+<!-- 						</form> -->
 						<tr>
 							<td></td>
 							<td>
