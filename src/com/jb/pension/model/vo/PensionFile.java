@@ -18,6 +18,7 @@ public class PensionFile {
 		this.pRenameFile = pRenameFile;
 		this.pCode = pCode;
 	}
+	
 
 	public int getpFileNo() {
 		return pFileNo;

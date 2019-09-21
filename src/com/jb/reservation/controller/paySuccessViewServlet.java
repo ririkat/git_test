@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.reservation.model.service.ReservationService;
+import com.jb.reservation.model.vo.Reservation;
+
 /**
- * Servlet implementation class PaymentServlet
+ * Servlet implementation class paySuccessView
  */
-@WebServlet("/PaymentServlet")
-public class PaymentServlet extends HttpServlet {
+@WebServlet("/reservation/paySuccessView")
+public class paySuccessViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentServlet() {
+    public paySuccessViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,16 +30,17 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//예약내역확인 후 결제정보 입력으로 전환해주는 서블릿 
+		//현희기준 5번째 서블릿 
+		//걍 결제성공 페이지로 전환해주는 서블릿
+	
+		String resCode = request.getParameter("resCode");
 		
+		Reservation res = new ReservationService().selectReservatedRoom(resCode);
 		
-		
-		
-		
-		
-		
-		
-		
+		request.getRequestDispatcher("/views/reservation/paySucess.jsp")
+		.forward(request,response);	
+
+        
 		
 	}
 

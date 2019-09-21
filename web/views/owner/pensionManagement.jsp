@@ -84,7 +84,7 @@
 				<h4>영업시작일 : <%=p.getpEnrollDate()%></h4>
 				<h4>블랙카운트 : <%=p.getpBlcount()%></h4>
 				<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/pensionDetail?pensionCode=<%=p.getpCode()%>&imgSrc=<%=imgSrc%>">Detail <span class="glyphicon glyphicon-chevron-right"></span></a>
-				<a class="btn btn-primary" href="#">Reviews <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<a class="btn btn-primary" href="<%=request.getContextPath()%>/review/pensionReviewList?pensionCode=<%=p.getpCode()%>">Reviews <span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 		</div>
 		<br><br>
