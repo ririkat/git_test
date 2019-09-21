@@ -57,7 +57,18 @@ public class OwnerInfoUpdateServlet extends HttpServlet {
 		o.setoName(request.getParameter("oName"));
 		o.setoGender(request.getParameter("oGender"));
 		System.out.println("reqeust oGender : "+request.getParameter("oGender"));
-//		o.setoEmail(request.getParameter("oEmail"));
+		
+		
+		
+		
+		
+		String oEmailId = request.getParameter("oEmailId");
+		String oEmail2 = request.getParameter("oEmail2");
+		String oEmail = oEmailId+"@"+oEmail2;
+		System.out.println("업주 이메일 합친거 :"+oEmail);
+		o.setoEmail(oEmail);
+		
+		
 		o.setoPhone(request.getParameter("oPhone"));
 		
 		String obirthYY = request.getParameter("oBirthYY");

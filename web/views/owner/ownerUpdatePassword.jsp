@@ -11,9 +11,6 @@
 
 
 			<section id="enroll-container">
-
-
-
 				<div class="tit_contents">비밀번호변경</div>
 				<br>
 				<hr>
@@ -67,7 +64,7 @@
 
 		$(function(){
 			$('#mypageList li').removeClass("active");
-			$('#mypageList li').eq(3).addClass("active");
+			$('#mypageList li').eq(2).addClass("active");
 		});
 
 

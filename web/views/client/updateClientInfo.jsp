@@ -1,4 +1,4 @@
-a<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jb.client.model.vo.Client"%>
 <%@ page import="java.util.Date,java.text.SimpleDateFormat"%>
@@ -118,24 +118,37 @@ String cBirthDD=str.substring(8, 10);
 	                </td>
 							</tr>
 					
-						<%-- <tr>
-								<th class="point"><strong class="point">*</strong>이메일</th>
-								<td>
-								<input type="text" name="cEmailId" style="IME-MODE: disabled" value="<%=cEmailId %>" id="cEmailId"> @ 
-								<input type="text" name="cEmail2" id="cEmail2"style="IME-MODE: disabled" value="<%=cEmailSelect%>"> 
-								
-									
-						<select name="cEmailSelect" id="cEmailSelect" onchange="mailChange(this.value,'uemail02');">
-							<option id="cEmailSelectnull">메일을 선택하세요</option>
-							<option value="naver" <%="naver".equals(cEmailSelect) ? "selected" : ""%>>naver.com</option>
-							<option value="hanmail" <%="hanmail".equals(cEmailSelect) ? "selected" : ""%>>hanmail.net</option>
-							<option value="nate" <%="nate".equals(cEmailSelect) ? "selected" : ""%>>nate.com</option>
-							<option value="gmail" <%="gmail".equals(cEmailSelect) ? "selected" : ""%>>gmail.com</option>
-							<option value="hotmail" <%="hotmail".equals(cEmailSelect) ? "selected" : ""%>>hotmail.com</option>
-							<option value="writeEmail">직접입력</option>
-					</select>
-					</td>
-							</tr> --%>
+					<tr>
+						<th class="point"><strong class="point">*</strong>이메일</th>
+						<td>
+						<input type="text" name="cEmailId"
+							style="IME-MODE: disabled"
+							value="<%=c.getcEmail().substring(0, c.getcEmail().indexOf("@"))%>"
+							id="cEmailId"> @ <input type="text" name="cEmail2"
+							id="cEmail2" style="IME-MODE: disabled" value="<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1)%>">
+							<select name="cEmailSelect" id="cEmailSelect">
+								<option id="cEmailSelectnull" value="choice">메일을 선택하세요</option>
+								<option value="naver.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("naver") ? "selected" : ""%>>
+									네이버</option>
+								<option value="hanmail.net"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("hanmail") ? "selected" : ""%>>
+									한메일</option>
+								<option value="nate.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("nate") ? "selected" : ""%>>
+									네이트</option>
+								<option value="gmail.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("gmail") ? "selected" : ""%>>
+									지메일</option>
+								<option value="hotmail.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("hotmail") ? "selected" : ""%>>
+									핫메일</option>
+								<option value="writeEmail">직접입력</option>
+						</select>
+						</td>
+					</tr>
+					
+						
 
 				 <tr>
 				      <th class="point"><strong class="point">*</strong>휴대폰번호</th>
@@ -148,8 +161,7 @@ String cBirthDD=str.substring(8, 10);
 				             </td>
 	            </tr>
 
-
-
+					
 						 <tr>
                         <th class="point">지역</th>
                         <td>
@@ -224,6 +236,17 @@ String cBirthDD=str.substring(8, 10);
 			$('#mypageList li').eq(2).addClass("active");
 		});
 
+	
+		//메일select
+		$('#cEmailSelect').change(function(){
+				console.log($('#cEmailSelect').val() );
+			if($('#cEmailSelect').val()!='writeEmail' && $('#cEmailSelect').val()!='choice'){
+				$('#cEmail2').val($('#cEmailSelect').val());
+			}
+			else
+				$('#cEmail2').val("");
+		});
+	
 		//주소 API
 		function openDaumZipAddress() {
 		new daum.Postcode({
@@ -321,40 +344,5 @@ String cBirthDD=str.substring(8, 10);
 		}
 
 		}
-	 
-
-	//메일 뒤에 선택하면 바뀌게 
-
-	function mailChange(val,id_name){
-		
-		obj = document.getElementById(id_name);
-		obj.value = val;
-		obj.focus();
-	}
-
-	
-
-
-
-
-
-
-
-
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <%@ include file="/views/common/footer.jsp"%>
