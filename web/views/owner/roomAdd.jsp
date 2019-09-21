@@ -172,28 +172,24 @@
 		$(this).parent().append(input);
 	})
 
+	//첨부파일 없음
 	function add_validate(){
-		//첨부파일 없음
 		if ($('input[type="file"]').length<=0) {
-			console.log("추가도 안했다니! : "+$('input[type="file"]').length);
 			alert("첨부파일(객실사진)을 추가해 주세요.");
 			return false;
-		}
-		/* else if(addRoom.roomImg.value==""){	//여러개일때 안먹힌다;
-			alert("첨부파일(객실사진)을 업로드해 주세요.");
-			return false;
-		} */
-		
+		}		
 		else{
-			console.log("else는 들어왔다!");
+			var cnt = 0;
 			$('input[type="file"]').each(function(idx,item){
-				console.log("each도 들어왔어! : "+idx);
 				if($(this).val()==""){
-					console.log("나는 조건문이야!");
 					alert("첨부파일(객실사진)을 업로드해 주세요.");
+					cnt++;
 					return false;
 				}
 			});
+			if(cnt>0){
+				return false;
+			}
 		}
 	}
 </script>

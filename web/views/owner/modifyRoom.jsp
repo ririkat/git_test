@@ -204,11 +204,24 @@
 	})
 	
 
+	//첨부파일 없음
 	function modify_validate(){
-		//첨부파일 없음
-		if ($("input[name=roomImg]").length<=0 || modifyRoom.roomImg.value=="") {
+		if ($('input[type="file"]').length<=0) {
 			alert("첨부파일(객실사진)을 추가해 주세요.");
 			return false;
+		}
+		else{
+			var cnt = 0;
+			$('input[type="file"]').each(function(idx,item){
+				if($(this).val()==""){
+					alert("첨부파일(객실사진)을 업로드해 주세요.");
+					cnt++;
+					return false;
+				}
+			});
+			if(cnt>0){
+				return false;
+			}
 		}
 	}
 </script>
