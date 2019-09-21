@@ -12,9 +12,9 @@ import com.jb.pension.model.dao.RoomDao;
 import com.jb.pension.model.vo.Room;
 
 public class RoomService {
-	
-	private RoomDao dao = new RoomDao();
-	
+   
+   private RoomDao dao = new RoomDao();
+   
 	//객실 한개 정보 받아오기
 	public Room selectRoom(String rNo) {
 		Connection conn = getConnection();
@@ -67,6 +67,40 @@ public class RoomService {
 		return result;
 	}
 	
+	//객실 수정
+	public int modifyRoom(String rNo, String rName, int rNop, int rMaxNop, int rPrice, int rAddPrice, String  rSize, String rStruc, String rInfo) {
+		Connection conn = getConnection();
+		int result = dao.modifyRoom(conn,rNo,rName,rNop,rMaxNop,rPrice,rAddPrice,rSize,rStruc,rInfo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	//객실 한개 삭제
+	public int deleteOneRoom(String rNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteOneRoom(conn,rNo);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} close(conn);
+		return result;
+	}
+  
+     //룸조회
+   public Room roomInFo(String rno) {
+	   Connection conn = getConnection();
+	   Room r = dao.roomInFo(conn,rno);
+	   close(conn);
+	   return r;
+   }
+
 
 }
+
 

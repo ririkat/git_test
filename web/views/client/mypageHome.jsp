@@ -241,16 +241,123 @@ th, td {
             }
          %>
          
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+          
+<%-- 					</ul>
+				<br>
+			</div>
+
+		</div>
+		<!-- 마이페이지 nav끝 -->
+
+		<!-- 예약내역 시작 -->
+
+		<section>
+
+	
+				
+				<div class="tit_contents">예약내역확인</div>
+				<br>
+				<hr>
+				<br>
+
+				<!-- 예약한펜션리스트  -->
+				
+				<%
+				if (list == null || list.size() <= 0) {
+			%>
+			
+			<h1>예약한 펜션이 없습니다.</h1>
+			
+			<%
+				} else {
+			%>
+
+			<table class="wish-list">
+				<colgroup>
+					<!-- 공백부분 -->
+					<col width="1%" />
+					<!-- 펜션이미지 -->
+					<col width="15%" />
+					<!-- 펜션이름 -->
+					<col width="15%" />
+					<!-- 펜션주소 -->
+					<col width="15%" />
+					<!-- 전화번호 -->
+					<col width="15%" />
+					<!-- 테마 -->
+					<col width="15%" />
+					<!-- 처리 -->
+					<col width="15%" />
+				</colgroup>
+				<form name="list_form" method="post">
+					<thead>
+						<tr>
+							<th scope="row"></th>
+
+							<th scope="row">펜션이름</th>
+							<th scope="row">방정보</th>
+							<th scope="row">인원수</th>
+							<th scope="row">이용일</th>
+							<th scope="row">결제금액</th>
+							<th scope="row">예약상태</th>
+							
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<%
+							for (int i = 0; i < list.size(); i++) {
+								Reservation r = list.get(i);
+						%>
+
+<!-- 						<form name="pension-jjim-match-Frm" method="post"> -->
+<!-- 							<input type="hidden" id="" name="pCode" -->
+<%-- 								value="<%=r.getpCode()%>" /> --%>
+<!-- 						</form> -->
+<%-- 						<tr>
+							<td></td>
+							<td>
+								<div class="">
+									<a href=""><img
+										src="<%=request.getContextPath()%>/images/펜션사진.jpg"
+										width="80px" height="80px" class="img-thumbnail" /></a>
+								</div>
+							</td>
+							<td class="td-name"><%=r.getPension().getpName()%></td>
+							<td class="td-addr"><%=r.getPension().getpAddr()%></td>
+							<td class="td-phone"><%=r.getPension().getpTel()%></td>
+							<td class=""><button class="btn btn-warning">보기</button></td>
+							<td class="">
+								<button class="btn btn-warning" id="btn-delete">삭제</button>
+							</td>
+						</tr>
+
+						<%
+							}
+						%>
+
+
+					</tbody>
+
+				</form>
+
+
+			</table>
+			<%
+				}
+			%>
+			
+				
+	
+
+				<!-- 이전, 다음 버튼 -->
+
+				<ul class="pager">
+					<li class="previous"><a href="#">&#60;&#60;이전</a></li>
+					<li class="next"><a href="#">다음 &#62; &#62;</a></li>
+				</ul> --%>
+
 
 
 

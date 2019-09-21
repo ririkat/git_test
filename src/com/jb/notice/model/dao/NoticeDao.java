@@ -123,8 +123,8 @@ public class NoticeDao {
 			pstmt.setString(1, n.getnTitle());
 			pstmt.setString(2, n.getnContent());
 			pstmt.setString(3, n.getnOriginFile());
-			pstmt.setString(4, n.getmId());
-			pstmt.setString(5, n.getnRenamedFile());
+			pstmt.setString(5, n.getmId());
+			pstmt.setString(4, n.getnRenamedFile());
 			result =pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

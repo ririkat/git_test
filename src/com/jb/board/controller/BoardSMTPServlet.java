@@ -1,7 +1,7 @@
 package com.jb.board.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
+import com.jb.report.model.service.ReportService;
+import com.jb.report.model.vo.Report;
 
 /**
  * Servlet implementation class BoardSMTPServlet
@@ -41,9 +42,13 @@ public class BoardSMTPServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String cmmNo=request.getParameter("cmmNo");
+		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
 		String category=request.getParameter("category");
+		System.out.println(category);
 		String content=request.getParameter("content");
+		String cId=request.getParameter("cId");
+		
+		Report r=new Report(cId, category, content, cmmNo);
 		
 		
 		String host="smtp.gmail.com";
@@ -52,9 +57,10 @@ public class BoardSMTPServlet extends HttpServlet {
 		
 		String msgText="";
 		msgText+=cmmNo+"번에 게시물에 대한 신고 내용입니다.<br/>";
+		msgText+="신고자 : "+cId+"<br/>";
 		msgText+="신고유형 : "+category+"<br/>";
 		msgText+="신고내용 : "+content+"<br/>";
-		msgText+="<a href='localhost:9090"+request.getContextPath()+"/board/boardView?cmmNo="+cmmNo+"'>글내용확인하기</a>";
+		msgText+="<a href='rclass.iptime.org:9999/"+request.getContextPath()+"/board/boardView?cmmNo="+cmmNo+"'>글내용확인하기</a>";
 		
 		Properties props=new Properties();
 		props.put("mail.smtp.host", host);
@@ -83,6 +89,26 @@ public class BoardSMTPServlet extends HttpServlet {
 		}catch(MessagingException e) {
 			e.printStackTrace();
 		}
+		
+		
+		int result=new ReportService().insertReport(r);
+		
+		
+		String msg="";
+		String loc="";
+		
+		if(result>0) {
+			msg="신고가 접수되었습니다.";
+			loc="/board/boardView?cmmNo="+cmmNo;
+		}else {
+			msg="잘못된 접근입니다.";
+			loc="/board/boardView?cmmNo="+cmmNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		
 		
 	}
 

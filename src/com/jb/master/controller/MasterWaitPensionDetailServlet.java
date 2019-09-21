@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.client.model.vo.Client;
+import com.jb.pension.model.service.PensionFacilitiesService;
+import com.jb.pension.model.service.PensionFileService;
 import com.jb.pension.model.service.PensionService;
 import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
+import com.jb.pension.model.vo.PensionFacilities;
+import com.jb.pension.model.vo.PensionFile;
 import com.jb.pension.model.vo.Room;
 
 /**
@@ -46,7 +50,59 @@ public class MasterWaitPensionDetailServlet extends HttpServlet {
 		String pCode = request.getParameter("pensionCode");
 		Pension pInfo = new PensionService().selectPension(pCode);
 		
-		request.setAttribute("pInfo", pInfo);
+		//해당 펜션 사진 받아오기
+		PensionFile pImg = new PensionFileService().selectImages(pCode);
+
+		//해당 펜션 부대시설 받아오기
+		PensionFacilities pf = new PensionFacilitiesService().selectPensionFac(pCode);
+		String pFac = "";
+		if(pf.getStore().equals("Y")) {
+			pFac += " 매점 /";
+		}
+		if(pf.getWifi().equals("Y")) {
+			pFac += " 와이파이 /";
+		}
+		if(pf.getPet().equals("Y")) {
+			pFac += " 애견가능 /";
+		}
+		if(pf.getPool().equals("Y")) {
+			pFac += " 공용수영장 /";
+		}
+		if(pf.getsPool().equals("Y")) {
+			pFac += " 어린이풀장 /";
+		}
+		if(pf.getSlide().equals("Y")) {
+			pFac += " 워터슬라이드 /";
+		}
+		if(pf.getOpenBath().equals("Y")) {
+			pFac += " 노천탕 /";
+		}
+		if(pf.getGrill().equals("Y")) {
+			pFac += " 그릴 /";
+		}
+		if(pf.getSmoked().equals("Y")) {
+			pFac += " 바베큐세트 /";
+		}
+		if(pf.getCafe().equals("Y")) {
+			pFac += " 카페 /";
+		}
+		if(pf.getSing().equals("Y")) {
+			pFac += " 노래방 /";
+		}
+		if(pf.getFoot().equals("Y")) {
+			pFac += " 축구장 /";
+		}
+		if(pf.getHand().equals("Y")) {
+			pFac += " 농구장 /";
+		}
+		if(pf.getCar().equals("Y")) {
+			pFac += " 주차장 /";
+		}
+		pFac += " ...";
+		
+		request.setAttribute("pInfo", pInfo);	//선택된 펜션정보
+		request.setAttribute("pImg", pImg);		//선택된 펜션 사진
+		request.setAttribute("pFac", pFac);		//선택된 펜션 부대시설
 		request.getRequestDispatcher("/views/master/waitPensionDetail.jsp").forward(request, response);
 	}
 

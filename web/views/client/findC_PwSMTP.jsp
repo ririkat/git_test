@@ -60,21 +60,16 @@
 					</tr>
 				</tbody>
 			</table>
-			<br>
-			<br>
+<br><br>
 			<div class="button">
 				<input type="submit" value="변경">
 				<input type="reset" value="취소">
 			</div>
-
-
 		</form>
-		<br>
-		<br>
-		<hr>
+<br><br>
+<hr>
 	</section>
 	<script>
-	
 	$(function(){
 		var email=$("#cemail3").val();
 		var reEmail=masking(email);
@@ -127,10 +122,9 @@
 	            error:function(data){
 	            }
 	         });
-	            
-	      });
+	         $(this).attr({"disabled":"true"});
+			});//인증번호 발송을 계속하지 못하게 버튼 잠금
 	   });
-	
 	
 	function fpw_validate() {
 	//비밀번호 빈칸
@@ -164,18 +158,7 @@
         }
 	}	
 	</script>
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+<br><br><br><br><br><br><br><br><br><br><br>
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>

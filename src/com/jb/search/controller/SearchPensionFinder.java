@@ -1,6 +1,9 @@
 package com.jb.search.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -31,6 +34,26 @@ public class SearchPensionFinder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String from=(request.getParameter("from"));
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date fromDate = new java.util.Date();
+		try {
+			fromDate = transFormat.parse(from);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		java.sql.Date fromSqlDate = new java.sql.Date(fromDate.getTime());
+		
+		
+		String to=(request.getParameter("to"));
+		java.util.Date toDate = new java.util.Date();
+		try {
+			toDate = transFormat.parse(to);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		java.sql.Date toSqlDate = new java.sql.Date(toDate.getTime());
+		
 		String keyword=request.getParameter("keyword");
 		String area=request.getParameter("area");
 		String[] pFac=request.getParameterValues("pen_fac");
@@ -43,7 +66,7 @@ public class SearchPensionFinder extends HttpServlet {
 		}
 		int nop=Integer.parseInt(request.getParameter("nop"));
 		
-		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac,nop);
+		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac,nop,fromSqlDate,toSqlDate);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/search/searchAll.jsp").forward(request, response);
 	}

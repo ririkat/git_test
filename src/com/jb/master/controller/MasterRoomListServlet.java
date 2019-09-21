@@ -10,10 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jb.client.model.vo.Client;
+import com.jb.pension.model.service.PensionFacilitiesService;
+import com.jb.pension.model.service.PensionFileService;
 import com.jb.pension.model.service.PensionService;
+import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
+import com.jb.pension.model.vo.PensionFacilities;
+import com.jb.pension.model.vo.PensionFile;
 import com.jb.pension.model.vo.Room;
+import com.jb.pension.model.vo.RoomFile;
 
 /**
  * Servlet implementation class MasterRoomListServlet
@@ -49,6 +55,60 @@ public class MasterRoomListServlet extends HttpServlet {
 		String pCode = request.getParameter("pensionCode");
 		Pension pInfo = new PensionService().selectPension(pCode);
 		
+		//해당 펜션 사진 받아오기
+		PensionFile pImg = new PensionFileService().selectImages(pCode);
+		
+		//해당 펜션 부대시설 받아오기
+		PensionFacilities pf = new PensionFacilitiesService().selectPensionFac(pCode);
+		String pFac = "";
+		if(pf.getStore().equals("Y")) {
+			pFac += " 매점 /";
+		}
+		if(pf.getWifi().equals("Y")) {
+			pFac += " 와이파이 /";
+		}
+		if(pf.getPet().equals("Y")) {
+			pFac += " 애견가능 /";
+		}
+		if(pf.getPool().equals("Y")) {
+			pFac += " 공용수영장 /";
+		}
+		if(pf.getsPool().equals("Y")) {
+			pFac += " 어린이풀장 /";
+		}
+		if(pf.getSlide().equals("Y")) {
+			pFac += " 워터슬라이드 /";
+		}
+		if(pf.getOpenBath().equals("Y")) {
+			pFac += " 노천탕 /";
+		}
+		if(pf.getGrill().equals("Y")) {
+			pFac += " 그릴 /";
+		}
+		if(pf.getSmoked().equals("Y")) {
+			pFac += " 바베큐세트 /";
+		}
+		if(pf.getCafe().equals("Y")) {
+			pFac += " 카페 /";
+		}
+		if(pf.getSing().equals("Y")) {
+			pFac += " 노래방 /";
+		}
+		if(pf.getFoot().equals("Y")) {
+			pFac += " 축구장 /";
+		}
+		if(pf.getHand().equals("Y")) {
+			pFac += " 농구장 /";
+		}
+		if(pf.getCar().equals("Y")) {
+			pFac += " 주차장 /";
+		}
+		pFac += " ...";
+		
+		
+		//객실사진 받아오기(전체. jsp에서 개별처리)
+		List<RoomFile> rImgs = new RoomFileService().selectRoomFile();
+		
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -57,7 +117,7 @@ public class MasterRoomListServlet extends HttpServlet {
 		}
 		int numPerPage = 9;
 		int totalRoom = new RoomService().selectCountRoom(pCode);
-		List<Room> rooms = new RoomService().selectListPage(cPage, numPerPage, pCode);
+		List<Room> rooms = new RoomService().selectListPage(cPage, numPerPage, pCode); //객실
 		int totalPage = (int) Math.ceil((double) totalRoom / numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -87,8 +147,11 @@ public class MasterRoomListServlet extends HttpServlet {
 
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("rooms", rooms);
-		request.setAttribute("pInfo", pInfo);
+		request.setAttribute("pInfo", pInfo);	//선택된 펜션정보
+		request.setAttribute("pImg", pImg);		//선택된 펜션 사진
+		request.setAttribute("pFac", pFac);		//선택된 펜션 부대시설
+		request.setAttribute("rooms", rooms);	//펜션에 따른 객실들만
+		request.setAttribute("rImgs", rImgs);	//전체 객실 사진
 		request.getRequestDispatcher("/views/master/roomList.jsp").forward(request, response);
 	}
 

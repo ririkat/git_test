@@ -29,24 +29,23 @@ public class updatePasswordEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("cId");
-		String pw = request.getParameter("cPw");
+//		String pw = request.getParameter("cPw");
 		String pwNew  = request.getParameter("cPwNew");
 	
-		int result = new ClientService().updatePassword(id,pw,pwNew);
+		int result = new ClientService().updatePassword(id,pwNew);
 		
 		String msg ="";
 		String loc="/client/updatePassword?cId="+id;
 		
 		switch(result) {
-		case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;
-		case -1 : msg="현재 비밀번호와 다른 비밀번호를 입력하셨습니다.";break;
-		default : msg="비밀번호  변경 완료"; break;
+			case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;
+			case -1 : msg="현재 비밀번호와 다른 비밀번호를 입력하셨습니다.";break;
+			default : msg="비밀번호  변경 완료"; break;
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
