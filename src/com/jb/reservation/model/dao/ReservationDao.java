@@ -33,13 +33,14 @@ public class ReservationDao {
 		}
 	}
 
-	public int selectReservationCount(Connection conn) {
+	public int selectReservationCount(Connection conn, String cId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
 		String sql = prop.getProperty("selectReservationCount");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = rs.getInt("cnt");
@@ -52,23 +53,59 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
 
-	public List<Reservation> selectReservationList(Connection conn, int cPage, int numPerPage) {
+
+	
+	public List<Reservation> loadReservationList(Connection conn, String cId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Reservation> list = new ArrayList<Reservation>();
-		String sql = prop.getProperty("selectReservationList");
+		String sql = prop.getProperty("loadReservationList");
+		System.out.println("dao 1 : "+list);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
-			pstmt.setInt(2, cPage * numPerPage);
-			rs = pstmt.executeQuery();
+			pstmt.setString(1, cId);
+			
+			rs= pstmt.executeQuery();
 			while (rs.next()) {
 				Reservation r = new Reservation();
 
-				// r.setpCode(rs.getString("p_code")); 등 작성해야함
+				r.setrNo(rs.getString("r_no"));
+				r.setcId(rs.getString("c_id"));
+
+//				r.getPension().setpName(rs.getString("p_name"));
+//				r.getRoom().setrName(rs.getString("r_name"));
+				
+				r.setResCode(rs.getString("res_code"));
+				r.setResCheckIn(rs.getDate("res_checkin"));
+				r.setResCheckOut(rs.getDate("res_checkout"));
+				r.setResState(rs.getString("res_state"));
+				r.setResNop(rs.getInt("res_nop"));
+				r.setTotalPrice(rs.getInt("total_price"));
+			    r.setResState(rs.getString("res_state"));
+			    
+			
+			    r.setRoom(new Room(rs.getString("r_no"),rs.getString("r_name")
+			    		,rs.getInt("r_price"),rs.getInt("r_nop"),rs.getInt("r_maxnop")
+			    		,rs.getString("r_size"),rs.getString("p_code"),rs.getString("r_struc")
+			    		,rs.getString("r_info"),rs.getInt("r_addprice")));
+			    
+				r.setPension(new Pension(
+						rs.getString("p_code"),
+						rs.getString("p_name"),
+						rs.getString("p_addr"),
+						rs.getString("p_tel"),
+						rs.getString("o_id"),
+						rs.getString("enrollYn"),
+						rs.getInt("p_blcount"),
+						rs.getDate("p_enrollDate")));
+				
 
 				list.add(r);
+				
+				System.out.println("DAO에서 list :"+list);
+				System.out.println(r.getRoom().getrName());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,68 +116,56 @@ public class ReservationDao {
 		return list;
 	}
 
+
+	
+//	public Room loadReservatedRoom(Connection conn, String resCode) {
+//		
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		Room r = null;
+//		String sql=prop.getProperty("loadReservatedRoom");
+//		try {
+//			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(1, resCode);
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+//				
+//				r=new Room();
+//				r.setrNo(rs.getString("r_no"));
+//				r.setrName(rs.getString("r_name"));
+//				r.setrPrice(rs.getInt("r_price"));
+//				r.setrNop(rs.getInt("r_nop"));
+//				r.setrMaxNop(rs.getInt("r_maxnop"));
+//				r.setrSize(rs.getString("r_size"));
+//				r.setpCode(rs.getString("p_code"));
+//				r.setrStruc(rs.getString("r_struc"));
+//				r.setrInfo(rs.getString("r_info"));
+//				r.setrAddPrice(rs.getInt("r_addprice"));
+//				
+//				r.setPension(new Pension(
+//				rs.getString("p_code"),
+//				rs.getString("p_name"),
+//				rs.getString("p_addr"),
+//				rs.getString("p_tel"),
+//				rs.getString("o_id"),
+//				rs.getString("enrollYn"),
+//				rs.getInt("p_blcount"),
+//				rs.getDate("p_enrollDate")));
+//				
+//			}
+//				
+//				
+//			}catch(SQLException e) {
+//				e.printStackTrace();
+//			}finally {
+//				close(rs);
+//				close(pstmt);
+//			}return r;
+//		}
+//	
+
 	
 	
-	public Reservation selectReservatedRoom(Connection conn, String resCode) {
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Reservation r = null;
-		
-		String sql = prop.getProperty("selectCheckRes");
-
-		try {
-
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, resCode);
-		
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				
-				//펜션명, 펜션주소, 객실명, 기준/최대 인원수, 체크인아웃날짜, 인원수, 추가인원수, 추가인원요금 , 요금합계 
-				//이름, 생년월일 , 연락처, 이메일
-				//hidden으로 처리한 것 : pCode, resCode, cId 
-				
-				r = new Reservation();
-				
-				//나중에 쓸 수도 있으니까 * 로 처리해서 값 다 가져오기 
-				
-				r.getPension().setpCode(rs.getString("p_code"));
-				r.getPension().setpName(rs.getString("p_name"));
-				r.getPension().setpAddr(rs.getString("p_addr"));
-				
-				r.getRoom().setrName(rs.getString("r_name"));
-				r.getRoom().setrNop(rs.getInt("r_nop"));
-				r.getRoom().setrMaxNop(rs.getInt("r_maxnop"));
-//				r.getRoom().setrAddNop(rs.getInt("r_addnop"));
-				r.getRoom().setrAddPrice(rs.getInt("r_addprice"));
-				r.getRoom().setrPrice(rs.getInt("r_price"));
-				
-				r.setResCode(rs.getString("res_code"));
-				r.setResCheckIn(rs.getDate("res_checkin"));
-				r.setResCheckOut(rs.getDate("res_checkout"));
-				r.setResNop(rs.getInt("res_nop"));
-				r.setTotalPrice(rs.getInt("total_price"));
-				
-				r.getClient().setcName(rs.getString("c_name"));
-				r.getClient().setcBirth(rs.getDate("c_birth"));
-				r.getClient().setcPhone(rs.getString("c_phone"));
-				r.getClient().setcEmail(rs.getString("c_email"));
-				
-			
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return r;
-		
-	}
 	
 
 	
@@ -225,6 +250,81 @@ public class ReservationDao {
 		
 		
 	}
+
+	
+	
+	//하나의 예약(예정) 가져오기 
+	
+	public Reservation selectOneReservation(Connection conn, String resCode, String cId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Reservation res = null;
+		String sql = prop.getProperty("selectOneReservation");
+		
+	 try {
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, cId);
+		pstmt.setString(2, resCode);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			res = new Reservation();
+			res.setResCode(rs.getString("res_code"));
+			res.setResCheckIn(rs.getDate("res_checkin"));
+			res.setResCheckOut(rs.getDate("res_checkOut"));
+			res.setResState(rs.getString("res_state"));	
+			res.setResNop(rs.getInt("res_nop"));
+			res.setTotalPrice(rs.getInt("total_price"));
+			res.setcId(rs.getString("c_id"));
+			res.setResDate(rs.getDate("res_date"));
+			
+			   res.setRoom(new Room(
+					   rs.getString("r_no"),
+					   rs.getString("r_name"),
+			    		rs.getInt("r_price"),
+			    		rs.getInt("r_nop"),
+			    		rs.getInt("r_maxnop"),
+			    		rs.getString("r_size"),
+			    		rs.getString("p_code"),
+			    		rs.getString("r_struc"),
+			    		rs.getString("r_info"),
+			    		rs.getInt("r_addprice")));
+			    
+				res.setPension(new Pension(
+						rs.getString("p_code"),
+						rs.getString("p_name"),
+						rs.getString("p_addr"),
+						rs.getString("p_tel"),
+						rs.getString("o_id"),
+						rs.getString("enrollYn"),
+						rs.getInt("p_blcount"),
+						rs.getDate("p_enrollDate")));
+				
+			
+				res.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
+				rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
+				rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
+				rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority")));
+				 
+						
+						
+	
+				System.out.println(res);
+			
+			
+		}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} return res;
+		
+	}
+	
+	   
+	
 }
 		
 		

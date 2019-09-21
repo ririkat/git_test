@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.jb.notice.model.vo.Notice;
+import com.jb.pension.model.vo.Pension;
 import com.jb.reservation.model.dao.ReservationDao;
 import com.jb.reservation.model.vo.Payment;
 import com.jb.reservation.model.vo.Reservation;
@@ -17,23 +18,32 @@ public class ReservationService {
 	
 	private ReservationDao dao = new ReservationDao();
 	
-	public int selectReservationCount() {
+	public int selectReservationCount(String cId) {
 		Connection conn = getConnection();
-		int result=dao.selectReservationCount(conn);
+		int result = dao.selectReservationCount(conn,cId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
 	
-	public List<Reservation> selectReservationList(int cPage, int numPerPage){
+	public List<Reservation> loadReservationList(String cId){
 		Connection conn = getConnection();
-		List<Reservation> list=dao.selectReservationList(conn,cPage,numPerPage);
+		List<Reservation> list=dao.loadReservationList(conn,cId);
+		
+		System.out.println("service에서 list: "+list);
 		close(conn);
 		return list;
 	}
 	
-	public Reservation selectReservatedRoom(String resCode) {
+	public Reservation selectOneReservation(String cId,String resCode) {
 		Connection conn = getConnection();
-		Reservation r = dao.selectReservatedRoom(conn, resCode);
+		
+		Reservation r = dao.selectOneReservation(conn, cId,resCode);
+		System.out.println(r);
 		close(conn);
 		return r;
 	}

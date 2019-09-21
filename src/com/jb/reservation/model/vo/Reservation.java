@@ -19,7 +19,7 @@ public class Reservation {
    private String cId;
    private Date resDate;
 
-   private Pension Pension;
+   private Pension Pension; //pCode가져와야함 
    private Room Room;
    private Payment Payment;
    private Client Client;
@@ -220,8 +220,8 @@ public void setClient(Client client) {
 public String toString() {
 	return "Reservation [resCode=" + resCode + ", resCheckIn=" + resCheckIn + ", resCheckOut=" + resCheckOut
 			+ ", resState=" + resState + ", resNop=" + resNop + ", totalPrice=" + totalPrice + ", rNo=" + rNo + ", cId="
-			+ cId + ", resDate=" + resDate + ", Pension=" + Pension + ", Room=" + Room + ", Payment=" + Payment
-			+ ", Client=" + Client + "]";
+			+ cId + ", resDate=" + resDate + ", \nPension=" + Pension + ", \nRoom=" + Room + ", \nPayment=" + Payment
+			+ ", \nClient=" + Client + "]";
 }
    
 
