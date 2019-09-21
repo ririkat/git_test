@@ -133,14 +133,14 @@
 <script>
 	function modify_validate(){
 		//번호 빈칸
-		if (addPension.tel2.value == "" || addPension.tel3.value == "") {
+		if (modifyPension.tel2.value == "" || modifyPension.tel3.value == "") {
 			alert("전화번호를 바르게 입력해 주세요.");
 			tel2.focus();
 			return false;
 		}
 		
 		//첨부파일 없음
-		if (addPension.panorama.value == "") {
+		if (modifyPension.panorama.value == "") {
 			alert("첨부파일(펜션전경사진)을 추가해 주세요.");
 			return false;
 		}
