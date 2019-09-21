@@ -1,4 +1,4 @@
-package com.jb.notice.controller;
+package com.jb.report.controller;
 
 import java.io.IOException;
 
@@ -8,34 +8,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.notice.model.service.NoticeService;
-import com.jb.notice.model.vo.Notice;
+import com.jb.report.model.service.ReportService;
+import com.jb.report.model.vo.Report;
 
 /**
- * Servlet implementation class NoticeUpdateServlet
+ * Servlet implementation class ReportViewServlet
  */
-@WebServlet("/notice/noticeUpdate")
-public class NoticeUpdateServlet extends HttpServlet {
+@WebServlet("/report/reportView")
+public class ReportViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public NoticeUpdateServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReportViewServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("noticeNo"));
-		Notice n= new NoticeService().selectNoticeOne(no);
-
-		request.setAttribute("notice", n);
-		request.getRequestDispatcher("/views/notice/noticeUpdate.jsp").forward(request, response);
+		int refNo=Integer.parseInt(request.getParameter("refNo"));
+		Report r=new ReportService().selectReportOne(refNo);
+		
+		request.setAttribute("report", r);
+		request.getRequestDispatcher("/views/report/reportView.jsp").forward(request, response);
+		
+		
+		
+		
 	}
 
 	/**

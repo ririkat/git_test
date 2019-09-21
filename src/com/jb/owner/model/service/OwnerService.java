@@ -15,8 +15,6 @@ import com.jb.owner.model.vo.Owner;
 public class OwnerService {
 	private OwnerDao dao = new OwnerDao();
 	
-	
-	
 	//전체 업주회원수
 	public int selectCountOwner() {
 		Connection conn = getConnection();
@@ -24,7 +22,6 @@ public class OwnerService {
 		close(conn);
 		return count;
 	}
-	
 	
 	public List<Owner> selectListPage(int cPage, int numPerPage){
 		Connection conn =getConnection();
@@ -78,13 +75,12 @@ public class OwnerService {
 		return result;
 	}
 	
-	public Owner selectId(String id, String pw) {
+	public Owner selectId(String id,String pw) {
 		Connection conn = getConnection();
-		Owner o = dao.selectId(conn, id, pw);
+		Owner o = dao.selectId(conn, id,pw);
 		close(conn);
 		return o;
 	}
-	
 	
 	//업체 회원가입
 		public int insertOwner(Owner o) {
@@ -133,7 +129,6 @@ public class OwnerService {
 			result = -1;
 		}
 		
-		
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -143,16 +138,12 @@ public class OwnerService {
 		return result;
 	}
 	
-	public int updateOwnerPassword(String oId, String oPw, String oPwNew) {
+	public int updateOwnerPassword(String oId, String oPwNew) {
 		Connection conn = getConnection();
 		
-		Owner o = dao.selectId(conn, oId, oPw);
-		int result = 0;
-		if(o!=null) {
-			result = dao.updateOwnerPassword(conn, oId, oPwNew);
-		}else {
-			result = -1;
-		}
+
+			int result = dao.updateOwnerPassword(conn, oId, oPwNew);
+
 		if(result >0) {
 			commit(conn);
 		}else {
@@ -160,8 +151,6 @@ public class OwnerService {
 		}
 		close(conn);
 		return result;
-		
-		
 	}
 
 	public int updatePassword(String id, String pw) {

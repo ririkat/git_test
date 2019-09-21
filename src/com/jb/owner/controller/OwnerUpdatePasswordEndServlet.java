@@ -30,10 +30,9 @@ public class OwnerUpdatePasswordEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("oId");
-		String pw = request.getParameter("oPw");
 		String pwNew  = request.getParameter("oPwNew");
 		
-		int result = new OwnerService().updateOwnerPassword(id,pw,pwNew);
+		int result = new OwnerService().updateOwnerPassword(id,pwNew);
 		
 		String msg="";
 		String loc="/owner/updatePassword?oId="+id;

@@ -12,6 +12,7 @@ import java.util.List;
 import com.jb.board.model.dao.BoardDao;
 import com.jb.board.model.vo.Board;
 import com.jb.board.model.vo.BoardComment;
+import com.jb.notice.model.vo.Notice;
 
 public class BoardService {
 	private BoardDao dao = new BoardDao();
@@ -54,8 +55,14 @@ public class BoardService {
 		return null;
 	}
 
-	public Board selectBoardOne(int cmmNo) {
+	public Board selectBoardOne(int cmmNo, boolean hasRead) {
 		Connection conn=getConnection();
+		if(!hasRead) {
+			int result=dao.updateCount(conn, cmmNo);
+			
+			if(result>0) commit(conn);
+			else rollback(conn);
+		}
 		Board b=dao.selectBoardOne(conn, cmmNo);
 		close(conn);
 		return b;
@@ -91,9 +98,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int deleteComment(int cmmNo, int commentNo) {
+	public int deleteComment(int cmmNo, int coNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteComment(conn, cmmNo, commentNo);
+		int result=dao.deleteComment(conn, cmmNo, coNo);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -107,6 +114,13 @@ public class BoardService {
 		List<BoardComment> list=dao.selectBoardComment(conn, cmmNo);
 		close(conn);
 		return list;
+	}
+
+	public Board selectBoardOne(int cmmNo) {
+		Connection conn=getConnection();
+		Board b = dao.selectBoardOne(conn,cmmNo);
+		close(conn);
+		return b;
 	}
 
 	

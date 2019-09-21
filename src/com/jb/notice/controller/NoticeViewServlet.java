@@ -64,8 +64,8 @@ public class NoticeViewServlet extends HttpServlet {
 		Notice n=new NoticeService().selectNoticeOne(no,hasRead);
 		List<NoticeComment> list = new NoticeService().selectNoticeComment(no);
 		
-		request.setAttribute("notice", n);
 		request.setAttribute("list", list);
+		request.setAttribute("notice", n);
 		request.getRequestDispatcher("/views/notice/noticeView.jsp").forward(request, response);
 	}
 
