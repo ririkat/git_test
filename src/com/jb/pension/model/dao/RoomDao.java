@@ -173,6 +173,30 @@ public class RoomDao {
 		} return result;
 	}
 	
+	//객실 수정
+	public int modifyRoom(Connection conn, String rNo, String rName, int rNop, int rMaxNop, int rPrice, int rAddPrice, String rSize, String rStruc, String rInfo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("modifyRoom");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rName);
+			pstmt.setInt(2, rNop);
+			pstmt.setInt(3, rMaxNop);
+			pstmt.setInt(4, rPrice);
+			pstmt.setInt(5, rAddPrice);
+			pstmt.setString(6, rSize);
+			pstmt.setString(7, rStruc);
+			pstmt.setString(8, rInfo);
+			pstmt.setString(9, rNo);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	
 	public int getCurrval(Connection conn) {
 		Statement stmt = null;
 		ResultSet rs = null;

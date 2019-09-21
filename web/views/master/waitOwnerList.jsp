@@ -77,7 +77,7 @@
 					<input type="checkbox" name="selected" value="ROW">
 				</td>
 				<td style="cursor: pointer">
-					<a href="<%=request.getContextPath()%>/owner/ownerInfo?oId=<%=o.getoId()%>">
+					<a href="<%=request.getContextPath()%>/master/waitOwnerInfo?oId=<%=o.getoId()%>">
 						<%=o.getoId() %>
 					</a>
 				</td>
@@ -142,7 +142,7 @@
 					// 가져온 값을 배열에 담는다.
 					tdArr.push(oId);
 				});
-				//삭제할 펜션들을 서블릿으로 보내기
+				//삭제할 업주들을 서블릿으로 보내기
 				location.href="<%=request.getContextPath()%>/master/waitOwnerDelete?delOwnerList="+tdArr;
 			}
 		}
@@ -170,7 +170,7 @@
 					tdArr.push(oId);
 				});
 				
-				//승인할 펜션들을 서블릿으로 보내기
+				//승인할 업주들을 서블릿으로 보내기
 				location.href="<%=request.getContextPath()%>/master/waitOwnerAccept?accOwnerList="+tdArr;
 			}
 		}

@@ -367,6 +367,23 @@ public class OwnerDao {
 		return result;
 	}
 
+	//관리자 승인대기 업주 한명 승인
+	public int acceptOwner(Connection conn, String oId) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "update owner set o_eayn='Y', o_ed=sysdate where o_id='"+oId+"'";
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
 	public int multiDeleteOwner(Connection conn, String[] idss) {
 		PreparedStatement pstmt=null;
 		int result =0;

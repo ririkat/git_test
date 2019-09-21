@@ -27,6 +27,31 @@ public class RoomFileService {
 		return result;
 	}
 	
+	//오버로딩
+	public int addImages(String rNo, String oriFile, String reFile) {
+		Connection conn = getConnection();
+		int result = dao.addImages(conn,rNo,oriFile,reFile);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteImgs(String rNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteImgs(conn,rNo);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	public List<RoomFile> selectRoomFile() {
 		Connection conn = getConnection();
 		List<RoomFile> list = dao.selectRoomFile(conn);

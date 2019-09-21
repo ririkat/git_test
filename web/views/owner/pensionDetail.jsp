@@ -93,17 +93,18 @@
 			<tbody>
 				<% if(roomList!=null && !roomList.isEmpty()) {
 					int cnt = 0;
-					for(Room r : roomList) { %>
+					for(Room r : roomList) {
+						List<RoomFile> curRfList = new ArrayList();
+						if(rFileList!=null && !rFileList.isEmpty()) {
+							for(RoomFile rf : rFileList) {
+								if(r.getrNo().equals(rf.getrNo())){
+									curRfList.add(rf);
+								}
+							}
+					%>
 					<tr>
 						<th>
 							<span class="imgBox">
-								<%List<RoomFile> curRfList = new ArrayList();
-									for(RoomFile rf : rFileList) {
-										if(r.getrNo().equals(rf.getrNo())){
-											curRfList.add(rf);
-										}
-								  	}
-								%>
 								<a name="move<%=r.getrNo()%>"></a>
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
 								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
@@ -123,75 +124,77 @@
 								<h4>객실 설명 : <%=r.getrInfo() %></h4>
 								<h4>부대시설 : 
 									<%  String rFac = "";
-										for(RoomFacilities rfc : rFacList) {
-										if(r.getrNo().equals(rfc.getrNo())){
-											if(rfc.getBed().equals("Y")) {
-												rFac += " 침대 /";
+										if(rFacList!=null && !rFacList.isEmpty()) {
+											for(RoomFacilities rfc : rFacList) {
+											if(r.getrNo().equals(rfc.getrNo())){
+												if(rfc.getBed().equals("Y")) {
+													rFac += " 침대 /";
+												}
+												if(rfc.getDressTable().equals("Y")) {
+													rFac += " 화장대 /";
+												}
+												if(rfc.getTable().equals("Y")) {
+													rFac += " 테이블 /";
+												}
+												if(rfc.getSofa().equals("Y")) {
+													rFac += " 소파 /";
+												}
+												if(rfc.getDressCase().equals("Y")) {
+													rFac += " 옷장 /";
+												}
+												if(rfc.getBath().equals("Y")) {
+													rFac += " 욕조 /";
+												}
+												if(rfc.getSpa().equals("Y")) {
+													rFac += " 스파 /";
+												}
+												if(rfc.getWashKit().equals("Y")) {
+													rFac += " 세면도구 /";
+												}
+												if(rfc.getTv().equals("Y")) {
+													rFac += " TV /";
+												}
+												if(rfc.getBeam().equals("Y")) {
+													rFac += " 빔프로젝터 /";
+												}
+												if(rfc.getAircon().equals("Y")) {
+													rFac += " 에어컨 /";
+												}
+												if(rfc.getFridge().equals("Y")) {
+													rFac += " 냉장고 /";
+												}
+												if(rfc.getCookFac().equals("Y")) {
+													rFac += " 조리시설 /";
+												}
+												if(rfc.getCookUten().equals("Y")) {
+													rFac += " 조리기구 /";
+												}
+												if(rfc.getRice().equals("Y")) {
+													rFac += " 밥솥 /";
+												}
+												if(rfc.getMicrowave().equals("Y")) {
+													rFac += " 전자레인지 /";
+												}
+												if(rfc.getrSmoked().equals("Y")) {
+													rFac += " 개별바베큐 /";
+												}
+												if(rfc.getChild().equals("Y")) {
+													rFac += " 유아시설 /";
+												}
+												if(rfc.getoView().equals("Y")) {
+													rFac += " 오션뷰 /";
+												}
+												if(rfc.getiPool().equals("Y")) {
+													rFac += " 인피니티풀 /";
+												}
+												rFac += " ...";
+												break;
 											}
-											if(rfc.getDressTable().equals("Y")) {
-												rFac += " 화장대 /";
-											}
-											if(rfc.getTable().equals("Y")) {
-												rFac += " 테이블 /";
-											}
-											if(rfc.getSofa().equals("Y")) {
-												rFac += " 소파 /";
-											}
-											if(rfc.getDressCase().equals("Y")) {
-												rFac += " 옷장 /";
-											}
-											if(rfc.getBath().equals("Y")) {
-												rFac += " 욕조 /";
-											}
-											if(rfc.getSpa().equals("Y")) {
-												rFac += " 스파 /";
-											}
-											if(rfc.getWashKit().equals("Y")) {
-												rFac += " 세면도구 /";
-											}
-											if(rfc.getTv().equals("Y")) {
-												rFac += " TV /";
-											}
-											if(rfc.getBeam().equals("Y")) {
-												rFac += " 빔프로젝터 /";
-											}
-											if(rfc.getAircon().equals("Y")) {
-												rFac += " 에어컨 /";
-											}
-											if(rfc.getFridge().equals("Y")) {
-												rFac += " 냉장고 /";
-											}
-											if(rfc.getCookFac().equals("Y")) {
-												rFac += " 조리시설 /";
-											}
-											if(rfc.getCookUten().equals("Y")) {
-												rFac += " 조리기구 /";
-											}
-											if(rfc.getRice().equals("Y")) {
-												rFac += " 밥솥 /";
-											}
-											if(rfc.getMicrowave().equals("Y")) {
-												rFac += " 전자레인지 /";
-											}
-											if(rfc.getrSmoked().equals("Y")) {
-												rFac += " 개별바베큐 /";
-											}
-											if(rfc.getChild().equals("Y")) {
-												rFac += " 유아시설 /";
-											}
-											if(rfc.getoView().equals("Y")) {
-												rFac += " 오션뷰 /";
-											}
-											if(rfc.getiPool().equals("Y")) {
-												rFac += " 인피니티풀 /";
-											}
-											rFac += " ...";
-											break;
 										}
 									}%>
 									<%=rFac %>
 								</h4>
-								<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/modifyRoom?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&pName=<%=pInfo.getpName()%>&rName=<%=r.getrName()%>&rNop=<%=r.getrNop()%>&rMaxNop=<%=r.getrMaxNop()%>&rPrice=<%=r.getrPrice()%>&rAddPrice=<%=r.getrAddPrice()%>&rSize=<%=r.getrSize()%>&rStruc=<%=r.getrStruc()%>&rInfo=<%=r.getrInfo()%>">수정 <span class="glyphicon glyphicon-chevron-right"></span></a>
+								<a class="btn btn-primary" href="<%=request.getContextPath()%>/owner/modifyRoom?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>&pName=<%=pInfo.getpName()%>&rName=<%=r.getrName()%>&rNop=<%=r.getrNop()%>&rMaxNop=<%=r.getrMaxNop()%>&rPrice=<%=r.getrPrice()%>&rAddPrice=<%=r.getrAddPrice()%>&rSize=<%=r.getrSize()%>&rStruc=<%=r.getrStruc()%>&rInfo=<%=r.getrInfo()%>">수정 <span class="glyphicon glyphicon-chevron-right"></span></a>
 								<a class="btn btn-primary" onclick="return delcheck();" href="<%=request.getContextPath()%>/owner/oneRoomDelete?rNo=<%=r.getrNo()%>&pCode=<%=pInfo.getpCode()%>&imgSrc=<%=imgSrc%>">삭제 <span class="glyphicon glyphicon-chevron-right"></span></a>
 							</div>
 						</th>
@@ -209,6 +212,7 @@
 						</th>
 					</tr>
 				<%	cnt++;
+						}
 					}
 			    }%>
 			</tbody>

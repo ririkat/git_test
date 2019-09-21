@@ -35,6 +35,7 @@ public class OwnerModifyRoomServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String rNo = request.getParameter("rNo");
 		String pCode = request.getParameter("pCode");
+		String imgSrc = request.getParameter("imgSrc");
 		String pName = request.getParameter("pName");
 		String rName = request.getParameter("rName");
 		String rNop = request.getParameter("rNop");
@@ -52,6 +53,7 @@ public class OwnerModifyRoomServlet extends HttpServlet {
 		
 		request.setAttribute("rNo", rNo);
 		request.setAttribute("pCode", pCode);
+		request.setAttribute("imgSrc", imgSrc);
 		request.setAttribute("pName", pName);
 		request.setAttribute("rName", rName);
 		request.setAttribute("rNop", rNop);

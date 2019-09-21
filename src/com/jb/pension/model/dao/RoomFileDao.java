@@ -27,6 +27,35 @@ public class RoomFileDao {
 		} return result;
 	}
 	
+	//오버로딩
+	public int addImages(Connection conn, String rNo, String oriFile, String reFile) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "insert into room_file values(seq_room_file_no.nextval,'"+oriFile+"','"+reFile+"','"+rNo+"')";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		} return result;
+	}
+	
+	public int deleteImgs(Connection conn, String rNo) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "delete from room_file where r_no='"+rNo+"'";
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		} return result;
+	}
+	
 	public List<RoomFile> selectRoomFile(Connection conn){
 		Statement stmt = null;
 		ResultSet rs = null;

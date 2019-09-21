@@ -67,6 +67,19 @@ public class RoomService {
 		return result;
 	}
 	
+	//객실 수정
+	public int modifyRoom(String rNo, String rName, int rNop, int rMaxNop, int rPrice, int rAddPrice, String  rSize, String rStruc, String rInfo) {
+		Connection conn = getConnection();
+		int result = dao.modifyRoom(conn,rNo,rName,rNop,rMaxNop,rPrice,rAddPrice,rSize,rStruc,rInfo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	//객실 한개 삭제
 	public int deleteOneRoom(String rNo) {
 		Connection conn = getConnection();

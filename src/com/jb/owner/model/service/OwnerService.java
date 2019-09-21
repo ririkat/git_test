@@ -127,6 +127,19 @@ public class OwnerService {
 		return result;
 	}
 	
+	//관리자 승인대기 업주 한명 승인
+	public int acceptOwner(String oId) {
+		Connection conn = getConnection();
+		int result = dao.acceptOwner(conn,oId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 	public int multiDeleteOwner(String[] idss) {
 		Connection conn =getConnection();
