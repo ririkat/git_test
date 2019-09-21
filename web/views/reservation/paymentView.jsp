@@ -21,10 +21,12 @@
 	int nowMonth = now.get(Calendar.MONTH)+1;		// 현재 월
 	int nowDate = now.get(Calendar.DATE);			// 현재 일
 	out.print(nowYear+"년 "+nowMonth+"월 "+nowDate+"일"); */
+	Reservation resInfo=(Reservation)request.getAttribute("resInfo");
 %>
 
 <!-- 결제API script -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -33,47 +35,12 @@
 
 
 	<br> <br> <br> <br>
-	<div id="mypagetitle" text-align="center">결제정보확인</div>
+	<div id="mypagetitle" text-align="center">결제진행</div>
 	<br> <br>
 
 	<form method="post" class="container"  name="reservationFrm" id="reservationFrm" action="">
 
-		<table class="table_final_auction" id="final_input_table">
-			<colgroup>
-				<col width="20%">
-				<col width="">
-			</colgroup>
-			<%-- <tbody>
-				<tr>
-					<th class="txt_left"><strong class="point">*예약자명</strong></th>
-					<td class="txt_left">
-					<input type="text" name="cName" value="<%=c.getcName()%>"> <span style="color: #FF8F00;">*
-							예약자 실명을 입력하세요. 예약확인시 혼동이 될 수 있습니다.</span></td>
-				</tr>
-				<tr>
-					<th class="txt_left"><strong class="point">*생년월일</strong></th>
-					<td class="txt_left"><input type="text" name="cBirth" value="<%=c.getcBirth()%>" class="w80px" maxlength="10" onblur="">
-						ex)94/02/07 <span id="bir_auth"></span></td>
-				</tr>
-				<tr>
-					<th class="txt_left"><strong class="point">*연락처</strong></th>
-					<td class="txt_left"><input type="text" name="cPhone"
-						value="<%=c.getcPhone()%>" style="width: 120px;" class="num_only"
-						placeholder="01012345678로 입력"> <span
-						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
-				</tr>
-
-				<tr>
-					<th class="txt_left"><strong class="point">이메일</strong></th>
-					<td class="txt_left"><input type="text" name="cEmail"
-						value="<%=c.getcEmail()%>" style="width: 300px;">
-						ex)honey@honey.com</td>
-				</tr>
-
-
-
-			</tbody>
-		</table>
+		
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
 		<div id="mypagetitle" text-align="center">결제금액</div>
@@ -92,9 +59,6 @@
 				<col width="25%">
 			</colgroup>
 
-
-
-
 			<tbody>
 				<tr>
 					<th>
@@ -108,10 +72,6 @@
 				</tr>
 
 
-
-
-
-
 				<tr>
 					<td
 						style="padding: 10px 20px; text-align: right; position: relative;">
@@ -123,18 +83,14 @@
 									<th>기본가</th>
 									<td><strong class="nanum f23 ltm1">
 									
-									<input type="text" name="rPrice" style="border:none" value="<%=r.getrPrice() %>">
+									<input type="text" name="rPrice" style="border:none" value="<%=resInfo.getRoom().getrPrice()%>">
 									</strong>원</td>
 								</tr>
-
-
-
-
 
 								<tr>
 									<th>인원추가</th>
 									<td><strong class="nanum f23 ltm1">
-									<input type="text" name="rAddPrice" style="border:none" value="<%=r.getrAddPrice() %>"></strong>원(추가인원 0명)</td>
+									<input type="text" name="rAddPrice" style="border:none" value="<%=resInfo.getRoom().getrAddPrice()%>"></strong>원(추가인원 0명)</td>
 								</tr>
 
 
@@ -142,17 +98,13 @@
 						</table>
 					</td>
 
-
-
 					<!-- 총결제금액 -->
 
 					<td style="padding: 10px 20px; text-align: right;">
 					<strong class="nanum f23 ltm1 cff" id="total_price_view">
-					<input type="text" name="totalPrice" style="border:none" value="<%=totalPrice%>"></strong>원
+					<input type="text" name="totalPrice" style="border:none" value="<%=resInfo.getTotalPrice()%>"></strong>원
 					</td>
 				</tr>
-
-
 
 			</tbody>
 		</table>
@@ -207,21 +159,18 @@
 
 			</tbody>
 		</table>
-        
-        <input type="hidden" name="payCode" value="<%=pay.getPayCode()%>">
-        <input type="hidden" name="rCode" value="<%=res.getResCode()%>">
-		<input type="hidden" name="pCode" value="<%=p.getpCode()%>">
+      
+        <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
+	
 		 
-	 
-		<input type="hidden" name="cId" value="<%=c.getcId()%>">
-		<input type="hidden" name="resState" value="<%=res.getResState()%>">
+	
 			
-			
- --%>        <input type="reset" onclick="preview();" class="btn btn-warning" value="뒤로가기">
-        <input type="submit" class="btn btn-warning" id="btn-pay" onclick="" value="결제하기">
+       <input type="reset" onclick="preview();" class="btn btn-warning" value="뒤로가기">
+        <input type="button" class="btn btn-warning" id="btn-pay" onclick="" value="결제하기">
 			
 
-	</form>
+	</form> 
+	<input type="submit" name="pay" id="pay" value="결제하기">
 
 
 
@@ -235,7 +184,7 @@
   <script>
   
  /*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
-  
+  /* 
         $(document).ready(function () {
             $("#payCard").click(function () {
                 if ($("#payCard").prop("checked", true)) {
@@ -252,7 +201,7 @@
             });
 
         });
- 
+  */
       
     	 
      
@@ -268,104 +217,51 @@
    --%>
   /* 결제하기 버튼 */
 
-  $(function(){
-	  
-	  $('#btn-pay').click(function(){
-		  
-	  
-       var IMP = window.IMP; // 생략가능
-       IMP.init('imp08945184'); //가맹점 식별코드
-       var msg;
-       
-       IMP.request_pay({
-    	   
-    	   
-    	   //아래의 param값은 임의로 지정한게 아니라 i`m port에서 지정한 param값임
-         
-    	   pg : 'kakaopay',
-           pay_method : 'card',
-       // 가맹점에서 생성관리하는 고유 주문번호
-           merchant_uid : 'merchant_' + new Date().getTime(),
-           name : '자바방 펜션 결제',
-           amount : <%=totalPrice%>,
-           buyer_email : '<%=c.getcEmail()%>',
-           buyer_name : '<%=c.getcName()%>',
-           cId : '<%=c.getcId()%>',
-           buyer_tel : '<%=c.getcPhone()%>',
-           buyer_addr : '<%=c.getcAddr()%>',
-           custom_data : '<%=pay.getPayCode()%>,<%=res.getResCode()%>,<%=c.getcId()%>,<%=r.getrNo()%>',
-           resCode : '<%=res.getResCode()%>'
-         
-       }, function(rsp) {
-           if ( rsp.success ) {
-               //1. 서블릿에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-               jQuery.ajax({
-                   url: "/reservation/payComplete",
-                   type: 'POST',
-                   dataType: 'json',
-                   data: {
-                      
-                      //기타 필요한 데이터가 있으면 추가 전달
-                        
-                      // 아임포트 거래 고유번호 - 혀니가 임의지정한 값 아님. 아임포트에서 지정해준거니까 건들지마!!!!
-                	   payCode : rsp.merchant_uid,
-                	   payMethod : rsp.pay_method,
-                	   resState : rsp.status,
-                	   imp_uid: rsp.imp_uid,
-                	   custom_data : rsp.custom_data
-                	   
-                	
-                   }
-               }).done(function(data) {
-                   //2. 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-                   if ( everythings_fine ) {
-                       msg = '결제가 완료되었습니다.';
-                       msg += '\n고유ID : ' + rsp.imp_uid;
-                       msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                       msg += '\결제 금액 : ' + rsp.paid_amount;
-                       msg += '카드 승인번호 : ' + rsp.apply_num;
-                       
-                       alert(msg);
-                   } 
-                   
-                   
-                   else {
-                       //3. 아직 제대로 결제가 되지 않았습니다.
-                       //4. 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-                   }
-               });
-               //성공시 이동할 페이지
-               location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg;
-               
-               //예매상태를 Y로 바꿔주기  in servlet 
-               //카드결제는 하는순간 y 무통장입금은 n 
-               
-           } else {
-               msg = '결제에 실패하였습니다.';
-               msg += '에러내용 : ' + rsp.error_msg;
-              
-               //실패시 이동할 페이지
-               location.href="<%=request.getContextPath()%>/order/payFail";
-               alert(msg);
-           }
-           
-           
-       }
-	  }
-           
-       });
-       
    
-  
-	  
-	  
-	  
-	  
-	  )};
-	  
-	  
-
-  
+ $("#pay").click(function () {
+        var IMP = window.IMP;
+        IMP.init('imp08945184'); 
+       
+        IMP.request_pay({
+       
+            pg:'kakao',
+            pay_method: 'card',
+            merchant_uid: new Date().getTime(),
+            name: '자바방 펜션 결제',
+            amount: 50000, 
+            buyer_email: 'honey@honey.do',
+            buyer_name: '서현희',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '경기도 어쩌구 저쩌구동'
+        
+    
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+              
+            	var msg = '결제가 완료되었습니다.';
+               
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                
+                location.href='<%=request.getContextPath()%>/views/reservation/paySuccess.jsp';
+             
+                          /* 여기다가 쿼리스트링 써서 넘기기 */ 
+                
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+           <%--  location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg; --%>
+        });
+        
+        
+        
+    });
+     
   
   
   

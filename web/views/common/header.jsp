@@ -150,7 +150,7 @@
 								<a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴</a>
 							</li>
 						<%}%>
-	                        <li><a class="aa" href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">마이페이지</a></li>
+	                        <li><a class="aa" href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">마이페이지</a></li>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
 						<%if(loginClient==null&&loginOwner!=null){%>

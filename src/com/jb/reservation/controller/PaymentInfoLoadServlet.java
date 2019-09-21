@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.client.model.vo.Client;
 import com.jb.reservation.model.service.ReservationService;
 import com.jb.reservation.model.vo.Payment;
 import com.jb.reservation.model.vo.Reservation;
@@ -31,6 +32,7 @@ public class PaymentInfoLoadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		//현희 기준(결제 기능) 2번째 서블릿 !! 
 		
 		//paymentView.jsp 에게 값을 보여줌
@@ -40,17 +42,23 @@ public class PaymentInfoLoadServlet extends HttpServlet {
 		
 		
 		String resCode = request.getParameter("resCode");
+//		String resCode = "1234";
 		String cId= request.getParameter("cId");
+		
+	
 		int rPrice=Integer.parseInt(request.getParameter("rPrice"));
 		int rAddPrice = Integer.parseInt(request.getParameter("rAddPrice"));
 		int totalPrice = rPrice+rAddPrice;
 		
+		
 		request.setAttribute("totalPrice", totalPrice);
 		
 	
-		Reservation res = new ReservationService().selectReservatedRoom(resCode);
-		request.setAttribute("reservation", res);
-		request.getRequestDispatcher("/views/reservation/pamentView.jsp").forward(request, response);
+		Reservation resInfo = new ReservationService().selectOneReservation(resCode,cId);
+		System.out.println("InfoLoad 서블릿 : "+resInfo);
+		request.setAttribute("resInfo", resInfo);
+		request.setAttribute("resCode", resCode);
+		request.getRequestDispatcher("/views/reservation/payInfoView.jsp").forward(request, response);
 		
 		
 		

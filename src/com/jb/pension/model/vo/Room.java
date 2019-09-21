@@ -19,6 +19,7 @@ public class Room {
 	
 	private RoomFacilities roomFac;
 //	private List<RoomFile> rfList;
+	private Pension Pension;
 	
 
 	public Room() {
@@ -56,6 +57,25 @@ public class Room {
 		this.rInfo = rInfo;
 		this.rAddPrice = rAddPrice;
 		this.roomFac = roomFac;
+	}
+	
+	public Room(String rNo, String rName, int rPrice, int rNop, int rMaxNop, int rAddNop, String rSize, String pCode,
+			String rStruc, String rInfo, int rAddPrice, RoomFacilities roomFac,
+			com.jb.pension.model.vo.Pension pension) {
+		super();
+		this.rNo = rNo;
+		this.rName = rName;
+		this.rPrice = rPrice;
+		this.rNop = rNop;
+		this.rMaxNop = rMaxNop;
+		this.rAddNop = rAddNop;
+		this.rSize = rSize;
+		this.pCode = pCode;
+		this.rStruc = rStruc;
+		this.rInfo = rInfo;
+		this.rAddPrice = rAddPrice;
+		this.roomFac = roomFac;
+		Pension = pension;
 	}
 
 
@@ -151,8 +171,18 @@ public class Room {
 	public String toString() {
 		return "Room [rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop + ", rMaxNop="
 				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
-				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
+				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + ", Pension=" + Pension
+				+ "]";
 	}
+
+	public Pension getPension() {
+		return Pension;
+	}
+
+	public void setPension(Pension pension) {
+		Pension = pension;
+	}
+
 	
 
 }
