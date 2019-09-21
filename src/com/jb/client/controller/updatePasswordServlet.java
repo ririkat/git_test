@@ -30,26 +30,14 @@ public class updatePasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-					String cId=request.getParameter("cId");
-
-					Client c= new ClientService().selectClient(cId);
-					
-					request.setAttribute("client", c);
-					request.setAttribute("cId", cId);
-					
-					request.getRequestDispatcher("/views/client/updatePassword.jsp")
-					.forward(request,response);		
-		
-	
-	
-				
-		  
-
+			String cId=request.getParameter("cId");	
+			Client c= new ClientService().selectClient(cId);
 			
+			request.setAttribute("client", c);
+			request.setAttribute("cId", cId);
 			
+			request.getRequestDispatcher("/views/client/updatePassword.jsp").forward(request,response);
 		}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -13,7 +13,7 @@ import com.jb.owner.model.service.OwnerService;
 /**
  * Servlet implementation class UpdatePasswordEndServlet
  */
-@WebServlet("/owner/updatePasswordEnd")
+@WebServlet(name="UpdatePwOwner", urlPatterns="/owner/updatePasswordEnd")
 public class UpdatePasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,13 +29,13 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("id");
-		String pw=request.getParameter("pw");
+		String id=request.getParameter("oId");
+		String pw=request.getParameter("oPwNew");
 	
 		int result = new OwnerService().updatePassword(id,pw);
 		
 		String msg ="";
-		String loc="/views/client/login.jsp";
+		String loc="/";
 		
 		switch(result) {
 		case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;

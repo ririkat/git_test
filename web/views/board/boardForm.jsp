@@ -15,7 +15,8 @@
 						<caption>게시글 작성</caption>
 						</thead>
 						<tbody>
-							<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" encType="multipart/form-data">
+							<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" encType="multipart/form-data"
+							onsubmit="return sendData();">
 								<tr>
 									<th>제목 :</th>
 									<td><input type="text" placeholder="제목을 입력하세요. "
@@ -30,7 +31,7 @@
 								</tr>
 								<th>내용 :</th>
 								<td><textarea cols="10" placeholder="내용을 입력하세요. "
-										name="content" class="form-control"></textarea></td>
+										name="content" id="career" class="form-control"></textarea></td>
 								</tr>
 								<tr>
 									<th>첨부파일 :</th>
@@ -38,7 +39,7 @@
 								</tr>
 								<tr>
 									<td colspan="2"><input type="submit" value="등록"
-										onclick="sendData()" class="btn btn-default pull-right" /> <input
+										class="btn btn-default pull-right" /> <input
 										type="button" value="취소" class="btn btn-default pull-left" />
 										<input type="button" value="글 목록으로 "
 										class="btn btn-default pull-right" onclick="toList()" ;/></td>
@@ -54,6 +55,12 @@
 <script>
 	function toList(){
 		location.href="<%=request.getContextPath() %>/board/boardList";
+	}
+	function sendData(){
+		if($("#career").val().trim().length==0){
+			alert("내용을 입력하세요");
+			return false;
+		}
 	}
 </script>
 

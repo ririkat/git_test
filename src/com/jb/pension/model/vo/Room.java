@@ -7,10 +7,8 @@ public class Room {
 	private String rNo;
 	private String rName;
 	private int rPrice;
-
 	private int rNop;
 	private int rMaxNop;
-	private int rAddNop;
 	private String rSize;
 	private String pCode;
 	private String rStruc;
@@ -18,9 +16,8 @@ public class Room {
 	private int rAddPrice;
 	
 	private RoomFacilities roomFac;
-//	private List<RoomFile> rfList;
 	private Pension Pension;
-	
+	private List<RoomFile> rfList; 
 
 	public Room() {
 		// TODO Auto-generated constructor stub
@@ -50,7 +47,6 @@ public class Room {
 		this.rPrice = rPrice;
 		this.rNop = rNop;
 		this.rMaxNop = rMaxNop;
-		this.rAddNop = rAddNop;
 		this.rSize = rSize;
 		this.pCode = pCode;
 		this.rStruc = rStruc;
@@ -59,25 +55,14 @@ public class Room {
 		this.roomFac = roomFac;
 	}
 	
-	public Room(String rNo, String rName, int rPrice, int rNop, int rMaxNop, int rAddNop, String rSize, String pCode,
-			String rStruc, String rInfo, int rAddPrice, RoomFacilities roomFac,
-			com.jb.pension.model.vo.Pension pension) {
-		super();
-		this.rNo = rNo;
-		this.rName = rName;
-		this.rPrice = rPrice;
-		this.rNop = rNop;
-		this.rMaxNop = rMaxNop;
-		this.rAddNop = rAddNop;
-		this.rSize = rSize;
-		this.pCode = pCode;
-		this.rStruc = rStruc;
-		this.rInfo = rInfo;
-		this.rAddPrice = rAddPrice;
-		this.roomFac = roomFac;
-		Pension = pension;
+
+	public List<RoomFile> getRfList() {
+		return rfList;
 	}
 
+	public void setRfList(List<RoomFile> rfList) {
+		this.rfList = rfList;
+	}
 
 	public String getrNo() {
 		return rNo;
@@ -170,9 +155,8 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [rNo=" + rNo + ", rName=" + rName + ", rPrice=" + rPrice + ", rNop=" + rNop + ", rMaxNop="
-				+ rMaxNop + ", rAddNop=" + rAddNop + ", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
-				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + ", Pension=" + Pension
-				+ "]";
+				+ rMaxNop +", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
+				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
 
 	public Pension getPension() {

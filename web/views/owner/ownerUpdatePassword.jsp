@@ -11,9 +11,6 @@
 
 
 			<section id="enroll-container">
-
-
-
 				<div class="tit_contents">비밀번호변경</div>
 				<br>
 				<hr>
@@ -53,8 +50,8 @@
 							value="변경">	
 						<input type="reset" class="btn btn-warning" onclick="" value="뒤로가기">
 					</div>
-					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("oId")%>' />	
-					<input type="hidden" name="cPw_" id="cPw_" value='<%=o.getoPw()%>' />
+					<input type="hidden" name="oId" value='<%=o.getoId()%>' />	
+					<input type="hidden" name="oPw_" id="oPw_" value='<%=o.getoPw()%>' />
 
 
 				</form>
@@ -67,7 +64,7 @@
 
 		$(function(){
 			$('#mypageList li').removeClass("active");
-			$('#mypageList li').eq(3).addClass("active");
+			$('#mypageList li').eq(2).addClass("active");
 		});
 
 

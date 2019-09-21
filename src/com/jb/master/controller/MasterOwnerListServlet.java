@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.master.model.service.MasterService;
+import com.jb.client.model.vo.Client;
 import com.jb.owner.model.service.OwnerService;
 import com.jb.owner.model.vo.Owner;
 
@@ -31,16 +31,14 @@ public class MasterOwnerListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			//주우서억
-		
-//		Master loginMaster = (Master)request.getSession().getAttribute("loginMaster");
-//		if(loginMaster==null) {
-//			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다");
-//			request.setAttribute("loc", "/");
-//			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-//			return;
-//		}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		Client loginClient = (Client) request.getSession().getAttribute("loginClient");
+		if (loginClient==null || loginClient.getAuthority()!=1) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		
 		//페이징 처리!!
 		int cPage;//현재보고있는 페이지
