@@ -70,8 +70,10 @@ public class OwnerAddRoomEndServlet extends HttpServlet {
 		
 		System.out.println(pCode+" / "+rName+" / "+rNop+" / "+rMaxNop+" / "+rPrice+" / "+rAddPrice
 				+" / "+rSize+" / "+rStruc+" / "+rInfo);
-		for(int i=0; i<facilities.length; i++) {
-			System.out.println(facilities[i]);
+		if (facilities != null) {
+			for(int i=0; i<facilities.length; i++) {
+				System.out.println(facilities[i]);
+			}
 		}
 		
 		
@@ -104,28 +106,30 @@ public class OwnerAddRoomEndServlet extends HttpServlet {
 		String reFile = "";
 		int imgRes = 0;
 		Enumeration files = mr.getFileNames();
-		while(files.hasMoreElements()) {
-			file = (String)files.nextElement();
-			oriFile = mr.getOriginalFileName(file);
-			reFile = mr.getFilesystemName(file);
-			imgRes = new RoomFileService().addImages(currval,oriFile,reFile);
-			if(!(imgRes>0)) {
-				File remove = new File(saveDir+"/"+reFile);
-				remove.delete();
+		if(files!=null) {
+			while(files.hasMoreElements()) {
+				file = (String)files.nextElement();
+				oriFile = mr.getOriginalFileName(file);
+				reFile = mr.getFilesystemName(file);
+				imgRes = new RoomFileService().addImages(currval,oriFile,reFile);
+				if(!(imgRes>0)) {
+					File remove = new File(saveDir+"/"+reFile);
+					remove.delete();
+				}
 			}
 		}
-		
 		
 		String msg = "";
 		String loc = "";
 		if(currval>0 && facRes>0 && imgRes>0) {
 			msg = "객실 추가 완료";
 			loc = "/owner/pensionDetail?pensionCode="+pCode+"&imgSrc="+imgSrc;
-		} else {
+		}
+		else {
 			File remove = new File(saveDir+"/"+reFile);
 			remove.delete();
 			msg = "객실 추가 실패";
-			loc = "/owner/addRoom?pCode="+pCode;
+			loc = "/owner/addRoom?pCode="+pCode+"&imgSrc="+imgSrc;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
