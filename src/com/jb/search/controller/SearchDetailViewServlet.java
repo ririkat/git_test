@@ -37,8 +37,6 @@ public class SearchDetailViewServlet extends HttpServlet {
 		
 		Pension p = new SearchService().selectDetail(pCode);
 		
-		System.out.println(p);
-		
 		request.setAttribute("pension", p);
 		request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);
 	}

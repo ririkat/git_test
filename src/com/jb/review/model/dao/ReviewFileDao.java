@@ -16,7 +16,8 @@ public class ReviewFileDao {
 	public int addImages(Connection conn, int currval, String oriFile, String reFile) {
 		Statement stmt=null;
 		int result=0;
-		String sql = "insert into review_file values('seq_review_file_no.nextval','"+oriFile+"','"+reFile+"','"+currval+"')";
+		String sql = "insert into review_file values(seq_review_file_no.nextval,'"+oriFile+"','"+reFile+"',"+currval+")";
+		System.out.println("insert sql문: "+sql);
 		try {
 			stmt=conn.createStatement();
 			result = stmt.executeUpdate(sql);
@@ -48,6 +49,7 @@ public class ReviewFileDao {
 		}finally {
 			close(rs);
 			close(stmt);
+			System.out.println(list);
 		}return list;
 	}
 

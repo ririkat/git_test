@@ -39,9 +39,9 @@ public class ReviewListServlet extends HttpServlet {
 				
 				String pCode = (String) request.getParameter("pensionCode");
 //				String pCode = "p1001";
-				System.out.println(pCode);
+				System.out.println("리뷰버튼 눌렀을때 넘어오는 pCode: "+pCode);
 				Pension p = new PensionService().selectPension(pCode);
-				System.out.println("헤헤: "+p);
+				System.out.println("pension정보하나: "+p);
 				//페이징 처리
 				//1.현재 보고있는 페이지 정보
 				int cPage;
@@ -53,15 +53,18 @@ public class ReviewListServlet extends HttpServlet {
 				//2.페이지당 게시글 출력갯수
 				int numPerPage=10;
 				
+				
 				//3.DB에 접근하여 필요한 데이터 가져오기(해당페이지 게시글만 가져온다)
 				ReviewService service = new ReviewService();
 						
 				int totalMyPensionReview = service.selectMyPensionReviewCount(pCode);
-				System.out.println(totalMyPensionReview);
+				System.out.println("totalMypensionReview : "+totalMyPensionReview);
 				//리뷰 리스트
 				List<Review> reviewList=service.selectMyPensionReviewList(pCode, cPage,numPerPage);
 				//리뷰 파일리스트
-//				List<ReviewFile> reviewFileList = new ReviewFileService().selectImages();
+				List<ReviewFile> reviewFileList = new ReviewFileService().selectImages();
+				
+				
 				
 				//4.pageBar구성
 				int totalPage=(int)Math.ceil((double)totalMyPensionReview/numPerPage);
@@ -73,14 +76,14 @@ public class ReviewListServlet extends HttpServlet {
 				if(pageNo==1) {
 					pageBar+="<span>&lt</span>";
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?cPage="+(pageNo-1)+"'>&lt</a>";
+					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo-1)+"'>&lt</a>";
 				}
 				
 				while(!(pageNo>pageEnd||pageNo>totalPage)) {
 					if(pageNo==cPage) {
 						pageBar+="<span>"+pageNo+"</span>";
 					}else {
-						pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
+						pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
 					}
 					pageNo++;
 				}
@@ -88,7 +91,7 @@ public class ReviewListServlet extends HttpServlet {
 				if(pageNo>totalPage) {
 					pageBar+="<span>&gt</span>";
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?cPage="+(pageNo)+"'>&gt</a>";
+					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>&gt</a>";
 				}
 				
 				request.setAttribute("pageBar", pageBar);
@@ -96,7 +99,7 @@ public class ReviewListServlet extends HttpServlet {
 				request.setAttribute("pCode", pCode);
 				request.setAttribute("pension", p); 
 				request.setAttribute("reviewList", reviewList);
-//				request.setAttribute("reviewFileList", reviewFileList);
+				request.setAttribute("reviewFileList", reviewFileList);
 				request.getRequestDispatcher("/views/review/pensionReviewList.jsp").forward(request, response);
 				
 	}

@@ -17,7 +17,7 @@
 	<style>
         th{
             text-align: center;
-        }	
+        }
     </style>
 
 	<div class="col-sm-9">
@@ -45,14 +45,26 @@
 							if(reviewList!=null && !reviewList.isEmpty()){
 								for(Review r : reviewList){ %>
 						<tr>
-							<td style="width: 40px;"><%=r.getrNo()%></td>
-							<td style="width: 100px;">
+							<td style="width: 50px;"><%=r.getrNo()%></td>
+							
+							<td id="content" style="width: 200px; height: 50px;">
 								<a href="<%=request.getContextPath()%>/review/reviewView?rNo=<%=r.getrNo()%>&pCode=<%=pCode%>">
 									<%=r.getrTitle()%></a>
 							</td>
-							<td style="width: 450px;"><%=r.getrContent()%></td>
-							<td>(x)</td>
-							<td><%=r.getcId() %></td>
+							
+							<td style="width: 250px;"><%=r.getrContent()%></td>
+							
+							<td style="width: 70px;">
+							<% for(ReviewFile rf : reviewFileList){
+								if( (rf.getrNo()==r.getrNo()) && (!rf.getpRenameFile().equals("null")) ){ //!!DB에서 null값을 가져올때 String으로 인식
+									%>
+										<img src="<%=request.getContextPath()%>/images/file.png" alt="첨부파일" width="16px" />
+								<%
+								 }
+								}
+								%>
+							</td>
+							<td style="width: 90px;"><%=r.getcId() %></td>
 						</tr>
 							<%}
 								}%>
@@ -81,7 +93,7 @@
 	  	 });
 		
 		function writeReview(){
-			location.href="<%=request.getContextPath()%>/review/reviewWrite";
+			location.href="<%=request.getContextPath()%>/review/reviewWrite?pCode=<%=pCode%>";
 		}
 		
 	</script>

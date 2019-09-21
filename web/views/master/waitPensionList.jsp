@@ -22,7 +22,7 @@
                 		<option value="ownerId" <%="o_id".equals(searchType)?"selected":"" %> >업주 아이디</option>
                 	</select>
                 	<div id="search-pensionName">
-                		<form action="<%=request.getContextPath()%>/master/pensionSearch">
+                		<form action="<%=request.getContextPath()%>/master/waitSearch">
                 			<input type="hidden" name="searchType" value="p_name"/>
                 			<input type="hidden" name="cPage" value="<%=cPage %>"/>
                 			<input type="text" placeholder="펜션이름으로 검색" name="searchKeyword"
@@ -31,7 +31,7 @@
                 		</form>
                 	</div>
                 	<div id="search-ownerId">
-                		<form action="<%=request.getContextPath()%>/master/pensionSearch">
+                		<form action="<%=request.getContextPath()%>/master/waitSearch">
                 			<input type="hidden" name="searchType" value="o_id"/>
                 			<input type="hidden" name="cPage" value="<%=cPage %>"/>
                 			<input type="text" placeholder="업주 아이디 검색" name="searchKeyword"

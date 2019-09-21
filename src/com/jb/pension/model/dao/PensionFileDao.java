@@ -50,6 +50,28 @@ public class PensionFileDao {
 		} return list;
 	}
 	
+	public PensionFile selectImages(Connection conn, String pCode){
+		Statement stmt = null;
+		ResultSet rs = null;
+		PensionFile pf = new PensionFile();
+		String sql = "select * from pen_file where p_code='"+pCode+"'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				pf.setpFileNo(rs.getInt("p_file_no"));
+				pf.setpCode(rs.getString("p_code"));
+				pf.setpOriginalFile(rs.getString("P_ORIGINAL_FILE"));
+				pf.setpRenameFile(rs.getString("P_RENAME_FILE"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		} return pf;
+	}
+	
 	public int modifyImages(Connection conn, String pCode, String oriFile, String reFile) {
 		Statement stmt = null;
 		int result = 0;

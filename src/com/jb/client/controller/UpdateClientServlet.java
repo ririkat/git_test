@@ -67,7 +67,14 @@ public class UpdateClientServlet extends HttpServlet {
 		c.setcName(request.getParameter("cName"));
 		c.setcGender(request.getParameter("cGender"));
 
-		c.setcEmail(request.getParameter("cEmail"));
+		
+		String cEmailId = request.getParameter("cEmailId");
+		String cEmail2 = request.getParameter("cEmail2");
+		String cEmail = cEmailId+"@"+cEmail2;
+		c.setcEmail(cEmail);
+		
+		
+		
 		c.setcPhone(request.getParameter("cPhone"));
 		c.setcAddr(request.getParameter("cAddr"));
 
@@ -89,6 +96,12 @@ public class UpdateClientServlet extends HttpServlet {
 		System.out.println("sqlDate: " + sqlDate);
 		c.setcBirth(sqlDate);
 
+	
+		
+		
+		
+		
+		
 		String zonecode = request.getParameter("zonecode");
 		String addr = request.getParameter("address");
 		String addrEtc = request.getParameter("address_etc");
