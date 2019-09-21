@@ -4,7 +4,8 @@
 <%@ page import="com.jb.client.model.vo.Client"%>
 
 <%
-    
+
+Client c=(Client)request.getAttribute("client");
   
     %>
 
@@ -33,7 +34,7 @@
                         <li class="active"><a href="<%=request.getContextPath()%>/client/?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
 			
 						
-                        <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
@@ -63,13 +64,15 @@
 							<tr>
 								<th class="point">아이디</th>
 								<td><input type="hidden" name="cId"
-									value="<%=loginClient.getcId()%>" readonly><%=loginClient.getcId()%></td>
+									value="<%=c.getcId()%>" readonly><%=c.getcId()%></td>
 							</tr>
 							<tr>
 								<th class="point"><strong class="point"></strong>비밀번호</th>
 								<td><input type="password" id="cPw" name="cPw" title="비밀번호"
 									required></td>
 							</tr>
+							<input type="hidden" id="loadcPw" name="loadcPw" value="<%=c.getcPw()%>">
+
 
 							<tr>
 								<th class="point"><strong class="point"></strong>탈퇴사유</th>
@@ -106,10 +109,8 @@
 
 					<div class="button">
 						<input type="button" id="btn-delete" class="btn btn-warning"
-							name="btn-delete" onclick="deleteClient();" value="탈퇴"> <input
-							type="reset" class="btn btn-warning"
-							onclick="<%=request.getContextPath()%>/client/mypageHome"
-							value="취소">
+							name="btn-delete" onclick="deleteClient();" value="탈퇴"> 
+							<input type="reset" class="btn btn-warning" onclick="<%=request.getContextPath()%>/client/infoLoad" value="취소">
 					</div>
 					<hr>
 
@@ -123,83 +124,27 @@
 
 <script>
 
+$(function(){
+	$('#mypageList li').removeClass("active");
+	$('#mypageList li').eq(4).addClass("active");
+});
 
-    function deleteClient(){
-			
-			if(confirm("정말로 탈퇴하시겠습니까?")){
-			
-				var url="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>";
-				location.href=url;
-			}
+function deleteClient(){
+	var pwck = $('#cPw').val();
+	var loadpw = $('#loadcPw').val();
+
+	if(pwck!=loadpw){
+		alert("비밀번호가 일치하지 않습니다.");
+		$('#cPw').val("");
+		$('#cPw').focus();
+	}
+	else{
+		if(confirm("정말로 탈퇴하시겠습니까?")){
+			var url="<%=request.getContextPath()%>/client/deleteClient?cId=<%=c.getcId()%>";
+			location.href=url;
 		}
-	     
-	 
-   
-	
- 	function deleteClient(){
-
-		 var cPw=$('#cPw').val();
-		 
-		 if(!cPw=<%=loginClient.getcPw()%>) {
-			 
-			 alert("비밀번호가 일치하지 않습니다.");
-				$(this).val("");
-				$('#cPw').val("").focus();
-				
-				return;
-	+	 } 
-	+		
-	+	<%-- else if(confirm("정말로 탈퇴하시겠습니까?")){
-	+		
-	+		  if(cPw=<%=loginClient.getcPw()%>) {
-	+		
-	+			var url="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>";
-	+			location.href=url;
-	+		
-	+		  }else {
-	+			  
-	+			  alert("비밀번호가 일치하지 않습니다.");
-	+				
-	+				$('#cPw').val("").focus();
-	+				
-	+				return;
-	+			  
-	+			  
-	+			  
-	+		   }
-	+		  }
-	+	} --%>
-	+    
-	+ 
-	+    
-	+    
-	+    
-	+<%-- 
-	+
-	 		function deleteClient() {
-	 			
-	 			var pwck=$('#cPw').val(); 
-	 			
-	
-	+			if(!pwck=<%=loginClient.getcPw()%>){
-	 				alert("비밀번호가 일치하지 않습니다.");
-	 				$(this).val("");
-	 				$('#cPw').val("").focus();
-	
-	+				return;
-	 			}
-	 			
-
-	+			else if(confirm("정말로 탈퇴하시겠습니까?")){
-	+				location.href="<%=request.getContextPath()%>/client/deleteClient?cId=<%=loginClient.getcId()%>&cPw=<%=loginClient.getcId()%>";
-	+				
-	+				
-	 				
-	 			
-	 			}
-	 	}
-	
-	+			  --%>
+	}
+}
 	 		
 	
     

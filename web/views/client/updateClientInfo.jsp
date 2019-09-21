@@ -1,9 +1,23 @@
-a<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jb.client.model.vo.Client"%>
+<%@ page import="java.util.Date,java.text.SimpleDateFormat"%>
 
 
 <%@ include file="/views/common/header.jsp"%>
+
+<%
+
+Client c=(Client)request.getAttribute("client");
+
+Date form = new Date();
+SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+String str = transFormat.format(c.getcBirth());
+String cBirthYY=str.substring(0, 4);
+String cBirthMM=str.substring(5,7);
+String cBirthDD=str.substring(8, 10);
+
+%>
 
 <section>
 
@@ -20,7 +34,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 					<ul class="nav nav-pills nav-stacked">
 						<br>
 				
-                        <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
+                        <li><a href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
@@ -61,21 +75,21 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 							<tr>
 								<th class="point" style="vertical-align: middle"><strong
 									class="point">*</strong>이름</th>
-								<td><input type="text" name="cName" id="cName" value="<%=loginClient.getcName()%>" required></td>
+								<td><input type="text" name="cName" id="cName" value="<%=c.getcName()%>" required></td>
 							</tr>
 						<tr>
 							<th class="point"><strong class="point">*</strong>아이디</th>
-							<td><input type="hidden" value="<%=loginClient.getcId()%>" name="cId" id="cId" readonly><%=loginClient.getcId()%>
+							<td><input type="hidden" value="<%=c.getcId()%>" name="cId" id="cId" readonly><%=c.getcId()%>
 					   
 									
 							</td>
 						</tr>
-				<tr>
+				 <tr>
                              <th class="point"><strong class="point">*</strong>생년월일</th>
                              <td>
-                              <input check-join-date input-number type="number" name="cBirthYY" id="cBirthYY" min="1900" max="2005" maxlength="4">년                            
-                              <input check-join-date input-number type="number" name="cBirthMM" id="cBirthMM" min="01" max="12" maxlength="2" >월                            
-                              <input check-join-date input-number type="number" name="cBirthDD" id="cBirthDD" min="01" max="31" maxlength="2"  >일                           
+                              <input value="<%=cBirthYY %>" check-join-date input-number type="number" name="cBirthYY" id="cBirthYY" min="1900" max="2005" maxlength="4" >년                            
+                              <input value="<%=cBirthMM %>" check-join-date input-number type="number" name="cBirthMM" id="cBirthMM" min="01" max="12" maxlength="2" >월                            
+                              <input value="<%=cBirthDD %>" check-join-date input-number type="number" name="cBirthDD" id="cBirthDD" min="01" max="31" maxlength="2"  >일                           
                             
                             
                             
@@ -86,7 +100,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 							<tr>
 								<th class="point"><strong class="point">*</strong>성별</th>
 								<td>
-	                	<%if("M"==loginClient.getcGender()){ %>
+	                	<%if("M"==c.getcGender()){ %>
 	                    <input type="radio" name="cGender" id="cGender0" value="M" checked>
 	                    <label for="cGender0">남</label>
 	                   
@@ -104,51 +118,63 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 	                </td>
 							</tr>
 					
-						<%-- <tr>
-								<th class="point"><strong class="point">*</strong>이메일</th>
-								<td>
-								<input type="text" name="cEmailId" style="IME-MODE: disabled" value="<%=cEmailId %>" id="cEmailId"> @ 
-								<input type="text" name="cEmail2" id="cEmail2"style="IME-MODE: disabled" value="<%=cEmailSelect%>"> 
-								
-									
-						<select name="cEmailSelect" id="cEmailSelect" onchange="mailChange(this.value,'uemail02');">
-							<option id="cEmailSelectnull">메일을 선택하세요</option>
-							<option value="naver" <%="naver".equals(cEmailSelect) ? "selected" : ""%>>naver.com</option>
-							<option value="hanmail" <%="hanmail".equals(cEmailSelect) ? "selected" : ""%>>hanmail.net</option>
-							<option value="nate" <%="nate".equals(cEmailSelect) ? "selected" : ""%>>nate.com</option>
-							<option value="gmail" <%="gmail".equals(cEmailSelect) ? "selected" : ""%>>gmail.com</option>
-							<option value="hotmail" <%="hotmail".equals(cEmailSelect) ? "selected" : ""%>>hotmail.com</option>
-							<option value="writeEmail">직접입력</option>
-					</select>
-					</td>
-							</tr> --%>
+					<tr>
+						<th class="point"><strong class="point">*</strong>이메일</th>
+						<td>
+						<input type="text" name="cEmailId"
+							style="IME-MODE: disabled"
+							value="<%=c.getcEmail().substring(0, c.getcEmail().indexOf("@"))%>"
+							id="cEmailId"> @ <input type="text" name="cEmail2"
+							id="cEmail2" style="IME-MODE: disabled" value="<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1)%>">
+							<select name="cEmailSelect" id="cEmailSelect">
+								<option id="cEmailSelectnull" value="choice">메일을 선택하세요</option>
+								<option value="naver.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("naver") ? "selected" : ""%>>
+									네이버</option>
+								<option value="hanmail.net"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("hanmail") ? "selected" : ""%>>
+									한메일</option>
+								<option value="nate.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("nate") ? "selected" : ""%>>
+									네이트</option>
+								<option value="gmail.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("gmail") ? "selected" : ""%>>
+									지메일</option>
+								<option value="hotmail.com"
+									<%=c.getcEmail().substring(c.getcEmail().indexOf("@")+1 , c.getcEmail().indexOf(".")).equals("hotmail") ? "selected" : ""%>>
+									핫메일</option>
+								<option value="writeEmail">직접입력</option>
+						</select>
+						</td>
+					</tr>
+					
+						
 
 				 <tr>
 				      <th class="point"><strong class="point">*</strong>휴대폰번호</th>
 				     <td>
 				       <input type="tel" placeholder="(-없이)01012345678" name="cPhone" id="cPhone" 
-				       onkeyup="onlynumber();" value='<%=loginClient.getcPhone()%>'>
+				       onkeyup="onlynumber();" value='<%=c.getcPhone()%>'>
 				       
 				       <br/>
 				      
 				             </td>
 	            </tr>
 
-
-
-							<tr>
-								<th class="point">지역</th>
-								<td>
- 							<%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
-
-	<input id="zonecode" name="zonecode" type="text" value="" style="width:70px;" readonly/>
-	&nbsp;
-	<input type="button"  onClick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
-	<br/>
-	<input type="text" id="address" name="address" value="" style="width:240px;" value="<%=loginClient.getcAddr()%>" required  readonly/>
-	<input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="" style="width:200px;"/>
-								</td>
-							</tr>
+					
+						 <tr>
+                        <th class="point">지역</th>
+                        <td>
+                      <%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
+							<%System.out.println("테스트: "+ c.getcAddr().substring(c.getcAddr().indexOf("^")+1 ,c.getcAddr().indexOf("|")) ); %>
+						   <input id="zonecode" name="zonecode" type="text" value="<%=c.getcAddr().substring(c.getcAddr().indexOf("우")+2, c.getcAddr().indexOf("|"))%>" style="width:70px;" readonly/>
+						   &nbsp;
+						   <input type="button"  onclick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
+						   <br/>
+						   <input type="text" id="address" name="address" value="<%=c.getcAddr().substring(c.getcAddr().indexOf("|")+1 ,c.getcAddr().lastIndexOf("|"))%>" style="width:240px;"  required  readonly/>
+						   <input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="<%=c.getcAddr().substring(c.getcAddr().lastIndexOf("|")+1)%>" style="width:200px;"/>
+                        </td>
+                     </tr>
 							
 							
 							
@@ -205,16 +231,34 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	//주소 API
-			function openDaumZipAddress() {
-			new daum.Postcode({
-				oncomplete:function(data) {
-				/* 	jQuery("#postcode1").val(data.postcode1);
-					jQuery("#postcode2").val(data.postcode2); */
-					jQuery("#zonecode").val(data.zonecode);
-					jQuery("#address").val(data.address);
-					jQuery("#address_etc").focus();
-					console.log(data);
-				}
+			$(function(){
+			$('#mypageList li').removeClass("active");
+			$('#mypageList li').eq(2).addClass("active");
+		});
+
+	
+		//메일select
+		$('#cEmailSelect').change(function(){
+				console.log($('#cEmailSelect').val() );
+			if($('#cEmailSelect').val()!='writeEmail' && $('#cEmailSelect').val()!='choice'){
+				$('#cEmail2').val($('#cEmailSelect').val());
+			}
+			else
+				$('#cEmail2').val("");
+		});
+	
+		//주소 API
+		function openDaumZipAddress() {
+		new daum.Postcode({
+		   oncomplete:function(data) {
+		   /*    jQuery("#postcode1").val(data.postcode1);
+		      jQuery("#postcode2").val(data.postcode2); */
+		      jQuery("#zonecode").val(data.zonecode);
+		      jQuery("#address").val(data.address);
+		      jQuery("#address_etc").val("");
+		      jQuery("#address_etc").focus();
+		      console.log(data);
+		  	 }
 			}).open();
 		}
 	
@@ -271,13 +315,14 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 	}
 	
 	
-	function updateClient(){
-		
-		var frm=$('#clientFrm');
-		var url="<%=request.getContextPath()%>/client/clientUpdate?cId=<%=loginClient.getcId()%>";
-		frm.attr("action",url);
-		frm.submit();			
-	}
+	 function updateClient(){
+			if(confirm('정말로 수정하시겠습니까?')){
+				var frm=$('#clientFrm');
+				var url="<%=request.getContextPath()%>/client/clientUpdate?cId=<%=c.getcId()%>";
+				frm.attr("action",url);
+				frm.submit();			
+			}
+		}
 	
 
 	 // 휴대폰번호에 숫자만 입력받게 
@@ -299,40 +344,5 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 		}
 
 		}
-	 
-
-	//메일 뒤에 선택하면 바뀌게 
-
-	function mailChange(val,id_name){
-		
-		obj = document.getElementById(id_name);
-		obj.value = val;
-		obj.focus();
-	}
-
-	
-
-
-
-
-
-
-
-
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <%@ include file="/views/common/footer.jsp"%>
