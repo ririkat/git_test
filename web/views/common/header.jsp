@@ -158,7 +158,7 @@
 						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
 					<!-- 로고 -->
-					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>/index.jsp">자바방</a>
+					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>">자바방</a>
 				</div>
 				
 				<!-- <button type="button" class="navbar-nav btn pull-right btn-srch" id="btn-srch">

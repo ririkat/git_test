@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.jb.pension.model.vo.Room" %>
+<%@ page import="com.jb.pension.model.vo.Room, com.jb.pension.model.vo.RoomFile, java.util.List" %>
 <%
 	Room r = (Room) request.getAttribute("room"); 	
 %>
@@ -33,7 +33,7 @@
 
 <!--       <div class="carousel-inner"> -->
 <!--         <div class="item active"> -->
-<%-- <%--           <img src="<%=request.getContextPath()%>/upload/pension/<% %>" alt="Image"> --%> --%>
+<%-- <%--           <img src="<%=request.getContextPath()%>/upload/pension/<% %>" alt="Image"> --%>
 <!--            <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"> -->
 <!--           <div class="carousel-caption"> -->
 <!--           </div>       -->
@@ -55,26 +55,18 @@
   <h3>방 사진</h3>
   <br>
   <div class="row">
-    <div class="col-sm-2">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Partner 1</p>
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Partner 2</p>    
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Partner 3</p>
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Partner 4</p>
-    </div> 
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Partner 5</p>
-    </div>     
+  	<%List<RoomFile> rfList = r.getRfList();
+  		if(rfList!=null && !rfList.isEmpty()){
+  			for(int i=0; i<rfList.size(); i++){
+  				String imgSrc = rfList.get(i).getrRenameFile();%>
+  				<div class="col-sm-2">
+			      <img src="<%=request.getContextPath()%>/upload/room/<%=imgSrc%>" class="img-responsive" style="width:100%" alt="Image">
+			      <p>Partner 1</p>
+			    </div>
+  	<%		}
+  		}
+  	%>
+      
     </div> 
   </div>
 <br>
@@ -97,7 +89,7 @@
     <div class="container text-center">
     
       <h3>객실 부대시설</h3><br>
-      <p>
+      <p style="text-align: center">
 	  침대<input type="checkbox" disabled name="roomfac" id="fac1" value="<%=r.getRoomFac().getBed()%>">  
 	  화장대<input type="checkbox" disabled name="roomfac" id="fac2" value="<%=r.getRoomFac().getDressTable()%>">
 	  테이블<input type="checkbox" disabled name="roomfac" id="fac3" value="<%=r.getRoomFac().getTable()%>">
@@ -105,8 +97,9 @@
 	  옷장<input type="checkbox" disabled name="roomfac" id="fac5" value="<%=r.getRoomFac().getDressCase()%>">
 	  욕조<input type="checkbox" disabled name="roomfac" id="fac6" value="<%=r.getRoomFac().getBath()%>">
 	  스파<input type="checkbox" disabled name="roomfac" id="fac7" value="<%=r.getRoomFac().getSpa()%>">
-	  세면도구<input type="checkbox" disabled name="roomfac" id="fac8" value="<%=r.getRoomFac().getWashKit()%>">
+	  세면도구<input type="checkbox" disabled name="roomfac" id="fac8" value="<%=r.getRoomFac().getWashKit()%>"> 
 	  티비<input type="checkbox" disabled name="roomfac" id="fac9" value="<%=r.getRoomFac().getTv()%>">
+	 <br><br> 
 	  빔프로젝터<input type="checkbox" disabled name="roomfac" id="fac10" value="<%=r.getRoomFac().getBeam()%>">
 	  에어컨<input type="checkbox" disabled name="roomfac" id="fac11" value="<%=r.getRoomFac().getAircon()%>">
 	  냉장고<input type="checkbox" disabled name="roomfac" id="fac12" value="<%=r.getRoomFac().getFridge()%>">

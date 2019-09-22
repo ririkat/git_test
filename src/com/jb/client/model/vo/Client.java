@@ -16,15 +16,20 @@ public class Client {
    private Date cEd;
    private int cBLCount;
    private int authority;
+   private String readstatus;
    
    public Client() {
       // TODO Auto-generated constructor stub
    }
    
-   
-   
-   
-   public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
+   public Client(String cId, int cBLCount,String readstatus) {
+	super();
+	this.cId = cId;
+	this.cBLCount = cBLCount;
+	this.readstatus=readstatus;
+}
+
+public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
 		String cAddr) {
 	super();
 	this.cId = cId;
@@ -38,7 +43,7 @@ public class Client {
    }
 	
 	public Client(String cId, String cPw, String cName, Date cBirth, String cGender, String cEmail, String cPhone,
-			String cAddr, Date cEd, int cBLCount, int authority) {
+			String cAddr, Date cEd, int cBLCount, int authority, String readstatus) {
 		super();
 		this.cId = cId;
 		this.cPw = cPw;
@@ -51,6 +56,7 @@ public class Client {
 		this.cEd = cEd;
 		this.cBLCount = cBLCount;
 		this.authority = authority;
+		this.readstatus=readstatus;
 	}
 
 	public String getcId() {
@@ -141,12 +147,22 @@ public class Client {
 		this.authority = authority;
 	}
 
+	public String getReadstatus() {
+		return readstatus;
+	}
+
+	public void setReadstatus(String readstatus) {
+		this.readstatus = readstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Client [cId=" + cId + ", cPw=" + cPw + ", cName=" + cName + ", cBirth=" + cBirth + ", cGender="
-				+ cGender + ", cEmail=" + cEmail + ", cPhone=" + cPhone + ", cAddr="
-				+ cAddr + ", cEd=" + cEd + ", cBLCount=" + cBLCount + ", authority=" + authority + "]";
+				+ cGender + ", cEmail=" + cEmail + ", cPhone=" + cPhone + ", cAddr=" + cAddr + ", cEd=" + cEd
+				+ ", cBLCount=" + cBLCount + ", authority=" + authority + ", readstatus=" + readstatus + "]";
 	}
+
+	
 
 
 }

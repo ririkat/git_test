@@ -35,12 +35,8 @@ public class LoginClientServlet extends HttpServlet {
 		String id = request.getParameter("loginid");
 		String pw = request.getParameter("cpass");
 		
-		System.out.println(id);
-		System.out.println(pw);
-		
 		ClientService service = new ClientService();
 		Client c = service.selectId(id, pw);
-		System.out.println(c);
 		
 		String view = "";
 		if(c != null) {

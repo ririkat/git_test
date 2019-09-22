@@ -83,6 +83,7 @@ public class ReservationService {
 		int result = dao.insertReservation(conn,res);
 		if(result>0) {
 			commit(conn);
+			result = dao.selecSeq(conn);
 		}else {
 			rollback(conn);
 		}
