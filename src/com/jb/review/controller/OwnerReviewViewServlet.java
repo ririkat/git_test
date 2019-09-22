@@ -1,6 +1,7 @@
 package com.jb.review.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,19 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.review.model.service.ReviewFileService;
 import com.jb.review.model.service.ReviewService;
+import com.jb.review.model.vo.Review;
+import com.jb.review.model.vo.ReviewFile;
 
 /**
- * Servlet implementation class ReviewDeleteServlet
+ * Servlet implementation class OwnerReviewViewServlet
  */
-@WebServlet("/review/deleteReview")
-public class ReviewDeleteServlet extends HttpServlet {
+@WebServlet("/review/ownerReviewView")
+public class OwnerReviewViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteServlet() {
+    public OwnerReviewViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +33,16 @@ public class ReviewDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		String pCode = request.getParameter("pCode");
-		System.out.println("ReviewDelete서블릿: "+pCode);
-		int result= new ReviewService().deleteReview(rNo);
+		int rNo= Integer.parseInt(request.getParameter("rNo"));
+		Review r = new ReviewService().selectReviewOne(rNo);
+		List<ReviewFile> reviewFileList = new ReviewFileService().selectImages();
+		System.out.println("view서블릿에서 view.jsp로 객체 내용 :"+r);
 		
-		String loc="/review/clientReviewList?pensionCode="+pCode;
-		String msg=result>0?"리뷰 삭제 완료":"리뷰 삭제 실패";
-		String view = "/views/common/msg.jsp";
-		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
+		request.setAttribute("pCode", pCode);
+		request.setAttribute("reviewFileList", reviewFileList);
+		request.setAttribute("review", r);
+		request.getRequestDispatcher("/views/review/ownerPensionReviewView.jsp").forward(request, response);
 	}
 
 	/**

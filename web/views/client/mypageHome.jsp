@@ -172,7 +172,8 @@ th, td {
 						<tr>
 						<td></td>
 						
-							<td><%=res.getPension().getpName() %>
+							<td><a href="<%=request.getContextPath()%>/client/pensionDetail?pensionCode=<%=res.getPension().getpCode()%>">
+								<%=res.getPension().getpName() %></a>
 								<%-- <div class="">
 
 <!-- 						<form name="pension-jjim-match-Frm" method="post"> -->

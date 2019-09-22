@@ -96,13 +96,13 @@ public class ReviewWriteEndServlet extends HttpServlet {
 		
 		if(currval>0 && imgRes>0) {
 			msg = "리뷰 등록 완료";
-			loc = "/review/pensionReviewList?pensionCode="+pCode;
+			loc = "/review/clientReviewList?pensionCode="+pCode;
 		}
 		else {
 			File remove = new File(saveDir+"/"+reFile);
 			remove.delete();
 			msg="리뷰 등록 실패";
-			loc = "/review/pensionReviewList?pensionCode="+pCode;
+			loc = "/review/clientReviewList?pensionCode="+pCode;
 		}
 		
 //		request.setAttribute("pCode", pCode);

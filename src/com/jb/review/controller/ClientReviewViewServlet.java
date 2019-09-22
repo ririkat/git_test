@@ -15,16 +15,16 @@ import com.jb.review.model.vo.Review;
 import com.jb.review.model.vo.ReviewFile;
 
 /**
- * Servlet implementation class OwnerReviewViewServlet
+ * Servlet implementation class ClientReviewViewServlet
  */
-@WebServlet("/review/reviewView")
-public class ReviewViewServlet extends HttpServlet {
+@WebServlet("/review/clientReviewView")
+public class ClientReviewViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewViewServlet() {
+    public ClientReviewViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class ReviewViewServlet extends HttpServlet {
 		request.setAttribute("pCode", pCode);
 		request.setAttribute("reviewFileList", reviewFileList);
 		request.setAttribute("review", r);
-		request.getRequestDispatcher("/views/review/pensionReviewView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/review/clientPensionReviewView.jsp").forward(request, response);
 	}
 
 	/**
