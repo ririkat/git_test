@@ -45,6 +45,14 @@ public class PaymentInfoInsertServlet extends HttpServlet {
 		
 	    ReservationService service = new ReservationService();
 	    int result = service.insertPayInfo(pay);
+	    
+	    String msg="";
+		String loc="/";
+		msg=result>0?"성공적으로 회원등록했습니다!":"회원등록실패했습니다.";
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request,response);
 		
 	}
 
