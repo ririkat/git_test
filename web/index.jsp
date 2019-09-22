@@ -132,7 +132,6 @@
 			<br>
 			<br>
 			<br>
-
 			<div class="carousel-inner">
 				<h1 class="thNavy">이벤트</h1>
 				<img src="http://placehold.it/800x300" style="width: 100%" alt="Image">
@@ -142,5 +141,4 @@
 			<br>
 		</div>
 </section>
-
 <%@ include file="/views/common/footer.jsp"%>
