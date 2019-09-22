@@ -16,8 +16,8 @@ public class Room {
 	private int rAddPrice;
 	
 	private RoomFacilities roomFac;
+	private Pension Pension;
 	private List<RoomFile> rfList; 
-	
 
 	public Room() {
 		// TODO Auto-generated constructor stub
@@ -54,8 +54,6 @@ public class Room {
 		this.rAddPrice = rAddPrice;
 		this.roomFac = roomFac;
 	}
-
-
 	
 
 	public List<RoomFile> getRfList() {
@@ -160,6 +158,15 @@ public class Room {
 				+ rMaxNop +", rSize=" + rSize + ", pCode=" + pCode + ", rStruc=" + rStruc
 				+ ", rInfo=" + rInfo + ", rAddPrice=" + rAddPrice + ", roomFac=" + roomFac + "]";
 	}
+
+	public Pension getPension() {
+		return Pension;
+	}
+
+	public void setPension(Pension pension) {
+		Pension = pension;
+	}
+
 	
 
 }
