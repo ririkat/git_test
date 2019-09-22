@@ -31,12 +31,12 @@ public class BoardCommentDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
-		int coNo=Integer.parseInt(request.getParameter("coNo"));
+		int commentNo=Integer.parseInt(request.getParameter("commentNo"));
 		
 		System.out.println(cmmNo);
-		System.out.println(coNo);
+		System.out.println(commentNo);
 		
-		int result=new BoardService().deleteComment(cmmNo, coNo);
+		int result=new BoardService().deleteComment(cmmNo, commentNo);
 		
 		String loc="/board/boardView?cmmNo="+cmmNo;
 		String msg=result>0?"댓글삭제완료":"댓글삭제실패";

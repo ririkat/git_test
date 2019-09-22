@@ -5,70 +5,73 @@
 	Board b=(Board)request.getAttribute("board");
 	List<BoardComment> list=(List)request.getAttribute("list");
 %>
+
+
+
 <%@ include file="/views/common/header.jsp"%>
+
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
-<section id="faq-container" class="container">
+
+<section>
 	<div class="col-sm-9">
-		<h2>게시판</h2>
-		<table id="tbl-faq" class="table table-bordered">
-			<tr>
-				<td>게시번호</td>
-				<td><%=b.getCmmNo() %></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><%=b.getTitle() %></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><%=b.getcId() %></td>
-			</tr>
-			<tr>
-				<td>조회수</td>
-				<td><%=b.getViewCnt() %></td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					<%if(b.getRenameFilename()!=null){%>
-	                     <a href="javascript:fn_filedown('<%=b.getOriginalFilename()%>','<%=b.getRenameFilename()%>')">
-	                     <img src="<%=request.getContextPath()%>/images/file.png" width="16px"/><%=b.getOriginalFilename() %></a>
-	                 <%}%>
-	                 
-					 <script>
-	                        function fn_filedown(ori,ren){
-	                           	var ori=encodeURIComponent(ori);
-	                           	var ren=encodeURIComponent(ren);
-	                           	location.href="<%=request.getContextPath()%>/board/boardFileDown?orifileName="+ori+"&refileName="+ren;
-	                        };
-	                 </script>
-				</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><%=b.getContent() %></td>
-			</tr>
-			<tr>
-				<td colspan="2" class="text-center">
-					<input type="button" id="toSend" class="btn btn-default pull-left" value="글목록으로" onclick="toList()"/>
-						<%if(loginClient!=null && (loginClient.getcId().equals(b.getcId()) || loginClient.getcId().equals("admin"))) { %>
-							<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()"/>
-							<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()"/>
-						<%} %>
-						<%if(loginClient!=null){ %>
-						<input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>
-						<%} %>
-				</td>
-			</tr>
-		</table>
-		</div>
+	<h2>게시판</h2>
+	<table>
+		<tr>
+			<td>게시번호</td>
+			<td><%=b.getCmmNo() %></td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td><%=b.getTitle() %></td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td><%=b.getcId() %></td>
+		</tr>
+		<tr>
+			<td>조회수</td>
+			<td><%=b.getViewCnt() %></td>
+		</tr>
+		<tr>
+			<td>첨부파일</td>
+			<td>
+				<%if(b.getRenameFilename()!=null){%>
+                     <a href="javascript:fn_filedown('<%=b.getOriginalFilename()%>','<%=b.getRenameFilename()%>')">
+                     <img src="<%=request.getContextPath()%>/images/file.png" width="16px"/><%=b.getOriginalFilename() %></a>
+                 <%}%>
+                 
+				 <script>
+                        function fn_filedown(ori,ren){
+                           	var ori=encodeURIComponent(ori);
+                           	var ren=encodeURIComponent(ren);
+                           	location.href="<%=request.getContextPath()%>/board/boardFileDown?orifileName="+ori+"&refileName="+ren;
+                        };
+                 </script>
+			</td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><%=b.getContent() %></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			</td>
+		</tr>
+	</table>
+	<input type="button" id="toSend" class="btn btn-default pull-left" value="글목록으로" onclick="toList()"/>
+		<%if(loginClient!=null && (loginClient.getcId().equals(b.getcId()) || loginClient.getcId().equals("admin"))) { %>
+			<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()"/>
+			<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()"/>
+		<%} %>
+		<input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>
 	<script>
 		function toList(){
 			location.href="<%=request.getContextPath() %>/board/boardList";
 		}
 		function updateBoard(){
+			
 <%-- 		location.href="<%=request.getContextPath()%>/board/updateBoard?cmmNo=<%=b.getCmmNo()%>"; --%>
 			location.href="<%=request.getContextPath()%>/board/updateBoard?cmmNo=<%=b.getCmmNo() %>";
 		}
@@ -122,10 +125,10 @@
 					<%=bc.getComment() %>
 				</td>
 				<td>
-					<button class="btn-reply" value="<%=bc.getCoNo() %>">답글</button>
+					<button class="btn-reply" value="<%=bc.getCommentNo() %>">답글</button>
 					<%if(loginClient!=null
 						&&("admin".equals(loginClient.getcId())||bc.getcId().equals(loginClient.getcId()))) {%>
-						<button class="btn-delete" value="<%=bc.getCoNo()%>">삭제</button>
+						<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
 						<%} %>
 					</td>
 				</tr>
@@ -144,7 +147,7 @@
 				<td>
 					<%if(loginClient!=null
 						&&("admin".equals(loginClient.getcId())||bc.getcId().equals(loginClient.getcId()))) {%>
-					<button class="btn-delete" value="<%=bc.getCoNo()%>">삭제</button>
+					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
 					<%} %>
 				</td>
 			</tr>

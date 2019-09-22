@@ -43,15 +43,8 @@ public class OwnerPensionListServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 10;
-		
-		
 		int totalWaitPension = new PensionService().selectWaitPension(oId);
 		List<Pension> waitPensions = new PensionService().selectWaitList(cPage, numPerPage, oId);
-		
-		
-		
-		
-		
 		int totalPage = (int)Math.ceil((double)totalWaitPension/numPerPage);
 		String pageBar = "";
 		int pageBarSize = 5;

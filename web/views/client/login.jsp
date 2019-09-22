@@ -28,6 +28,9 @@
 ======= --%>
                                 <input type="radio" name="loginType" id="client" value="client" checked/><label for="client">고객</label>
                                 <input type="radio" name="loginType" id="owner" value="owner"/><label for="owner">업주</label>
+                            <form id="loginTypefrm" class="form-signin" method="post" action="<%=request.getContextPath()%>/client/login">
+                                <input type="radio" name="loginType" id="client" value="client" checked/>고객
+                                <input type="radio" name="loginType" id="owner" value="owner"/>업주
                                 <input type="text" id="loginid" name="loginid"  class="form-control" placeholder="아이디 입력" required autofocus/><br>
                                 <input type="password" id="cpass" name="cpass"  class="form-control" placeholder="비밀번호 입력" required/><br>
                                 <input type="submit" class="btn btn-lg btn-warning btn-block" value="로그인"/>
@@ -55,7 +58,6 @@
                     $('#loginTypefrm').attr('action','<%=request.getContextPath()%>/client/login');
                 }
                 else if(loginType=="owner"){
-                	$('#cpass').attr('name','opass');	//Owner의 서블릿에서는 받는파라미터값이 opass로 되어있어 owner서블릿으로 넘겨주기전에 name값 변경
                     $('#loginTypefrm').attr('action','<%=request.getContextPath()%>/owner/login');
                 }
                 else return;

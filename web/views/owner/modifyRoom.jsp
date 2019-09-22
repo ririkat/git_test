@@ -135,7 +135,7 @@
 					<tr>
 						<th class="point"><strong class="point">*</strong> 객실사진</th>
 						<td>
-							<input type="button" id="fakeBtn" value="파일추가">
+							<input type="button" id="modiBtn" value="파일수정">
 						</td>
 					</tr>
 					
@@ -179,36 +179,53 @@
 
 
 <script>
-	$(function(){
-		$.ajax({
-			url:"<%=request.getContextPath()%>/owner/rImgsDelete",
-			type:"post",
-			data:{rNo:"<%=rNo%>"},
-			dataType:"html",
-			success:function(data){console.log("원본삭제완료")},
-			error:function(data){console.log("원본삭제실패")}
-		})
+	var i=0;
+	$("#modiBtn").click(function(){
+		if(confirm("이전에 업로드하신 사진은 모두 지워집니다. 진행하시겠습니까?")){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/owner/rImgsDelete",
+				type:"post",
+				data:{rNo:"<%=rNo%>"},
+				dataType:"html",
+				success:function(data){alert("원본 삭제 완료.");},
+				error:function(data){alert("원본 삭제 실패.");}
+			})
+			var addBtn = $('<input>').attr({"type":"button", "id":"addFile", "value":"파일추가"});
+			var delBtn = $('<input>').attr({"type":"button", "id":"delFile", "value":"-"});
+			var input = $('<input>').attr({"type":"file", "name":"roomImg"+i, "id":"roomImg"+i});
+			$("#modiBtn").parent().append(addBtn);
+			$("#modiBtn").parent().append(delBtn);
+			$("#addFile").parent().append(input);
+			$("#modiBtn").remove();
+			i++;
+			
+			$("#addFile").click(function(){
+				var input = $('<input>').attr({"type":"file", "name":"roomImg"+i, "id":"roomImg"+i});
+				$(this).parent().append(input);
+				i++;
+			})
+			$("#delFile").click(function(){
+				i--;
+				$("#roomImg"+i).remove();
+			})
+		}
 	})
-	
-	$("#fakeBtn").click(function(){
-		var addBtn = $('<input>').attr({"type":"button", "id":"addFile", "value":"파일추가"});
-		var input = $('<input>').attr({"type":"file", "name":"roomImg"});
-		$("#fakeBtn").parent().append(addBtn);
-		$("#addFile").parent().append(input);
-		$("#fakeBtn").attr({"style":"display:none"});
-		
-		$("#addFile").click(function(){
-			var input = $('<input>').attr({"type":"file", "name":"roomImg"});
-			$(this).parent().append(input);
-		})
-	})
-	
 
+	
+	//첨부파일 없음
 	function modify_validate(){
-		//첨부파일 없음
-		if ($("input[name=roomImg]").length<=0 || modifyRoom.roomImg.value=="") {
-			alert("첨부파일(객실사진)을 추가해 주세요.");
-			return false;
+		if($('input[id="modiBtn"]').length<=0){	//파일수정버튼을 눌렀으면(즉,버튼이 삭제되어 없는 상태.)
+			var cnt = 0;
+			$('input[type="file"]').each(function(idx,item){
+				if($(this).val()==""){
+					alert("첨부파일(객실사진)을 업로드해 주세요.");
+					cnt++;
+					return false;
+				}
+			});
+			if(cnt>0){
+				return false;
+			}
 		}
 	}
 </script>

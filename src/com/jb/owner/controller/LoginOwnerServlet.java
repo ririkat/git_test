@@ -30,15 +30,15 @@ public class LoginOwnerServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("loginid");
-		String pw = request.getParameter("opass");
+		String pw = request.getParameter("cpass");
 		System.out.println(id);
 		System.out.println(pw);
 		
 		OwnerService service = new OwnerService();
 		Owner o = service.selectId(id,pw);
+		System.out.println(o);
 		
 		String view = "";
 		if(o!= null) {

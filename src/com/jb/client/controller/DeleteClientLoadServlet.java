@@ -31,7 +31,9 @@ public class DeleteClientLoadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		HttpSession session = request.getSession();
 		
+	    session.getAttribute("loginClient");
 			String cId=request.getParameter("cId");
 
 			

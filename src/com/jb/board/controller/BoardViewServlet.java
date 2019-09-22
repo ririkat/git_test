@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +25,7 @@ public class BoardViewServlet extends HttpServlet {
      */
     public BoardViewServlet() {
         super();
-
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,40 +33,49 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Cookie[] cookies=request.getCookies();
-		String boardCookieVal="";
-		boolean hasRead=false;//이 게시글을 읽었는지 확인
-		
 		int cmmNo=Integer.parseInt(request.getParameter("cmmNo"));
-
-		if(cookies!=null) {
-			out:
-				for(Cookie c : cookies) {
-					String name=c.getName();
-					String value=c.getValue();
-							
-					if("boardCookie".equals(name)) {
-						boardCookieVal=value;
-						if(value.contains("|"+cmmNo+"|")) {
-							hasRead=true;
-							break out;
-						}
-					}
-				}
-			}
-		if(!hasRead) {
-			Cookie boardCookie=new Cookie("boardCookie", boardCookieVal+"|"+cmmNo+"|");
-			boardCookie.setMaxAge(-1);
-			response.addCookie(boardCookie);
-		}
-		Board b=new BoardService().selectBoardOne(cmmNo, hasRead);
-		List<BoardComment> list=new BoardService().selectBoardComment(cmmNo);
+		Board b=new BoardService().selectBoardOne(cmmNo);
 		
+		List<BoardComment> list=new BoardService().selectBoardComment(cmmNo);
 		request.setAttribute("list", list);
 		request.setAttribute("board", b);
-		System.out.println(list);
-		System.out.println(b);
 		request.getRequestDispatcher("/views/board/boardView.jsp").forward(request, response);
+//		//새로고침을 통해 조회수가 올라가는 현상은
+//		//쿠키를 통해서 제한
+//		Cookie[] cookies=request.getCookies();
+//		String boardCookieVal="";
+//		boolean hasRead=false;//이 게시글을 읽었는지 확인
+//		
+//		if(cookies!=null) {
+//			out:
+//			for(Cookie c : cookies) {
+//				String name=c.getName();
+//				String value=c.getValue();
+//						
+//				if("boardCookie".equals(name)) {
+//					boardCookieVal=value;
+//					if(value.contains("|"+bNo+"|")) {
+//						hasRead=true;
+//						break;
+//					}
+//				}
+//			}
+//		}
+//		if(!hasRead) {
+//			Cookie boardCookie=new Cookie("boardCookie", boardCookieVal+"|"+bNo+"|");
+//			boardCookie.setMaxAge(-1);
+//			response.addCookie(boardCookie);
+//		}
+//		
+//
+//		
+//		Board b=new BoardService().selectBoard(bNo, hasRead);
+		
+//		
+//		request.setAttribute("board", b);
+		
+//		
+//		request.getRequestDispatcher("/views/board/boardView.jsp").forward(request, response);
 		
 		
 		

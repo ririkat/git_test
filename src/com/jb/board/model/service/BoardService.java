@@ -53,14 +53,8 @@ public class BoardService {
 		return null;
 	}
 
-	public Board selectBoardOne(int cmmNo, boolean hasRead) {
+	public Board selectBoardOne(int cmmNo) {
 		Connection conn=getConnection();
-		if(!hasRead) {
-			int result=dao.updateCount(conn, cmmNo);
-			
-			if(result>0) commit(conn);
-			else rollback(conn);
-		}
 		Board b=dao.selectBoardOne(conn, cmmNo);
 		close(conn);
 		return b;
@@ -96,9 +90,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int deleteComment(int cmmNo, int coNo) {
+	public int deleteComment(int cmmNo, int commentNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteComment(conn, cmmNo, coNo);
+		int result=dao.deleteComment(conn, cmmNo, commentNo);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -128,6 +122,5 @@ public class BoardService {
 		return b;
 	}
 
-	
 
 }

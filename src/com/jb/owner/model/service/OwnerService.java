@@ -24,7 +24,6 @@ public class OwnerService {
 		return count;
 	}
 	
-
 	//전체 미승인 업주회원 수
 	public int selectCountWait() {
 		Connection conn = getConnection();
@@ -40,7 +39,7 @@ public class OwnerService {
 		close(conn);
 		return list;
 	}
-
+	
 	public List<Owner> selectListPage(int cPage, int numPerPage){
 		Connection conn =getConnection();
 		List<Owner> list=dao.selectListPage(conn,cPage,numPerPage);
@@ -154,62 +153,21 @@ public class OwnerService {
 		return result;
 	}
 	
-	public Owner selectId(String id,String pw) {
+	public Owner selectId(String id, String pw) {
 		Connection conn = getConnection();
-		Owner o = dao.selectId(conn, id,pw);
+		Owner o = dao.selectId(conn, id, pw);
 		close(conn);
 		return o;
 	}
 	
+	
 	//업체 회원가입
-		public int insertOwner(Owner o) {
-			Connection conn = getConnection();
-			int result = dao.insertOwner(conn, o);
-			if (result > 0) {
-				commit(conn);
-
-			} else {
-				rollback(conn);
-			}
-			close(conn);
-			return result;
-		}
-		
-		//업체 아이디 중복
-		public boolean selectCheckId(String id) {
-			Connection conn = getConnection();
-			boolean result = dao.selectCheckId(conn,id);
-			close(conn);
-			return result;
-		}
-		
-		//업체 아이디찾기
-		public Owner findId(String name, String email) {
-			Connection conn = getConnection();
-			Owner o = dao.findId(conn,name,email);
-			close(conn);
-			return o;
-		
-		}
-
-
-		public Owner findEmail(String uid) {
-			Connection conn=getConnection();
-			Owner o=dao.findEmail(conn, uid);
-			close(conn);
-			return o;
-		}
-	public int updateOwner(Owner o) {
-		Connection conn=getConnection();
-		int result = 0;
-		if(o!=null) {
-			result=dao.updateOwner(conn,o);
-		}else {
-			result = -1;
-		}
-		
+	public int insertOwner(Owner o) {
+		Connection conn = getConnection();
+		int result = dao.insertOwner(conn, o);
 		if (result > 0) {
 			commit(conn);
+
 		} else {
 			rollback(conn);
 		}
@@ -217,19 +175,31 @@ public class OwnerService {
 		return result;
 	}
 	
-	public int updateOwnerPassword(String oId, String oPwNew) {
+	//업체 아이디 중복
+	public boolean selectCheckId(String id) {
 		Connection conn = getConnection();
-
-		int result = dao.updateOwnerPassword(conn, oId, oPwNew);
-
-		if(result >0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		boolean result = dao.selectCheckId(conn,id);
 		close(conn);
 		return result;
 	}
+	
+	//업체 아이디찾기
+	public Owner findId(String name, String email) {
+		Connection conn = getConnection();
+		Owner o = dao.findId(conn,name,email);
+		close(conn);
+		return o;
+	
+	}
+
+
+	public Owner findEmail(String uid) {
+		Connection conn=getConnection();
+		Owner o=dao.findEmail(conn, uid);
+		close(conn);
+		return o;
+	}
+
 
 	public int updatePassword(String id, String pw) {
 		Connection conn=getConnection();

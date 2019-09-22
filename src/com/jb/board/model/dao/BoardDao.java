@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -69,7 +68,6 @@ private Properties prop = new Properties();
 				b.setCategory(rs.getString("category"));
 				b.setOriginalFilename(rs.getString("original_filename"));
 				b.setRenameFilename(rs.getString("rename_filename"));
-				b.setViewCnt(rs.getInt("view_cnt"));
 				b.setCommuCnt(rs.getInt("commu_cnt"));
 				b.setcId(rs.getString("c_id"));
 				list.add(b);
@@ -121,7 +119,6 @@ private Properties prop = new Properties();
 				b.setEntDate(rs.getDate("ent_date"));
 				b.setRenameFilename(rs.getString("rename_filename"));
 				b.setOriginalFilename(rs.getString("original_filename"));
-				b.setViewCnt(rs.getInt("view_cnt"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -173,11 +170,11 @@ private Properties prop = new Properties();
 		String sql=prop.getProperty("insertComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, bc.getComment());
-			pstmt.setString(2, bc.getcId());
-			pstmt.setInt(3, bc.getCommentLevel());
-			pstmt.setString(4, bc.getCommentRef()==0?null:String.valueOf(bc.getCommentRef()));
-			pstmt.setInt(5, bc.getCmmNo());
+			pstmt.setInt(1, bc.getCmmNo());
+			pstmt.setString(2, bc.getComment());
+			pstmt.setString(3, bc.getcId());
+			pstmt.setInt(4, bc.getCommentLevel());
+			pstmt.setString(5, bc.getCommentRef()==0?null:String.valueOf(bc.getCommentRef()));
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -187,14 +184,14 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public int deleteComment(Connection conn, int cmmNo, int coNo) {
+	public int deleteComment(Connection conn, int cmmNo, int commentNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("deleteComment");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, cmmNo);
-			pstmt.setInt(2, coNo);
+			pstmt.setInt(2, commentNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -215,7 +212,7 @@ private Properties prop = new Properties();
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				BoardComment bc=new BoardComment();
-				bc.setCoNo(rs.getInt("co_no"));
+				bc.setCommentNo(rs.getInt("comment_no"));
 				bc.setCmmNo(rs.getInt("cmm_no"));
 				bc.setComment(rs.getString("comment"));
 				bc.setCommentDate(rs.getDate("comment_date"));
@@ -233,6 +230,7 @@ private Properties prop = new Properties();
 		return list;
 	}
 
+<<<<<<< HEAD
 	public int updateCount(Connection conn, int cmmNo) {
 		Statement stmt=null;
 		int result=0;
@@ -270,4 +268,18 @@ private Properties prop = new Properties();
 		return b;
 	}
 	
+=======
+	
+
+>>>>>>> 569004b09dd22cc426ed769ebec5f5fa945b2229
 }
+
+
+
+
+
+
+
+
+
+

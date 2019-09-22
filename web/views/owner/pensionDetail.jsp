@@ -12,6 +12,71 @@
 	List<RoomFile> rFileList = (List)request.getAttribute("rFileList");
 	String pFac = (String)request.getAttribute("pFac");
 %>
+<style>
+.table_room2 th {
+    border: 1px solid #d1d1d1;
+    padding: 12px;
+    background-color: #fafafa;
+    vertical-align: middle;
+    line-height: 18px;
+}
+
+.table_room2 th.br2, .table_room2 td.br2 {
+    border-right-width: 2px;
+}
+
+.table_room2 th.bl2, .table_room2 td.bl2 {
+    border-left-width: 2px;
+}
+
+.table_room2 th.bb2, .table_room2 td.bb2 {
+    border-bottom-width: 2px;
+}
+
+.table_room2 th span.imgBox {
+    position: relative;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+.pdb0px {
+    padding-bottom: 0px !important;
+}
+
+.bb0px {
+    border-bottom: 0px !important;
+}
+
+.f0 {
+    border: 1px solid #dedede;
+    color: #666;
+    height: 20px;
+    line-height: 20px;
+}
+
+.imgBox {
+    margin: 0px auto;
+    padding: 2px;
+    width: 720px;
+    height: 442px;
+    border: 1px solid #eeeeee;
+}
+
+.room_img {
+    width: 718px;
+    height: 440px;
+}
+
+.room_sum_off {
+    padding: 4px;
+    border: 2px solid #dadada;
+    width: 90px;
+    height: 60px;
+}
+</style>
 
 <div class="col-md-10">
 	<br><br><br>
@@ -103,11 +168,13 @@
 							}
 					%>
 					<tr>
-						<th>
+						<th class="bl2 br2 bb0px pdb0px">
 							<span class="imgBox">
+								<%if(curRfList!=null && !curRfList.isEmpty()) {%>
 								<a name="move<%=r.getrNo()%>"></a>
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
-								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
+								<% System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
+								<%} %>
 							</span>
 						</th>
 						<th rowspan='2'>
@@ -201,7 +268,7 @@
 					</tr>
 	
 					<tr>
-						<th>
+						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
 							<div id="thum_img">
 								<%for(int i=0; i<curRfList.size(); i++) { %>
 									<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"

@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.pension.model.vo.Room;
-import com.jb.pension.model.vo.RoomFacilities;
-import com.jb.pension.model.vo.RoomFile;
 
 public class RoomDao {
 	
@@ -58,7 +56,6 @@ public class RoomDao {
 			close(stmt);
 		} return r;
 	}
-  
 	
 	//선택된 펜션의 전체 객실 수
 	public int selectCountRoom(Connection conn, String pCode) {
@@ -149,8 +146,6 @@ public class RoomDao {
 		}
 		return list;
 	}
-  
-  
 	
 	//객실추가
 	public int addRoom(Connection conn, String pCode, String rName,
@@ -235,75 +230,5 @@ public class RoomDao {
 			close(stmt);
 		} return result;
 	}
-  
-     //룸조회
-   public Room roomInFo(Connection conn, String rno) {
-	   PreparedStatement pstmt = null;
-	   ResultSet rs = null;
-	   String sql = prop.getProperty("roomSelect");
-	   Room r = null;
-	   try {
-		   pstmt=conn.prepareStatement(sql);
-		   pstmt.setString(1, rno);
-		   rs = pstmt.executeQuery();
-		   if(rs.next()) {
-			   r = new Room();
-			   r.setpCode(rs.getString("p_code"));
-	            r.setrNo(rs.getString("r_no"));
-	            r.setrName(rs.getString("r_name"));
-	            r.setrPrice(rs.getInt("r_price"));
-	            r.setrAddPrice(rs.getInt("r_addPrice"));
-	            r.setrNop(rs.getInt("r_nop"));
-	            r.setrMaxNop(rs.getInt("r_maxnop"));
-	            r.setrSize(rs.getString("r_size"));
-	            r.setrStruc(rs.getString("r_struc"));
-	            r.setrInfo(rs.getString("r_info"));
-	            
-	            r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
-						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
-						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
-						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
-						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
-				
-	            r.setRfList(new RoomDao().selectRoomFileList(conn,rno));
-		   }
-	   }catch(SQLException e) {
-		   e.printStackTrace();
-	   }finally {
-		   close(rs);
-		   close(pstmt);
-	   }
-	   return r;
-   }
 
-
-
-   public List<RoomFile> selectRoomFileList(Connection conn, String rno) {
-	   PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      String sql = prop.getProperty("selectRoomFileList");
-	      List<RoomFile> list = new ArrayList();
-	      try {
-			   pstmt=conn.prepareStatement(sql);
-			   pstmt.setString(1, rno);
-			   rs = pstmt.executeQuery();
-			   while(rs.next()) {
-				   RoomFile rf = new RoomFile();
-				   rf.setrFileNo(rs.getInt("r_file_no"));
-				   rf.setrOriginalFile(rs.getString("r_Original_File"));
-				   rf.setrRenameFile(rs.getString("r_Rename_File"));
-				   rf.setrNo(rs.getString("r_file_no"));
-		           list.add(rf);
-			   }
-		   }catch(SQLException e) {
-			   e.printStackTrace();
-		   }finally {
-			   close(rs);
-			   close(pstmt);
-		   }
-		   return list;
-   }
-   
 }
-
-
