@@ -8,7 +8,7 @@
 <section>
     <div class="container-fluid">
         <div class="row content">
-        	<!--사이드바-->
+           <!--사이드바-->
             <div class="col-sm-3 col-md-2 sidenav"> 
                 <br>
                 <br>
@@ -18,24 +18,24 @@
                         <br>
                         <li class="active">
                             <a class="nav-link" href="<%=request.getContextPath()%>/owner/pensionList?oId=<%=loginOwner.getoId() %>">
-                               	펜션관리 </span>
+                                  펜션관리 </span>
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="<%=request.getContextPath()%>/owner/ownerInfo?oId=<%=loginOwner.getoId()%>">
-                            	개인정보수정</a>
+                               개인정보수정</a>
                         </li>
                          <li>
-                        	<a class="nav-link" href="<%=request.getContextPath()%>/owner/updatePassword?oId=<%=loginOwner.getoId()%>">
-                        		비밀번호변경</a>
+                           <a class="nav-link" href="<%=request.getContextPath()%>/owner/updatePassword?oId=<%=loginOwner.getoId()%>">
+                              비밀번호변경</a>
                         </li>
                         
                         <li>
-                        	<a class="nav-link" href="<%=request.getContextPath()%>/owner/deleteOwner?oId=<%=loginOwner.getoId()%>">
-                        		업주탈퇴</a>
+                           <a class="nav-link" href="<%=request.getContextPath()%>/owner/deleteOwner?oId=<%=loginOwner.getoId()%>">
+                              업주탈퇴</a>
                         </li>
                         
                     </ul><br>
                 </div>
             </div>
-	
+   
