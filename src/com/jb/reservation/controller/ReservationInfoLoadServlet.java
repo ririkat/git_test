@@ -47,6 +47,7 @@ public class ReservationInfoLoadServlet extends HttpServlet {
 	
 		
 	    request.setAttribute("resInfo", resInfo);
+	    request.setAttribute("cId", cId);
 		
 		
 		request.getRequestDispatcher("/views/reservation/reservationConfirm.jsp").forward(request,response);		

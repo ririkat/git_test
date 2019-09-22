@@ -7,7 +7,7 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <%
-String payCode = (String)request.getAttribute("merchant_uid");
+
 
 
 %>
@@ -20,10 +20,10 @@ String payCode = (String)request.getAttribute("merchant_uid");
 	
 	<h1>결제가 완료되었습니다.</h1>
 	
-	<h1><%=payCode%></h1>
+	<h1></h1>
 	
 	
-	<input type="hidden" name = "payCode" value="<%=payCode%>">
+	<input type="hidden" name = "payCode" value="">
 	<input type="submit" value="예약내역확인" onclick="go();"/>
 	<input type="button" value="메인화면이동"/>
 	

@@ -56,6 +56,7 @@ public class PaymentInfoLoadServlet extends HttpServlet {
 	
 		Reservation resInfo = new ReservationService().selectOneReservation(resCode,cId);
 		System.out.println("InfoLoad 서블릿 : "+resInfo);
+		request.setAttribute("cId", cId);
 		request.setAttribute("resInfo", resInfo);
 		request.setAttribute("resCode", resCode);
 		request.getRequestDispatcher("/views/reservation/payInfoView.jsp").forward(request, response);

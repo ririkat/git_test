@@ -12,11 +12,9 @@
     <%
     
     Reservation resInfo=(Reservation)request.getAttribute("resInfo");
-     int totalPrice = (int)request.getAttribute("totalPrice"); 
-   
-   
-   
-   
+     int totalPrice = (int)request.getAttribute("totalPrice");
+     String resCode = (String)request.getAttribute("resCode");
+     
     
     %>
 
@@ -30,7 +28,7 @@
 	<div id="mypagetitle" text-align="center">결제정보확인</div>
 	<br> <br>
  
-	<form method="post" class="container"  name="reservationFrm" id="reservationFrm" action="">
+	<form method="post" class="container"  name="payFrm" id="payMethod" action="">
 	<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
 		<table class="table_final_auction" id="final_input_table">
@@ -42,20 +40,21 @@
 				<tr>
 					<th class="txt_left"><strong class="point">예약자명</strong></th>
 					<td class="txt_left">
-					<input type="text" name="cName" value="<%=resInfo.getClient().getcName()%>"> <span style="color: #FF8F00;">*
+					<input type="text" name="resName" value="<%=resInfo.getClient().getcName()%>"> <span style="color: #FF8F00;">*
 							예약자 실명을 입력하세요. 예약확인시 혼동이 될 수 있습니다.</span></td>
 				</tr>
 				
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
-					<td class="txt_left"><input type="text" name="cPhone"
-						value="<%=resInfo.getClient().getcPhone()%>" style="width: 120px;" class="num_only"
+					<td class="txt_left"><input type="text" name="resPhone"
+						value="<%=resInfo.getClient().getcPhone()%>" style="width: 120px;" 
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
 				</tr>
 
 			</tbody>
 		</table>
+	
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
 		<div id="mypagetitle" text-align="center">결제금액</div>
@@ -131,16 +130,77 @@
 
 
 		</table>
+		
+		
+		<div id="mypagetitle" text-align="center">결제방법</div>
+		<br> <br>
+		<p class="blk h10">&nbsp;</p>
+		
+		
+		
+		
+		<table width="100%" class="table_pay_type">
+			<colgroup>
+				<col width="100">
+				<col width="440">
+				<col width="*">
+			</colgroup>
+			<thead>
+				<tr>
+                    <th colspan="3">
+                        <span style="margin-right:30px;">
+                        <input type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
+                           </span>
+                       
+                        <span style="margin-right:30px;">
+                        <input type="radio" name="pay" id="payCard" value="kakaoPay" checked>카카오페이결제
+                           </span>
+             
+
+                    </th>
+                </tr>
+			</thead>
+
+
+			<tbody id="bank_info">
+				<tr>
+					<th>입금자명</th>
+					<td><input type="text" name="accountName" style="width: 100px;" value="">
+						<span class="cff">(입금하실 때 반드시 입금자명으로 입금 해 주세요)</span></td>
+					<th rowspan="3">무통장입금 안내(꼭 기억해주세요)
+						<p class="blk h05">&nbsp;</p>
+						<div>
+							<strong class="cff">정해진 기간 이내 입금완료 하지 않을 경우 자동취소 됩니다.</strong><br>
+							무통장 입금 선택시 <span class="cff">예약대기 상태</span>가 되며 예약대기는 예약 확정이
+							아닙니다.<br> 예약대기 상태에서는 <span class="cff">입금을 먼저하신 분께 우선
+								예약권</span>이 있습니다.
+						</div>
+					</th>
+				</tr>
+
+				
+			</tbody>
+		</table>
+      
+<%--         <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> --%>
+<%--              <input type = "hidden" name = "cId" value="<%loginClient.getcId() %>"> --%>
+	
         
  <!--  
         <input type="button" onclick="preview();" id="pay" class="btn btn-warning" value="결제하기">  -->
        
         <input type="button" class="btn btn-warning" onclick="" value="나중에하기">
         
+		
 			
 
 	</form>
-	 <input type="button" name="pay" id="pay" value="결제하기">
+	<input type = "button" name = "payment_btn" class="btn btn-warning" id = "payment" value="결제하기">
+	  <!-- onclick="payment();" -->
+<!-- 	 카카오버튼 -->
+	 <input type="button" name="pay" id="pay" value="카카오페이로결제하기">
+	
+	 
 	
 	
 
@@ -149,54 +209,150 @@
 
 <script>
 
+<%-- $(function(){
+    $("input[name='pay']:radio").change(function(){
+        var pay= $(this).val();
+        if(pay=="account"){
+            $('#payFrm').attr('action','<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>');
+        }
+        else if(pay=="kakaoPay"){
+        	
+        	 $('#payFrm').attr('action','<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>');
+        }
+        else return;
+    });
+}); --%>
+$(function(){
+	$('#payment').click(function(){
+		 var form = document.payFrm;
+			//무통장결제 라디오 버튼을 선택한 경우
+			if(form.pay[0].checked == true){
+	      
+	  			 form.action="<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>"; 
+	<%-- form.action="<%=request.getContextPath()%>/views/reservation/paymentOnAccount.jsp"; --%>
+				
+			}
+			//카카오페이 결제 라디오 버튼을 선택한 경우
+			else if(form.pay[1].checked == true){
+
+				 form.action="<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>"; 
+	        
+			}
+			else{
+				alert("결제방법을 선택해주세요.");
+			}
+			form.submit();
+	})
+})
+<%-- function payment(){
+	
+	 var form = document.payFrm;
+		//무통장결제 라디오 버튼을 선택한 경우
+		if(form.pay[0].checked == true){
+      
+  			 form.action="<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>"; 
+form.action="<%=request.getContextPath()%>/views/reservation/paymentOnAccount.jsp";
+			
+		}
+		//카카오페이 결제 라디오 버튼을 선택한 경우
+		else if(form.pay[1].checked == true){
+
+			 form.action="<%=request.getContextPath()%>/resservation/account?resCode=<%=resInfo.getResCode()%>"; 
+        
+		}
+		else{
+			alert("결제방법을 선택해주세요.");
+		}
+		form.submit();
+	}
+  --%>
+
+
+
+/*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
+/* 
+      $(document).ready(function () {
+          $("#payCard").click(function () {
+              if ($("#payCard").prop("checked", true)) {
+
+                  $("#bank_info").hide();
+               } else {
+
+                   $("#bank_info").show();
+               
+          }
+
+
+
+          });
+
+      });
+*/
+    
+  	 
+   
+
+/* 이전으로 버튼 */
+
+<%-- function preview(){
+	
+	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=res.getResCode()%>;
+		location.href=url;
+
+}
+ --%>
 /* 결제하기 버튼 */
 
 
-$("#pay").click(function () {
-       var IMP = window.IMP;
-       IMP.init('imp08945184'); 
+ $("#pay").click(function () {
+	 
+	 var form = document.payFrm;
+		//무통장결제 라디오 버튼을 선택한 경우
+		if(form.pay[0].checked == true){
+      var IMP = window.IMP;
+      IMP.init('imp08945184'); 
+     
+      IMP.request_pay({
+     
+          pg:'kakao',
+          pay_method: 'card',
+          merchant_uid: new Date().getTime(),
+          name: '자바방 펜션 결제',
+          amount: 50000, 
+          buyer_email: 'honey@honey.do',
+          buyer_name: '서현희',
+          buyer_tel: '010-1234-5678',
+          buyer_addr: '경기도 어쩌구 저쩌구동'
       
-       IMP.request_pay({
-      
-           pg:'kakao',
-           pay_method: 'card',
-           merchant_uid: new Date().getTime(),
-           name: '자바방 펜션 결제',
-           amount: 50000, 
-           buyer_email: 'honey@honey.do',
-           buyer_name: '서현희',
-           buyer_tel: '010-1234-5678',
-           buyer_addr: '경기도 어쩌구 저쩌구동'
-       
-   
-       }, function (rsp) {
-           console.log(rsp);
-           if (rsp.success) {
-             
-           	var msg = '결제가 완료되었습니다.';
-              
-               msg += '고유ID : ' + rsp.imp_uid;
-               msg += '상점 거래ID : ' + rsp.merchant_uid;
-               msg += '결제 금액 : ' + rsp.paid_amount;
-               msg += '카드 승인번호 : ' + rsp.apply_num;
-               
-               location.href='<%=request.getContextPath()%>/views/reservation/paySuccess.jsp';
+  
+      }, function (rsp) {
+          console.log(rsp);
+          if (rsp.success) {
             
-                         /* 여기다가 쿼리스트링 써서 넘기기 */ 
-               
-           } else {
-               var msg = '결제에 실패하였습니다.';
-               msg += '에러내용 : ' + rsp.error_msg;
-           }
-           alert(msg);
-          <%--  location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg; --%>
-       });
-       
-       
-       
-   });
-
-
+          	var msg = '결제가 완료되었습니다.';
+             
+              msg += '고유ID : ' + rsp.imp_uid;
+              msg += '상점 거래ID : ' + rsp.merchant_uid;
+              msg += '결제 금액 : ' + rsp.paid_amount;
+              msg += '카드 승인번호 : ' + rsp.apply_num;
+              
+              location.href='<%=request.getContextPath()%>/views/reservation/paySuccess.jsp';
+           
+                        /* 여기다가 쿼리스트링 써서 넘기기 */ 
+              
+          } else {
+              var msg = '결제에 실패하였습니다.';
+              msg += '에러내용 : ' + rsp.error_msg;
+          }
+          alert(msg);
+          location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg;
+      });
+	}
+      
+      
+      
+  }); 
+ 
 
 </script>
 
