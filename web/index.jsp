@@ -142,4 +142,5 @@
 			<br>
 		</div>
 </section>
+
 <%@ include file="/views/common/footer.jsp"%>
