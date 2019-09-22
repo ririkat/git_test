@@ -59,6 +59,13 @@ public class RoomFileService {
 		return list;
 	}
 	
+	public List<RoomFile> selectRoomFile(String rNo) {
+		Connection conn = getConnection();
+		List<RoomFile> list = dao.selectRoomFile(conn,rNo);
+		close(conn);
+		return list;
+	}
+	
 	//해당 객실의 사진들 불러오기
 	public List<RoomFile> curRoomFiles(String rNo){
 		Connection conn = getConnection();

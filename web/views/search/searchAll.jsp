@@ -200,7 +200,7 @@
 								<p><%=list.get(i).getpAddr() %></p>
 								<p>
 									<a href="#" class="btn my-btn" role="button">찜♥</a>
-									<a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode() %>"
+									<a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
 										class="btn btn-default" role="button">예매상세</a>
 								</p>
 							</div>

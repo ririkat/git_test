@@ -233,12 +233,14 @@ public class ReservationDao {
 		String sql = prop.getProperty("insertReservation");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, res.getResCode());
-			pstmt.setString(2, res.getResState());
-			pstmt.setInt(3, res.getResNop());
-			pstmt.setInt(4, res.getTotalPrice());
-			pstmt.setString(5, res.getrNo());
-			pstmt.setString(6, res.getcId());
+//			pstmt.setString(1, res.getResCode());
+			pstmt.setDate(1, res.getResCheckIn());
+			pstmt.setDate(2, res.getResCheckOut());
+			pstmt.setString(3, res.getResState());
+			pstmt.setInt(4, res.getResNop());
+			pstmt.setInt(5, res.getTotalPrice());
+			pstmt.setString(6, res.getrNo());
+			pstmt.setString(7, res.getcId());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -322,6 +324,27 @@ public class ReservationDao {
 		} return res;
 		
 	}
+
+	public int selecSeq(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selecSeq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	   
 	
