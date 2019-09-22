@@ -15,11 +15,13 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.notice.model.dao.NoticeDao;
+import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.PensionFacilities;
 import com.jb.pension.model.vo.PensionFile;
 import com.jb.pension.model.vo.Room;
 import com.jb.pension.model.vo.RoomFacilities;
+import com.jb.pension.model.vo.RoomFile;
 
 public class SearchDao {
 	
@@ -127,6 +129,8 @@ public class SearchDao {
 						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
 						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
 						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
+				
+				r.setRfList(new RoomFileService().selectRoomFile(rs.getString("r_no")));
 				
 				list.add(r);
 			}
