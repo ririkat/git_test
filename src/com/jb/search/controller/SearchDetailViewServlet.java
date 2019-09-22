@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
+import com.jb.pension.model.vo.Room;
 import com.jb.search.model.service.SearchService;
 
 /**
@@ -34,8 +36,6 @@ public class SearchDetailViewServlet extends HttpServlet {
 		String pCode=request.getParameter("pCode");
 		
 		Pension p = new SearchService().selectDetail(pCode);
-		
-		System.out.println(p);
 		
 		request.setAttribute("pension", p);
 		request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);

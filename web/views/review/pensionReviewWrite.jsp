@@ -4,41 +4,42 @@
 <%
 	Client c = (Client) request.getAttribute("client");
 	String pCode = (String) request.getAttribute("pCode");
+	System.out.println(pCode);
 %>
 
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideMypage.jsp"%>
 
-
-
-
-		<section id="review-container" class="container">
+		<section id="review-container">
+			<div class="container">
 			<div class="col-sm-9">
 				<h2 class="text-center">리뷰 작성</h2>
 				  <form action="<%=request.getContextPath() %>/review/reviewWriteEnd"
 					method="post" enctype="multipart/form-data">
 
 					<table id="tbl-review" class="table table-bordered">
-						
 						<tr>
 							<th>제목</th>
-							<td><input type="text" name="title" required></td>
+							<td><input type="text" name="title" class="form-control" required></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><input type="text" name="writer" value="<%=c.getcId()%>" readonly/></td>
+							<td><input type="text" name="writer" class="form-control" value="test1" readonly/></td>  <%--나중에 loginClient또는 c.getcId()로 바꾸기 --%>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td><input type="file" name="up_file"></td>
+							<td>
+								<input type="button" id="addFile" value="파일 추가" class="form-control" style="width:100px;">
+								<input type="file" name="upFile1" id="upFile" >
+							</td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="5" cols="30" name="content"></textarea></td>
+							<td><textarea rows="5" cols="30" name="content" class="form-control"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align: center">
-							<input type="submit" value="등록" class="btn my-btn">
+							<input type="submit" value="등록" class="btn my-btn" onclick="">
 							<input type="reset" value="취소" class="btn my-btn" onclick="history.back();"></td>
 						</tr>
 					</table>
@@ -47,18 +48,17 @@
 					
 				</form>
 				</div>
+				</div>
 		</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
+		<script>
+			var cnt=2;
+			$("#addFile").click(function(){
+				var input = $('<input>').attr({"type":"file","name":"upFile"+cnt,"id":"upFile"});
+				$("#addFile").parent().append(input);
+				console.log(cnt);
+				cnt++;
+			})
+		</script>
+		
 <%@ include file="/views/common/footer.jsp"%>

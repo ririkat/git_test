@@ -2,6 +2,7 @@ package com.jb.review.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import com.jb.review.model.service.ReviewService;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.filerename.MyFileRenamePolicy;
+import oracle.net.aso.e;
 
 /**
  * Servlet implementation class ReviewWriteEndServlet
@@ -63,29 +65,47 @@ public class ReviewWriteEndServlet extends HttpServlet {
 		String writer = mr.getParameter("writer");
 		String content = mr.getParameter("content");
 		
-		String oriFile= mr.getOriginalFileName("up_file");//원래이름
-		String reFile = mr.getFilesystemName("up_file");//rename된 이름
+//		String oriFile= mr.getOriginalFileName("upfile");//원래이름
+//		String reFile = mr.getFilesystemName("upfile");//rename된 이름
+		
 		
 //		Review r = new Reveiw(title, writer, content, oldFile, reFile);
 		
 		//리뷰DB추가 /dao insert후 시퀀스넘버반환
 		int currval = new ReviewService().writeReview(title, writer, content, pCode);
 		
-		//리뷰 파일DB추가
-		int reviewFileRes = new ReviewFileService().addImages(currval,oriFile,reFile);
-		
+		//객실 이미지 추가
+		String file="";
+		String oriFile = "";
+		String reFile="";
+		int imgRes = 0;
+		Enumeration files = mr.getFileNames();
+		while(files.hasMoreElements()) {
+			file = (String)files.nextElement();
+			oriFile = mr.getOriginalFileName(file);
+			reFile = mr.getFilesystemName(file);
+			imgRes = new ReviewFileService().addImages(currval, oriFile, reFile);
+			if(!(imgRes>0)) {
+				File remove = new File(saveDir+"/"+reFile);
+				remove.delete();
+			}
+		}
+
 		String msg= "";
 		String loc="";
-		if(currval>0 && reviewFileRes>0) {
+		
+		if(currval>0 && imgRes>0) {
 			msg = "리뷰 등록 완료";
-			loc = "???";
+			loc = "/review/pensionReviewList?pensionCode="+pCode;
 		}
 		else {
 			File remove = new File(saveDir+"/"+reFile);
 			remove.delete();
 			msg="리뷰 등록 실패";
-			loc = "???";
+			loc = "/review/pensionReviewList?pensionCode="+pCode;
 		}
+		
+//		request.setAttribute("pCode", pCode);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

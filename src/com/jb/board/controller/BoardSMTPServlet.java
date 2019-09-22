@@ -60,7 +60,7 @@ public class BoardSMTPServlet extends HttpServlet {
 		msgText+="신고자 : "+cId+"<br/>";
 		msgText+="신고유형 : "+category+"<br/>";
 		msgText+="신고내용 : "+content+"<br/>";
-		msgText+="<a href='localhost:9090"+request.getContextPath()+"/board/boardView?cmmNo="+cmmNo+"'>글내용확인하기</a>";
+		msgText+="<a href='rclass.iptime.org:9999/"+request.getContextPath()+"/board/boardView?cmmNo="+cmmNo+"'>글내용확인하기</a>";
 		
 		Properties props=new Properties();
 		props.put("mail.smtp.host", host);

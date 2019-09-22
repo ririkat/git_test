@@ -19,7 +19,7 @@ public class Reservation {
    private String cId;
    private Date resDate;
 
-   private Pension Pension;
+   private Pension Pension; //pCode가져와야함 
    private Room Room;
    private Payment Payment;
    private Client Client;
@@ -71,8 +71,6 @@ public void setResCode(String resCode) {
 	this.resCode = resCode;
 }
 
-
->>>>>>> 9268b4c6ec8dae7bbd4ebfbd6717906c767674ff
 
 public Date getResCheckIn() {
 	return resCheckIn;
@@ -222,8 +220,8 @@ public void setClient(Client client) {
 public String toString() {
 	return "Reservation [resCode=" + resCode + ", resCheckIn=" + resCheckIn + ", resCheckOut=" + resCheckOut
 			+ ", resState=" + resState + ", resNop=" + resNop + ", totalPrice=" + totalPrice + ", rNo=" + rNo + ", cId="
-			+ cId + ", resDate=" + resDate + ", Pension=" + Pension + ", Room=" + Room + ", Payment=" + Payment
-			+ ", Client=" + Client + "]";
+			+ cId + ", resDate=" + resDate + ", \nPension=" + Pension + ", \nRoom=" + Room + ", \nPayment=" + Payment
+			+ ", \nClient=" + Client + "]";
 }
    
 

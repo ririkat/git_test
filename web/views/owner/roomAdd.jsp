@@ -123,7 +123,6 @@
 						<th class="point"><strong class="point">*</strong> 객실사진</th>
 						<td>
 							<input type="button" id="addFile" value="파일추가">
-							<input type="file" name="roomImg1" id="addRoomImg">
 						</td>
 					</tr>
 					
@@ -168,18 +167,33 @@
 
 
 <script>
-	var cnt = 2;
 	$("#addFile").click(function(){		
-		var input = $('<input>').attr({"type":"file", "name":"roomImg"+cnt, "id":"addRoomImg"});
-		$("#addFile").parent().append(input);
-		cnt++;
+		var input = $('<input>').attr({"type":"file", "name":"roomImg"});
+		$(this).parent().append(input);
 	})
 
-	function add_validate(){		
+	function add_validate(){
 		//첨부파일 없음
-		if (addPension.roomImg.value == "") {
+		if ($('input[type="file"]').length<=0) {
+			console.log("추가도 안했다니! : "+$('input[type="file"]').length);
 			alert("첨부파일(객실사진)을 추가해 주세요.");
 			return false;
+		}
+		/* else if(addRoom.roomImg.value==""){	//여러개일때 안먹힌다;
+			alert("첨부파일(객실사진)을 업로드해 주세요.");
+			return false;
+		} */
+		
+		else{
+			console.log("else는 들어왔다!");
+			$('input[type="file"]').each(function(idx,item){
+				console.log("each도 들어왔어! : "+idx);
+				if($(this).val()==""){
+					console.log("나는 조건문이야!");
+					alert("첨부파일(객실사진)을 업로드해 주세요.");
+					return false;
+				}
+			});
 		}
 	}
 </script>

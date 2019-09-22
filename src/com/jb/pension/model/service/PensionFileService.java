@@ -34,6 +34,13 @@ public class PensionFileService {
 		return list;
 	}
 	
+	public PensionFile selectImages(String pCode){
+		Connection conn = getConnection();
+		PensionFile pf = dao.selectImages(conn,pCode);
+		close(conn);
+		return pf;
+	}
+	
 	public int modifyImages(String pCode, String oriFile, String reFile) {
 		Connection conn = getConnection();
 		int result = dao.modifyImages(conn,pCode,oriFile,reFile);

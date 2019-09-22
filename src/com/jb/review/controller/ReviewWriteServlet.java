@@ -32,9 +32,8 @@ public class ReviewWriteServlet extends HttpServlet {
 		
 		
 		
-		
 		request.setAttribute("pCode", pCode);
-		request.getRequestDispatcher("/views/review/review.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/review/pensionReviewWrite.jsp").forward(request, response);
 	}
 
 	/**

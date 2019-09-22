@@ -34,8 +34,9 @@ public class paySuccessViewServlet extends HttpServlet {
 		//걍 결제성공 페이지로 전환해주는 서블릿
 	
 		String resCode = request.getParameter("resCode");
+		String cId=request.getParameter("cId");
 		
-		Reservation res = new ReservationService().selectReservatedRoom(resCode);
+		Reservation res = new ReservationService().selectOneReservation(resCode,cId);
 		
 		request.getRequestDispatcher("/views/reservation/paySucess.jsp")
 		.forward(request,response);	
