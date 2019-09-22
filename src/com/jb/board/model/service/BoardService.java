@@ -1,10 +1,9 @@
 package com.jb.board.model.service;
 
-import static common.template.JDBCTemplate.getConnection;
-
-import static common.template.JDBCTemplate.commit;
-import static common.template.JDBCTemplate.rollback;
 import static common.template.JDBCTemplate.close;
+import static common.template.JDBCTemplate.commit;
+import static common.template.JDBCTemplate.getConnection;
+import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 import com.jb.board.model.dao.BoardDao;
 import com.jb.board.model.vo.Board;
 import com.jb.board.model.vo.BoardComment;
-import com.jb.notice.model.vo.Notice;
 
 public class BoardService {
 	private BoardDao dao = new BoardDao();
@@ -119,6 +117,13 @@ public class BoardService {
 	public Board selectBoardOne(int cmmNo) {
 		Connection conn=getConnection();
 		Board b = dao.selectBoardOne(conn,cmmNo);
+		close(conn);
+		return b;
+	}
+
+	public Board findBoardWriter(int cmmNo) {
+		Connection conn=getConnection();
+		Board b=dao.findBoardWriter(conn, cmmNo);
 		close(conn);
 		return b;
 	}

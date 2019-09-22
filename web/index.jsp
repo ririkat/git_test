@@ -142,4 +142,14 @@
 			<br>
 		</div>
 </section>
+<script>
+window.onload = function () {
+	if(loginClient!=null && loginClient.getAuthority()!=1){
+//			위 조건(로그인은 했는데, 관리자가 아님)이 참이면
+		if(loginClient.getcBLCount()>0 ){//상태를 하나 추가??
+			alert("회원님이 작성하신 게시글에 대한 신고가 접수되었습니다. 이메일을 확인하세요");
+	}
+}
+
+</script>
 <%@ include file="/views/common/footer.jsp"%>

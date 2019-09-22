@@ -17,11 +17,7 @@ public class ClientService {
 
 	public Client selectId(String id, String pw) {
 		Connection conn = getConnection();
-		System.out.println("service!!");
-		System.out.println(id);
-		System.out.println(pw);
 		Client c = dao.selectId(conn, id, pw);
-		System.out.println(c);
 		close(conn);
 		return c;
 	}
@@ -164,6 +160,17 @@ public class ClientService {
 		Client c=dao.findEmail(conn, uid);
 		close(conn);
 		return c;
+	}
+
+	public int clientReport(Client c) {
+		Connection conn = getConnection();
+		int result = dao.clientReport(conn, c);
+		
+		if (result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 
 
