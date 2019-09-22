@@ -103,11 +103,13 @@
 							}
 					%>
 					<tr>
-						<th>
+						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
 							<span class="imgBox">
 								<a name="move<%=r.getrNo()%>"></a>
+								<%if(curRfList!=null && !curRfList.isEmpty()) {%>
 								<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(0).getrRenameFile()%>" class="room_img<%=cnt%>">
-								<%System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
+								<% System.out.println("메인사진 : "+curRfList.get(0).getrRenameFile()); %>
+								<%} %>
 							</span>
 						</th>
 						<th rowspan='2'>
@@ -201,7 +203,7 @@
 					</tr>
 	
 					<tr>
-						<th>
+						<th class="bl2 br2 bb2 pdt5px f0 lsm1">
 							<div id="thum_img">
 								<%for(int i=0; i<curRfList.size(); i++) { %>
 									<img src="<%=request.getContextPath()%>/upload/room/<%=curRfList.get(i).getrRenameFile()%>"

@@ -167,9 +167,11 @@
 
 
 <script>
+	var i = 0;
 	$("#addFile").click(function(){		
-		var input = $('<input>').attr({"type":"file", "name":"roomImg"});
+		var input = $('<input>').attr({"type":"file", "name":"roomImg"+i});
 		$(this).parent().append(input);
+		i++;
 	})
 
 	//첨부파일 없음
