@@ -130,16 +130,11 @@ public class ClientService {
 		return result;
 	}
 
-	public int updatePassword(String cId, String cPw, String cPwNew) {
+	public int updatePassword(String cId, String cPwNew) {
 		Connection conn = getConnection();
 	
-		Client c = dao.selectId(conn, cId, cPw);
-		int result = 0;
-		if(c!=null) {
-			result = dao.updatePassword(conn, cId, cPwNew);
-		}else {
-			result = -1;
-		}
+		int result = dao.updatePassword(conn, cId, cPwNew);
+
 		if(result >0) {
 			commit(conn);
 		}else {

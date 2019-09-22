@@ -30,8 +30,8 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int no = Integer.parseInt(request.getParameter("noticeNo"));
-
 		Notice n= new NoticeService().selectNoticeOne(no);
 
 		request.setAttribute("notice", n);

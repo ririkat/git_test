@@ -5,14 +5,17 @@
 <%@ page import="com.jb.reservation.model.vo.Payment"%>
 <%@ page import="com.jb.pension.model.vo.Pension"%>
 <%@ page import="com.jb.pension.model.vo.Room"%>
+<%@ page import="java.util.List"%>
+
 
 <%
-	Reservation res = (Reservation) request.getAttribute("reservation");
+Reservation resInfo=(Reservation)request.getAttribute("resInfo");
+System.out.println("에베베베"+resInfo);
 
-	Pension p = res.getPension();
-	Room r = res.getRoom();
-	Client c = res.getClient();
+
+   
 %>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -25,7 +28,7 @@
 
 
 
-	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="">
+	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/payInfoLoad">
 
 		<table class="table_final_auction">
 
@@ -47,42 +50,42 @@
 				<tr>
 					<!-- 펜션명 td -->
 					<td rowspan="1">
-					<input type="text" name="pName" style="border:none" value="<%=p.getpName()%>"><br>
-					(<input type="text" name="pAddr" style="border:none" value="<%=p.getpAddr()%>">)
+					<input type="text" name="pName" style="border:none" value="<%=resInfo.getPension().getpName()%>"><br>
+					(<input type="text" name="pAddr" style="border:none" value="<%=resInfo.getPension().getpAddr()%>">)
 					</td>
-					
+					 
 				
 
 					<!--객실명 td-->
-					<td rowspan="1"><input type="text" name="rName"  style="border:none" value="<%=r.getrName()%>"></td>
+					<td rowspan="1"><input type="text" name="rName"  style="border:none" value="<%=resInfo.getRoom().getrName()%>"></td>
 					
 
 
 					<!--기준/최대 인원수 td-->
-					<td rowspan="1"><input type="text" name="rNop" style="border:none" value="<%=r.getrNop()%>">/
-					<input type="text" name="rMaxNop" style="border:none" value="<%=r.getrMaxNop()%>"></td>
+					<td rowspan="1"><input type="text" name="rNop" style="border:none" value="<%=resInfo.getRoom().getrNop()%>">/
+					<input type="text" name="rMaxNop" style="border:none" value="<%=resInfo.getRoom().getrMaxNop()%>"></td>
 					
 					
 
 
 					<!--이용일 td-->
 					<td style="color: #FF9C00; font-weight: bold;">
-					<input type="text" name="resCheckIn" style="border:none" value="<%=res.getResCheckIn()%>">부터
+					<input type="text" name="resCheckIn" style="border:none" value="<%=resInfo.getResCheckIn()%>">부터
 						<br>
-					<br><input type="text" name="resCheckOut" style="border:none" value="<%=res.getResCheckOut()%>">까지
+					<br><input type="text" name="resCheckOut" style="border:none" value="<%=resInfo.getResCheckOut()%>">까지
 					</td>
 
 
 					<!--인원수 td-->
-					<td><input type="text" name="rNop" style="border:none"  value="<%=r.getrNop()%>">
+					<td><input type="text" name="rNop" style="border:none"  value="<%=resInfo.getResNop()%>">
 					<br>추가인원수 :  <input type="text" name="rAddNop" style="border:none" value="추가인원몇명"></td>
 					
 				
 				
 					<!--요금합계 td-->
-					<td>객실요금: <input type="text" name="rPrice" style="border:none"  value="<%=r.getrPrice()%>">원<br> 
-					   추가인원요금 : <input type="text" name="rAddPrice" style="border:none" value="<%=r.getrAddPrice()%>">원<br>
-					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=res.getTotalPrice()%>">원
+					<td>객실요금: <input type="text" name="rPrice" style="border:none"  value="<%=resInfo.getRoom().getrPrice()%>">원<br> 
+					   추가인원요금 : <input type="text" name="rAddPrice" style="border:none" value="<%=resInfo.getRoom().getrAddPrice()%>">원<br>
+					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=resInfo.getTotalPrice()%>">원
 					   
 					  
 			    
@@ -333,16 +336,16 @@
 			동의합니다.</label> <br>
 		<p class="blk h20">&nbsp;</p>
 		<br> <br> <br> 
-		 <input type="hidden" name="pCode" value="<%=p.getpCode()%>"> 
-		 <input type="hidden" name="rNo" value="<%=r.getrNo()%>"> 
-		 <input type="hidden" name="resCode" value="<%=res.getResCode()%>"> 
-		 <input type="hidden" name="cId" value="<%=c.getcId()%>"> 
+		
+		 <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
+		 <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> 
 		 
 		 
 		  
 		  
 		  <input type="reset" onclick="" class="btn btn-warning" value="이전단계"> 
-		  <input type="submit" class="btn btn-warning" id="btn-" onclick="submitReservation();" value="다음단계">
+		 <input type="submit" class="btn btn-warning" id="pay" onclick="payInfo();" value="다음단계">
+		<!-- <input type="button" name="pay" id="pay" value="카카오페이결제"> -->
 
 	</form>
 
@@ -350,9 +353,23 @@
 
 <script>
 
-function submitReservation() {
+ function payInfo() {
+	 
+	 console.log(resInfo);
+	 location.href="<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>";
+<%-- 	 location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>'; --%>
+	 
 	
-	var chkbox = document.getElementsByName('chk');
+	 
+	 
+ }
+
+
+
+<%-- function submitReservation() {
+	location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
+	 --%>
+	<%-- var chkbox = document.getElementsByName('chk');
 	var num = 0;
 	
 	for (var i = 0; i < chkbox.length; i++) {
@@ -363,12 +380,13 @@ function submitReservation() {
 	
 	if (num == 2 ) {
 		
-		location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=res.getResCode()%>';
+		location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>';
+		location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
 			return false;
 		} else {
 			alert("모든 약관에 동의해 주세요.");
-		}
-	}
+		} --%>
+	/* } */
 </script>
 
 

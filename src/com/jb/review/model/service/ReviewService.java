@@ -62,9 +62,11 @@ public class ReviewService {
 	public int writeReview(String title, String writer, String content, String pCode) {
 		Connection conn=getConnection();
 		int result = dao.writeReview(conn,title,writer,content,pCode);
+		System.out.println("글쓰기Service result return: "+result);
 		if(result>0) {
 			commit(conn);
 			result= dao.getCurrval(conn);
+			System.out.println("currval: "+result);
 			if(result>0) {
 				commit(conn);
 			}
@@ -78,7 +80,38 @@ public class ReviewService {
 		return result;
 	}
 	
-	//
+	//삭제
+	public int deleteReview(int rNo) {
+		Connection conn =getConnection ();
+		int result=dao.deleteReview(conn,rNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	//리뷰수정
+	public int updateReview(int rNo, String title, String writer, String content,String pCode) {
+		Connection conn = getConnection();
+		int result = dao.updateReview(conn, rNo, title, writer, content, pCode);
+		int imgDelete=0;
+		if(result>0) {
+			commit(conn);
+			//rNo를 imgDlete를 넣고
+			imgDelete = dao.imgDelete(conn, rNo);		//수정할때 기존 r_no로 review_file테이블에 있는 데이터삭제
+			System.out.println("dao.imgDelete 작동!"+imgDelete);
+			if(result>0) {
+				commit(conn);
+			}
+			else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	
 }

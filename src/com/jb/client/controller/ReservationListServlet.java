@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jb.notice.model.service.NoticeService;
 import com.jb.notice.model.vo.Notice;
+import com.jb.pension.model.service.PensionService;
+import com.jb.pension.model.vo.Pension;
+import com.jb.pension.model.vo.Room;
 import com.jb.reservation.model.service.ReservationService;
 import com.jb.reservation.model.vo.Reservation;
 
@@ -34,53 +37,67 @@ public class ReservationListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cPage;
-		try {
-			cPage=Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage=1;
-		}
 		
 		
-		int numPerPage=10;
+//		int cPage;
+//		try {
+//			cPage=Integer.parseInt(request.getParameter("cPage"));
+//		}catch(NumberFormatException e) {
+//			cPage=1;
+//		}
+//		
+//		
+//		int numPerPage=10;
+//		
+//		
+//		int totalReservation = new ReservationService().selectReservationCount(cId);
+//		System.out.println("토탈예약 : "+totalReservation);
+//		List<Reservation> list = new ReservationService().selectReservationList(cPage, numPerPage, cId);
+//		Room r = new ReservationService().loadReservatedRoom();
 		
+//		
+//		
+//		//4.pageBar구성
+//		int totalPage=(int)Math.ceil((double)totalReservation/numPerPage);
+//		String pageBar="";
+//		int pageBarSize=5;
+//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+//		int pageEnd=pageNo+pageBarSize-1;
+//		
+//		if(pageNo==1) {
+//			pageBar+="<span>&lt</span>";
+//		}else {
+//			pageBar+="<a href='"+request.getContextPath()+"/client/mypageHome?cId="+cId+"&cPage=" + (pageNo - 1) + ">&laquo;</a>";
+//		}
+//		
+//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+//			if(pageNo==cPage) {
+//				pageBar+="<span>"+pageNo+"</span>";
+//			}else {
+//				pageBar+="<a href="+request.getContextPath()+"/client/mypageHome?cId="+cId+"&cPage=" + pageNo + ">" + pageNo
+//						+ "</a>";
+//			}
+//			pageNo++;
+//		}
+//		
+//		if(pageNo>totalPage) {
+//			pageBar+="<span>&gt</span>";
+//		}else {
+//			pageBar+="<a href='"+request.getContextPath()+"/client/mypageHome?cId="+cId+"&cPage="+(pageNo)+"'>&gt</a>";
+//		}
+//		
+//		request.setAttribute("pageBar", pageBar);
+//		request.setAttribute("cPage", cPage);
+
 		
-		ReservationService service = new ReservationService();
-		int totalReservation = service.selectReservationCount();
-		List<Reservation> list=service.selectReservationList(cPage,numPerPage);
-		
-		//4.pageBar구성
-		int totalPage=(int)Math.ceil((double)totalReservation/numPerPage);
-		String pageBar="";
-		int pageBarSize=5;
-		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-		int pageEnd=pageNo+pageBarSize-1;
-		
-		if(pageNo==1) {
-			pageBar+="<span>&lt</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/client/mypageHome?cPage="+(pageNo-1)+"'>&lt</a>";
-		}
-		
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/client/mypageHome?cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
-			}
-			pageNo++;
-		}
-		
-		if(pageNo>totalPage) {
-			pageBar+="<span>&gt</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/client/mypageHome?cPage="+(pageNo)+"'>&gt</a>";
-		}
-		
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("cPage", cPage);
+		String cId = request.getParameter("cId");
+		List<Reservation> list = new ReservationService().loadReservationList(cId);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/client/mypageHome.jsp").forward(request, response);
+		System.out.println("ReservationList서블릿 : "+list);
+
+		
+		
 	}
 
 

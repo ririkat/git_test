@@ -83,7 +83,7 @@
 
 	$(function(){
 		$('#mypageList li').removeClass("active");
-		$('#mypageList li').eq(4).addClass("active");
+		$('#mypageList li').eq(3).addClass("active");
 	});
     
     function deleteOwner(){

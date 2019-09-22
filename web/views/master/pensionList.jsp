@@ -13,7 +13,7 @@
             <!--content영역-->
             <div class="col-md-10">
                 <br><br><br>
-                <h2 style="text-align:center">펜션관리</h2> <br>
+                <h2 style="text-align:center">운영중인 펜션관리</h2> <br>
                 
                 <div class="pull-left">
                 	검색타입 : 
