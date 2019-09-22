@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.Room;
+import com.jb.pension.model.vo.RoomFile;
 import com.jb.search.model.service.SearchService;
 
 /**

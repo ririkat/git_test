@@ -14,10 +14,7 @@
     Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice"); 
    
-   
-   
-   
-    
+
     %>
 
     
