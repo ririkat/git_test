@@ -54,4 +54,12 @@ public class SearchService {
 		return result;
 	}
 
+	public List<Pension> searchMapResultLoad(String keyword, double y, double x) {
+		Connection conn=getConnection();
+		List<Pension> list =dao.searchMapResultLoad(conn,keyword,y,x);
+		
+		close(conn);
+		return list;
+	}
+
 }
