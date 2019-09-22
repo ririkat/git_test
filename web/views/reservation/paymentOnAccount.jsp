@@ -14,6 +14,7 @@ String resPhone = (String)request.getAttribute("resPhone");
 Reservation resInfo = (Reservation)request.getAttribute("resInfo");
 
 String resCode = (String)request.getAttribute("resCode");
+int totalPrice = (int)request.getAttribute("totalPrice");
 
 %>
 
@@ -104,7 +105,7 @@ String resCode = (String)request.getAttribute("resCode");
 					<!--요금합계 td-->
 					<td>객실요금: <input type="text" name="rPrice" style="border:none"  value="<%=resInfo.getRoom().getrPrice()%>">원<br> 
 					   추가인원요금 : <input type="text" name="rAddPrice" style="border:none" value="<%=resInfo.getRoom().getrAddPrice()%>">원<br>
-					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=resInfo.getTotalPrice()%>">원
+					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=totalPrice%>">원
 					   
 					  
 			    
@@ -179,12 +180,12 @@ String resCode = (String)request.getAttribute("resCode");
 				<tr>
 					<th class="txt_left"><strong class="point">예약자명</strong></th>
 					<td class="txt_left">
-					<input type="text" name="cName" value="<%=resName%>"> </td>
+					<input type="text" name="cName" style="border:none" value="<%=resName%>"> </td>
 				</tr>
 				
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
-					<td class="txt_left"><input type="text" name="cPhone"
+					<td class="txt_left"><input type="text" name="cPhone" style="border:none"
 						value="<%=resPhone%>" style="width: 120px;" 
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
@@ -199,7 +200,7 @@ String resCode = (String)request.getAttribute("resCode");
             예약해주셔서 감사합니다.
             
             
-       <input type="submit" onclick="paySuccessfully" name="goMainView">
+       <input type="submit" onclick="paySuccessfully" name="goMainView" value="예약목록확인">
 
        
  
@@ -215,7 +216,7 @@ String resCode = (String)request.getAttribute("resCode");
 function paySuccessfully() {
 	
 	
-	location.href="<%=request.getContextPath()%>/client/reservationList?resCode=<%=resInfo.getResCode()%>";
+	location.href="<%=request.getContextPath()%>/index.jsp";
 }
 
 

@@ -30,16 +30,25 @@ public class SelectPayMethodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	
+		String resName = request.getParameter("resName");
+		String accountName = request.getParameter("accountName");
 		String cId = request.getParameter("cId");
-		String resCode = request.getParameter("resCode");
-		//분기처리를 위해 radio버튼의 name 불러온거에욤
+	    String resCode = request.getParameter("resCode");
+//		String resCode = "1234";
+		String resPhone = request.getParameter("resPhone");
+		
+		//분기처리를 위한 radio버튼 name
+		
 		String pay = request.getParameter("pay");
+				
+
 		
 		Reservation resInfo = new ReservationService().selectOneReservation(resCode, cId);
 		
-		System.out.println("selectPayMethodServlet: "+resInfo);
+		System.out.println("무통장입금서블릿: "+resInfo);
 	
 		
 	    
@@ -51,29 +60,32 @@ public class SelectPayMethodServlet extends HttpServlet {
 		String accountDay = nowYear+"년 "+nowMonth+"월 "+nowDate+"일 까지 입금해주세요.";
 		
 		System.out.println(accountDay);
+		
+		int rPrice=Integer.parseInt(request.getParameter("rPrice"));
+		int rAddPrice = Integer.parseInt(request.getParameter("rAddPrice"));
+		int totalPrice = rPrice+rAddPrice;
 	
 
 	    request.setAttribute("resInfo", resInfo);
 	    request.setAttribute("cId", cId);
 	    request.setAttribute("resCode", resCode);
+	    request.setAttribute("accountName", accountName);
 	    request.setAttribute("accountDay", accountDay);
+	    request.setAttribute("resName", resName);
+	    request.setAttribute("resPhone", resPhone);
+	    request.setAttribute("totalPrice", totalPrice);
 	    
+	    if(pay.equals("account")){
 	    
-	   
-	    if(pay.equals("payByAccount")) {
-	    	
-	    	request.getRequestDispatcher("/views/reservation/paymentOnAccount.jsp").forward(request,response);
-	    
+	    request.getRequestDispatcher("/views/reservation/paymentOnAccount.jsp").forward(request, response);
 	    }else {
 	    	
-	    	request.getRequestDispatcher("/views/reservation/paymentOnKakao.jsp").forward(request,response);
+	    	request.getRequestDispatcher("/views/reservation/kakaoPay.jsp").forward(request, response);
 	    }
 	    
 	    
-		
-		
-		
-		
+	   
+	    
 	}
 
 	/**

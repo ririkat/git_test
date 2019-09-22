@@ -21,10 +21,8 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <section id='write-container'>
 
@@ -89,7 +87,6 @@
 
 				</tr>
 
-
 				<tr>
 					<td
 						style="padding: 10px 20px; text-align: right; position: relative;">
@@ -105,7 +102,6 @@
 									</strong>원</td>
 								</tr>
 
-
 								<tr>
 									<th>인원추가금액</th>
 									<td><strong class="nanum f23 ltm1"> <input
@@ -114,11 +110,9 @@
 										0명)</td>
 								</tr>
 
-
 							</tbody>
 						</table>
 					</td>
-
 
 					<!-- 총결제금액 -->
 
@@ -136,12 +130,16 @@
 		<br> <br>
 
 
+
+
 		</table>
 
 
 		<div id="mypagetitle" text-align="center">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
+
+
 
 
 		<table width="100%" class="table_pay_type">
@@ -155,13 +153,13 @@
 					<th colspan="3"><span style="margin-right: 30px;"> <input
 							type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
 					</span> <span style="margin-right: 30px;"> <input type="radio"
-							name="pay" id="payCard" value="kakaoPay">카카오페이결제
+							name="pay" id="payCard" value="kakaoPay" checked>카카오페이결제
 					</span></th>
 				</tr>
 			</thead>
 
 
-			<tbody id="accountInfo">
+			<tbody id="bank_info">
 				<tr>
 					<th>입금자명</th>
 					<td><input type="text" name="accountName"
@@ -182,17 +180,18 @@
 			</tbody>
 		</table>
 
-		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
-		<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
+		         <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
+		         <input type = "hidden" name = "cId" value="<%=loginClient.getcId()%>">
 
 
 		<!--  
         <input type="button" onclick="preview();" id="pay" class="btn btn-warning" value="결제하기">  -->
 
-		<input type="button" class="btn btn-warning" onclick="preview();"
-			value="이전으로"> <input type="submit" name="payment_btn"
-			class="btn btn-warning" id="payment" onclick="payment();"
-			value="결제하기">
+		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
+
+
+
+	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기">
 
 	</form>
 	<!-- onclick="payment();" -->
@@ -208,41 +207,60 @@
 
 <script>
 
-function payment(){
+$(window).load(function(){
+	 
+
+	   
 	
-
-	  var url="<%=request.getContextPath()%>/reservation/selectPayMethod?resCode="<%=resInfo.getResCode()%>;
-		location.href=url;
-
-}
-
-/*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
- 
-      $(document).ready(function () {
-          $("#payCard").click(function () {
-              if ($("#payCard").prop("checked", true)) {
-
-                  $("#accountInfo").hide();
-               } else {
-
-                   $("#accountInfo").show();
-               
+	var IMP = window.IMP;
+      IMP.init('imp08945184'); 
+     
+      IMP.request_pay({
+     
+          pg:'kakao',
+          pay_method: 'card',
+          merchant_uid: new Date().getTime(),
+          name: '자바방 펜션 결제',
+          amount: 50000, 
+          buyer_email: 'honey@honey.do',
+          buyer_name: '서현희',
+          buyer_tel: '010-1234-5678',
+          buyer_addr: '경기도 어쩌구 저쩌구동'
+      
+  
+      }, function (rsp) {
+          console.log(rsp);
+          if (rsp.success) {
+            
+          	var msg = '결제가 완료되었습니다.';
+             
+              msg += '고유ID : ' + rsp.imp_uid;
+              msg += '상점 거래ID : ' + rsp.merchant_uid;
+              msg += '결제 금액 : ' + rsp.paid_amount;
+              msg += '카드 승인번호 : ' + rsp.apply_num;
+              
+              location.href='<%=request.getContextPath()%>/views/reservation/paySuccess.jsp';
+           
+                        /* 여기다가 쿼리스트링 써서 넘기기 */ 
+              
+          } else {
+              var msg = '결제에 실패하였습니다.';
+              msg += '에러내용 : ' + rsp.error_msg;
           }
-
-/* 이전으로 버튼 */
-
-function preview(){
+          alert(msg);
+          location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg;
+      });
 	
-	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=resInfo.getResCode()%>;
-		location.href=url;
+      
+      
+      
+  }); 
 
-}
- 
+
 
 
 </script>
-
-
+    
 
 
 
