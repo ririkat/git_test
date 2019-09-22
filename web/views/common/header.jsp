@@ -42,6 +42,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/ReservationCss.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">
@@ -158,7 +159,7 @@
 						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
 					<!-- 로고 -->
-					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>/index.jsp">자바방</a>
+					<a class="navbar-brand navfont" href="<%=request.getContextPath()%>">자바방</a>
 				</div>
 				
 				<!-- <button type="button" class="navbar-nav btn pull-right btn-srch" id="btn-srch">

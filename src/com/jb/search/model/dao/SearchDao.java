@@ -15,11 +15,13 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.notice.model.dao.NoticeDao;
+import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.PensionFacilities;
 import com.jb.pension.model.vo.PensionFile;
 import com.jb.pension.model.vo.Room;
 import com.jb.pension.model.vo.RoomFacilities;
+import com.jb.pension.model.vo.RoomFile;
 
 public class SearchDao {
 	
@@ -128,6 +130,8 @@ public class SearchDao {
 						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
 						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
 				
+				r.setRfList(new RoomFileService().selectRoomFile(rs.getString("r_no")));
+				
 				list.add(r);
 			}
 		}catch(SQLException e) {
@@ -166,7 +170,6 @@ public class SearchDao {
 				r.setrInfo(rs.getString("r_info"));
 				r.setrAddPrice(rs.getInt("r_addprice"));
 				
-
 
 				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
 						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
@@ -297,6 +300,42 @@ public class SearchDao {
 		}
 		return result;
 	}
+
+	public List<Pension> searchMapResultLoad(Connection conn,String keyword,double y, double x) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pension> list=new ArrayList<Pension>();
+		String sql=prop.getProperty("searchMapResultLoad");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setDouble(1,y);
+			pstmt.setDouble(2,x);
+			pstmt.setDouble(3,y);
+			pstmt.setDouble(4,y);
+			pstmt.setDouble(5,x);
+			pstmt.setDouble(6,x);
+			pstmt.setString(7,keyword);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("아예 안들어오는거야?ㅠㅠㅠ");
+				Pension p = new Pension();
+				System.out.println(rs.getString("address"));
+				p.setpAddr(rs.getString("address"));
+				p.setLoc_y(rs.getDouble("deg_x"));
+				p.setLoc_x(rs.getDouble("deg_y"));
+				list.add(p);
+			}
+			System.out.println("아니 여기 온 건 맞니?");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		// TODO Auto-generated method stub
+		return list;
+	}
+
 	
 	
 }

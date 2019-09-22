@@ -2,8 +2,6 @@ package com.jb.reservation.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,19 +33,20 @@ public class RoomReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String resCode = "1234";
-		String resState = "N";
+		String resState = "N";//결제상태
+		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
+		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
+		int resNop = Integer.parseInt(request.getParameter("resNop"));//인원
+		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
+		String rNo = request.getParameter("rNo");//방번
+		String cId = request.getParameter("cId");//아이디
+
 		
-		int rNop = Integer.parseInt(request.getParameter("rnop"));
-		int totalPrice = Integer.parseInt(request.getParameter("rpirce"));
-		
-		String rNo = request.getParameter("rno");
-		String cId = "test1";
-		
-		  Reservation res = new Reservation(resCode,null,null,resState,rNop,totalPrice,rNo,cId);
-		  ReservationService service = new ReservationService();
+		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
+		ReservationService service = new ReservationService();
 		  
-		  int result = service.insertReservation(res); System.out.println(res);
+		 int result = service.insertReservation(res);
+		 System.out.println(res);
 		 
 
 	}

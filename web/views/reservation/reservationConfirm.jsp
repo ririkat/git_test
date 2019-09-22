@@ -10,8 +10,8 @@
 
 <%
 Reservation resInfo=(Reservation)request.getAttribute("resInfo");
-System.out.println("에베베베"+resInfo);
 
+/* int totalPrice = (int)request.getAttribute("totalPrice"); */
 
    
 %>
@@ -82,10 +82,10 @@ System.out.println("에베베베"+resInfo);
 					
 				
 				
-					<!--요금합계 td-->
+					<!--요금합계 td-->ㄴ
 					<td>객실요금: <input type="text" name="rPrice" style="border:none"  value="<%=resInfo.getRoom().getrPrice()%>">원<br> 
 					   추가인원요금 : <input type="text" name="rAddPrice" style="border:none" value="<%=resInfo.getRoom().getrAddPrice()%>">원<br>
-					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=resInfo.getTotalPrice()%>">원
+					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="아직못받아옴나중에쓰기">원
 					   
 					  
 			    
@@ -340,12 +340,11 @@ System.out.println("에베베베"+resInfo);
 		 <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
 		 <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> 
 		 
-		 
-		  
+	
 		  
 		  <input type="reset" onclick="" class="btn btn-warning" value="이전단계"> 
 		 <input type="submit" class="btn btn-warning" id="pay" onclick="payInfo();" value="다음단계">
-		<!-- <input type="button" name="pay" id="pay" value="카카오페이결제"> -->
+	
 
 	</form>
 
@@ -353,23 +352,11 @@ System.out.println("에베베베"+resInfo);
 
 <script>
 
- function payInfo() {
-	 
-	 console.log(resInfo);
-	 location.href="<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>";
-<%-- 	 location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>'; --%>
-	 
-	
-	 
-	 
- }
 
 
+function payInfo() {
 
-<%-- function submitReservation() {
-	location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
-	 --%>
-	<%-- var chkbox = document.getElementsByName('chk');
+	var chkbox = document.getElementsByName('chk');
 	var num = 0;
 	
 	for (var i = 0; i < chkbox.length; i++) {
@@ -379,14 +366,12 @@ System.out.println("에베베베"+resInfo);
 	}
 	
 	if (num == 2 ) {
-		
-		location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>';
-		location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
+	
 			return false;
 		} else {
 			alert("모든 약관에 동의해 주세요.");
-		} --%>
-	/* } */
+		} 
+	 }
 </script>
 
 

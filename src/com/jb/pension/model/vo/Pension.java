@@ -21,6 +21,9 @@ public class Pension {
 	//1:n 방 리스트 [[],[],[],...]
 	private List<Room> roomList;
 	
+	private Double loc_y;
+	private Double loc_x;
+	
 	public Pension() {
 		// TODO Auto-generated constructor stub
 	}
@@ -54,6 +57,50 @@ public class Pension {
 		this.penFac = penFac;
 		this.penFile = penFile;
 		this.roomList = roomList;
+	}
+	
+	
+
+
+	public Pension(String pCode, String pName, String pAddr, String pTel, String oId, String enrollYn, int pBlcount,
+			Date pEnrollDate, PensionFacilities penFac, List<PensionFile> penFile, List<Room> roomList, Double loc_y,
+			Double loc_x) {
+		super();
+		this.pCode = pCode;
+		this.pName = pName;
+		this.pAddr = pAddr;
+		this.pTel = pTel;
+		this.oId = oId;
+		this.enrollYn = enrollYn;
+		this.pBlcount = pBlcount;
+		this.pEnrollDate = pEnrollDate;
+		this.penFac = penFac;
+		this.penFile = penFile;
+		this.roomList = roomList;
+		this.loc_y = loc_y;
+		this.loc_x = loc_x;
+	}
+	
+	
+
+
+	public Double getLoc_y() {
+		return loc_y;
+	}
+
+
+	public void setLoc_y(Double loc_y) {
+		this.loc_y = loc_y;
+	}
+
+
+	public Double getLoc_x() {
+		return loc_x;
+	}
+
+
+	public void setLoc_x(Double loc_x) {
+		this.loc_x = loc_x;
 	}
 
 
@@ -171,6 +218,6 @@ public class Pension {
 	public String toString() {
 		return "Pension [pCode=" + pCode + ", pName=" + pName + ", pAddr=" + pAddr + ", pTel=" + pTel + ", oId=" + oId
 				+ ", enrollYn=" + enrollYn + ", pBlcount=" + pBlcount + ", pEnrollDate=" + pEnrollDate + ", penFac="
-				+ penFac + ", penFile=" + penFile + ", roomList=" + roomList + "]";
+				+ penFac + ", penFile=" + penFile + ", roomList=" + roomList + ", loc_y=" + loc_y +", loc_x=" + loc_x +"]";
 	}
 }
