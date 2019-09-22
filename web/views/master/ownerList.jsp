@@ -6,6 +6,7 @@
 	int cPage = (int)request.getAttribute("cPage");
 	String searchType = (String)request.getAttribute("searchType");
 	String searchKey = (String)request.getAttribute("searchKeyword");
+	
 
 %>
 
@@ -188,3 +189,4 @@ th {
 
               
           </script>
+       
