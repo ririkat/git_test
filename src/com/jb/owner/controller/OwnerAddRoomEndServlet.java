@@ -126,6 +126,10 @@ public class OwnerAddRoomEndServlet extends HttpServlet {
 			loc = "/owner/pensionDetail?pensionCode="+pCode+"&imgSrc="+imgSrc;
 		}
 		else {
+			if((!(imgRes>0)) && (currval>0 || facRes>0)) {
+				new RoomService().deleteOneRoom("r"+currval);
+				new RoomFacilitiesService().deleteFac("r"+currval);
+			}
 			File remove = new File(saveDir+"/"+reFile);
 			remove.delete();
 			msg = "객실 추가 실패";

@@ -123,6 +123,7 @@
 						<th class="point"><strong class="point">*</strong> 객실사진</th>
 						<td>
 							<input type="button" id="addFile" value="파일추가">
+							<input type="button" id="delFile" value="-">
 						</td>
 					</tr>
 					
@@ -169,11 +170,15 @@
 <script>
 	var i = 0;
 	$("#addFile").click(function(){		
-		var input = $('<input>').attr({"type":"file", "name":"roomImg"+i});
+		var input = $('<input>').attr({"type":"file", "name":"roomImg"+i, "id":"roomImg"+i});
 		$(this).parent().append(input);
 		i++;
 	})
-
+	$("#delFile").click(function(){
+		i--;
+		$("#roomImg"+i).remove();
+	})
+	
 	//첨부파일 없음
 	function add_validate(){
 		if ($('input[type="file"]').length<=0) {

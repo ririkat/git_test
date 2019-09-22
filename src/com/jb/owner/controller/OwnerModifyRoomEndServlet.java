@@ -101,20 +101,22 @@ public class OwnerModifyRoomEndServlet extends HttpServlet {
 		String reFile = "";
 		int imgRes = 0;
 		Enumeration files = mr.getFileNames();
-		while (files.hasMoreElements()) {
-			file = (String) files.nextElement();
-			oriFile = mr.getOriginalFileName(file);
-			reFile = mr.getFilesystemName(file);
-			imgRes = new RoomFileService().addImages(rNo, oriFile, reFile);
-			if (!(imgRes > 0)) {
-				File remove = new File(saveDir + "/" + reFile);
-				remove.delete();
-			}
+		if(files!=null) {
+			while (files.hasMoreElements()) {
+				file = (String) files.nextElement();
+				oriFile = mr.getOriginalFileName(file);
+				reFile = mr.getFilesystemName(file);
+				imgRes = new RoomFileService().addImages(rNo, oriFile, reFile);
+				if (!(imgRes > 0)) {
+					File remove = new File(saveDir + "/" + reFile);
+					remove.delete();
+				}
+			}			
 		}
 
 		String msg = "";
 		String loc = "";
-		if (result > 0 && facRes > 0 && imgRes > 0) {
+		if (result > 0 && facRes > 0 && imgRes >= 0) {
 			msg = "객실 수정 완료";
 			loc = "/owner/pensionDetail?pensionCode=" + pCode + "&imgSrc=" + imgSrc;
 		} else {

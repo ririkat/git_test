@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.jb.pension.model.vo.PensionFacilities" %>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideOwner.jsp"%>
 
@@ -9,6 +9,7 @@
 	String oId = (String)request.getAttribute("oId");
 	String pName = (String)request.getAttribute("pName");
 	String pAddr = (String)request.getAttribute("pAddr");
+	PensionFacilities pfc = (PensionFacilities)request.getAttribute("pfc");
 %>
 
 
@@ -94,28 +95,28 @@
 					<tr>
 						<th class="point"><strong class="point">*</strong> 펜션전경사진</th>
 						<td>
-							<input type="file" name="panorama">
+							<input type="button" id="modiBtn" value="파일수정">
 						</td>
 					</tr>
 					
 					<tr>
 						<th class="point"> 부대시설</th>
 						<td>
-							<label><input type="checkbox" name="facilities" value="store">매점</label>
-							<label><input type="checkbox" name="facilities" value="wifi">와이파이</label>
-							<label><input type="checkbox" name="facilities" value="pet">애견가능</label>
-							<label><input type="checkbox" name="facilities" value="pool">공용수영장</label>
-							<label><input type="checkbox" name="facilities" value="s_pool">어린이풀장</label>
-							<label><input type="checkbox" name="facilities" value="slide">워터슬라이드</label>
-							<label><input type="checkbox" name="facilities" value="open_bath">노천탕</label>
+							<label><input type="checkbox" name="facilities" value="store" <%=pfc.getStore().equals("Y")?"checked":""%>>매점</label>
+							<label><input type="checkbox" name="facilities" value="wifi" <%=pfc.getWifi().equals("Y")?"checked":""%>>와이파이</label>
+							<label><input type="checkbox" name="facilities" value="pet" <%=pfc.getPet().equals("Y")?"checked":""%>>애견가능</label>
+							<label><input type="checkbox" name="facilities" value="pool" <%=pfc.getPool().equals("Y")?"checked":""%>>공용수영장</label>
+							<label><input type="checkbox" name="facilities" value="s_pool" <%=pfc.getsPool().equals("Y")?"checked":""%>>어린이풀장</label>
+							<label><input type="checkbox" name="facilities" value="slide" <%=pfc.getSlide().equals("Y")?"checked":""%>>워터슬라이드</label>
+							<label><input type="checkbox" name="facilities" value="open_bath" <%=pfc.getOpenBath().equals("Y")?"checked":""%>>노천탕</label>
 							<br/>
-							<label><input type="checkbox" name="facilities" value="grill">그릴</label>
-							<label><input type="checkbox" name="facilities" value="smoked">바베큐세트</label>
-							<label><input type="checkbox" name="facilities" value="cafe">카페</label>
-							<label><input type="checkbox" name="facilities" value="sing">노래방</label>
-							<label><input type="checkbox" name="facilities" value="foot">족구장</label>
-							<label><input type="checkbox" name="facilities" value="hand">농구장</label>
-							<label><input type="checkbox" name="facilities" value="car">주차장</label>
+							<label><input type="checkbox" name="facilities" value="grill" <%=pfc.getGrill().equals("Y")?"checked":""%>>그릴</label>
+							<label><input type="checkbox" name="facilities" value="smoked" <%=pfc.getSmoked().equals("Y")?"checked":""%>>바베큐세트</label>
+							<label><input type="checkbox" name="facilities" value="cafe" <%=pfc.getCafe().equals("Y")?"checked":""%>>카페</label>
+							<label><input type="checkbox" name="facilities" value="sing" <%=pfc.getSing().equals("Y")?"checked":""%>>노래방</label>
+							<label><input type="checkbox" name="facilities" value="foot" <%=pfc.getFoot().equals("Y")?"checked":""%>>족구장</label>
+							<label><input type="checkbox" name="facilities" value="hand" <%=pfc.getHand().equals("Y")?"checked":""%>>농구장</label>
+							<label><input type="checkbox" name="facilities" value="car" <%=pfc.getCar().equals("Y")?"checked":""%>>주차장</label>
 						</td>
 					</tr>
 				</tbody>
@@ -131,6 +132,14 @@
 
 
 <script>
+	$("#modiBtn").click(function(){
+		if(confirm("이전에 업로드하신 사진이 지워집니다. 진행하시겠습니까?")){
+			var input = $('<input>').attr({"type":"file", "name":"panorama", "id":"panorama"});
+			$("#modiBtn").parent().append(input);
+			$("#modiBtn").remove();
+		}
+	})
+
 	function modify_validate(){
 		//번호 빈칸
 		if (modifyPension.tel2.value == "" || modifyPension.tel3.value == "") {
