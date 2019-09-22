@@ -246,4 +246,28 @@ private Properties prop = new Properties();
 			close(stmt);
 		}return result;
 	}
+
+	public Board findBoardWriter(Connection conn, int cmmNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Board b=null;
+		String sql=prop.getProperty("findBoardWriter");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cmmNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b=new Board();
+				b.setcId(rs.getString("c_id"));
+				b.setTitle(rs.getString("title"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+	}
+	
 }
