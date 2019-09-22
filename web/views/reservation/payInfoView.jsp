@@ -1,40 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <%@ page import="com.jb.reservation.model.vo.Reservation"%>
 <%@ page import="com.jb.reservation.model.vo.Payment"%>
 <%@ page import="com.jb.pension.model.vo.Pension"%>
 <%@ page import="com.jb.pension.model.vo.Room"%>
 <%@ page import="java.util.List"%>
 
-
-
 <%
-    
-    Reservation resInfo=(Reservation)request.getAttribute("resInfo");
+     Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice");
      String resCode = (String)request.getAttribute("resCode");
-     
-    
-    %>
-
+ %>
 
 <%@ include file="/views/common/header.jsp"%>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <section id='write-container'>
-
 
 	<br> <br> <br> <br>
 	<div id="mypagetitle" text-align="center">결제정보확인</div>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payMethod"
-		action="<%=request.getContextPath()%>/reservation/account">
+		action="<%=request.getContextPath()%>/reservation/selectPayMethod">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
 		<table class="table_final_auction" id="final_input_table">
@@ -50,7 +39,6 @@
 						style="color: #FF8F00;">* 예약자 실명을 입력하세요. 예약확인시 혼동이 될 수
 							있습니다.</span></td>
 				</tr>
-
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
 					<td class="txt_left"><input type="text" name="resPhone"
@@ -82,14 +70,10 @@
 						<div class="left">
 							<strong>객실금액</strong>
 						</div>
-
 					</th>
-
 					<th class="txt_left">총 결제금액</th>
 
 				</tr>
-
-
 				<tr>
 					<td
 						style="padding: 10px 20px; text-align: right; position: relative;">
@@ -105,7 +89,6 @@
 									</strong>원</td>
 								</tr>
 
-
 								<tr>
 									<th>인원추가금액</th>
 									<td><strong class="nanum f23 ltm1"> <input
@@ -113,13 +96,9 @@
 											value="<%=resInfo.getRoom().getrAddPrice()%>"></strong>원(추가인원
 										0명)</td>
 								</tr>
-
-
 							</tbody>
 						</table>
 					</td>
-
-
 					<!-- 총결제금액 -->
 
 					<td style="padding: 10px 20px; text-align: right;"><strong
@@ -127,7 +106,6 @@
 							type="text" name="totalPrice" style="border: none"
 							value="<%=totalPrice%>"></strong>원</td>
 				</tr>
-
 			</tbody>
 		</table>
 
@@ -135,14 +113,11 @@
 
 		<br> <br>
 
-
 		</table>
-
 
 		<div id="mypagetitle" text-align="center">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
-
 
 		<table width="100%" class="table_pay_type">
 			<colgroup>
@@ -159,7 +134,6 @@
 					</span></th>
 				</tr>
 			</thead>
-
 
 			<tbody id="accountInfo">
 				<tr>
@@ -178,43 +152,24 @@
 					</th>
 				</tr>
 
-
 			</tbody>
 		</table>
 
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 		<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 
-
-		<!--  
-        <input type="button" onclick="preview();" id="pay" class="btn btn-warning" value="결제하기">  -->
-
 		<input type="button" class="btn btn-warning" onclick="preview();"
 			value="이전으로"> <input type="submit" name="payment_btn"
-			class="btn btn-warning" id="payment" onclick="payment();"
+			class="btn btn-warning" id="payment" onclick=""
 			value="결제하기">
 
 	</form>
-	<!-- onclick="payment();" -->
-	<!-- 	 카카오버튼 -->
-
-
+	
 	<input type="button" name="kakaopay" id="kakaopay" value="카카오페이로결제하기">
-
-
-
 
 </section>
 
 <script>
-
-function payment(){
-	
-
-	  var url="<%=request.getContextPath()%>/reservation/selectPayMethod?resCode="<%=resInfo.getResCode()%>;
-		location.href=url;
-
-}
 
 /*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
  
@@ -235,15 +190,11 @@ function preview(){
 	
 	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=resInfo.getResCode()%>;
 		location.href=url;
-
-}
+} 
  
 
 
 </script>
-
-
-
 
 
 <%@ include file="/views/common/footer.jsp"%>

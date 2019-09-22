@@ -15,24 +15,25 @@
     Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice");
      String resCode = (String)request.getAttribute("resCode");
-     
+     String resName=(String)request.getAttribute("resName");
+     String resPhone=(String)request.getAttribute("resPhone");
     
     %>
 
 
 <%@ include file="/views/common/header.jsp"%>
+
+<!-- kakaoPay결제 API니까 지우지말아줬으면해!! -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <section id='write-container'>
 
-
 	<br> <br> <br> <br>
 	<div id="mypagetitle" text-align="center">결제정보확인</div>
 	<br> <br>
 
-	<form method="post" class="container" name="payFrm" id="payMethod"
-		action="<%=request.getContextPath()%>/reservation/account">
+	<form method="post" class="container" name="payFrm" id="payMethod" action="<%=request.getContextPath()%>/reservation/kakaoPaySuccess">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
 		<table class="table_final_auction" id="final_input_table">
@@ -129,18 +130,11 @@
 
 		<br> <br>
 
-
-
-
 		</table>
-
 
 		<div id="mypagetitle" text-align="center">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
-
-
-
 
 		<table width="100%" class="table_pay_type">
 			<colgroup>
@@ -157,7 +151,6 @@
 					</span></th>
 				</tr>
 			</thead>
-
 
 			<tbody id="bank_info">
 				<tr>
@@ -176,42 +169,24 @@
 					</th>
 				</tr>
 
-
 			</tbody>
 		</table>
 
 		         <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
-		         <input type = "hidden" name = "cId" value="<%=loginClient.getcId()%>">
-
-
-		<!--  
-        <input type="button" onclick="preview();" id="pay" class="btn btn-warning" value="결제하기">  -->
+		         <input type = "hidden" name ="cId" value="<%=loginClient.getcId()%>">
 
 		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
-
-
 
 	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기">
 
 	</form>
-	<!-- onclick="payment();" -->
-	<!-- 	 카카오버튼 -->
-
-
-	<input type="button" name="kakaopay" id="kakaopay" value="카카오페이로결제하기">
-
-
-
 
 </section>
 
 <script>
 
 $(window).load(function(){
-	 
-
-	   
-	
+	 	
 	var IMP = window.IMP;
       IMP.init('imp08945184'); 
      
@@ -221,13 +196,12 @@ $(window).load(function(){
           pay_method: 'card',
           merchant_uid: new Date().getTime(),
           name: '자바방 펜션 결제',
-          amount: 50000, 
-          buyer_email: 'honey@honey.do',
-          buyer_name: '서현희',
-          buyer_tel: '010-1234-5678',
-          buyer_addr: '경기도 어쩌구 저쩌구동'
-      
-  
+          amount: '<%=totalPrice%>', 
+          buyer_email: '<%=resInfo.getClient().getcEmail()%>',
+          buyer_name: '<%=resName%>',
+          buyer_tel: '<%=resPhone%>',
+          buyer_addr: '<%=resInfo.getClient().getcAddr()%>'
+     
       }, function (rsp) {
           console.log(rsp);
           if (rsp.success) {
@@ -239,7 +213,8 @@ $(window).load(function(){
               msg += '결제 금액 : ' + rsp.paid_amount;
               msg += '카드 승인번호 : ' + rsp.apply_num;
               
-              location.href='<%=request.getContextPath()%>/views/reservation/paySuccess.jsp';
+<%--location.href='<%=request.getContextPath()%>/reservation/kakaoPaySuccess?resCode=<%=resInfo.getResCode()%>'; --%>
+location.href='<%=request.getContextPath()%>/views/reservation/kakaoPaySuccessfully.jsp';
            
                         /* 여기다가 쿼리스트링 써서 넘기기 */ 
               
@@ -248,16 +223,10 @@ $(window).load(function(){
               msg += '에러내용 : ' + rsp.error_msg;
           }
           alert(msg);
-          location.href='<%=request.getContextPath()%>/reservation/payComplete?msg='+msg;
+        
       });
 	
-      
-      
-      
   }); 
-
-
-
 
 </script>
     
