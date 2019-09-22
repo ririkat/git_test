@@ -70,7 +70,6 @@ public class ClientDao {
 		String sql = prop.getProperty("updateClient");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, c.getcName());
             pstmt.setDate(2, c.getcBirth());
 			pstmt.setString(3, c.getcGender());
@@ -489,5 +488,29 @@ public class ClientDao {
 			}
 			return c;
 		}
-	
+
+		public int clientReport(Connection conn, Client c) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			int count=c.getcBLCount();
+			
+			if(count==0 || count==1 || count==2 || count==3) {
+				count++;
+				String sql = prop.getProperty("clientReport");
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, count);
+					pstmt.setString(2, c.getReadstatus());
+					pstmt.setString(3, c.getcId());
+					result = pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close(pstmt);
+				}
+			}else {
+				System.out.println("신고카운트 3회 이상");
+			}
+			return result;
+		}
 }

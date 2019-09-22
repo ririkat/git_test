@@ -233,12 +233,14 @@ public class ReservationDao {
 		String sql = prop.getProperty("insertReservation");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, res.getResCode());
-			pstmt.setString(2, res.getResState());
-			pstmt.setInt(3, res.getResNop());
-			pstmt.setInt(4, res.getTotalPrice());
-			pstmt.setString(5, res.getrNo());
-			pstmt.setString(6, res.getcId());
+//			pstmt.setString(1, res.getResCode());
+			pstmt.setDate(1, res.getResCheckIn());
+			pstmt.setDate(2, res.getResCheckOut());
+			pstmt.setString(3, res.getResState());
+			pstmt.setInt(4, res.getResNop());
+			pstmt.setInt(5, res.getTotalPrice());
+			pstmt.setString(6, res.getrNo());
+			pstmt.setString(7, res.getcId());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -301,6 +303,8 @@ public class ReservationDao {
 						rs.getInt("p_blcount"),
 						rs.getDate("p_enrollDate")));
 				
+				
+				//이거 건철이가 client테이블에 컬럼 추가 하면서 발생하는 오류인듯?
 			
 				res.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
 				rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
@@ -322,6 +326,27 @@ public class ReservationDao {
 		} return res;
 		
 	}
+
+	public int selecSeq(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selecSeq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	   
 	

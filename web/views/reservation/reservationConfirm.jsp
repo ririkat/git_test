@@ -366,14 +366,12 @@ function payInfo() {
 	}
 	
 	if (num == 2 ) {
-		
-		location.href='<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>';
-		location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
+	
 			return false;
 		} else {
 			alert("모든 약관에 동의해 주세요.");
-		} --%>
-	/* } */
+		} 
+	 }
 </script>
 
 

@@ -7,6 +7,7 @@
 <%@ page import="com.jb.pension.model.vo.Room"%>
 <%@ page import="java.util.List"%>
 
+
 <%
      Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice");

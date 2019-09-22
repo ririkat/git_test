@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.jb.review.model.vo.Review,com.jb.review.model.vo.ReviewFile, java.util.List" %>
+<%@ page import = "com.jb.review.model.vo.Review,com.jb.review.model.vo.ReviewFile,   java.util.List,java.util.ArrayList" %>
 <%
 	String pCode = request.getParameter("pCode");
 	Review r = (Review)request.getAttribute("review");
@@ -13,7 +13,7 @@
 
 <section id="review-container" class="container">
 	<div class="col-sm-9">
-	<h2>게시판</h2>
+	<h2>리뷰</h2>
 	<table id="tbl-review" class="table table-bordered">
 		<tr>
 			<td>게시번호</td>
@@ -30,19 +30,24 @@
 		<tr>
 			<td>이미지</td>
 			<td>
-			<%String imgSrc = ""; %>
-				<%for(ReviewFile rf : reviewFileList){ %>
-					<%if(r.getrNo()==rf.getrNo()){ %>
-                      <%imgSrc = rf.getpRenameFile(); %>
-                 <%}%>
-                 <%}%>
-                 <img class="img-responsive" src="<%=request.getContextPath() %>/upload/review/<%=imgSrc%>" 
-                 	alt="(X)" style="width:200px; height:130px;">
+			<% if(r !=null) {
+			
+			List<ReviewFile> curRfList = new ArrayList();
+				for(ReviewFile rf : reviewFileList){
+					if(rf.getrNo()==r.getrNo()){
+						curRfList.add(rf);%>
+		                 <%} %>
+		                 <%} %>
+						<%for(int i=0; i<curRfList.size(); i++) {%>
+		                 <img class="img-responsive" src="<%=request.getContextPath() %>/upload/review/<%=curRfList.get(i).getpRenameFile()%>" 
+		                 	alt="파일 없음" style="width:50%; ">
+				<%} %>
+			<%} %>
 			</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><%=r.getrContent() %></td>
+			<td style="height: 100px;"><%=r.getrContent() %></td>
 		</tr>
 <!-- 		<tr> -->
 <!-- 			<td colspan="2"> -->
@@ -62,12 +67,13 @@
 			location.href="<%=request.getContextPath() %>/review/pensionReviewList?pensionCode=<%=pCode%>";
 		}
 		function updateReview(){
+			if(confirm("주의! 수정 시 기존 게시물의 사진들은 삭제됩니다!\n정말 수정하시겠습니까?"))
 			location.href="<%=request.getContextPath()%>/review/updateReview?rNo=<%=r.getrNo() %>";
 		}
 		function deleteReview(){
 			var result=confirm("정말로 삭제합니까?");
 			if(result){
-				location.href="<%=request.getContextPath() %>/review/deleteReveiw?rNo=<%=r.getrNo() %>";
+				location.href="<%=request.getContextPath() %>/review/deleteReview?pCode=<%=pCode%>&rNo=<%=r.getrNo()%>";
 			}
 		}
 		function out(){  //신고

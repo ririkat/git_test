@@ -10,16 +10,12 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
-<br>
-<br>
-<br>
+<br><br><br>
 <section>
-	<br><br><br><br>
+<br><br><br><br>
 	<section id="enroll-container">
 		<div class="tit_contents">업주 비밀번호 찾기</div>
-		<br>
-		<hr>
-		<br>
+<br><hr><br>
 		<form name="form1" method="post" action="<%=request.getContextPath()%>/owner/updatePasswordEnd" onsubmit="return fpw_validate();">
 			<table class="updateTable">
 				<input type="hidden" name="loginType" id="owner" value="owner" />
@@ -58,21 +54,16 @@
 					</tr>
 				</tbody>
 			</table>
-			<br>
-			<br>
+<br><br>
 			<div class="button">
 				<input type="submit" value="변경">
 				<input type="reset" value="취소">
 			</div>
-
-
 		</form>
-		<br>
-		<br>
-		<hr>
+<br><br>
+<hr>
 	</section>
 	<script>
-	
 	$(function(){
 		var email=$("#email3").val();
 		var reEmail=masking(email);
@@ -125,10 +116,9 @@
 	            error:function(data){
 	            }
 	         });
-	            
-	      });
+	         $(this).attr({"disabled":"true"});
+	      });//인증번호 중복발송 막음
 	   });
-	
 	
 	function fpw_validate() {
 		//비밀번호 빈칸
@@ -162,18 +152,7 @@
         }
 	}
 	</script>
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+<br><br><br><br><br><br><br><br><br><br><br>
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>

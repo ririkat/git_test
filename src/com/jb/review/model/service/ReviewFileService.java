@@ -17,6 +17,7 @@ public class ReviewFileService {
 	public int addImages(int currval, String oriFile, String reFile) {
 		Connection conn = getConnection();
 		int result= dao.addImages(conn,currval,oriFile,reFile);
+		System.out.println("파일서비스 addImages :"+result);
 		if(result>0) {
 			commit(conn);
 		}else {

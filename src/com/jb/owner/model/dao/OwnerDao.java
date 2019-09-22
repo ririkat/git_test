@@ -8,12 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.jb.client.model.vo.Client;
+import org.eclipse.jdt.internal.compiler.ast.Statement;
+
 import com.jb.owner.model.vo.Owner;
 
 public class OwnerDao {
@@ -51,6 +51,60 @@ public class OwnerDao {
 		return result;
 	}
 	
+	//전체 미승인 업주회원 수
+	public int selectCountWait(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selectCountWait");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//페이징 - 승인 대기중인 업주
+	public List<Owner> waitListPage(Connection conn, int cPage, int numPerPage){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("waitListPage");
+		List<Owner> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Owner o = new Owner();
+				o.setoId(rs.getString("o_id"));
+				o.setoName(rs.getString("o_name"));
+				o.setoBirth(rs.getDate("o_birth"));
+				o.setoGender(rs.getString("o_gender"));
+				o.setoEmail(rs.getString("o_email"));
+				o.setoPhone(rs.getString("o_phone"));
+				o.setoAddr(rs.getString("o_addr"));
+				o.setoEd(rs.getDate("o_ed"));
+				list.add(o);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	public List<Owner> selectListPage(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
@@ -85,12 +139,12 @@ public class OwnerDao {
 	}
 	
 	//오버로딩
-	//업주회원 검색
+	//업주회원 검색 (승인된 회원)
 	public int selectCountOwner(Connection conn, String type, String keyword) {
 		Statement stmt=null;
 		ResultSet rs= null;
 		int result =0;
-		String sql = "select count(*) as cnt from owner where "+type+" like '%"+keyword+"%'";
+		String sql = "select count(*) as cnt from owner where o_eayn='Y' and "+type+" like '%"+keyword+"%'";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -107,7 +161,28 @@ public class OwnerDao {
 		return result;
 	}
 	
+	//업주회원 검색 (미승인)
+	public int selectCountOwner2(Connection conn, String type, String keyword) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select count(*) as cnt from owner where o_eayn='N' and " + type + " like '%" + keyword + "%'";
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return result;
+	}
 	
+	//페이징 - 승인된 업주
 	public List<Owner> selectOwnerList(Connection conn, String type, String keyword, int cPage, int numPerPage){
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -116,7 +191,7 @@ public class OwnerDao {
 		int end = cPage*numPerPage;
 		String sql = "select * from ("
 				+ "select rownum as rnum, a.* from("
-				+ "select * from owner where "
+				+ "select * from owner where o_eayn='Y' and "
 				+ type + " like '%" + keyword + "%' )a) "
 				+ "where rnum between " + start + " and " + end;
 		try {
@@ -148,7 +223,44 @@ public class OwnerDao {
 		return list;
 	}
 	
-	
+	//페이징 - 미승인된 업주
+	public List<Owner> selectOwnerList2(Connection conn, String type, String keyword, int cPage, int numPerPage){
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Owner> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "select * from ("
+				+ "select rownum as rnum, a.* from("
+				+ "select * from owner where o_eayn='N' and "
+				+ type + " like '%" + keyword + "%' )a) "
+				+ "where rnum between " + start + " and " + end;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Owner o = new Owner();
+				o.setoId(rs.getString("o_id"));
+				o.setoName(rs.getString("o_name"));
+				o.setoBirth(rs.getDate("o_birth"));
+				o.setoGender(rs.getString("o_gender"));
+				o.setoEmail(rs.getString("o_email"));
+				o.setoPhone(rs.getString("o_phone"));
+				o.setoAddr(rs.getString("o_addr"));
+				o.setoEd(rs.getDate("o_ed"));
+				o.setoBLCount(rs.getInt("o_blcount"));
+				
+				list.add(o);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(stmt);
+		}
+		return list;
+	}
 	
 	
 	public Owner selectOwnerOne(Connection conn, String oId) {
@@ -200,7 +312,86 @@ public class OwnerDao {
 		return result;
 	}
 	
+	//관리자 승인대기 업주 선택삭제
+	public int deleteOwnerList(Connection conn, String delList) {
+		Statement stmt = null;
+		int result = 0;
+		String sql = "delete from owner where o_id in (";
 
+		String[] arrDelList = delList.split(",");
+		for(int i=0; i<arrDelList.length; i++) {
+			arrDelList[i] = "'"+arrDelList[i]+"'";
+		}
+		if(arrDelList.length<2) {
+			sql += arrDelList[0]+")";
+		}
+		else {
+			sql += arrDelList[0];
+			for(int i=1; i<arrDelList.length; i++) {
+				sql += ","+arrDelList[i];
+			}
+			sql += ")";
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
+	//관리자 승인대기 업주 선택승인(승인대기목록)
+	public int acceptOwnerList(Connection conn, String accList) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "update owner set o_eayn='Y', o_ed=sysdate where o_id in (";
+
+		String[] accDelList = accList.split(",");
+		for (int i = 0; i < accDelList.length; i++) {
+			accDelList[i] = "'" + accDelList[i] + "'";
+		}
+		if (accDelList.length < 2) {
+			sql += accDelList[0] + ")";
+		} else {
+			sql += accDelList[0];
+			for (int i = 1; i < accDelList.length; i++) {
+				sql += "," + accDelList[i];
+			}
+			sql += ")";
+		}
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+
+	//관리자 승인대기 업주 한명 승인
+	public int acceptOwner(Connection conn, String oId) {
+		Statement stmt = null;
+		int result = 0;		
+		String sql = "update owner set o_eayn='Y', o_ed=sysdate where o_id='"+oId+"'";
+
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
 	public int multiDeleteOwner(Connection conn, String[] idss) {
 		PreparedStatement pstmt=null;
 		int result =0;
@@ -221,8 +412,7 @@ public class OwnerDao {
 		return result;
 	}
 	
-	
-	public Owner selectId(Connection conn, String id, String pw) {
+	public Owner selectId(Connection conn, String id,String pw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql =prop.getProperty("selectId");
@@ -392,6 +582,7 @@ public class OwnerDao {
 		return result;
 	}
 	
+
 	public int updateOwnerPassword(Connection conn, String oId,String oPw) {
 		PreparedStatement pstmt=null;
 		int result =0;
@@ -408,5 +599,6 @@ public class OwnerDao {
 		}
 		return result;
 	}
-	
+
+
 }
