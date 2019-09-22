@@ -340,12 +340,11 @@ Reservation resInfo=(Reservation)request.getAttribute("resInfo");
 		 <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
 		 <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> 
 		 
-		 
-		  
+	
 		  
 		  <input type="reset" onclick="" class="btn btn-warning" value="이전단계"> 
 		 <input type="submit" class="btn btn-warning" id="pay" onclick="payInfo();" value="다음단계">
-		<!-- <input type="button" name="pay" id="pay" value="카카오페이결제"> -->
+	
 
 	</form>
 
@@ -353,16 +352,11 @@ Reservation resInfo=(Reservation)request.getAttribute("resInfo");
 
 <script>
 
-//  function payInfo() {
-<%-- 	 location.href="<%=request.getContextPath()%>/reservation/payInfoLoad?resCode=<%=resInfo.getResCode()%>"; --%>
-//  }
 
 
+function payInfo() {
 
-<%-- function submitReservation() {
-	location.href='<%=request.getContextPath()%>/views/reservation/paymentView.jsp';
-	 --%>
-	<%-- var chkbox = document.getElementsByName('chk');
+	var chkbox = document.getElementsByName('chk');
 	var num = 0;
 	
 	for (var i = 0; i < chkbox.length; i++) {
