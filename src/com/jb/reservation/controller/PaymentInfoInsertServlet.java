@@ -32,8 +32,6 @@ public class PaymentInfoInsertServlet extends HttpServlet {
 		String pay = request.getParameter("pay");
 		
 		
-		
-		
 	}
 
 	/**

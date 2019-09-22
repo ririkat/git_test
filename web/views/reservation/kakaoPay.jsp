@@ -185,48 +185,106 @@
 
 <script>
 
-$(window).load(function(){
+// $(window).load(function(){
 	 	
-	var IMP = window.IMP;
-      IMP.init('imp08945184'); 
+// 	var IMP = window.IMP;
+//       IMP.init('imp08945184'); 
      
-      IMP.request_pay({
+//       IMP.request_pay({
      
-          pg:'kakao',
-          pay_method: 'card',
-          merchant_uid: new Date().getTime(),
-          name: '자바방 펜션 결제',
-          amount: '<%=totalPrice%>', 
-          buyer_email: '<%=resInfo.getClient().getcEmail()%>',
-          buyer_name: '<%=resName%>',
-          buyer_tel: '<%=resPhone%>',
-          buyer_addr: '<%=resInfo.getClient().getcAddr()%>'
+//           pg:'kakao',
+//           pay_method: 'card',
+//           merchant_uid: new Date().getTime(),
+//           name: '자바방 펜션 결제',
+<%--           amount: '<%=totalPrice%>',  --%>
+<%--           buyer_email: '<%=resInfo.getClient().getcEmail()%>', --%>
+<%--           buyer_name: '<%=resName%>', --%>
+<%--           buyer_tel: '<%=resPhone%>', --%>
+<%--           buyer_addr: '<%=resInfo.getClient().getcAddr()%>' --%>
      
-      }, function (rsp) {
-          console.log(rsp);
-          if (rsp.success) {
+//       }, function (rsp) {
+//           console.log(rsp);
+//           if (rsp.success) {
             
-          	var msg = '결제가 완료되었습니다.';
+//           	var msg = '결제가 완료되었습니다.';
              
-              msg += '고유ID : ' + rsp.imp_uid;
-              msg += '상점 거래ID : ' + rsp.merchant_uid;
-              msg += '결제 금액 : ' + rsp.paid_amount;
-              msg += '카드 승인번호 : ' + rsp.apply_num;
+//               msg += '고유ID : ' + rsp.imp_uid;
+//               msg += '상점 거래ID : ' + rsp.merchant_uid;
+//               msg += '결제 금액 : ' + rsp.paid_amount;
+//               msg += '카드 승인번호 : ' + rsp.apply_num;
               
-<%--location.href='<%=request.getContextPath()%>/reservation/kakaoPaySuccess?resCode=<%=resInfo.getResCode()%>'; --%>
-location.href='<%=request.getContextPath()%>/views/reservation/kakaoPaySuccessfully.jsp';
+<%-- location.href='<%=request.getContextPath()%>/reservation/kakaoPaySuccess?resCode=<%=resInfo.getResCode()%>'; --%>
+<%-- <%-- location.href='<%=request.getContextPath()%>/views/reservation/kakaoPaySuccessfully.jsp'; --%> 
            
-                        /* 여기다가 쿼리스트링 써서 넘기기 */ 
+ 
               
-          } else {
-              var msg = '결제에 실패하였습니다.';
-              msg += '에러내용 : ' + rsp.error_msg;
-          }
-          alert(msg);
+//           } else {
+//               var msg = '결제에 실패하였습니다.';
+//               msg += '에러내용 : ' + rsp.error_msg;
+//           }
+//           alert(msg);
         
-      });
+//       });
 	
-  }); 
+//   }); 
+
+
+$(window).load(function(){
+    var IMP = window.IMP; // 생략가능
+    IMP.init('imp08945184'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+    var msg;
+    
+    IMP.request_pay({
+        pg : 'kakao',
+        pay_method : 'card',
+        merchant_uid : new Date().getTime(),
+        name : '자바방 펜션 결제',
+        amount : <%=totalPrice%>,
+        buyer_email : '<%=resInfo.getClient().getcEmail()%>',
+        buyer_name : '<%=resInfo.getClient().getcName()%>',
+        buyer_tel : '<%=resInfo.getClient().getcPhone()%>',
+        buyer_addr : '<%=resInfo.getClient().getcAddr()%>',
+      
+    }, function(rsp) {
+        if ( rsp.success ) {
+            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+            jQuery.ajax({
+                url: '<%=request.getContextPath()%>/reservation/kakaoPaySuccess',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    imp_uid : rsp.imp_uid
+                    //기타 필요한 데이터가 있으면 추가 전달
+                }
+            }).done(function(data) {
+                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                if ( everythings_fine ) {
+                    msg = '결제가 완료되었습니다.';
+                    msg += '\n고유ID : ' + rsp.imp_uid;
+                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '\결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                    
+                    alert(msg);
+                } else {
+                    //[3] 아직 제대로 결제가 되지 않았습니다.
+                    //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                }
+            });
+            //성공시 이동할 페이지
+<%--             location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+        } else {
+            msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+            //실패시 이동할 페이지
+<%--             location.href="<%=request.getContextPath()%>/order/payFail"; --%>
+            alert(msg);
+        }
+    });
+    
+});
+
+
 
 </script>
     

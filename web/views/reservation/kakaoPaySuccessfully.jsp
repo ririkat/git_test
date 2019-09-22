@@ -98,10 +98,6 @@
 			</tbody>
 		</table>
 
-
-
-
-
 			<h3>고객정보</h3>
 		<br> <br> <br> <br> <br> <br> <br> <br>
 
@@ -120,7 +116,7 @@
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
 					<td class="txt_left"><input type="text" name="cPhone"
-						style="border: none" value="<%=resPhone%>" style="width: 120px;"
+						style="border: none" value="<%=resPhone%>" style="width:120px;"
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
 				</tr>
@@ -141,7 +137,6 @@
 	</form>
 
 </section>
-
 
 <script>
 	

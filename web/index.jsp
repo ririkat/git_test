@@ -12,7 +12,6 @@
 			<li data-target="#myCarousel" data-slide-to="3"></li>
 		</ol>
 		
-
 		<!-- 슬라이드 컨테이너 -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active banner">
@@ -30,7 +29,6 @@
 					<p>Lorem ipsum...</p>
 				</div> -->
 			</div>
-
 
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
@@ -59,8 +57,6 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
-	
 	
 	<br>
 	<br>

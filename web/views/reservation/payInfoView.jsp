@@ -186,11 +186,11 @@
 
 /* 이전으로 버튼 */
 
-function preview(){
+// function preview(){
 	
-	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=resInfo.getResCode()%>;
-		location.href=url;
-} 
+<%-- 	  var url="<%=request.getContextPath()%>/reservation/reservationInfoLoad?resCode="<%=resInfo.getResCode()%>; --%>
+// 		location.href=url;
+// } 
  
 
 

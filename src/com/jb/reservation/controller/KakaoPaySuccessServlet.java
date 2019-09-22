@@ -42,6 +42,10 @@ public class KakaoPaySuccessServlet extends HttpServlet {
 //		int rPrice = Integer.parseInt(request.getParameter("rPrice"));
 //		int rAddPrice = Integer.parseInt(request.getParameter("rAddPrice"));
 //		int totalPrice = rPrice + rAddPrice;
+		
+		System.out.println("들어오니ㅣ??왜그러니???");
+		System.out.println(cId);
+		System.out.println(resCode);
 //		
 	
 		Reservation resInfo = new ReservationService().selectOneReservation(resCode, cId);

@@ -19,10 +19,7 @@ int totalPrice = (int)request.getAttribute("totalPrice");
 %>
 
 	<section>
-    
-
-
-
+   
     <br>
     <br>
     <br>
