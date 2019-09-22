@@ -39,6 +39,8 @@ public class KakaoPaySuccessServlet extends HttpServlet {
 		// 분기처리를 위한 radio버튼 name
 		String pay = request.getParameter("pay");
 		
+		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+		
 //		int rPrice = Integer.parseInt(request.getParameter("rPrice"));
 //		int rAddPrice = Integer.parseInt(request.getParameter("rAddPrice"));
 //		int totalPrice = rPrice + rAddPrice;
@@ -55,10 +57,12 @@ public class KakaoPaySuccessServlet extends HttpServlet {
 		request.setAttribute("resCode", resCode);
 		request.setAttribute("resName", resName);
 		request.setAttribute("resPhone", resPhone);
-//		request.setAttribute("totalPrice", totalPrice);
+		request.setAttribute("totalPrice", totalPrice);
 
 		
 		System.out.println("kakaooooooo : "+resInfo);
+		
+		request.getRequestDispatcher("/views/reservation/kakaoPaySuccessfully.jsp").forward(request, response);
 	
 	}
 

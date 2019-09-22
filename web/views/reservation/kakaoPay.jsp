@@ -33,7 +33,7 @@
 	<div id="mypagetitle" text-align="center">결제정보확인</div>
 	<br> <br>
 
-	<form method="post" class="container" name="payFrm" id="payMethod" action="<%=request.getContextPath()%>/reservation/kakaoPaySuccess">
+	<form method="post" class="container" name="payFrm" id="payFrm" action="<%=request.getContextPath()%>/reservation/kakaoPaySuccess">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
 		<table class="table_final_auction" id="final_input_table">
@@ -177,56 +177,13 @@
 
 		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
 
-	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기">
+<!-- 	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기"> -->
 
 	</form>
 
 </section>
 
 <script>
-
-// $(window).load(function(){
-	 	
-// 	var IMP = window.IMP;
-//       IMP.init('imp08945184'); 
-     
-//       IMP.request_pay({
-     
-//           pg:'kakao',
-//           pay_method: 'card',
-//           merchant_uid: new Date().getTime(),
-//           name: '자바방 펜션 결제',
-<%--           amount: '<%=totalPrice%>',  --%>
-<%--           buyer_email: '<%=resInfo.getClient().getcEmail()%>', --%>
-<%--           buyer_name: '<%=resName%>', --%>
-<%--           buyer_tel: '<%=resPhone%>', --%>
-<%--           buyer_addr: '<%=resInfo.getClient().getcAddr()%>' --%>
-     
-//       }, function (rsp) {
-//           console.log(rsp);
-//           if (rsp.success) {
-            
-//           	var msg = '결제가 완료되었습니다.';
-             
-//               msg += '고유ID : ' + rsp.imp_uid;
-//               msg += '상점 거래ID : ' + rsp.merchant_uid;
-//               msg += '결제 금액 : ' + rsp.paid_amount;
-//               msg += '카드 승인번호 : ' + rsp.apply_num;
-              
-<%-- location.href='<%=request.getContextPath()%>/reservation/kakaoPaySuccess?resCode=<%=resInfo.getResCode()%>'; --%>
-<%-- <%-- location.href='<%=request.getContextPath()%>/views/reservation/kakaoPaySuccessfully.jsp'; --%> 
-           
- 
-              
-//           } else {
-//               var msg = '결제에 실패하였습니다.';
-//               msg += '에러내용 : ' + rsp.error_msg;
-//           }
-//           alert(msg);
-        
-//       });
-	
-//   }); 
 
 
 $(window).load(function(){
@@ -243,13 +200,14 @@ $(window).load(function(){
         buyer_email : '<%=resInfo.getClient().getcEmail()%>',
         buyer_name : '<%=resInfo.getClient().getcName()%>',
         buyer_tel : '<%=resInfo.getClient().getcPhone()%>',
-        buyer_addr : '<%=resInfo.getClient().getcAddr()%>',
+        buyer_addr : '<%=resInfo.getClient().getcAddr()%>'
+        
       
     }, function(rsp) {
         if ( rsp.success ) {
-            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+            
             jQuery.ajax({
-                url: '<%=request.getContextPath()%>/reservation/kakaoPaySuccess',
+                url: '/reservation/kakaoPaySuccess',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -257,7 +215,7 @@ $(window).load(function(){
                     //기타 필요한 데이터가 있으면 추가 전달
                 }
             }).done(function(data) {
-                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                //서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                 if ( everythings_fine ) {
                     msg = '결제가 완료되었습니다.';
                     msg += '\n고유ID : ' + rsp.imp_uid;
@@ -283,6 +241,8 @@ $(window).load(function(){
     });
     
 });
+
+
 
 
 

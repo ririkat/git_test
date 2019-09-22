@@ -164,8 +164,6 @@
 			value="결제하기">
 
 	</form>
-	
-	<input type="button" name="kakaopay" id="kakaopay" value="카카오페이로결제하기">
 
 </section>
 
@@ -192,6 +190,8 @@
 // 		location.href=url;
 // } 
  
+ 
+
 
 
 </script>

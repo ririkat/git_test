@@ -8,16 +8,15 @@
 	String resName = (String) request.getAttribute("resName");
 	String resPhone = (String) request.getAttribute("resPhone");
 	String resCode = (String) request.getAttribute("resCode");
-// 	int totalPrice = (int)request.getAttribute("totalPrice");
+ 	int totalPrice = (int)request.getAttribute("totalPrice");
 %>
 
 <section>
 
 	<br> <br> <br> <br> <br> <br> <br> <br>
 	<br>
-	<div id="mypagetitle" style="text-align: center">무통장입금 정보 확인</div>
+	<div id="mypagetitle" style="text-align: center">카드결제가 완료되었습니다.</div>
 	<br> <br> <br> <br> <br> <br>
-
 	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>">
 
 		<h3>예약펜션정보</h3>
