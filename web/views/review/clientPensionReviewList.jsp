@@ -11,8 +11,12 @@
 	String pageBar = (String) request.getAttribute("pageBar");
 	int cPage = (int) request.getAttribute("cPage");
 %>
+
+
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/common/sideOwner.jsp"%>
+<div class="container-fluid">
+	<div class="row content">
+<%@ include file="/views/common/sideMypage.jsp"%>
 
 	<style>
         th{
@@ -48,7 +52,7 @@
 							<td style="width: 50px;"><%=r.getrNo()%></td>
 							
 							<td id="content" style="width: 200px; height: 50px;">
-								<a href="<%=request.getContextPath()%>/review/reviewView?rNo=<%=r.getrNo()%>&pCode=<%=pCode%>">
+								<a href="<%=request.getContextPath()%>/review/clientReviewView?rNo=<%=r.getrNo()%>&pCode=<%=pCode%>">
 									<%=r.getrTitle()%></a>
 							</td>
 							

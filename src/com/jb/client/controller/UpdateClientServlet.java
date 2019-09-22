@@ -96,6 +96,12 @@ public class UpdateClientServlet extends HttpServlet {
 		System.out.println("sqlDate: " + sqlDate);
 		c.setcBirth(sqlDate);
 
+	
+		
+		
+		
+		
+		
 		String zonecode = request.getParameter("zonecode");
 		String addr = request.getParameter("address");
 		String addrEtc = request.getParameter("address_etc");

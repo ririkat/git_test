@@ -24,7 +24,7 @@
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><input type="text" name="writer" class="form-control" value="test1" readonly/></td>  <%--나중에 loginClient또는 c.getcId()로 바꾸기 --%>
+							<td><input type="text" name="writer" class="form-control" value="<%=loginClient.getcId()%>" readonly/></td>  <%--나중에 loginClient또는 c.getcId()로 바꾸기 --%>
 						</tr>
 						<tr>
 							<th>첨부파일</th>

@@ -11,7 +11,7 @@
                     <div class="col-sm-6 col-md-4 col-md-offset-4">
                         <div class="account-wall">
                             <h4 id="mypagetitle" style="text-align: center">로그인</h4>
-                            <form id="loginTypefrm" class="form-signin" method="post" action="<%=request.getContextPath()%>/client/login">
+                            <form id="loginTypefrm" class="form-signin" method="post" action="<%=request.getContextPath() %>/client/login">
 <%-- <<<<<<< HEAD
                                 <input type="radio" name="loginType" value="client" checked>고객
                                 <input type="radio" name="loginType" value="owner">업주

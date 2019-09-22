@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jb.client.model.vo.Client;
+import com.jb.owner.model.vo.Owner;
 import com.jb.pension.model.service.PensionService;
 import com.jb.pension.model.vo.Pension;
 import com.jb.review.model.service.ReviewFileService;
@@ -19,14 +21,14 @@ import com.jb.review.model.vo.ReviewFile;
 /**
  * Servlet implementation class OwnerReviewListServlet
  */
-@WebServlet("/review/pensionReviewList")
-public class ReviewListServlet extends HttpServlet {
+@WebServlet("/review/ownerReviewList")
+public class OwnerReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet() {
+    public OwnerReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +37,8 @@ public class ReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//리스트를 불러오기전 페이징처리 후 ReviewList를 불러오기
-				
+		//리스트를 불러오기전 페이징처리 후 ReviewList를 불러오기		
+		
 				String pCode = (String) request.getParameter("pensionCode");
 //				String pCode = "p1001";
 				System.out.println("리뷰버튼 눌렀을때 넘어오는 pCode: "+pCode);
@@ -76,14 +78,14 @@ public class ReviewListServlet extends HttpServlet {
 				if(pageNo==1) {
 					pageBar+="<span>&lt</span>";
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo-1)+"'>&lt</a>";
+					pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo-1)+"'>&lt</a>";
 				}
 				
 				while(!(pageNo>pageEnd||pageNo>totalPage)) {
 					if(pageNo==cPage) {
 						pageBar+="<span>"+pageNo+"</span>";
 					}else {
-						pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
+						pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
 					}
 					pageNo++;
 				}
@@ -91,7 +93,7 @@ public class ReviewListServlet extends HttpServlet {
 				if(pageNo>totalPage) {
 					pageBar+="<span>&gt</span>";
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/review/pensionReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>&gt</a>";
+					pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>&gt</a>";
 				}
 				
 				request.setAttribute("pageBar", pageBar);
@@ -100,7 +102,8 @@ public class ReviewListServlet extends HttpServlet {
 				request.setAttribute("pension", p); 
 				request.setAttribute("reviewList", reviewList);
 				request.setAttribute("reviewFileList", reviewFileList);
-				request.getRequestDispatcher("/views/review/pensionReviewList.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/review/ownerPensionReviewList.jsp").forward(request, response);
+				
 				
 	}
 
