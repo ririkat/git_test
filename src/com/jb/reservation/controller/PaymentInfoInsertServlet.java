@@ -1,11 +1,16 @@
 package com.jb.reservation.controller;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.jb.reservation.model.service.ReservationService;
+import com.jb.reservation.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentInfoInsertServlet
@@ -27,10 +32,19 @@ public class PaymentInfoInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String resCode = request.getParameter("resCode");
-		//pay-method radio button name 
-		String pay = request.getParameter("pay");
 		
+		String payCode = request.getParameter("payCode");
+		String resCode = request.getParameter("resCode");
+		String payMethod = request.getParameter("payMethod");
+		//pay-method radio button name 
+		String payy = request.getParameter("pay");
+//		Date payDate = request.getParameter("payDate");
+		
+		
+		Payment pay = new Payment(payCode,payMethod,resCode);
+		
+	    ReservationService service = new ReservationService();
+	    int result = service.insertPayInfo(pay);
 		
 	}
 

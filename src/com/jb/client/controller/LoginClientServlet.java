@@ -37,6 +37,10 @@ public class LoginClientServlet extends HttpServlet {
 		
 		ClientService service = new ClientService();
 		Client c = service.selectId(id, pw);
+		System.out.println("서블릿");
+		System.out.println(c.getcId());
+		System.out.println(c.getcPw());
+		
 		
 		String view = "";
 		if(c != null) {
