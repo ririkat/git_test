@@ -48,7 +48,12 @@ public class RoomReservationServlet extends HttpServlet {
 		 int result = service.insertReservation(res);
 		 System.out.println(res);
 		 
-
+			String msg = "";
+			String loc = "/";
+			msg = result>0? "(예약완료)결제페이지로 넘어갑니다.":"예약이 불가능합니다.";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 		
 

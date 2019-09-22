@@ -24,10 +24,6 @@
 
 
 <section>
-스톰
-
-
-
 	</br>
 	</br>
 	</br>
@@ -70,8 +66,8 @@
 						인원 수 입력 : <input type="text" name="resNo_" id="addtext" value="0" onkeyup="OnKeyUp(this.value)" maxlength="2"
 						style="width: 40px; height: 20px; font-size: 20px; text-align: center;">명
 						<br>
-						체크인<input type=date name="checkIn"><br>
-						체크아웃<input type=date name="checkOut">
+						체크인<input type=date name="checkIn" style="width: 130px; height: 20px;" ><br>
+						체크아웃<input type=date name="checkOut" style="width: 130px; height: 20px;">
 						<br><br><br><br>
 						<div id="pe">총 인원 수 : 0명</div>
 						
@@ -315,14 +311,25 @@
 		
 		function res_validate() {
 			
+			if(<%=loginClient==null%>){
+				alert("로그인이 필요한 서비스 입니다");
+				return false;
+			}
+			
 			if (res1.resNo_.value=="" || res1.resNo_.value==0) {
 	            alert("인원수를 입력해주세요.")
 	            resNo_.focus()
 	            return false;
 	        }
 			
-			return true;
+			if(res1.checkIn.value==""||res1.checkOut.value=="") {
+				alert("체크인/체크아웃 날짜를 선택해주세요.")
+				checkIn.focus()
+				return false;
+			}
+				return true;
 		}
+		
 		
 		function OnKeyUp(text) {
 
@@ -340,9 +347,7 @@
 			if(text!="")
 			{
 				if (!regMax.test(res1.addtext.value)) {
-					
-					txt.value = "";
-					
+					txt.value = "";		
 					alert("숫자만 입력해주세요.");
 					return false;
 				}
