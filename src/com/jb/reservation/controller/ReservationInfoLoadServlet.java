@@ -45,8 +45,22 @@ public class ReservationInfoLoadServlet extends HttpServlet {
 		Reservation resInfo = new ReservationService().selectOneReservation(resCode, cId);
 		System.out.println("infoLoad서블릿 : "+resInfo);
 	
+	
+		//아직 못받아옴 나중에 풀기 
+		
+		/*
+		 * 
+		 * int rPrice=Integer.parseInt(request.getParameter("rPrice")); int rAddPrice =
+		 * Integer.parseInt(request.getParameter("rAddPrice")); int totalPrice =
+		 * rPrice+rAddPrice;
+		 * 
+		 * 
+		 * request.setAttribute("totalPrice", totalPrice);
+		 */
+		
 		
 	    request.setAttribute("resInfo", resInfo);
+	    request.setAttribute("cId", cId);
 		
 		
 		request.getRequestDispatcher("/views/reservation/reservationConfirm.jsp").forward(request,response);		

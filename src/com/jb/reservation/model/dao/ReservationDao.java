@@ -303,6 +303,8 @@ public class ReservationDao {
 						rs.getInt("p_blcount"),
 						rs.getDate("p_enrollDate")));
 				
+				
+				//이거 건철이가 client테이블에 컬럼 추가 하면서 발생하는 오류인듯?
 			
 				res.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
 				rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
