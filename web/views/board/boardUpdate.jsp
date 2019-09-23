@@ -16,7 +16,7 @@
 				<div class="container">
 					<table class="table table-bordered">
 						<thead>
-						<div class="tit_contents">게시글수정</div>
+						<center><p class="title" style="color: #6a60a9;">게시글수정</p></center>
 						</thead>
 						<tbody>
 							<form action="<%=request.getContextPath() %>/board/boardUpdateEnd" method="post" encType="multipart/form-data"

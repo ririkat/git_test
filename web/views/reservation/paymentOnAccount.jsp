@@ -20,7 +20,7 @@
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div class="tit_contents">무통장입금 정보 확인</div>
+	 <center><p class="title" style="color: #6a60a9;">무통장입금정보확인</p></center>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -28,7 +28,8 @@
 		id="reservationFrm"
 		action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 
-		<div class="tit_contents">예약펜션정보</div>
+		 <center><p class="title">예약펜션정보</p></center>
+   <br><br>
 
 		<table class="table_final_auction">
 			<tbody>
@@ -85,8 +86,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<br> <br> <br><br>
 
-		<div class="tit_contents">결제방법</div>
+		 <center><p class="title" >결제방법</p></center>
+   <br><br><br> <br> <br>
 
 		<table class="table_final_auction">
 			<tbody>
@@ -114,16 +117,14 @@
 			</tbody>
 		</table>
 
-
-		<div class="tit_contents">고객정보</div>
+<br><br><br><br><br>
+		 <center><p class="title" >고객정보</p></center>
+   <br><br>
 		 <br>
 		<br>
 		<br>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+	
 
 		<table class="table_final_auction" id="final_input_table">
 			<colgroup>
@@ -145,15 +146,26 @@
 				</tr>
 			</tbody>
 		</table>
-
-
-		<h4><%=resName%></h4>
-		님의
-		<p><%=resInfo.getPension().getpName()%>펜션
-		</p>
-		예약이 완료되었습니다.<br> <span style="color: #FF8F00;"> 예약확정은 입금
-			확인 후 진행됩니다.</span><br> 예약해주셔서 감사합니다. <input type="submit"
-			onclick="paySuccessfully" name="goMainView" value="예약목록확인">
+        <br><br><br><br>
+        <div class="container" border="1">
+        <center>
+		<p><%=resName%> 님의 <%=resInfo.getPension().getpName()%>펜션 예약이 완료되었습니다.<br> 
+		<span style="color: #FF8F00;"> 예약확정은 입금 확인 후 진행됩니다.</span>
+		<br> 예약해주셔서 감사합니다. 
+		</center>
+		</div>
+		
+		<br><br>
+		
+		<center>
+		<input type="submit"
+			onclick="paySuccessfully" name="goMainView"  class="btn btn-warning" value="예약목록확인">
+			<center>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 
 	</form>
 

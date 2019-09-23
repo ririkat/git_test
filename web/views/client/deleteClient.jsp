@@ -34,7 +34,7 @@ Client c=(Client)request.getAttribute("client");
 		<div class="col-sm-9 sidenav">
 			<section id="container">
 				<br> <br> <br> <br> <br>
-				<div class="tit_contents">회원탈퇴</div>
+				  <center><p class="title" style="color: #6a60a9;">회원탈퇴</p></center>
 				<br>
 				<hr>
 				<br>

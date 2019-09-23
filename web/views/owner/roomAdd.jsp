@@ -13,7 +13,8 @@
 <div class="col-md-10">
 <br><br><br>
    <section id="enroll-container">
-      <div class="tit_contents">객실추가</div>
+      <center><p class="title" style="color: #6a60a9;">객실추가</p></center>
+   <br><br>
       <br><hr><br>
 
       <form name="addRoom" method="post" enctype="multipart/form-data" onsubmit="return add_validate();"

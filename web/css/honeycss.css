@@ -164,6 +164,9 @@ table.updateTable td {
 .title {
 	font-family: 'TmonMonsori';
 	font-size: 25px;
+	
+	color: #6a60a9 !import;
+    text-align: center !import;
 }
 
 /* 회원탈퇴 테이블 위치 조정 */

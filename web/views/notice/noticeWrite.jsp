@@ -6,7 +6,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
-				<div class="tit_contents">공지사항작성</div>
+				<center><p class="title" style="color: #6a60a9;">공지사항작성</p></center>
 				<form action="<%=request.getContextPath() %>/notice/noticeWriteEnd"
 					method="post" enctype="multipart/form-data">
 

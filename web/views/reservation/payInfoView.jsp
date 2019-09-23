@@ -79,7 +79,7 @@ border-collapse: collapse;
 <section id='write-container'>
 
 	<br> <br> <br> <br>
-	<div class="tit_contents">결제정보확인</div>
+	<div class="titcontents">결제정보확인</div>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payMethod"
@@ -111,7 +111,7 @@ border-collapse: collapse;
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		<div class="tit_contents">결제금액</div>
+		<div class="titcontents">결제금액</div>
 		<br> <br>
 
 		<table class="table_final_auction" style="table-layout: fixed;">
@@ -169,7 +169,7 @@ border-collapse: collapse;
 
 		</table>
 
-		<div class="tit_contents">결제방법</div>
+		<div class="titcontents">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 
@@ -212,11 +212,14 @@ border-collapse: collapse;
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 		<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 
+		<br><br><br>
+		<center>
 		<input type="button" class="btn btn-warning" onclick="preview();"
 			value="이전으로"> <input type="submit" name="payment_btn"
 			class="btn btn-warning" id="payment" onclick=""
 			value="결제하기">
-
+</center>
+<br><br><br>
 	</form>
 
 </section>

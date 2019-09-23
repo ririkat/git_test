@@ -15,7 +15,7 @@
 			<br>
 			<br>
 			
-				<div class="tit_contents">공지사항</div>
+				<center><p class="title" style="color: #6a60a9;">공지사항</p></center>
 			<br>
 			<hr>
 			

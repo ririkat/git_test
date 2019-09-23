@@ -12,7 +12,7 @@
 
 
 
-                    <div class="tit_contents">아이디찾기</div>
+                   <center><p class="title" style="color: #6a60a9;">아이디찾기</p></center>
                     <br>
                     <hr>
                     <br>

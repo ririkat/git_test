@@ -48,7 +48,7 @@
 
 
 
-				<div class="tit_contents">비밀번호변경</div>
+				 <center><p class="title" style="color: #6a60a9;">비밀번호변경</p></center>
 				<br>
 				<hr>
 				<br>

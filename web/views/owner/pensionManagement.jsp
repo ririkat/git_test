@@ -12,7 +12,8 @@
 
 <div class="col-md-10">
 	<br><br><br>
-	<div class="tit_contents">나의 펜션 리스트</div>
+	 <center><p class="title" style="color: #6a60a9;">나의 펜션 리스트</p></center>
+   <br><br>
 	<br><br>
 	
 	<div>

@@ -79,7 +79,8 @@ img {
 <div class="col-md-10">
 	<div class="mContent">
 		<br><br><br>
-		<div class="tit_contents"><%=r.getrName()%></div>
+		 <center><p class="title" style="color: #6a60a9;"><%=r.getrName()%></p></center>
+		
 		<br><br><br>
 		<table class="table_room2">
 	         <colgroup>

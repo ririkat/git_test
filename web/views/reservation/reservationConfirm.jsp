@@ -80,7 +80,7 @@ font: 12px/1.25em;
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div class="tit_contents">예약내역확인</div>
+	<center><p class="title" style="color: #6a60a9;">예약내역확인</p></center>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -383,10 +383,11 @@ font: 12px/1.25em;
 		
 		 <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
 		 <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> 
+		 <center>
 	
 		  <input type="reset" onclick="" class="btn btn-warning" value="이전단계"> 
 		 <input type="submit" class="btn btn-warning" id="pay" onclick="payInfo();" value="다음단계">
-	
+	</center>
 
 	</form>
 
@@ -414,7 +415,7 @@ function payInfo() {
 	 }
 </script>
 
-
+<br><br>
 
 
 <%@ include file="/views/common/footer.jsp"%>

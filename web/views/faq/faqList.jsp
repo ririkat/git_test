@@ -13,7 +13,7 @@
 			<div class="col-sm-9">
 			    <br>
 				<br>
-				<div class="tit_contents">FAQ</div>
+				 <center><p class="title" style="color: #6a60a9;">FAQ</p></center>
 				<br>
 				<br>
 				<hr>

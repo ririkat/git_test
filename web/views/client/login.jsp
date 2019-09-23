@@ -26,8 +26,10 @@
                                     
 <!--                                 	업체일반 회원뷰로 전환 -->
 ======= --%>
+                               <center>
                                 <input type="radio" name="loginType" id="client" value="client" checked/><label for="client">고객</label>
                                 <input type="radio" name="loginType" id="owner" value="owner"/><label for="owner">업주</label>
+                                </center>
                                 <input type="text" id="loginid" name="loginid"  class="form-control" placeholder="아이디 입력" required autofocus/><br>
                                 <input type="password" id="cpass" name="cpass"  class="form-control" placeholder="비밀번호 입력" required/><br>
                                 <input type="submit" class="btn btn-lg btn-warning btn-block" value="로그인"/>

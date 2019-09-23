@@ -46,7 +46,7 @@ String cBirthDD=str.substring(8, 10);
          <br>
 
          <section id="enroll-container">
-            <div class="tit_contents">회원정보수정</div>
+             <center><p class="title" style="color: #6a60a9;">회원정보수정</p></center>
             <br>
             <hr>
             <br>

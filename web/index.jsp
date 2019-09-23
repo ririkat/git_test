@@ -68,6 +68,8 @@
 		<div class="container text-center">
 			<div class="row">
 			
+			<center>
+			
 				<div class="col-sm-4">
 					<img class="wfullImg" style="width:400px;" src="http://placehold.it/300x150" alt="Image">
 					<a class="nav-link" href="#">
@@ -84,7 +86,7 @@
 					</a>
 					<!-- <p >테마마마마마마</p> -->
 				</div>
-			
+			</center>
 			
 			</div>
 		</div>

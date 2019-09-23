@@ -8,7 +8,7 @@ Client c = (Client)request.getAttribute("findClient");
 %>
   <section>
   		<br><br><br><br><br><br><br><br><br><br><br><br>
-      <div class="tit_contents">이메일을 확인해주세요</div>
+        <center><p class="title" style="color: #6a60a9;">이메일을 확인해주세요</p></center>
 
   		<br><br><br><br><br><br><br><br><br><br><br><br>
   </section>

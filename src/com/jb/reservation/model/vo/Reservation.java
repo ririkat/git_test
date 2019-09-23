@@ -43,6 +43,22 @@ public class Reservation {
 	this.cId = cId;
 }
 
+   
+   
+
+
+public Reservation(Date resCheckIn, Date resCheckOut, String resState, int resNop, int totalPrice, String rNo,
+		String cId) {
+	super();
+	this.resCheckIn = resCheckIn;
+	this.resCheckOut = resCheckOut;
+	this.resState = resState;
+	this.resNop = resNop;
+	this.totalPrice = totalPrice;
+	this.rNo = rNo;
+	this.cId = cId;
+}
+
 
 
 public Reservation(String resCode, Date resCheckIn, Date resCheckOut, String resState, int resNop, int totalPrice,

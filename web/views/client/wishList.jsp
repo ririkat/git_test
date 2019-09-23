@@ -74,7 +74,7 @@ th, td {
 		</div><!--마이페이지 사이드메뉴 끝 -->
 
 		<section><!-- 내가 찜한 객실 시작 -->
-			<div class="tit_contents">내가찜한펜션</div>
+			 <center><p class="title" style="color: #6a60a9;">내가 찜한 목록</p></center>
 			<div class="all-clear">
 				<button class="btn btn-warning" id="all-clear" onclick="">목록모두삭제</button>
 			</div>

@@ -98,7 +98,7 @@ th, td {
 
 			<br> <br> <br>
 
-			<div class="tit_contents">예약/결제내역</div>
+			 <center><p class="title" style="color: #6a60a9;">예약결제내역</p></center>
 			<br>
 			
 			<hr>

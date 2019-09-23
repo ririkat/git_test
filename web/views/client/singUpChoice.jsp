@@ -10,7 +10,7 @@
                         <div class="col-sm-6 col-md-4 col-md-offset-4">
                             <div class="account-wall">
     
-                                    <div class="tit_contents">선택하세요</div>
+                                     <center><p class="title" style="color: #6a60a9;">선택하세요</p></center>
                                
                                 <form class="form-signin">
                                    <br><br>

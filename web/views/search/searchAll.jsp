@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <section>
 	<div class="container">
-	<h2 class="text-center">펜션 검색</h2>
+	<center><p class="title" style="color: #6a60a9;">펜션검색</p></center>
 		<!--리스트컨테이너-->
 		<div class="row">
 			<!--검색바-->

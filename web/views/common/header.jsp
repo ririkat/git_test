@@ -34,7 +34,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/honeycss.css">
-<%-- <link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css"> --%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/reservationCSS.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/riri.css">

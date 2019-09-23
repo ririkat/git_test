@@ -10,7 +10,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="faq-container" class="container">
 			<div class="col-sm-9">
-				<div class="tit_contents">FAQ</div>
+				 <center><p class="title" style="color: #6a60a9;">FAQ</p></center>
 				<table id="tbl-faq" class="table table-bordered">
 					<tr>
 						<th>제 목</th>

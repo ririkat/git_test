@@ -25,7 +25,8 @@
     </style>
 
    <div class="col-sm-9">
-     <div class="tit_contents"><%=p.getpName() %>에 대한 리뷰</div>
+     
+     <center><p class="title" style="color: #6a60a9;"><%=p.getpName() %>에 대한 리뷰</p></center>
           
             <div id="review-container">
 <%--                <form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder"> --%>
