@@ -51,7 +51,7 @@ public class SelectPayMethodServlet extends HttpServlet {
 		int nowMonth = now.get(Calendar.MONTH) + 1; // 현재 월
 		int nowDate = now.get(Calendar.DATE) + 7; // 현재 일
 
-		String accountDay = nowYear + "년 " + nowMonth + "월 " + nowDate + "일 까지 입금해주세요.";
+		String accountDay = nowYear + "년 " + nowMonth + "월 " + nowDate + "일";
 
 		// 기본금액+추가금액 = 총금액
 		int rPrice = Integer.parseInt(request.getParameter("rPrice"));

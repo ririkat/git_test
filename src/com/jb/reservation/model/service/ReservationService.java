@@ -62,11 +62,12 @@ public class ReservationService {
 	}
 	
 
-	
-	public int updatePayInfo(Reservation res) {
+		public int changeResState(Reservation res) {
 	
 		Connection conn = getConnection();
-		int result = dao.updatePayInfo(conn, res);
+		System.out.println("서비스  dao전 res : "+res);
+		int result = dao.changeResState(conn, res);
+		System.out.println("service에서 r : "+ result);
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -92,6 +93,20 @@ public class ReservationService {
 		
 	}
 
+	
+	public int cancleRes(String resCode) {
+		
+		Connection conn = getConnection();
+		int result = dao.cancleRes(conn, resCode);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+
+	}
 	
 	
 	

@@ -7,8 +7,7 @@
 
 Client c=(Client)request.getAttribute("client");
   
-    %>
-
+ %>
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -20,29 +19,16 @@ Client c=(Client)request.getAttribute("client");
 				<a href="mypage.html">&nbsp;&nbsp;마이페이지</a>
 			</h4>
 
-
 			<div id="mypageList">
 
 				<ul class="nav nav-pills nav-stacked">
 					<br>
-
-					<%--   <li><a href="<%=request.getContextPath()%>/client/mypageHome?cId=<%=c.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
-                        
-                        <li><a href="<%=request.getContextPath()%>/client/myFavoriteRoom?cId=<%=c.getcId()%>">&nbsp;&nbsp;내가찜한펜션</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/updateClientInfo?cId=<%=c.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
-                        <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=c.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
-                        <li class="active"><a href="<%=request.getContextPath()%>/client/?cId=<%=c.getcId()%>">회원탈퇴</a></li> --%>
-			
-						
-                        <li><a href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
+					   <li><a href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/deleteLoad?cId=<%=loginClient.getcId()%>">회원탈퇴</a></li>
-                        
-                        
-
-				</ul>
+                    </ul>
 				<br>
 			</div>
 		</div>
@@ -77,8 +63,6 @@ Client c=(Client)request.getAttribute("client");
 							<tr>
 								<th class="point"><strong class="point"></strong>탈퇴사유</th>
 								<td>
-
-
 									<p>
 										<input type="radio" id="" name="usece" title="탈퇴사유"
 											value="이용X"> <label for="">중개사이트를 이용하지 않아서</label>
@@ -113,14 +97,12 @@ Client c=(Client)request.getAttribute("client");
 							<input type="reset" class="btn btn-warning" onclick="<%=request.getContextPath()%>/client/infoLoad" value="취소">
 					</div>
 					<hr>
-
-
 				</form>
+		
 			</section>
 		</div>
 	</div>
 </div>
-
 
 <script>
 
@@ -145,8 +127,7 @@ function deleteClient(){
 		}
 	}
 }
-	 		
-	
+
     
     function deleteClient(){
 		

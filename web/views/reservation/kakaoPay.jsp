@@ -1,25 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <%@ page import="com.jb.reservation.model.vo.Reservation"%>
 <%@ page import="com.jb.reservation.model.vo.Payment"%>
 <%@ page import="com.jb.pension.model.vo.Pension"%>
 <%@ page import="com.jb.pension.model.vo.Room"%>
 <%@ page import="java.util.List"%>
 
-
-
-<%
-    
-    Reservation resInfo=(Reservation)request.getAttribute("resInfo");
+<% 
+     Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice");
      String resCode = (String)request.getAttribute("resCode");
      String resName=(String)request.getAttribute("resName");
      String resPhone=(String)request.getAttribute("resPhone");
     
-    %>
-
+  %>
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -49,7 +44,6 @@
 						style="color: #FF8F00;">* 예약자 실명을 입력하세요. 예약확인시 혼동이 될 수
 							있습니다.</span></td>
 				</tr>
-
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
 					<td class="txt_left"><input type="text" name="resPhone"
@@ -57,7 +51,6 @@
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
 				</tr>
-
 			</tbody>
 		</table>
 
@@ -67,31 +60,23 @@
 		<br> <br>
 
 		<table class="table_final_auction" style="table-layout: fixed;">
-
 			<colgroup>
 				<col width="25%">
 				<col width="25%">
 				<col width="25%">
 				<col width="25%">
 			</colgroup>
-
 			<tbody>
 				<tr>
 					<th>
 						<div class="left">
 							<strong>객실금액</strong>
 						</div>
-
 					</th>
-
 					<th class="txt_left">총 결제금액</th>
-
 				</tr>
-
 				<tr>
-					<td
-						style="padding: 10px 20px; text-align: right; position: relative;">
-
+					<td style="padding: 10px 20px; text-align: right; position: relative;">
 
 						<table class="table_zava">
 							<tbody>
@@ -102,7 +87,6 @@
 											value="<%=resInfo.getRoom().getrPrice()%>">
 									</strong>원</td>
 								</tr>
-
 								<tr>
 									<th>인원추가금액</th>
 									<td><strong class="nanum f23 ltm1"> <input
@@ -110,7 +94,6 @@
 											value="<%=resInfo.getRoom().getrAddPrice()%>"></strong>원(추가인원
 										0명)</td>
 								</tr>
-
 							</tbody>
 						</table>
 					</td>
@@ -122,14 +105,11 @@
 							type="text" name="totalPrice" style="border: none"
 							value="<%=totalPrice%>"></strong>원</td>
 				</tr>
-
 			</tbody>
 		</table>
 
 		<p class="blk h20">&nbsp;</p>
-
 		<br> <br>
-
 		</table>
 
 		<div id="mypagetitle" text-align="center">결제방법</div>
@@ -168,7 +148,6 @@
 						</div>
 					</th>
 				</tr>
-
 			</tbody>
 		</table>
 
@@ -176,11 +155,9 @@
 		         <input type = "hidden" name ="cId" value="<%=loginClient.getcId()%>">
 
 		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
-
-	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제완료">
+     	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment" onclick="payment();" value="결제완료">
 
 	</form>
-
 </section>
 
 <script>
@@ -201,9 +178,8 @@ $(window).load(function(){
         buyer_name : '<%=resInfo.getClient().getcName()%>',
         buyer_tel : '<%=resInfo.getClient().getcPhone()%>',
         buyer_addr : '<%=resInfo.getClient().getcAddr()%>'
-        
-      
-    }, function(rsp) {
+    
+      }, function(rsp) {
         if ( rsp.success ) {
             
             jQuery.ajax({
@@ -212,7 +188,7 @@ $(window).load(function(){
                 dataType: 'json',
                 data: {
                     imp_uid : rsp.imp_uid
-                    //기타 필요한 데이터가 있으면 추가 전달
+       
                 }
             }).done(function(data) {
                 //서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
@@ -247,12 +223,8 @@ $(window).load(function(){
 
 
 
-
-
-
 </script>
     
-
 
 
 <%@ include file="/views/common/footer.jsp"%>

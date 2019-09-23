@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jb.reservation.model.vo.Reservation"%>
 <%@ include file="/views/common/header.jsp"%>
+<%@ page import="java.util.Calendar"%>
+
 
 <%
 	Reservation resInfo = (Reservation) request.getAttribute("resInfo");
@@ -9,20 +11,27 @@
 	String resPhone = (String) request.getAttribute("resPhone");
 	String resCode = (String) request.getAttribute("resCode");
  	int totalPrice = (int)request.getAttribute("totalPrice");
+ 	
+
+ 		Calendar now = Calendar.getInstance();
+ 		int nowYear = now.get(Calendar.YEAR); // 현재 년
+ 		int nowMonth = now.get(Calendar.MONTH) + 1; // 현재 월
+ 		int nowDate = now.get(Calendar.DATE); // 현재 일
+
+ 		String payDate = nowYear + "년 " + nowMonth + "월 " + nowDate + "일";
+ 
 %>
 
 <section>
-
 	<br> <br> <br> <br> <br> <br> <br> <br>
 	<br>
 	<div id="mypagetitle" style="text-align: center">카드결제가 완료되었습니다.</div>
 	<br> <br> <br> <br> <br> <br>
-	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>">
-
+<	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/payInfoInsert">
+<%-- <form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/changeResState"> --%>
 		<h3>예약펜션정보</h3>
 
 		<table class="table_final_auction">
-
 			<tbody>
 				<tr>
 					<th>펜션명</th>
@@ -71,7 +80,7 @@
 						추가인원요금 : <input type="text" name="rAddPrice" style="border: none"
 						value="<%=resInfo.getRoom().getrAddPrice()%>">원<br>
 						요금 합계 : <input type="text" name="totalPrice" style="border: none"
-						value="왜 null떠 시벌스">원
+						value="<%=totalPrice%>">원
 					</td>
 
 				</tr>
@@ -79,13 +88,14 @@
 			</tbody>
 		</table>
 
-		<h3>결제방법</h3>
+		<h3>결제정보</h3>
 
 		<table class="table_final_auction">
 
 			<tbody>
 				<tr>
 					<th>결제방법</th>
+					<th>결제날짜</th>
 				</tr>
 
 				<!-- 테이블 가로 늘리는것 -->
@@ -93,6 +103,7 @@
 
 				<tr>
 					<td rowspan="1">KakaoPay(Card)</td>
+					<td rowspan="1"><%=payDate %></td>
 				</tr>
 			</tbody>
 		</table>
@@ -111,7 +122,6 @@
 					<td class="txt_left"><input type="text" name="cName"
 						style="border: none" value="<%=resName%>"></td>
 				</tr>
-
 				<tr>
 					<th class="txt_left"><strong class="point">*연락처</strong></th>
 					<td class="txt_left"><input type="text" name="cPhone"
@@ -119,20 +129,19 @@
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
 				</tr>
-
 			</tbody>
 		</table>
-
 
 		<h1><%=resName%></h1>
 		님의
 		<p><%=resInfo.getPension().getpName()%>펜션
 		</p>
-		예약이 완료되었습니다.<br> <br> 예약해주셔서 감사합니다. 
-		
-		
-		<input type="submit" onclick="paySuccessfully" name="goMainView" value="예약목록확인">
-
+		예약이 완료되었습니다.<br> <br> 예약해주셔서 감사합니다. 	
+		<input type="hidden" name ="resCode" value="<%=resInfo.getResCode() %>">
+		<input type="hidden" name ="cId" value="<%=loginClient.getcId()%>">
+		<input type="hidden" name ="payMethod" value="kakaoPay">
+	
+		<input type="submit" name="goMainView" value="메인화면으로가기">
 	</form>
 
 </section>
@@ -140,7 +149,6 @@
 <script>
 	
 </script>
-
 
 
 

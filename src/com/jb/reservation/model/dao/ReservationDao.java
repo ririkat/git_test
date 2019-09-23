@@ -5,6 +5,7 @@ import static common.template.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -127,10 +128,10 @@ public class ReservationDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setString(1, pay.getPayCode());
-			pstmt.setDate(2,pay.getPayDate());
-			pstmt.setString(3, pay.getPayMethod());
-			pstmt.setString(4, pay.getResCode());
+		
+			pstmt.setDate(1,(Date) pay.getPayDate());
+			pstmt.setString(2, pay.getPayMethod());
+			pstmt.setString(3, pay.getResCode());
 			
 			result=pstmt.executeUpdate();
 			
@@ -142,6 +143,30 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	
+	
+	public int changeResState(Connection conn, Reservation res) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("changeResState");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, res.getResState());
+			pstmt.setString(2, res.getResCode());
+			
+			result=pstmt.executeUpdate();
+			System.out.println("dao result2 : "+result);
+			
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	finally {
+		close(pstmt);
+	}
+	return result;
+}
 	
 	public int updatePayInfo(Connection conn, Reservation res) {
 		
@@ -186,11 +211,11 @@ public class ReservationDao {
 //			pstmt.setString(1, res.getResCode());
 			pstmt.setDate(1, res.getResCheckIn());
 			pstmt.setDate(2, res.getResCheckOut());
-			pstmt.setString(3, res.getResState());
-			pstmt.setInt(4, res.getResNop());
-			pstmt.setInt(5, res.getTotalPrice());
-			pstmt.setString(6, res.getrNo());
-			pstmt.setString(7, res.getcId());
+//			pstmt.setString(3, res.getResState());
+			pstmt.setInt(3, res.getResNop());
+			pstmt.setInt(4, res.getTotalPrice());
+			pstmt.setString(5, res.getrNo());
+			pstmt.setString(6, res.getcId());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -296,6 +321,31 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	
+	public int cancleRes(Connection conn, String resCode) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("cancleRes");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, resCode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	   
