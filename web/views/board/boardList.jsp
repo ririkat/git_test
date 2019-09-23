@@ -18,6 +18,13 @@
 		<div class="col-sm-9">
 			<div>
 		<h2> 게시판 </h2>
+		<div id="search-container">
+			<form method="get" action="<%=request.getContextPath()%>/board/boardFinder">
+				<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
+				​​​​​​​<button type="submit">검색</button>
+			</form>
+		</div>
+		
         <table class="table table-striped">
             <thead>
                 <tr>

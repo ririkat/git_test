@@ -22,6 +22,13 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public List<Board> selectBoardFinder(int cPage, int numPerPage, String keyword){
+		Connection conn = getConnection();
+		List<Board> list = dao.selectBoardFinder(conn, cPage, numPerPage,keyword);
+		close(conn);
+		return list;
+	}
 
 	public List<Board> selectBoard(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
