@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginClientServlet
+ * Servlet implementation class FindPw
  */
-@WebServlet("/login")
-public class LoginClientServlet extends HttpServlet {
+@WebServlet("/FindPw")
+public class FindPw extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginClientServlet() {
+    public FindPw() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,9 @@ public class LoginClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
-
+		
+		request.getRequestDispatcher("/views/client/findPW.jsp").forward(request, response);
+		
 	}
 
 	/**

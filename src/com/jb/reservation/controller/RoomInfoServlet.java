@@ -44,7 +44,7 @@ public class RoomInfoServlet extends HttpServlet {
 		
 		request.setAttribute("room", r);
 		request.getRequestDispatcher("/views/reservation/RoomInfo.jsp").forward(request, response);
-		
+
 //		response.
 	}
 

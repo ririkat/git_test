@@ -2,7 +2,9 @@ package com.jb.reservation.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.jb.reservation.model.service.ReservationService;
 import com.jb.reservation.model.vo.Reservation;
 
-
 /**
- * Servlet implementation class RoomReservationServlet
+ * Servlet implementation class CheckInServlet
  */
-@WebServlet("/reservation")
-public class RoomReservationServlet extends HttpServlet {
+@WebServlet("/checkIncheck")
+public class CheckInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RoomReservationServlet() {
+    public CheckInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,39 +34,40 @@ public class RoomReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String resState = "N";//결제상태
-		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
-		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
 		
-		String no = request.getParameter("resNop");//인원
-		int resNop = Integer.parseInt(no);
+//		Date CheckIn = Date.valueOf(request.getParameter("checkIn"));
 		
-		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
-		String rNo = request.getParameter("rNo");//방번
-		String cId = request.getParameter("cId");//아이디
-				
-		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId,null);
+		String date = request.getParameter("checkIn");
+		Date checkIn = Date.valueOf(date);
+		System.out.println(checkIn);
+		SimpleDateFormat sp = new SimpleDateFormat("yy-MM-dd");
+		date=sp.format(checkIn);
+		System.out.println(date);
+		
+		
 		ReservationService service = new ReservationService();
-		int result = service.insertReservation(res);
-		 
-
-		System.out.println(resCheckIn);  
-		System.out.println(resCheckOut); 
+		Reservation res = service.checkIncheck(checkIn);
 		System.out.println(res);
-		System.out.println(rNo); 
+			
 		
-
-//		String msg = "";
-//		String loc = "/reservation/load";
-//		msg = result>0?"등록성공":"등록 실패";
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("loc", loc);
-//		request.getRequestDispatcher("/reservation/reservationInfoLoad").forward(request, response);	
+		String view = "";
+		
+		if(res.getResCheckIn() == null) {
+			String msg = "예약이 가능합니다";
+			request.setAttribute("msg", msg);
+			view = "/views/common/msg.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(view);
+			rd.forward(request, response);
+		}else {
+			String msg = "예약된 방 입니다.";
+			request.setAttribute("msg", msg);
+			view = "/views/common/msg.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(view);
+			rd.forward(request, response);
+		}
 		
 		
 	}
-		
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

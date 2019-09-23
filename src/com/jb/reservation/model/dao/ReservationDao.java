@@ -442,7 +442,32 @@ public class ReservationDao {
 		}
 		return result;
 	}
-	   
 	
+	
+	public Reservation checkIncheck(Connection conn, Date CheckIn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("checkIn");
+	    Reservation res = null;
+	    try {
+	    	pstmt=conn.prepareStatement(sql);
+	    	pstmt.setDate(1, CheckIn);
+	    	rs=pstmt.executeQuery();
+	    	if(rs.next()) {
+	    		res = new Reservation();
+	    		res.setResCheckIn(rs.getDate("res_checkin"));
+	    		res.setrNo(rs.getString("r_no"));
+	    	}
+	    }catch(SQLException e) {
+	    	e.printStackTrace();
+	    }finally {
+			close(rs);
+			close(pstmt);
+		}
+	return res;
 }
 		
+		
+}
+  

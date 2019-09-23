@@ -1,4 +1,4 @@
-package com.jb.client.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginClientServlet
+ * Servlet implementation class SignUpOwnerServlet
  */
-@WebServlet("/login")
-public class LoginClientServlet extends HttpServlet {
+@WebServlet("/SignUpOwner")
+public class SignUpOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginClientServlet() {
+    public SignUpOwnerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,10 @@ public class LoginClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
-
+		
+		
+		request.getRequestDispatcher("/views/owner/signUpOwner.jsp").forward(request, response);
+		
 	}
 
 	/**
