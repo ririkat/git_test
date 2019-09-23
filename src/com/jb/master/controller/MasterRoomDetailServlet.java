@@ -1,6 +1,7 @@
-package com.jb.owner.controller;
+package com.jb.master.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.pension.model.service.PensionFacilitiesService;
-import com.jb.pension.model.vo.PensionFacilities;
+import com.jb.pension.model.service.RoomFacilitiesService;
+import com.jb.pension.model.service.RoomFileService;
+import com.jb.pension.model.service.RoomService;
+import com.jb.pension.model.vo.Room;
+import com.jb.pension.model.vo.RoomFacilities;
+import com.jb.pension.model.vo.RoomFile;
 
 /**
- * Servlet implementation class OwnerModifyPensionServlet
+ * Servlet implementation class MasterRoomDetailServlet
  */
-@WebServlet("/owner/modifyPension")
-public class OwnerModifyPensionServlet extends HttpServlet {
+@WebServlet("/master/roomDetail")
+public class MasterRoomDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerModifyPensionServlet() {
+    public MasterRoomDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +35,18 @@ public class OwnerModifyPensionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//화면전환용 서블릿
 		String pCode = request.getParameter("pCode");
-		String oId = request.getParameter("oId");
-		String pName = request.getParameter("pName");
-		String pAddr = request.getParameter("pAddr");
-		PensionFacilities pfc = new PensionFacilitiesService().selectPensionFac(pCode);
+		String rNo = request.getParameter("rNo");
+		
+		Room r = new RoomService().selectRoom(rNo);
+		List<RoomFile> rFileList = new RoomFileService().curRoomFiles(rNo);
+		RoomFacilities rFac = new RoomFacilitiesService().curRoomFac(rNo);
 		
 		request.setAttribute("pCode", pCode);
-		request.setAttribute("oId", oId);
-		request.setAttribute("pName", pName);
-		request.setAttribute("pAddr", pAddr);
-		request.setAttribute("pfc", pfc);
-		request.getRequestDispatcher("/views/owner/modifyPension.jsp").forward(request, response);
+		request.setAttribute("r", r);
+		request.setAttribute("rFileList", rFileList);
+		request.setAttribute("rFac", rFac);
+		request.getRequestDispatcher("/views/master/roomDetail.jsp").forward(request, response);
 	}
 
 	/**

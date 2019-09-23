@@ -2,7 +2,9 @@ package com.jb.owner.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.jb.pension.model.service.RoomFacilitiesService;
 import com.jb.pension.model.service.RoomFileService;
 import com.jb.pension.model.service.RoomService;
+import com.jb.pension.model.vo.RoomFile;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.filerename.MyFileRenamePolicy;
@@ -94,6 +97,13 @@ public class OwnerModifyRoomEndServlet extends HttpServlet {
          }
       }
       int facRes = new RoomFacilitiesService().modifyFacilities(rNo, facCheck);
+      
+      //수정전 존재하던 파일만 받아놓기(rFiles)
+      List<RoomFile> rFileList = new RoomFileService().curRoomFiles(rNo);	//해당객실사진 전부
+      String[] rFiles = new String[rFileList.size()];	
+      for(int i=0; i<rFileList.size(); i++) {	//객실사진 파일명 전부 받아오기
+    	  rFiles[i] = rFileList.get(i).getrRenameFile();
+      }
 
       // 객실 이미지 추가
       String file = "";
@@ -101,8 +111,12 @@ public class OwnerModifyRoomEndServlet extends HttpServlet {
       String reFile = "";
       int imgRes = 0;
       Enumeration files = mr.getFileNames();
-      if(files!=null) {
-         while (files.hasMoreElements()) {
+      if(files!=null) {	//수정했으면
+//    	  for(int i=0; i<rFiles.length; i++) {
+//    		  File remove = new File(saveDir+"/"+rFiles[i]);	//변경전 원본 삭제
+//    		  remove.delete();
+//    	  }
+         while (files.hasMoreElements()) {	//사진변경
             file = (String) files.nextElement();
             oriFile = mr.getOriginalFileName(file);
             reFile = mr.getFilesystemName(file);
