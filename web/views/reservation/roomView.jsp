@@ -56,7 +56,8 @@
 				<div class="col-sm-4">
 					<div class="well">
 						<input type="hidden">
-						<h1 style="text-align: center"><%=p.getpName()%></h1>
+						<div class="tit_contents"><%=p.getpName()%></div>
+					
 						<br> 방 : <select id="selectP" onchange="ChangePrice()">
 							<%for (Room r : p.getRoomList()) { %>
 							<option value="<%=r.getrPrice()%>|<%=r.getrMaxNop()%>|<%=r.getrAddPrice()%>|<%=r.getrNo()%>"><%=r.getrName()%></option>
@@ -79,21 +80,19 @@
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
-<<<<<<< HEAD
+
 						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
-=======
+
 						
 						<%if(loginClient!=null) {%>
 						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 						<%} %>
 						
->>>>>>> refs/heads/master
+
 						<div id="rNo_" style="display: none;"></div>
-<<<<<<< HEAD
+
 						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo() %>">
-=======
-						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo()%>">
->>>>>>> refs/heads/master
+
 						
 					</div>
 					
@@ -137,7 +136,7 @@
 	<!--   펜션안내 -->
 	<div class="container text-center">
 		<div class="well">
-			<h3>펜션 정보</h3>
+			<div class="tit_contents">펜션정보</div>
 			<p>
 				펜션주소 :
 				<%=p.getpAddr()%></p>
@@ -153,7 +152,7 @@
 	<div class="container text-center">
 		<div class="well">
 
-			<h3>부대시설</h3>
+		<div class="tit_contents">부대시설</div>
 			<br>
 			<br>
 
@@ -196,7 +195,7 @@
 	<div class="container text-center">
 		<div class="well">
 			
-			<h3>객실 정보</h3><%for (int i = 0; i < p.getRoomList().size(); i++) {%>
+			<div class="tit_contents">객실정보</div><%for (int i = 0; i < p.getRoomList().size(); i++) {%>
 			<!-- 1 -->			
 			<div><h1><%=p.getRoomList().get(i).getrName()%></h1>
 					<br>
@@ -235,7 +234,7 @@
 	<hr>
 	<div class="well">
 		<div class="container text-center">
-			<h3 style="text-align: left">리뷰게시판</h3>
+			<div class="tit_contents">리뷰게시판</div>
 			<p>리뷰</p>
 			<p><p>
 		</div>

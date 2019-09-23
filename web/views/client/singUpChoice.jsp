@@ -10,7 +10,7 @@
                         <div class="col-sm-6 col-md-4 col-md-offset-4">
                             <div class="account-wall">
     
-                                    <h4 id="mypagetitle" style="text-align: center">선택하세요</h4>
+                                    <div class="tit_contents">선택하세요</div>
                                
                                 <form class="form-signin">
                                    <br><br>

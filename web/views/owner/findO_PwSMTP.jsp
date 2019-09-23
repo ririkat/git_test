@@ -14,7 +14,7 @@
 <section>
 <br><br><br><br>
 	<section id="enroll-container">
-		<div class="tit_contents">업주 비밀번호 찾기</div>
+		<div class="tit_contents">비밀번호 찾기</div>
 <br><hr><br>
 		<form name="form1" method="post" action="<%=request.getContextPath()%>/owner/updatePasswordEnd" onsubmit="return fpw_validate();">
 			<table class="updateTable">

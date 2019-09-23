@@ -12,13 +12,25 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container">
 			<div class="col-sm-9">
-				<h2>공지사항</h2>
-				<div id="search-container">
-					<form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
-						<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
-						​​​​​​​<button type="submit">검색</button>
-					</form>
-				</div>
+			<br>
+			<br>
+			
+				<div class="tit_contents">공지사항</div>
+			<br>
+			<hr>
+			
+			    
+             <br><br><br>
+               <div class="container">
+               <div class = "input-group" style="float:right;">
+                <form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
+                <input type="text"  style="width:300px;" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
+                                                       
+                    <button type="submit"  style="height:29px;" style="vertical-align:middle;"class = "btn btn-warning">검색</button>                                            
+                  </form>
+            </div>
+            <br><br><br><br><br>
+		
 				
 				<table id="tbl-notice" class="table table-striped table-hover">
 					<thead>
@@ -57,6 +69,7 @@
 						%>
 					</tbody>
 				</table>
+				</div>
 				<%
 					if (loginClient != null && loginClient.getAuthority() == 1) {
 				%>

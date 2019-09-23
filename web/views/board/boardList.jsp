@@ -17,13 +17,23 @@
 	<section>
 		<div class="col-sm-9">
 			<div>
-		<h2> 게시판 </h2>
-		<div id="search-container">
-			<form method="get" action="<%=request.getContextPath()%>/board/boardFinder">
-				<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
-				​​​​​​​<button type="submit">검색</button>
-			</form>
-		</div>
+			<br>
+			
+		<div class="tit_contents">게시판</div>
+		<br>
+		<br>
+		<br>
+		<hr>
+	
+		 <div class="container">
+               <div class = "input-group" style="float:right;">
+                <form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
+                <input type="text"  style="width:300px;" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
+                                                       
+                    <button type="submit"  style="height:29px;" style="vertical-align:middle;"class = "btn btn-warning">검색</button>                                            
+                  </form>
+            </div>
+            <br><br><br>
 		
         <table class="table table-striped">
             <thead>
@@ -63,6 +73,7 @@
             %>
             </tbody>
         </table>
+        
         <hr/>
 
         <!-- 글쓰기 버튼 좌우 정렬 pull-right / pull-left -->
@@ -75,6 +86,7 @@
                 <li><%=request.getAttribute("pageBar") %></li>
             </ul>
 		</div>
+    		</div>
     		</div>
 			    <script>
 			       	function writeBoard(){

@@ -25,7 +25,7 @@
 <section>
 	<br> <br> <br> <br> <br> <br> <br> <br>
 	<br>
-	<div id="mypagetitle" style="text-align: center">카드결제가 완료되었습니다.</div>
+	<div class="tit_contents">카드결제가 완료되었습니다.</div>
 	<br> <br> <br> <br> <br> <br>
 <	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 <%-- <form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/changeResState"> --%>

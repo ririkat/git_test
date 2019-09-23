@@ -20,7 +20,7 @@
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div id="mypagetitle" style="text-align: center">무통장입금 정보 확인</div>
+	<div class="tit_contents">무통장입금 정보 확인</div>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -28,7 +28,7 @@
 		id="reservationFrm"
 		action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 
-		예약펜션정보
+		<div class="tit_contents">예약펜션정보</div>
 
 		<table class="table_final_auction">
 			<tbody>
@@ -86,7 +86,7 @@
 			</tbody>
 		</table>
 
-		결제방법
+		<div class="tit_contents">결제방법</div>
 
 		<table class="table_final_auction">
 			<tbody>
@@ -115,7 +115,7 @@
 		</table>
 
 
-		고객정보
+		<div class="tit_contents">고객정보</div>
 		 <br>
 		<br>
 		<br>
@@ -147,7 +147,7 @@
 		</table>
 
 
-		<h1><%=resName%></h1>
+		<h4><%=resName%></h4>
 		님의
 		<p><%=resInfo.getPension().getpName()%>펜션
 		</p>
@@ -158,7 +158,7 @@
 	</form>
 
 </section>
-s
+
 <script>
 
 function paySuccessfully() {

@@ -12,7 +12,7 @@
       <section id="review-container">
          <div class="container">
          <div class="col-sm-9">
-            <h2 class="text-center">리뷰 작성</h2>
+           <div class="tit_contents">리뷰작성</div>
               <form action="<%=request.getContextPath() %>/review/reviewWriteEnd"
                method="post" enctype="multipart/form-data" onsubmit="return fnExtension();">
 

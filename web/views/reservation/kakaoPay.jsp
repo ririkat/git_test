@@ -25,7 +25,7 @@
 <section id='write-container'>
 
 	<br> <br> <br> <br>
-	<div id="mypagetitle" text-align="center">결제정보확인</div>
+	<div class="tit_contents">결제정보확인</div>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payFrm" action="<%=request.getContextPath()%>/reservation/kakaoPaySuccess">
@@ -56,7 +56,7 @@
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		<div id="mypagetitle" text-align="center">결제금액</div>
+		<div class="tit_contents">결제금액</div>
 		<br> <br>
 
 		<table class="table_final_auction" style="table-layout: fixed;">
@@ -112,7 +112,7 @@
 		<br> <br>
 		</table>
 
-		<div id="mypagetitle" text-align="center">결제방법</div>
+		<div class="tit_contents">결제금액</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 

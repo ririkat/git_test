@@ -11,7 +11,7 @@
 			<div class="row">
 				<div class="m-0">
 					<div class="account-wall" style="text-align: center">
-						<h2>자바방 업체 이용약관</h2>
+						<div class="tit_contents">이용약관</div>
 						<br>
 						
 						<table width="100%" cellpadding="4" cellspacing="0"

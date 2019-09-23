@@ -18,11 +18,69 @@ String resCode = (String)request.getAttribute("resCode");
 
 <%@ include file="/views/common/header.jsp"%>
 
+<style>
+
+
+.td_ contents_font{
+ font-family: 'BBTreeGR';
+line-height: 15px;
+font: 12px/1.25em;
+
+}
+
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.table_final_auction {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+   border-collapse: collapse;
+    background-color: #fff;
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+}
+
+
+
+.table_room2 {
+   display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+
+
+.table_room2 td {
+    border: 1px solid #d1d1d1;
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+
+
+</style>
+
 <section>
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div id="mypagetitle" style="text-align: center">예약내역확인</div>
+	<div class="tit_contents">예약내역확인</div>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -89,8 +147,6 @@ String resCode = (String)request.getAttribute("resCode");
 
 			</tbody>
 		</table>
-
-
 
 
 
@@ -315,8 +371,6 @@ String resCode = (String)request.getAttribute("resCode");
 		</table>
 
 
-		
-
 		<p class="blk h20">&nbsp;</p>
 		<br> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chk"
 			value="Y" id="check1"><label for="check1">이용시 유의사항,
@@ -329,9 +383,7 @@ String resCode = (String)request.getAttribute("resCode");
 		
 		 <input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>"> 
 		 <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> 
-		 
 	
-		  
 		  <input type="reset" onclick="" class="btn btn-warning" value="이전단계"> 
 		 <input type="submit" class="btn btn-warning" id="pay" onclick="payInfo();" value="다음단계">
 	
@@ -341,8 +393,6 @@ String resCode = (String)request.getAttribute("resCode");
 </section>
 
 <script>
-
-
 
 function payInfo() {
 

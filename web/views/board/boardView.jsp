@@ -11,7 +11,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="faq-container" class="container">
 	<div class="col-sm-9">
-		<h2>게시판</h2>
+		<div class="tit_contents">게시판</div>
 		<table id="tbl-faq" class="table table-bordered">
 			<tr>
 				<td>게시번호</td>

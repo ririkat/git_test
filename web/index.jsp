@@ -67,27 +67,25 @@
 	<div class="container-fluid text-center info">
 		<div class="container text-center">
 			<div class="row">
+			
 				<div class="col-sm-4">
-					<img class="wfullImg" src="http://placehold.it/300x150" alt="Image">
+					<img class="wfullImg" style="width:400px;" src="http://placehold.it/300x150" alt="Image">
 					<a class="nav-link" href="#">
 						<!-- <h2 class="bContent yellow">테마검색</h2> -->
 					</a>
 					<!-- <p>테마마마마</p> -->
 				</div>
+		
+			
 				<div class="col-sm-4">
-					<img class="wfullImg" src="http://placehold.it/300x150"  alt="Image">
-					<a class="nav-link" href="#">
-						<!-- <h2 class="bContent yellow">지역검색</h2> -->
-					</a>
-					<!-- <p>지역에에엥잉</p> -->
-				</div>
-				<div class="col-sm-4">
-					<img class="wfullImg" src="http://placehold.it/300x150" alt="Image">
+					<img class="wfullImg" style="width:400px;" src="http://placehold.it/300x150" alt="Image">
 					<a class="nav-link" href="#">
 						<!-- <h2 class="bContent yellow">여행지테마검색</h2> -->
 					</a>
 					<!-- <p >테마마마마마마</p> -->
 				</div>
+			
+			
 			</div>
 		</div>
 	</div>

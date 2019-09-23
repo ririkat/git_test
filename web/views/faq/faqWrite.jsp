@@ -6,7 +6,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
-				<h2 class="text-center">fAQ 작성</h2>
+			<div class="tit_contents">FAQ작성</div>
 				<form action="<%=request.getContextPath() %>/faq/faqWriteEnd"
 					method="post" enctype="multipart/form-data">
 

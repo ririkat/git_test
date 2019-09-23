@@ -6,7 +6,7 @@
 	<form action="SendMail.jsp" method="post">
 		<table>
 			<tr>
-				<th colspan="2">JSP 메일 보내기</th>
+				<th colspan="2"><div class="tit_contents">JSP메일보내기</div></th>
 			</tr>
 			<tr>
 				<td>from</td><td><input type="text" name="from"></td>

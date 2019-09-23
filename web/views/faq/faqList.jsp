@@ -11,7 +11,14 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container">
 			<div class="col-sm-9">
-				<h2>FAQ</h2>
+			    <br>
+				<br>
+				<div class="tit_contents">FAQ</div>
+				<br>
+				<br>
+				<hr>
+				<br>
+				<br><div class="container">
 				<!-- <div id="search-container">
 					<form method="get" action="<%=request.getContextPath()%>/faq/faqFinder">
 						<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
@@ -63,11 +70,14 @@
 				<%
 					}
 				%>
+				<br>
+				<br>
 				<div id="pageBar" class="text-center">
 					<ul class="pagination">
 						<li><%=pageBar%></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 
 			<script>

@@ -15,10 +15,71 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
+<style>
+
+.td_ contents_font{
+ font-family: 'BBTreeGR';
+line-height: 15px;
+font: 12px/1.25em;
+
+}
+
+
+
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+
+
+.table_final_auction {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+border-collapse: collapse;
+    background-color: #fff;
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+}
+
+
+
+.table_room2 {
+   display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+
+
+.table_room2 td {
+    border: 1px solid #d1d1d1;
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+
+
+</style>
+
 <section id='write-container'>
 
 	<br> <br> <br> <br>
-	<div id="mypagetitle" text-align="center">결제정보확인</div>
+	<div class="tit_contents">결제정보확인</div>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payMethod"
@@ -50,7 +111,7 @@
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		<div id="mypagetitle" text-align="center">결제금액</div>
+		<div class="tit_contents">결제금액</div>
 		<br> <br>
 
 		<table class="table_final_auction" style="table-layout: fixed;">
@@ -108,7 +169,7 @@
 
 		</table>
 
-		<div id="mypagetitle" text-align="center">결제방법</div>
+		<div class="tit_contents">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 

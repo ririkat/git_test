@@ -12,7 +12,7 @@
 
 
 
-                    <div class="tit_contents">업체회원 아이디찾기</div>
+                    <div class="tit_contents">아이디찾기</div>
                     <br>
                     <hr>
                     <br>

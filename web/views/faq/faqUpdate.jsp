@@ -9,7 +9,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="faq-container">
 <div class="col-sm-9">
-	<h2>FAQ 수정</h2>
+	<div class="tit_contents">FAQ수정</div>
 	<form  action="<%=request.getContextPath() %>/faq/faqUpdateEnd?faqNo=<%=f.getfNo() %>" method="post" enctype="multipart/form-data">
         <table id="tbl-board">
         <tr>

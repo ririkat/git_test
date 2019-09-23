@@ -14,7 +14,7 @@
    <br>
    <br>
    <br>
-   <h2 style="text-align: center">대기중인 예약자 목록</h2>
+  <div class="tit_contents">대기중인 예약자 목록</div>
    <br>
 
 <!--    <div class="pull-left"> -->

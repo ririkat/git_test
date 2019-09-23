@@ -1,5 +1,22 @@
 @charset "UTF-8";
 
+
+
+
+
+
+
+/*제목글씨*/
+    .mainPurpleTitle {
+
+        font-family: 'TmonMonsori' !import;
+        font-size: 27px !import;
+        color: #6a60a9 !import;
+        text-align: center !import;
+    }
+
+
+
 /* 마이페이지 제목 */
 #mypagetitle {
 	font-family: 'TmonMonsori';
@@ -60,10 +77,9 @@ table.updateTable>th, td {
 	vertical-align: center;
 }
 
-/* 회원정보수정 페이지 / 회원탈퇴 페이지 제목 */
+/*타이틀폰트*/
 .tit_contents {
 	font-family: 'TmonMonsori';
-	font-weight: bold;
 	color: #6a60a9;
 	font-size: 25px;
 	text-align: center;
@@ -207,7 +223,7 @@ label {
 }
 
 
-#navbg{
+#myNavbar{
          background-color:#6a60a9 !important;;
          
      }

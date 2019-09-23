@@ -12,7 +12,7 @@
 				<div class="container">
 					<table class="table table-bordered">
 						<thead>
-						<caption>게시글 작성</caption>
+						<div class="tit_contents">게시글작성</div>
 						</thead>
 						<tbody>
 							<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" encType="multipart/form-data"

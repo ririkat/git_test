@@ -20,7 +20,7 @@
 
 
 
-                    <div class="tit_contents">회원 비밀번호 찾기</div>
+                    <div class="tit_contents">비밀번호 찾기</div>
                     <br><hr><br>
                     <form name="form1" method="post" action="<%=request.getContextPath()%>/client/findEmail">
                         <table class="updateTable">

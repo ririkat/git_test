@@ -3,8 +3,6 @@
 <%@ page import="com.jb.client.model.vo.Client"%>
 <%
 	Client c = (Client) request.getAttribute("client");
-	
-	
 
 %>
 

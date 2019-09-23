@@ -15,7 +15,7 @@
 <div class="col-sm-10">
     <div class="mContent">
         <br><br><br>
-		<h2 class="mListTitle">신고내역</h2><br>
+		<div class="tit_contents">신고내역</div><br>
 		
         <table class="table table-hover">
             <thead>

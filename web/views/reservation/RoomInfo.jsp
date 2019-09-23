@@ -59,7 +59,7 @@
 
 
 <div class="container text-center">    
-  <h3>객실 사진</h3>
+ <div class="tit_contents">객실사진</div>
   <br>
   <div class="row">
   	<%List<RoomFile> rfList = r.getRfList();
@@ -80,7 +80,7 @@
 
 <hr>
     <div class="container text-center">
-      <h3>객실 정보</h3><br>
+      <div class="tit_contents">객실정보</div><br>
       <p><%=r.getrInfo() %></p><br>
       <p>최대인원 : <%=r.getrMaxNop()%>명</p>
       <p>평수 : <%=r.getrSize() %>평</p>
@@ -95,7 +95,7 @@
     <hr>
     <div class="container text-center">
 <%--     <%=rf!=null&&!rf.getBed().isEmpty()?"checked":"" %> --%>
-      <h3>객실 부대시설</h3><br>
+      <div class="tit_contents">객실부대시설</div><br>
       <p style="text-align: center">
       
 

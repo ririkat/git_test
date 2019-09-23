@@ -25,7 +25,8 @@
     </style>
 
    <div class="col-sm-9">
-            <h2><%=p.getpName() %>에 대한 리뷰</h2>
+     <div class="tit_contents"><%=p.getpName() %>에 대한 리뷰</div>
+          
             <div id="review-container">
 <%--                <form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder"> --%>
 <!--                   <input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/> -->
