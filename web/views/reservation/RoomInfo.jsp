@@ -99,7 +99,7 @@
       <p style="text-align: center">
       
 
-
+<br><br><br><br><br><br><br><br><br>
 	침대<input type="checkbox" disabled name="roomfac" id="fac1" value="<%=r.getRoomFac().getBed()%>"<%=rf.getBed() == "Y"?"checked":""%>>  
 	  화장대<input type="checkbox" disabled name="roomfac" id="fac2" value="<%=r.getRoomFac().getDressTable()%>"<%=rf.getDressTable() == "Y"?"checked":""%>> 
 	  테이블<input type="checkbox" disabled name="roomfac" id="fac3" value="<%=r.getRoomFac().getTable()%>"<%=rf.getTable() == "Y"?"checked":""%>> 
