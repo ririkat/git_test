@@ -1,4 +1,4 @@
-package com.jb.owner.controller;
+package com.jb.master.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.pension.model.service.PensionFacilitiesService;
-import com.jb.pension.model.vo.PensionFacilities;
+import com.jb.pension.model.service.RoomService;
 
 /**
- * Servlet implementation class OwnerModifyPensionServlet
+ * Servlet implementation class MasterOneRoomDeleteServlet
  */
-@WebServlet("/owner/modifyPension")
-public class OwnerModifyPensionServlet extends HttpServlet {
+@WebServlet("/master/oneRoomDelete")
+public class MasterOneRoomDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OwnerModifyPensionServlet() {
+    public MasterOneRoomDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +29,16 @@ public class OwnerModifyPensionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//화면전환용 서블릿
 		String pCode = request.getParameter("pCode");
-		String oId = request.getParameter("oId");
-		String pName = request.getParameter("pName");
-		String pAddr = request.getParameter("pAddr");
-		PensionFacilities pfc = new PensionFacilitiesService().selectPensionFac(pCode);
+		String rNo = request.getParameter("rNo");
 		
-		request.setAttribute("pCode", pCode);
-		request.setAttribute("oId", oId);
-		request.setAttribute("pName", pName);
-		request.setAttribute("pAddr", pAddr);
-		request.setAttribute("pfc", pfc);
-		request.getRequestDispatcher("/views/owner/modifyPension.jsp").forward(request, response);
+		int result = new RoomService().deleteOneRoom(rNo);
+		
+		String msg = result > 0 ? "삭제 완료" : "삭제 실패";
+		String loc = "/master/roomList?pensionCode="+pCode;
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
