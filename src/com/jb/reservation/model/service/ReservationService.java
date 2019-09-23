@@ -6,10 +6,9 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
-import com.jb.notice.model.vo.Notice;
-import com.jb.pension.model.vo.Pension;
 import com.jb.reservation.model.dao.ReservationDao;
 import com.jb.reservation.model.vo.Payment;
 import com.jb.reservation.model.vo.Reservation;
