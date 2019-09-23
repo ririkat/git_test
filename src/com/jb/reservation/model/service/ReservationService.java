@@ -17,6 +17,14 @@ public class ReservationService {
 	
 	private ReservationDao dao = new ReservationDao();
 	
+	public List<Reservation> selectListPage(String cId, int cPage, int numPerPage){
+		Connection conn = getConnection();
+		List<Reservation> list = dao.selectListPage(conn,cId,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	
 	public int selectReservationCount(String cId) {
 		Connection conn = getConnection();
 		int result = dao.selectReservationCount(conn,cId);
@@ -48,10 +56,10 @@ public class ReservationService {
 		return list;
 	}
 	
-	public Reservation selectOneReservation(String cId,String resCode) {
+	public Reservation selectOneReservation(String resCode, String cId) {
 		Connection conn = getConnection();
 		
-		Reservation r = dao.selectOneReservation(conn, cId,resCode);
+		Reservation r = dao.selectOneReservation(conn, resCode, cId);
 		System.out.println(r);
 		close(conn);
 		return r;

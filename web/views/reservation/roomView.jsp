@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="oracle.net.aso.r"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

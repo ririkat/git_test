@@ -33,37 +33,7 @@ public class LoginClientServlet extends HttpServlet {
 	 */
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("loginid");
-		String pw = request.getParameter("cpass");
-		
-		ClientService service = new ClientService();
-		Client c = service.selectId(id, pw);
-		System.out.println("서블릿");
-		System.out.println(c.getcId());
-		System.out.println(c.getcPw());
-		
-		
-		String view = "";
-		if(c != null) {
-		//세션 생성
-		HttpSession session = request.getSession();
-		session.setAttribute("loginClient", c);
-		session.setMaxInactiveInterval(600);
-		
-		view = "/"; // index.jsp 연결~
-		response.sendRedirect(request.getContextPath()+view);
-//		request.getRequestDispatcher("/index.jsp").forward(request, response);
-		
-		}else {
-			String msg = "아이디나 비밀번호가 일치하지 않습니다.";
-			request.setAttribute("msg", msg);
-			view = "/views/common/msg.jsp";
-			String loc = "/views/client/login.jsp";
-			request.setAttribute("loc", loc);
-			RequestDispatcher rd = request.getRequestDispatcher(view);
-			rd.forward(request, response);
-		}
-
+		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
 	}
 
 	/**

@@ -5,6 +5,8 @@
 <%@ include file="/views/common/header.jsp"%>
 <%
 	List<Reservation> list = (List) request.getAttribute("list");
+	List<Reservation> resList = (List) request.getAttribute("resList");
+	int cPage = (int)request.getAttribute("cPage");
 
  		Calendar now = Calendar.getInstance();
  		int nowYear = now.get(Calendar.YEAR); // 현재 년
@@ -114,7 +116,7 @@ th, td {
 <!-- 			예약한펜션리스트  -->
 
 			<%
- 				if (list == null || list.size() <= 0) {
+ 				if (resList == null || resList.size() <= 0) {
  			%>
 
 			<h1>예약한 펜션이 없습니다.</h1>
@@ -157,8 +159,8 @@ th, td {
 					<tbody>
 
 						<%
- 							for (int i = 0; i < list.size(); i++) {
- 									Reservation res = list.get(i);
+ 							for (int i = 0; i < resList.size(); i++) {
+ 									Reservation res = resList.get(i);
 						%>
 						<input id="resCode" type="hidden" name="resCode" value="<%=res.getResCode() %>">
 
@@ -209,7 +211,12 @@ th, td {
 			<% 
  				}
  			%>
-		
+		<!-- 페이지바 -->
+        		<div class="text-center">
+                  <ul class="pagination">
+                     <li><%=request.getAttribute("pageBar") %></li>
+                  </ul>
+               </div>
  		</section>
 
 
