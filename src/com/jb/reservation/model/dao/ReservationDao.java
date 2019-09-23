@@ -526,8 +526,6 @@ public class ReservationDao {
 	}
 
 		
-		
-
 
 	public int acceptResList(Connection conn, String accList) {
 		Statement stmt=null;

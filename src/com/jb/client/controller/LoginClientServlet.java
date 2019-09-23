@@ -33,7 +33,9 @@ public class LoginClientServlet extends HttpServlet {
 	 */
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
+
 	}
 
 	/**

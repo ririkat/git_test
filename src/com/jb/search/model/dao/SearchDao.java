@@ -46,26 +46,32 @@ public class SearchDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Pension p=new Pension();
-				p.setpCode(rs.getString("p_code"));
-				p.setpName(rs.getString("p_name"));
-				p.setpAddr(rs.getString("p_addr"));
-				p.setpTel(rs.getString("p_tel"));
-				p.setoId(rs.getString("o_id"));
-				p.setEnrollYn(rs.getString("enrollyn"));
-				p.setpBlcount(rs.getInt("p_blcount"));
-				p.setpEnrollDate(rs.getDate("p_enrolldate"));
-				
-				p.setPenFac(new PensionFacilities(rs.getString("p_code"),rs.getString("store"),rs.getString("wifi")
-						,rs.getString("pet"),rs.getString("pool"),rs.getString("s_Pool")
-						,rs.getString("slide"),rs.getString("open_Bath"),rs.getString("grill")
-						,rs.getString("smoked"),rs.getString("cafe"),rs.getString("sing")
-						,rs.getString("foot"),rs.getString("hand"),rs.getString("car")));
-				
-				
-				p.setPenFile(new SearchDao().loadPenFile(conn,rs.getString("p_code")));
-				p.setRoomList(new SearchDao().loadRoom(conn, rs.getString("p_code")));
-				
-				list.add(p);
+				int result=0;
+				List<Room> rl = new SearchDao().loadRoom(conn, rs.getString("p_code"));
+				for(int i=0; i<rl.size(); i++) {
+						result++;
+				}
+				if(result>0) {
+						p.setpCode(rs.getString("p_code"));
+						p.setpName(rs.getString("p_name"));
+						p.setpAddr(rs.getString("p_addr"));
+						p.setpTel(rs.getString("p_tel"));
+						p.setoId(rs.getString("o_id"));
+						p.setEnrollYn(rs.getString("enrollyn"));
+						p.setpBlcount(rs.getInt("p_blcount"));
+						p.setpEnrollDate(rs.getDate("p_enrolldate"));
+						
+						p.setPenFac(new PensionFacilities(rs.getString("p_code"),rs.getString("store"),rs.getString("wifi")
+								,rs.getString("pet"),rs.getString("pool"),rs.getString("s_Pool")
+								,rs.getString("slide"),rs.getString("open_Bath"),rs.getString("grill")
+								,rs.getString("smoked"),rs.getString("cafe"),rs.getString("sing")
+								,rs.getString("foot"),rs.getString("hand"),rs.getString("car")));
+						
+						
+						p.setPenFile(new SearchDao().loadPenFile(conn,rs.getString("p_code")));
+						p.setRoomList(rl);
+						list.add(p);
+				}
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -142,13 +148,54 @@ public class SearchDao {
 		}return list;
 	}
 	
+	public List<Room> loadRoom(Connection conn, String pCode,Date from,Date to){
+		Statement stmt=null;
+		ResultSet rs=null;
+		List<Room> list = new ArrayList<Room>();
+//		select r.* from pension p join room r on p.p_code=r.p_code join room_fac rf on r.r_no=rf.r_no where p.p_code='p1011' and r.r_no not in (select r_no from reservation where res_checkIn<='19/08/21' or res_checkOut>='19/09/06');
+//		--reservation이 있는 룸을 찾고
+		String sql="select r.*,rf.* from pension p join room r on p.p_code=r.p_code join room_fac rf on r.r_no=rf.r_no where p.p_code='"+pCode+"' and r.r_no not in (select r_no from reservation where (res_checkIn<='"+from+"' and res_checkOut<='"+to+"' and res_checkOut>='"+from+"') or (res_checkIn>='"+from+"' and res_checkIn<='"+to+"' and res_checkOut>='"+to+"') or (res_checkIn<='"+from+"' and res_checkOut>='"+to+"'))";
+
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				Room r=new Room();
+				r.setrNo(rs.getString("r_no"));
+				r.setrName(rs.getString("r_name"));
+				r.setrPrice(rs.getInt("r_price"));
+				r.setrNop(rs.getInt("r_nop"));
+				r.setrMaxNop(rs.getInt("r_maxnop"));
+				r.setrSize(rs.getString("r_size"));
+				r.setpCode(rs.getString("p_code"));
+				r.setrStruc(rs.getString("r_struc"));
+				r.setrInfo(rs.getString("r_info"));
+				r.setrAddPrice(rs.getInt("r_addprice"));
+				
+
+				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
+						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
+						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
+						,rs.getString("fridge"),rs.getString("cook_Fac"),rs.getString("cook_Uten"),rs.getString("rice")
+						,rs.getString("microwave"),rs.getString("r_Smoked"),rs.getString("child"),rs.getString("o_View"),rs.getString("i_Pool")));
+				
+				list.add(r);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}return list;
+	}
+	
 	public List<Room> loadRoom(Connection conn, String pCode,String[] rFac,Date from,Date to){
 		Statement stmt=null;
 		ResultSet rs=null;
 		List<Room> list = new ArrayList<Room>();
 //		select r.* from pension p join room r on p.p_code=r.p_code join room_fac rf on r.r_no=rf.r_no where p.p_code='p1011' and r.r_no not in (select r_no from reservation where res_checkIn<='19/08/21' or res_checkOut>='19/09/06');
 //		--reservation이 있는 룸을 찾고
-		String sql="select r.*,rf.* from pension p join room r on p.p_code=r.p_code join room_fac rf on r.r_no=rf.r_no where p.p_code='"+pCode+"' and r.r_no not in (select r_no from reservation where res_checkIn<='"+from+"' or res_checkOut>='"+to+"')";
+		String sql="select r.*,rf.* from pension p join room r on p.p_code=r.p_code join room_fac rf on r.r_no=rf.r_no where p.p_code='"+pCode+"' and r.r_no not in (select r_no from reservation where (res_checkIn<='"+from+"' and res_checkOut<='"+to+"' and res_checkOut>='"+from+"') or (res_checkIn>='"+from+"' and res_checkIn<='"+to+"' and res_checkOut>='"+to+"') or (res_checkIn<='"+from+"' and res_checkOut>='"+to+"'))";
 		for(int i=0; i<rFac.length; i++) {
 			if(!rFac[i].equals("not")) {
 				sql+=" and rf."+rFac[i]+"='Y'";
@@ -243,7 +290,7 @@ public class SearchDao {
 		return list;
 	}
 
-	public Pension selectDetail(Connection conn, String pCode) {
+	public Pension selectDetail(Connection conn, String pCode,Date from,Date to) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
