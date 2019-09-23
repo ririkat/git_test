@@ -3,7 +3,6 @@
 <%@ page import="com.jb.client.model.vo.Client, com.jb.review.model.vo.Review" %>
 <%
    Review r = (Review) request.getAttribute("review");
-   Client c = (Client) request.getAttribute("client");
    String pCode = (String) request.getAttribute("pCode");
 %>
 

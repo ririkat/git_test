@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jb.client.model.vo.Client" %>
 <%
-   Client c = (Client) request.getAttribute("client");
    String pCode = (String) request.getAttribute("pCode");
    System.out.println(pCode);
 %>

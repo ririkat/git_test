@@ -39,20 +39,20 @@ public class ReservationService {
 		return list;
 	}
 
-//	// 오버로딩
-//	public List<Reservation> loadReservationList2() {
-//		Connection conn = getConnection();
-//		List<Reservation> list = dao.loadReservationList2(conn);
-//
-//		System.out.println("service에서 list: " + list);
-//		close(conn);
-//		return list;
-//	}
+	// 오버로딩
+	public List<Reservation> loadReservationList2() {
+		Connection conn = getConnection();
+		List<Reservation> list = dao.loadReservationList2(conn);
 
-	public Reservation selectOneReservation(String cId, String resCode) {
+		System.out.println("service에서 list: " + list);
+		close(conn);
+		return list;
+	}
+
+	public Reservation selectOneReservation(String resCode,String cId ) {
 		Connection conn = getConnection();
 
-		Reservation r = dao.selectOneReservation(conn, cId, resCode);
+		Reservation r = dao.selectOneReservation(conn,resCode, cId);
 		System.out.println(r);
 		close(conn);
 		return r;
@@ -71,19 +71,6 @@ public class ReservationService {
 		return result;
 	}
 
-	public int updatePayInfo(Reservation res) {
-
-		Connection conn = getConnection();
-		int result = dao.updatePayInfo(conn, res);
-		if (result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-
-	}
 
 	// 예약데이터 인설트
 	public int insertReservation(Reservation res) {
@@ -102,14 +89,14 @@ public class ReservationService {
 
 
 
-//	public Reservation checkIncheck(Date CheckIn) {
-//
-//		Connection conn = getConnection();
-//		Reservation res = dao.checkIncheck(conn, CheckIn);
-//		close(conn);
-//		return res;
-//
-//	}
+	public Reservation checkIncheck(Date CheckIn) {
+
+		Connection conn = getConnection();
+		Reservation res = dao.checkIncheck(conn, CheckIn);
+		close(conn);
+		return res;
+
+	}
 	
 	public int changeResState(Reservation res) {
 		
@@ -128,32 +115,32 @@ public class ReservationService {
 	}
 
 
-//	// 승인대기 예약자들 선택
-//	public int acceptResList(String accList) {
-//		Connection conn = getConnection();
-//		int result = dao.acceptResList(conn, accList);
-//		if (result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		return result;
-//	}
-//
-//	// 승인대기 예약자 삭제
-//	public int deleteResList(String delList) {
-//		Connection conn = getConnection();
-//		int result = dao.deleteResList(conn, delList);
-//		if(result>0) {
-//			commit(conn);
-//		}else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		return result;
-//	}
-//	
+	// 승인대기 예약자들 선택
+	public int acceptResList(String accList) {
+		Connection conn = getConnection();
+		int result = dao.acceptResList(conn, accList);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	// 승인대기 예약자 삭제
+	public int deleteResList(String delList) {
+		Connection conn = getConnection();
+		int result = dao.deleteResList(conn, delList);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 
 	public int cancleRes(String resCode) {

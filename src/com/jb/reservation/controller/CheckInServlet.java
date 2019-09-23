@@ -2,6 +2,7 @@ package com.jb.reservation.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -34,16 +35,18 @@ public class CheckInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-//		Date CheckIn = Date.valueOf(request.getParameter("checkIn"));
-		
 		String date = request.getParameter("checkIn");
-		Date checkIn = Date.valueOf(date);
-		System.out.println(checkIn);
-		SimpleDateFormat sp = new SimpleDateFormat("yy-MM-dd");
-		date=sp.format(checkIn);
-		System.out.println(date);
 		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date utilDate = new java.util.Date();
+		try {
+			utilDate = transFormat.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
+		Date checkIn = sqlDate;
 		
 		ReservationService service = new ReservationService();
 		Reservation res = service.checkIncheck(checkIn);
