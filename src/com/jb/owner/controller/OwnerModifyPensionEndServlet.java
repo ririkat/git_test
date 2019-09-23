@@ -83,13 +83,17 @@ public class OwnerModifyPensionEndServlet extends HttpServlet {
 		int facRes = new PensionFacilitiesService().modifyFacilities(pCode,facCheck);
 		
 		//이미지 테이블 수정
-		int imgRes = new PensionFileService().modifyImages(pCode,oriFile,reFile);
+		int imgRes=0;
+		if(oriFile!=null && reFile!=null) {
+			imgRes = new PensionFileService().modifyImages(pCode,oriFile,reFile);			
+		}
+		String imgSrc = new PensionFileService().selectImages(pCode).getpRenameFile();
 		
 		String msg = "";
 		String loc = "";
-		if(penRes>0 && facRes>0 && imgRes>0) {
+		if(penRes>0 && facRes>0 && imgRes>=0) {
 			msg = "펜션 수정 완료";
-			loc = "/owner/pensionDetail?pensionCode="+pCode+"&imgSrc="+reFile;
+			loc = "/owner/pensionDetail?pensionCode="+pCode+"&imgSrc="+imgSrc;
 		} else {
 			File remove = new File(saveDir+"/"+reFile);
 			remove.delete();
