@@ -57,11 +57,10 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
 
 <!-- 	테스트 링크 -->
 	 <a href="<%=request.getContextPath()%>/search/load" class="text-center new-account">테스트테스트</a>
-	
+
 	<br>
 	<br>
 	<div class="container-fluid text-center info">
@@ -133,7 +132,6 @@
 			<br>
 			<br>
 			<br>
-
 			<div class="carousel-inner">
 				<h1 class="thNavy">이벤트</h1>
 				<img src="http://placehold.it/800x300" style="width: 100%" alt="Image">
@@ -143,5 +141,16 @@
 			<br>
 		</div>
 </section>
-
+<script>
+// 	$(document).ready(function(){              신고당한 유저 알람해줄 코드,, 완성 못함 by ogc
+<%-- 		console.log(<%=loginClient%>); --%>
+<%-- 		if(<%=loginClient==null%>){ --%>
+// 			alert("로그인 안되어있음");
+// 	//			break;
+<%-- 		}else if(<%=loginClient!=null&&loginClient.getAuthority()==0&&loginClient.getcBLCount()>0&&loginClient.getReadstatus().equals("N")%>){ --%>
+// 			alert("회원님이 작성하신 게시글에 대한 신고가 접수되었습니다. 이메일을 확인하세요");
+<%-- 		location.href="<%=request.getContextPath() %>/report/reportSMTP?cId=<%=loginClient.getcId()%>"; --%>
+// 		}
+// 	});
+</script>
 <%@ include file="/views/common/footer.jsp"%>

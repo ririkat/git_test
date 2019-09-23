@@ -50,67 +50,18 @@
 					<%} %>
 				</table>
 
-				<div id="comment-container">
-					<div id="comment-editor">
-						<form action="<%=request.getContextPath()%>/notice/noticeCommentInsert" method="post">
-							<input type="hidden" name="noticeRef" value="<%=n.getnNo()%>"/>
-							<input type="hidden" name="noticeCommentWriter" value="<%=loginClient!=null?loginClient.getcId():""%>"/>
-							<input type="hidden" name="noticeCommentLevel" value="1"/>
-							<input type="hidden" name="noticeCommentRef" value="0"/>
-							<textarea name="noticeCommentContent" cols="60" rows="3"></textarea>
-							<button type="submit" id="btn-insert">등록</button>
-						</form>
-					</div>
-				</div>
 
-				<table id="tbl-comment">
-					<%
-						if(list!=null&&!list.isEmpty()){
-							for(NoticeComment nc : list){
-								if(nc.getnCommentLevel()==1){
-					%>
-						<tr class="level1">
-							<td>
-								<sub class="comment-writer"><%=nc.getnCommentWriter()%></sub>
-								<sub class="comment-date"><%=nc.getnCommentDate()%></sub><br/>
-								<%=nc.getnCommentContent()%>
-							</td>
-							<td>
-									<button class="btn-reply" value="<%=nc.getnCommentNo()%>">답글</button>
-									<%
-										if(loginClient.getAuthority()==1||nc.getnCommentWriter().equals(loginClient.getcId())){
-									%>
-									<button class="btn-delete" value="<%=nc.getnCommentNo()%>">삭제</button>
-									<%
-										}
-									%>
-							</td>
-						</tr>
-						<%
-						}else{
-						%>
-						<tr class="level2">
-							<td>
-								<sub><%=nc.getnCommentWriter()%></sub>
-								<sub><%=nc.getnCommentDate()%></sub><br/>
-								<%=nc.getnCommentContent()%>
-							</td>
-						</tr>
-						<%
-						}
-						}
-					}
-					%>
-				</table>
 			</div>
 			<script>
 				//게시글 버튼 이벤트
 				//게시글 수정
 				function notice_modify(){
+					if(confirm("게시물을 수정하시겠습니까?"))
 					location.href="<%=request.getContextPath()%>/notice/noticeUpdate?noticeNo=<%=n.getnNo()%>";
 				}
 				//게시글 삭제
 				function notice_delete(){
+					if(confirm("정말로 게시물을 삭제하시겠습니까?"))
 					location.href="<%=request.getContextPath()%>/notice/noticeDelete?noticeNo=<%=n.getnNo()%>";
 				}
 				

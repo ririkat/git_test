@@ -1,28 +1,23 @@
 package com.jb.client.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.jb.client.model.vo.WishList;
 
 /**
- * Servlet implementation class wishListDeleteServlet
+ * Servlet implementation class FindPw
  */
-@WebServlet("/client/wishListDelete")
-public class wishListDeleteServlet extends HttpServlet {
+@WebServlet("/FindPw")
+public class FindPw extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public wishListDeleteServlet() {
+    public FindPw() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,33 +27,9 @@ public class wishListDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
-		
-		if(session==null) {
-			return;
-		}
-		
-		ArrayList<WishList> wishList = (ArrayList<WishList>)session.getAttribute("wishList");
-		
-		if(wishList==null) {
-			
-			return;
-		}
-		
-		//해당 클라이언트의 모든 섹션 삭제
-		
-//	     session.invalidate();
-		
-		
-		//상품목록 세션삭제
-		session.removeAttribute("wishList");
-		
-		
-			
+		request.getRequestDispatcher("/views/client/findPW.jsp").forward(request, response);
 		
 	}
-		
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

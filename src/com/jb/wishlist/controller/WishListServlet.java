@@ -1,17 +1,17 @@
-package com.jb.client.controller;
+package com.jb.wishlist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.jb.client.model.vo.WishList;
+import com.jb.wishlist.model.service.WishListService;
+import com.jb.wishlist.model.vo.WishList;
 
 /**
  * Servlet implementation class WishListServlet
@@ -32,47 +32,53 @@ public class WishListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//찜하기 누르면 여기로 넘겨달라고 말하기 (to 장덕철) !!
+		String pImage = request.getParameter("pImage");
+		String pName = request.getParameter("pName");
+		String pAddr = request.getParameter("pAddr");
+		String pTel = request.getParameter("pTel");
+		String pCode = request.getParameter("pCode");
+		String cid=request.getParameter("cid");
 		
-		//세션으로 만들기 
-   
-		HttpSession session = request.getSession();
+		WishList w=new WishList(pCode, pAddr, pImage, pName, pTel, cid);
+		WishListService service = new WishListService();
+		int result = service.insertWishList(w);
 		
-		 ArrayList<WishList> wishList = null; // 찜목록을 담는 list
-	        if (session.getAttribute("wishList") == null) { // 비어있으면 새 것으로 초기화를 해준다.
-	        	wishList = new ArrayList<WishList>();
-	        } else {
-	        	wishList = (ArrayList<WishList>) session.getAttribute("wishList"); // 비어있지 않으면 지금까지를 데이터 배열(List)을 담는다.
-	        }
+		List<WishList> list=new ArrayList<WishList>();
+		
+		String msg = "";
+		String loc = "";
+		
+		if(result>0) {
+			request.setAttribute("list", list);
+			loc="/views/client/wishList.jsp";
+			request.getRequestDispatcher(loc).forward(request, response);
+		}else {
+			msg="찜 실패, 관리자에게 문의하세요.";
+			loc="/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}		
+		
+		
+		
+//        request.getRequestDispatcher("/views/wishList.jsp").forward(request, response);
 
-			String pImage = request.getParameter("pImage");
-			String pName = request.getParameter("pName");
-			String pAddr = request.getParameter("pAddr");
-			String pTel = request.getParameter("pTel");
-			String pCode = request.getParameter("pCode");
-
-			WishList wish = new WishList(); // 하나의 데이터 객체를 생성한다. (하나의 주문 의미)
-			
-			//객체에 값을 넣음
-			
-			wish.setpCode("pCode");
-			wish.setpAddr("pAddr");
-			wish.setpImage("pImage");
-			wish.setpName("pName");
-			wish.setpTel("pTel");
-			
-			
-			wishList.add(wish);
-
-	        session.setAttribute("wishList", wishList); 
-	        request.getRequestDispatcher("/views/wishList.jsp").forward(request, response);
-	        // WishListServlet에서 wishList.jsp를 보여준다.
 	        
-		
-		
-		
-		
+	        
+	        
+	        
+	        
+	        //세션으로 만들기 
+//	        HttpSession session = request.getSession();
+//	        if (session.getAttribute("wishList") == null) { // 비어있으면 새 것으로 초기화를 해준다.
+//	        	wishList = new ArrayList<WishList>();
+//	        } else {
+//	        	wishList = (ArrayList<WishList>) session.getAttribute("wishList"); // 비어있지 않으면 지금까지를 데이터 배열(List)을 담는다.
+//	        }
+//	        session.setAttribute("wishList", wishList); 
+	        // WishListServlet에서 wishList.jsp를 보여준다.
 		//쿠키로 만들기 
 		
 //		String pImage = request.getParameter("pImage");

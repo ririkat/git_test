@@ -54,6 +54,10 @@
 							<input type="button" onClick="openDaumZipAddress();" value="주소찾기" />
 							<br/>
 							<input type="text" id="address" name="address" value="" style="width:240px" readonly/>
+							<!-- 위도,경도 저장 input 태그 -->
+							<input type="hidden" name="y" id="result1"/>
+							<input type="hidden" name="x" id="result2"/>
+							<!--  -->
 							<input type="text" id="address_etc" name="address_etc" value="" style="width:200px" placeholder="상세주소"/>
 							<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 							<script>
@@ -65,6 +69,7 @@
 											jQuery("#postcode2").val(data.postcode2);
 											jQuery("#zonecode").val(data.zonecode);
 											jQuery("#address").val(data.address);
+											jQuery("#address").keyup();
 											jQuery("#address_etc").focus();
 											console.log(data);
 										}
@@ -140,7 +145,8 @@
 	</section>
 </div>
 
-
+<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e76ecfc05b559e02f313c77eb525f67&libraries=services"></script>
 <script>
 	function enroll_validate(){
 		//펜션이름 빈칸
@@ -175,6 +181,40 @@
 			return false;
 		}
 	}
+	
+	
+	
+	//주소 -> 위도,경도 변환하기
+	var geocoder = new kakao.maps.services.Geocoder();
+	$('#address').keyup(function() {
+		var addr = $('#address').val().trim();
+		var re = geocoder.addressSearch(addr,
+				function(result, status) {
+					// 정상적으로 검색이 완료됐으면 
+					if (status === kakao.maps.services.Status.OK) {
+						var y=result[0].y;
+						var x=result[0].x;
+						
+						$("#result1").val(y);
+						$("#result2").val(x);
+					}
+		});
+    });
+
+	// 마커 이미지의 이미지 주소입니다
+	function insert_validate(){
+			var addr = $('#address').val().trim();
+			if(addr==""){
+				alert("주소 입력된거 없음");
+				return false;
+			}
+		  
+			
+			if($("#result1").val()==""||$("#result2").val()==""){
+				alert('위도,경도 아직 검색 안됨 ㅠㅠ');
+				return false;
+			}
+	}   
 </script>
 
 

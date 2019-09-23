@@ -1,20 +1,29 @@
-package com.jb.client.model.vo;
+package com.jb.wishlist.model.vo;
 
 public class WishList {
 	
-	private String pImage, pName, pAddr, pTel, pCode ;
+	private String pImage, pName, pAddr, pTel, pCode, cId ;
 	
 	public WishList() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WishList(String pImage, String pName, String pAddr, String pTel, String pCode) {
+	public WishList(String pImage, String pName, String pAddr, String pTel, String pCode, String cId) {
 		super();
 		this.pImage = pImage;
 		this.pName = pName;
 		this.pAddr = pAddr;
 		this.pTel = pTel;
 		this.pCode = pCode;
+		this.cId=cId;
+	}
+
+	public String getcId() {
+		return cId;
+	}
+
+	public void setcId(String cId) {
+		this.cId = cId;
 	}
 
 	public String getpImage() {
@@ -60,18 +69,9 @@ public class WishList {
 	@Override
 	public String toString() {
 		return "WishList [pImage=" + pImage + ", pName=" + pName + ", pAddr=" + pAddr + ", pTel=" + pTel + ", pCode="
-				+ pCode + "]";
+				+ pCode + ", cId=" + cId + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

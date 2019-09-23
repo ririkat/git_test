@@ -36,11 +36,14 @@ public class RoomReservationServlet extends HttpServlet {
 		//값 받아오기
 		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
 		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
+
 		String resState = "N";//결제상태
 		int resNop = Integer.parseInt(request.getParameter("resNop"));//인원
+
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
 		String rNo = request.getParameter("rNo");//방번
 		String cId = request.getParameter("cId");//아이디
+
 
 		//객체 생성
 //		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
@@ -62,7 +65,24 @@ public class RoomReservationServlet extends HttpServlet {
 		request.setAttribute("resInfo", resInfo);
 		request.setAttribute("resCode", resCode);
 		request.getRequestDispatcher("/views/reservation/payInfoView.jsp").forward(request, response);
+				
+		ReservationService service = new ReservationService();
+		int result = service.insertReservation(res);
 
+		System.out.println(resCheckIn);  
+		System.out.println(resCheckOut); 
+		System.out.println(res);
+		System.out.println(rNo); 
+		
+
+//		String msg = "";
+//		String loc = "/reservation/load";
+//		msg = result>0?"등록성공":"등록 실패";
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("loc", loc);
+//		request.getRequestDispatcher("/reservation/reservationInfoLoad").forward(request, response);	
+		
+		
 	}
 		
 
