@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.client.model.vo.Client;
+import com.jb.wishlist.model.vo.WishList;
 
 public class ClientDao {
 
@@ -30,6 +31,7 @@ public class ClientDao {
 	}
 	
 	public Client selectId(Connection conn, String id, String pw) {
+
 	      System.out.println("dao!!");
 	      System.out.println(id+pw);
 	      PreparedStatement pstmt = null;
@@ -60,6 +62,7 @@ public class ClientDao {
 	         } finally {
 	            close(rs);
 	            close(pstmt);
+
 	         }
 	         return c;
 	   }
@@ -455,6 +458,7 @@ public class ClientDao {
 					c.setcAddr(rs.getString("c_addr"));
 					c.setcEd(rs.getDate("c_ed"));
 					c.setcBLCount(rs.getInt("c_blcount"));
+					c.setReadstatus(rs.getString("readstatus"));
 				}
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -513,4 +517,6 @@ public class ClientDao {
 			}
 			return result;
 		}
+
+		
 }

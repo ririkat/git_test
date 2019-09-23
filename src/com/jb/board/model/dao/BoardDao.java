@@ -49,6 +49,43 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+	
+	//게시글 검색
+	public List<Board> selectBoardFinder(Connection conn ,int cPage,int numPerPage, String keyword) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Board> list = new ArrayList();
+		int start = (cPage-1)*numPerPage+1;
+		int end = cPage*numPerPage;
+		String sql = "select * from("
+				+"select rownum as rnum, a.* from("
+				+"select * from community where title"
+				+" like '%"+keyword+"%' order by ent_date desc)a) "
+				+"where rnum between "+start+" and "+end;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				Board b = new Board();
+				b.setCmmNo(rs.getInt("cmm_no"));
+				b.setcId(rs.getString("c_id"));
+				b.setTitle(rs.getString("title"));
+				b.setEntDate(rs.getDate("ent_date"));
+				b.setContent(rs.getString("content"));
+				b.setCategory(rs.getString("category"));
+				b.setOriginalFilename(rs.getString("original_filename"));
+				b.setRenameFilename(rs.getString("rename_filename"));
+				b.setCommuCnt(rs.getInt("commu_cnt"));
+				b.setViewCnt(rs.getInt("view_cnt"));
+				list.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}return list;
+	}
 
 	public List<Board> selectBoard(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;

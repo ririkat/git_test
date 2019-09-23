@@ -78,14 +78,14 @@ public class ClientReviewListServlet extends HttpServlet {
       if(pageNo==1) {
          pageBar+="<span>&lt</span>";
       }else {
-         pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo-1)+"'>&lt</a>";
+         pageBar+="<a href='"+request.getContextPath()+"/review/clientReviewList?pensionCode="+pCode+"&cPage="+(pageNo-1)+"'>&lt</a>";
       }
       
       while(!(pageNo>pageEnd||pageNo>totalPage)) {
          if(pageNo==cPage) {
             pageBar+="<span>"+pageNo+"</span>";
          }else {
-            pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
+            pageBar+="<a href='"+request.getContextPath()+"/review/clientReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>"+(pageNo)+"</a>";
          }
          pageNo++;
       }
@@ -93,7 +93,7 @@ public class ClientReviewListServlet extends HttpServlet {
       if(pageNo>totalPage) {
          pageBar+="<span>&gt</span>";
       }else {
-         pageBar+="<a href='"+request.getContextPath()+"/review/ownerReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>&gt</a>";
+         pageBar+="<a href='"+request.getContextPath()+"/review/clientReviewList?pensionCode="+pCode+"&cPage="+(pageNo)+"'>&gt</a>";
       }
       
       request.setAttribute("pageBar", pageBar);

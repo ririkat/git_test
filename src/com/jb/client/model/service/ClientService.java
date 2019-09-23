@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.jb.client.model.dao.ClientDao;
 import com.jb.client.model.vo.Client;
+import com.jb.wishlist.model.vo.WishList;
 
 public class ClientService {
 
@@ -173,6 +174,5 @@ public class ClientService {
 		close(conn);
 		return result;
 	}
-
 
 }
