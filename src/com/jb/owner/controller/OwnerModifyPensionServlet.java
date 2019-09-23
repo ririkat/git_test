@@ -1,11 +1,15 @@
 package com.jb.owner.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.jb.pension.model.service.PensionFacilitiesService;
+import com.jb.pension.model.vo.PensionFacilities;
 
 /**
  * Servlet implementation class OwnerModifyPensionServlet
@@ -31,11 +35,13 @@ public class OwnerModifyPensionServlet extends HttpServlet {
 		String oId = request.getParameter("oId");
 		String pName = request.getParameter("pName");
 		String pAddr = request.getParameter("pAddr");
+		PensionFacilities pfc = new PensionFacilitiesService().selectPensionFac(pCode);
 		
 		request.setAttribute("pCode", pCode);
 		request.setAttribute("oId", oId);
 		request.setAttribute("pName", pName);
 		request.setAttribute("pAddr", pAddr);
+		request.setAttribute("pfc", pfc);
 		request.getRequestDispatcher("/views/owner/modifyPension.jsp").forward(request, response);
 	}
 

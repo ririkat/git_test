@@ -163,10 +163,31 @@ th, td {
 						<input id="resCode" type="hidden" name="resCode" value="<%=res.getResCode() %>">
 
 						<tr>
+
 							<td><%=res.getResCode() %></td>
 							<td><%=res.getPension().getpName()%></td>
 							<td><%=res.getRoom().getrName()%></td>
-							<td><%=res.getResNop()%></td>
+						<td></td>
+						
+							<td><a href="<%=request.getContextPath()%>/client/pensionDetail?pensionCode=<%=res.getPension().getpCode()%>"><%=res.getPension().getpName() %></a>
+								<%-- <div class="">
+
+<!-- 						<form name="pension-jjim-match-Frm" method="post"> -->
+<!-- 							<input type="hidden" id="" name="pCode" -->
+<%-- 								value="<%=r.getpCode()%>" /> --%>
+<!-- 						</form> -->
+<%-- 						<tr>
+							<td></td>
+							<td>
+								<div class="">
+
+									<a href=""><img
+										src="<%=request.getContextPath()%>/images/펜션사진.jpg"
+										width="80px" height="80px" class="img-thumbnail" /></a>
+								</div> --%>
+							</td>
+							<td><%=res.getRoom().getrName() %></td>
+                         <td><%=res.getResNop()%></td>
 							<td>체크인 : <%=res.getResCheckIn()%><br> 체크아웃 : <%=res.getResCheckOut()%></td>
 							
 

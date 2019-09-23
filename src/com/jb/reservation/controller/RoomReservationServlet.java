@@ -28,6 +28,7 @@ public class RoomReservationServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+<<<<<<< HEAD
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
@@ -65,13 +66,54 @@ public class RoomReservationServlet extends HttpServlet {
     	  msg = "등록 실패";
     	  loc = "/";
       }
+=======
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String resState = "N";//결제상태
+		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
+		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
+		
+		String no = request.getParameter("resNop");//인원
+		int resNop = Integer.parseInt(no);
+		
+		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
+		String rNo = request.getParameter("rNo");//방번
+		String cId = request.getParameter("cId");//아이디
+				
+		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId,null);
+		ReservationService service = new ReservationService();
+		int result = service.insertReservation(res);
+		 
+>>>>>>> refs/heads/master
 
+<<<<<<< HEAD
       request.setAttribute("msg", msg);
       request.setAttribute("loc", loc);
       request.getRequestDispatcher("/reservation/reservationInfoLoad").forward(request, response);   
  
    }
       
+=======
+		System.out.println(resCheckIn);  
+		System.out.println(resCheckOut); 
+		System.out.println(res);
+		System.out.println(rNo); 
+		
+
+//		String msg = "";
+//		String loc = "/reservation/load";
+//		msg = result>0?"등록성공":"등록 실패";
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("loc", loc);
+//		request.getRequestDispatcher("/reservation/reservationInfoLoad").forward(request, response);	
+		
+		
+	}
+		
+>>>>>>> refs/heads/master
 
 
    /**

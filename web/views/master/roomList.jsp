@@ -16,8 +16,9 @@
 %>
 
    <div class="col-md-10 album py-5 bg-light">
+   	<div class="mContent">
        <div class="row">
-          <h1 style="text-align:center"><%=p.getpName() %></h1>
+          <div class="tit_contents"><%=p.getpName() %></div>
          <div class="col-lg-6 col-md-6">
             <p>
                <img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=pImg.getpRenameFile()%>" alt="펜션사진" style="width:500px; height:300px;">
@@ -39,7 +40,7 @@
        <hr>
        <br>
        
-       <h1 style="text-align:center">객실</h1>
+       <div class="tit_contents">객실</div>
        <div class="row">
           <% if(rooms!=null && !rooms.isEmpty()) {
             for(Room r : rooms) { %>
@@ -67,11 +68,15 @@
                         R_NOP : <%=r.getrNop() %> <br>
                      </p>
                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="moveJsp();">View</button>
+                         <script>
+							function moveJsp(){
+								location.href="<%=request.getContextPath()%>/master/roomDetail?pCode=<%=p.getpCode()%>&rNo=<%=r.getrNo()%>";
+							}
+						 </script>
                      </div>
                   </div>
                <br><br>
-            <!-- </div> -->
             </div>
          <%
             }
@@ -84,8 +89,7 @@
             <li><%=request.getAttribute("pageBar") %></li>
          </ul>
       </div>
-
    </div>
-  
-
+</div>
+   
 <%@ include file="/views/common/footer.jsp"%>

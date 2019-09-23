@@ -12,29 +12,33 @@
    String pFac = (String)request.getAttribute("pFac");
 %>
 
-<div class="col-md-10 album py-5 bg-light">
-   <div class="row">
-       <h1 style="text-align:center"><%=p.getpName() %></h1>
-      <div class="col-lg-6 col-md-6">
-         <p>
-            <img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=pImg.getpRenameFile()%>" alt="펜션사진" style="width:500px; height:300px;">
-         </p>
-      </div>
-      <div class="col-lg-6 col-md-6">
-         <h6><br></h6>
-         <h4>펜션코드 : <%=p.getpCode() %></h4>
-         <h4>업주 아이디 : <%=p.getoId() %></h4>
-         <h4>주소 : <%=p.getpAddr()%></h4>
-         <h4>전화번호 : <%=p.getpTel()%></h4>
-         <h4>영업시작일 : <%=p.getpEnrollDate()%></h4>
-         <h4>블랙카운트 : <%=p.getpBlcount()%></h4>
-         <h4>부대시설 : <%=pFac %></h4>
-         <br>
-         <button id="acceptBtn" class="btn" onclick="acceptBtn();">승인(추가)</button>
-         <button id="deleteBtn" class="btn" onclick="deleteBtn();">반려(삭제)</button>
-      </div>
+<div class="col-md-10">
+   <div class="mContent">
+		<br><br><br>
+		<div class="tit_contents"><%=p.getpName() %></div>
+		<br><br><br>
+		
+		<div class="row">
+	      <div class="col-lg-6 col-md-6">
+	         <p>
+	            <img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=pImg.getpRenameFile()%>" alt="펜션사진" style="width:500px; height:300px;">
+	         </p>
+	      </div>
+	      <div class="col-lg-6 col-md-6">
+	         <h6><br></h6>
+	         <h4>펜션코드 : <%=p.getpCode() %></h4>
+	         <h4>업주 아이디 : <%=p.getoId() %></h4>
+	         <h4>주소 : <%=p.getpAddr()%></h4>
+	         <h4>전화번호 : <%=p.getpTel()%></h4>
+	         <h4>승인신청일 : <%=p.getpEnrollDate()%></h4>
+	         <h4>블랙카운트 : <%=p.getpBlcount()%></h4>
+	         <h4>부대시설 : <%=pFac %></h4>
+	         <br>
+	         <button id="acceptBtn" class="btn" onclick="acceptBtn();">승인(추가)</button>
+	         <button id="deleteBtn" class="btn" onclick="deleteBtn();">반려(삭제)</button>
+	      </div>
+	   </div>
    </div>
-
 </div>
 
 <script>
