@@ -1,4 +1,4 @@
-package com.jb.client.controller;
+package com.jb.wishlist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jb.client.model.vo.WishList;
+import com.jb.wishlist.model.vo.WishList;
 
 /**
  * Servlet implementation class wishListDeleteServlet
  */
 @WebServlet("/client/wishListDelete")
-public class wishListDeleteServlet extends HttpServlet {
+public class WishListDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public wishListDeleteServlet() {
+    public WishListDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

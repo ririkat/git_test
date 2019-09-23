@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner" %>
+<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner, com.jb.report.model.vo.Report" %>
 <% 
 	Client loginClient = (Client)session.getAttribute("loginClient"); 
 	Owner loginOwner = (Owner)session.getAttribute("loginOwner");
@@ -186,6 +186,7 @@
 						<%}%>
 						<%if(loginClient!=null&&loginOwner==null){//1.회원로그인 된 경우
 							if(loginClient.getAuthority()==1 ) { %><!-- 회원 중 관리자로 로그인 된 경우 -->
+
 								<li>
 									<a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴</a>
 								</li>
@@ -210,9 +211,12 @@
 			</div>
 		</nav>
 		<script>
-			$('#btn-srch').click(function(){
+// 			$('#btn-srch').click(function(){
 				
-			})
+// 			})
+			
+			
+		
 		</script>
 	</header>
 	<!-- 헤더 끝 -->
