@@ -155,6 +155,7 @@
 		         <input type = "hidden" name ="cId" value="<%=loginClient.getcId()%>">
 
 		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
+
      	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment" onclick="payment();" value="결제완료">
 
 	</form>
@@ -212,7 +213,7 @@ $(window).load(function(){
         } else {
             msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
-            //실패시 이동할 페이지
+            /* //실패시 이동할 페이지 */
 <%--             location.href="<%=request.getContextPath()%>/order/payFail"; --%>
             alert(msg);
         }
