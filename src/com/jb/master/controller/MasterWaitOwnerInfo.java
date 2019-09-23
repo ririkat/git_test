@@ -16,7 +16,7 @@ import com.jb.owner.model.vo.Owner;
  */
 @WebServlet("/master/waitOwnerInfo")
 public class MasterWaitOwnerInfo extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,24 +26,24 @@ public class MasterWaitOwnerInfo extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("oId");
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String id = request.getParameter("oId");
 
-		Owner o = new OwnerService().selectOwnerOne(id);
-		
-		request.setAttribute("owner", o);
-		request.getRequestDispatcher("/views/master/waitOwnerInfo.jsp").forward(request, response);
-	}
+      Owner o = new OwnerService().selectOwnerOne(id);
+      
+      request.setAttribute("owner", o);
+      request.getRequestDispatcher("/views/master/waitOwnerInfo.jsp").forward(request, response);
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
