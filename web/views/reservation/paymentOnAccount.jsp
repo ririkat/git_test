@@ -20,7 +20,7 @@
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div id="mypagetitle" style="text-align: center">무통장입금 정보 확인</div>
+	<div id="mypagetitle" style="text-align: center">계좌이체 정보 확인</div>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -30,7 +30,7 @@
 
 		예약펜션정보
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>펜션명</th>
@@ -88,7 +88,7 @@
 
 		결제방법
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>결제방법</th>
@@ -102,7 +102,7 @@
 
 				<tr>
 				<input type="hidden" name ="payMethod" value="account">
-					<td rowspan="1">무통장입금</td>
+					<td rowspan="1">계좌이체</td>
 					<td rowspan="1">KH은행 1004-1004-1004<br> ( 예금주 : 서현희)
 					</td>
 
@@ -125,7 +125,7 @@
 		<br>
 		<br>
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -152,20 +152,16 @@
 		<p><%=resInfo.getPension().getpName()%>펜션
 		</p>
 		예약이 완료되었습니다.<br> <span style="color: #FF8F00;"> 예약확정은 입금
-			확인 후 진행됩니다.</span><br> 예약해주셔서 감사합니다. <input type="submit"
-			onclick="paySuccessfully" name="goMainView" value="예약목록확인">
+			확인 후 진행됩니다.</span><br> 예약해주셔서 감사합니다.
+			<input type="hidden" name ="resCode" value="<%=resInfo.getResCode() %>">
+		<input type="hidden" name ="cId" value="<%=loginClient.getcId()%>">
+		<input type="hidden" name ="payMethod" value="kakaoPay">
+	
+			<input type="submit" name="goMainView" value="예약목록확인">
 
 	</form>
 
 </section>
-s
-<script>
-
-function paySuccessfully() {
-		
-	location.href="<%=request.getContextPath()%>/reservation/payInfoInsert?resCode=<%=resInfo.getResCode()%>";
-	}
-</script>
 
 
 

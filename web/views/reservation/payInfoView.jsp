@@ -25,7 +25,7 @@
 		action="<%=request.getContextPath()%>/reservation/selectPayMethod">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -53,7 +53,7 @@
 		<div id="mypagetitle" text-align="center">결제금액</div>
 		<br> <br>
 
-		<table class="table_final_auction" style="table-layout: fixed;">
+		<table border="1" class="table_final_auction" style="table-layout: fixed;">
 			<colgroup>
 				<col width="25%">
 				<col width="25%">
@@ -106,13 +106,12 @@
 
 		<br> <br>
 
-		</table>
 
 		<div id="mypagetitle" text-align="center">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 
-		<table width="100%" class="table_pay_type">
+		<table border="1" width="100%" class="table_pay_type">
 			<colgroup>
 				<col width="100">
 				<col width="440">
@@ -120,11 +119,14 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="3"><span style="margin-right: 30px;"> <input
-							type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
-					</span> <span style="margin-right: 30px;"> <input type="radio"
-							name="pay" id="payCard" value="kakaoPay">카카오페이결제
-					</span></th>
+					<th colspan="3">
+						<span style="margin-right: 30px;">
+							<input type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
+						</span>
+						<span style="margin-right: 30px;">
+							<input type="radio"	name="pay" id="payCard" value="kakaoPay">카카오페이결제
+						</span>
+					</th>
 				</tr>
 			</thead>
 
@@ -132,7 +134,7 @@
 				<tr>
 					<th>입금자명</th>
 					<td><input type="text" name="accountName"
-						style="width: 100px;" value=""> <span class="cff">(입금하실
+						style="width: 100px;" value="<%=resInfo.getClient().getcName()%>"> <span class="cff">(입금하실
 							때 반드시 입금자명으로 입금 해 주세요)</span></td>
 					<th rowspan="3">무통장입금 안내(꼭 기억해주세요)
 						<p class="blk h05">&nbsp;</p>
@@ -151,10 +153,8 @@
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 		<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 
-		<input type="button" class="btn btn-warning" onclick="preview();"
-			value="이전으로"> <input type="submit" name="payment_btn"
-			class="btn btn-warning" id="payment" onclick=""
-			value="결제하기">
+		<input type="button" class="btn btn-warning" onclick="preview();" value="이전으로">
+		<input type="submit" name="payment_btn"	class="btn btn-warning" id="payment" value="결제하기">
 
 	</form>
 
@@ -164,17 +164,14 @@
 
 /*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
  
-      $(document).ready(function () {
-          $("#payCard").click(function () {
-              if ($("#payCard").prop("checked", true)) {
-
-                  $("#accountInfo").hide();
-               } else {
-
-                   $("#accountInfo").show();
-               
-          }
-
+		$(document).ready(function () {
+             if ($("#payCard").prop("checked", true)) {
+				$("#accountInfo").hide();
+               }
+              else {
+				$("#accountInfo").show();
+			}
+		}
 /* 이전으로 버튼 */
 
 // function preview(){
