@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner" %>
+<%@ page import ="com.jb.client.model.vo.Client,com.jb.owner.model.vo.Owner, com.jb.report.model.vo.Report" %>
 <% 
 	Client loginClient = (Client)session.getAttribute("loginClient"); 
 	Owner loginOwner = (Owner)session.getAttribute("loginOwner");
@@ -190,6 +190,7 @@
 								<a class="aa" href="<%=request.getContextPath()%>/master/pensionList">관리자메뉴</a>
 							</li>
 						<%}%>
+							<input type="hidden" id="loginClientId" value="<%=loginClient.getcId()%>"/>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">마이페이지</a></li>
 	                        <li><a class="aa" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 						<%}%>
@@ -206,9 +207,12 @@
 			</div>
 		</nav>
 		<script>
-			$('#btn-srch').click(function(){
+// 			$('#btn-srch').click(function(){
 				
-			})
+// 			})
+			
+			
+		
 		</script>
 	</header>
 	<!-- 헤더 끝 -->

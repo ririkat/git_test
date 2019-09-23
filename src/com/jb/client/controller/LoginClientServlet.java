@@ -45,7 +45,6 @@ public class LoginClientServlet extends HttpServlet {
 		session.setAttribute("loginClient", c);
 		session.setMaxInactiveInterval(600);
 		
-		
 		view = "/"; // index.jsp 연결~
 		response.sendRedirect(request.getContextPath()+view);
 //		request.getRequestDispatcher("/index.jsp").forward(request, response);
