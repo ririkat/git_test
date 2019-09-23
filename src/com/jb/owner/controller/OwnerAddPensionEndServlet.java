@@ -61,6 +61,8 @@ public class OwnerAddPensionEndServlet extends HttpServlet {
 		String addr = mr.getParameter("address")+" "+mr.getParameter("address_etc");
 		String tel = mr.getParameter("tel1")+mr.getParameter("tel2")+mr.getParameter("tel3");
 		String[] facilities = mr.getParameterValues("facilities");
+		double loc_y=Double.parseDouble(mr.getParameter("y"));
+		double loc_x=Double.parseDouble(mr.getParameter("x"));
 		
 		// 파일명 가져오기 !
 		String oriFile = mr.getOriginalFileName("panorama");	//실제 올린 파일명
@@ -72,7 +74,7 @@ public class OwnerAddPensionEndServlet extends HttpServlet {
 		}
 		
 		//펜션 DB에 추가	//변수 currval은 펜션코드
-		int currval = new PensionService().addPension(pName,addr,tel,oId);
+		int currval = new PensionService().addPension(pName,addr,tel,oId,loc_y,loc_x);
 		
 		//부대시설 DB에 추가
 		String[] facCheck = {"N","N","N","N","N","N","N","N","N","N","N","N","N","N"};

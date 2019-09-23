@@ -36,7 +36,6 @@ public class SearchDetailViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pCode=request.getParameter("pCode");
-		
 		Pension p = new SearchService().selectDetail(pCode);
 		
 		request.setAttribute("pension", p);
