@@ -33,10 +33,10 @@ public class SearchService {
 		return list;
 	}
 
-	public Pension selectDetail(String pCode) {
+	public Pension selectDetail(String pCode,Date from, Date to) {
 		Connection conn=getConnection();
-		Pension p=dao.selectDetail(conn,pCode);
-		System.out.println("서비스에서 받아오는지 : " + pCode);
+		Pension p=dao.selectDetail(conn,pCode,from,to);
+		System.out.println("서비스에서 받아오는지 : " + p);
 		close(conn);
 		return p;
 	}
