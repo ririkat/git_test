@@ -7,7 +7,6 @@
 <%@ page import="com.jb.pension.model.vo.Room"%>
 <%@ page import="java.util.List"%>
 
-
 <%
      Reservation resInfo=(Reservation)request.getAttribute("resInfo");
      int totalPrice = (int)request.getAttribute("totalPrice");
@@ -15,7 +14,6 @@
  %>
 
 <%@ include file="/views/common/header.jsp"%>
-
 
 <section id='write-container'>
 
@@ -47,7 +45,6 @@
 						placeholder="01012345678로 입력"> <span
 						style="color: #FF8F00;">* 예약관련 정보가 문자메세지로 전송됩니다.</span></td>
 				</tr>
-
 			</tbody>
 		</table>
 
@@ -57,14 +54,12 @@
 		<br> <br>
 
 		<table class="table_final_auction" style="table-layout: fixed;">
-
 			<colgroup>
 				<col width="25%">
 				<col width="25%">
 				<col width="25%">
 				<col width="25%">
 			</colgroup>
-
 			<tbody>
 				<tr>
 					<th>
@@ -73,13 +68,10 @@
 						</div>
 					</th>
 					<th class="txt_left">총 결제금액</th>
-
 				</tr>
 				<tr>
-					<td
-						style="padding: 10px 20px; text-align: right; position: relative;">
-
-
+					<td style="padding: 10px 20px; text-align: right; position: relative;">
+						
 						<table class="table_zava">
 							<tbody>
 								<tr>
@@ -192,8 +184,6 @@
 // } 
  
  
-
-
 
 </script>
 

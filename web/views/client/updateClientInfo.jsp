@@ -7,7 +7,6 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <%
-
 Client c=(Client)request.getAttribute("client");
 
 Date form = new Date();
@@ -20,7 +19,6 @@ String cBirthDD=str.substring(8, 10);
 %>
 
 <section>
-
    <div class="container-fluid">
       <div class="row content">
          <div class="col-sm-3 sidenav">
@@ -28,26 +26,18 @@ String cBirthDD=str.substring(8, 10);
             <h4 id="mypagetitle">
                <a href="mypage.html" >&nbsp;&nbsp;마이페이지</a>
             </h4>
-
             <div id="mypageList">
-
                <ul class="nav nav-pills nav-stacked">
                   <br>
-            
                         <li><a href="<%=request.getContextPath()%>/client/reservationList?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/deleteLoad?cId=<%=loginClient.getcId()%>">회원탈퇴</a></li>
-                        
-                        
-               </ul>
+                </ul>
                <br>
             </div>
-
-         </div>
-
-
+            </div>
 
          <!-- 회원정보 수정 form -->
          <br>
@@ -55,16 +45,11 @@ String cBirthDD=str.substring(8, 10);
          <br>
          <br>
 
-
          <section id="enroll-container">
-
-
-
             <div class="tit_contents">회원정보수정</div>
             <br>
             <hr>
             <br>
-
             <form id="clientFrm" method="post" onsubmit="return update_validate();">
                <table class="updateTable">
                   <colgroup>
@@ -80,9 +65,7 @@ String cBirthDD=str.substring(8, 10);
                   <tr>
                      <th class="point"><strong class="point">*</strong>아이디</th>
                      <td><input type="hidden" value="<%=c.getcId()%>" name="cId" id="cId" readonly><%=c.getcId()%>
-                  
-                           
-                     </td>
+                  </td>
                   </tr>
              <tr>
                              <th class="point"><strong class="point">*</strong>생년월일</th>
@@ -90,14 +73,9 @@ String cBirthDD=str.substring(8, 10);
                               <input value="<%=cBirthYY %>" check-join-date input-number type="number" name="cBirthYY" id="cBirthYY" min="1900" max="2005" maxlength="4" >년                            
                               <input value="<%=cBirthMM %>" check-join-date input-number type="number" name="cBirthMM" id="cBirthMM" min="01" max="12" maxlength="2" >월                            
                               <input value="<%=cBirthDD %>" check-join-date input-number type="number" name="cBirthDD" id="cBirthDD" min="01" max="31" maxlength="2"  >일                           
-                            
-                            
-                            
-                                      
-                            </td>
+                             </td>
                          </tr>
-                           
-                     <tr>
+                        <tr>
                         <th class="point"><strong class="point">*</strong>성별</th>
                         <td>
                       <%if("M"==c.getcGender()){ %>
@@ -117,8 +95,7 @@ String cBirthDD=str.substring(8, 10);
                        <%} %>
                    </td>
                      </tr>
-               
-               <tr>
+                <tr>
                   <th class="point"><strong class="point">*</strong>이메일</th>
                   <td>
                   <input type="text" name="cEmailId"
@@ -147,26 +124,20 @@ String cBirthDD=str.substring(8, 10);
                   </select>
                   </td>
                </tr>
-               
-                  
-
-             <tr>
+                    <tr>
                   <th class="point"><strong class="point">*</strong>휴대폰번호</th>
                  <td>
                    <input type="tel" placeholder="(-없이)01012345678" name="cPhone" id="cPhone" 
                    onkeyup="onlynumber();" value='<%=c.getcPhone()%>'>
-                   
-                   <br/>
+                    <br/>
                   
                          </td>
                </tr>
 
-               
                    <tr>
                         <th class="point">지역</th>
                         <td>
-                      <%--<input type="text" name="cAddr" id="cAddr" value="<%=loginClient.getcAddr()%>" required> --%>
-                     <%System.out.println("테스트: "+ c.getcAddr().substring(c.getcAddr().indexOf("^")+1 ,c.getcAddr().indexOf("|")) ); %>
+                      <%System.out.println("테스트: "+ c.getcAddr().substring(c.getcAddr().indexOf("^")+1 ,c.getcAddr().indexOf("|")) ); %>
                      <input id="zonecode" name="zonecode" type="text" value="<%=c.getcAddr().substring(c.getcAddr().indexOf("우")+2, c.getcAddr().indexOf("|"))%>" style="width:70px;" readonly/>
                      &nbsp;
                      <input type="button"  onclick="openDaumZipAddress();" class="btn btn-warning" value = "주소 찾기" />
@@ -175,12 +146,7 @@ String cBirthDD=str.substring(8, 10);
                      <input type="text" placeholder="상세주소입력"  name="address_etc" id="address_etc" value="<%=c.getcAddr().substring(c.getcAddr().lastIndexOf("|")+1)%>" style="width:200px;"/>
                         </td>
                      </tr>
-                     
-                     
-                     
-                     
-                     
-                      <tr>
+                                   <tr>
                                     <th class="point"><strong class="point">*</strong>이메일 수신여부</th>
                                     <td>
                                         <input type="radio" name="email_auth" value="Y">예 &nbsp;
@@ -195,9 +161,7 @@ String cBirthDD=str.substring(8, 10);
                                         <span class="cdf">* 수신여부에 상관없이 예약관련 문자는 발송됩니다*</span>
                                     </td>
                                 </tr>
-
-
-                  </tbody>
+                         </tbody>
                </table>
 
          
@@ -205,10 +169,7 @@ String cBirthDD=str.substring(8, 10);
    <input type="hidden" name="cId" value='<%=(String)request.getAttribute("cId")%>'/>
             </form>
             
-            
-            
-
-   
+         
    
             <br>
             <br>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="oracle.net.aso.r"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -80,17 +81,13 @@
 						<input type="hidden" name="resNop" id="m_p">
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
-<<<<<<< HEAD
-						<%-- <input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>"> --%>
-						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
-=======
+						
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
 						
 						<%if(loginClient!=null) {%>
 						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 						<%} %>
 						
->>>>>>> refs/remotes/origin/master
 						<div id="rNo_" style="display: none;"></div>
 						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo()%>">
 						
@@ -409,5 +406,3 @@
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>
-
-

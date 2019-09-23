@@ -10,10 +10,9 @@
 
 <%
 Reservation resInfo=(Reservation)request.getAttribute("resInfo");
-
-/* int totalPrice = (int)request.getAttribute("totalPrice"); */
-
-   
+String cId = (String)request.getAttribute("cId");
+String resCode = (String)request.getAttribute("resCode");
+ 
 %>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -53,20 +52,14 @@ Reservation resInfo=(Reservation)request.getAttribute("resInfo");
 					<input type="text" name="pName" style="border:none" value="<%=resInfo.getPension().getpName()%>"><br>
 					(<input type="text" name="pAddr" style="border:none" value="<%=resInfo.getPension().getpAddr()%>">)
 					</td>
-					 
 				
-
 					<!--객실명 td-->
 					<td rowspan="1"><input type="text" name="rName"  style="border:none" value="<%=resInfo.getRoom().getrName()%>"></td>
-					
-
-
+				
 					<!--기준/최대 인원수 td-->
 					<td rowspan="1"><input type="text" name="rNop" style="border:none" value="<%=resInfo.getRoom().getrNop()%>">/
 					<input type="text" name="rMaxNop" style="border:none" value="<%=resInfo.getRoom().getrMaxNop()%>"></td>
 					
-					
-
 
 					<!--이용일 td-->
 					<td style="color: #FF9C00; font-weight: bold;">
@@ -75,17 +68,14 @@ Reservation resInfo=(Reservation)request.getAttribute("resInfo");
 					<br><input type="text" name="resCheckOut" style="border:none" value="<%=resInfo.getResCheckOut()%>">까지
 					</td>
 
-
 					<!--인원수 td-->
 					<td><input type="text" name="rNop" style="border:none"  value="<%=resInfo.getResNop()%>">
 					<br>추가인원수 :  <input type="text" name="rAddNop" style="border:none" value="추가인원몇명"></td>
-					
 				
-				
-					<!--요금합계 td-->ㄴ
+					<!--요금합계 td-->
 					<td>객실요금: <input type="text" name="rPrice" style="border:none"  value="<%=resInfo.getRoom().getrPrice()%>">원<br> 
 					   추가인원요금 : <input type="text" name="rAddPrice" style="border:none" value="<%=resInfo.getRoom().getrAddPrice()%>">원<br>
-					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="아직못받아옴나중에쓰기">원
+					   요금 합계 : <input type="text" name="totalPrice" style="border:none"  value="<%=resInfo.getRoom().getrPrice()+resInfo.getRoom().getrAddPrice()%>">원
 					   
 					  
 			    
