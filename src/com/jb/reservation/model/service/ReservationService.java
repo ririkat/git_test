@@ -115,6 +115,19 @@ public class ReservationService {
 		return result;
 	}
 	
+	//승인대기 예약자 삭제
+	public int deleteResList(String delList) {
+		Connection conn = getConnection();
+		int result = dao.deleteResList(conn, delList);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 	
 

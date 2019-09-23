@@ -138,7 +138,7 @@
                var td = tr.children();
                               
                // td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-               var oId = td.eq(1).children().text().trim();
+               var oId = td.eq(6).text().trim();
                               
                // 가져온 값을 배열에 담는다.
                tdArr.push(oId);
@@ -146,7 +146,7 @@
                
             });
             //삭제할 업주들을 서블릿으로 보내기
-            location.href="<%=request.getContextPath()%>/master/waitOwnerDelete?delOwnerList="+tdArr;
+            location.href="<%=request.getContextPath()%>/owner/waitResDelete?delResList="+tdArr;
          }
       }
    });

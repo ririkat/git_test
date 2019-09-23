@@ -201,6 +201,38 @@ public class ReservationDao {
 		}
 		return list;
 	}
+	
+	//예약자 승인대기 삭제
+	public int deleteResList(Connection conn,String delList) {
+		Statement stmt=null;
+		int result= 0;
+		String sql = "delete from reservation where c_id in (";
+		String[] arrDelList = delList.split(",");
+		for(int i=0; i<arrDelList.length; i++) {
+			arrDelList[i] = "'"+arrDelList[i]+"'";
+		}
+		if(arrDelList.length<2) {
+			sql += arrDelList[0]+")";
+		}
+		else {
+			sql += arrDelList[0];
+			for(int i=1; i<arrDelList.length; i++) {
+				sql += ","+arrDelList[i];
+			}
+			sql += ")";
+		}
+		
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
 
 
 	
