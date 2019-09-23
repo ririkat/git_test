@@ -1,25 +1,27 @@
-package com.jb.client.controller;
+package com.jb.owner.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.client.model.service.ClientService;
+import com.jb.owner.model.vo.Owner;
+import com.jb.reservation.model.service.ReservationService;
 
 /**
- * Servlet implementation class updatePasswordEndServlet
+ * Servlet implementation class WaitResClientAccept
  */
-@WebServlet(name="UpdatePwClient", urlPatterns="/client/updatePasswordEnd")
-public class updatePasswordEndServlet extends HttpServlet {
+@WebServlet("/owner/waitResClientAccept")
+public class WaitResClientAccept extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updatePasswordEndServlet() {
+    public WaitResClientAccept() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,22 +30,22 @@ public class updatePasswordEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("cId");
-//		String pw = request.getParameter("cPw");
-		String pwNew  = request.getParameter("cPw");
-		System.out.println("id: "+id+"// pw: "+pwNew);
-	
-		int result = new ClientService().updatePassword(id,pwNew);
-		
-		String msg ="";
-		String loc="/";  //updatePassword(로그인한 상태)와 pw찾기(로그인 안한상태) 두곳에서 updatePasswordEnd 서블릿 호출하므로 loc 메인화면으로 변경
-		
-		switch(result) {
-			case 0 : msg="비밀번호 변경 실패. 다시 시도해주세요.";break;
-			case -1 : msg="현재 비밀번호와 다른 비밀번호를 입력하셨습니다.";break;
-			default : msg="비밀번호  변경 완료"; break;
+		Owner loginOwner = (Owner) request.getSession().getAttribute("loginOwner");
+		if (loginOwner==null) {
+			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
 		}
 		
+		//승인(추가)할 예약자들 아이디 받아오기
+		String accList = request.getParameter("accResList");
+		System.out.println("!+!+"+accList);
+		
+		int result = new ReservationService().acceptResList(accList);
+		
+		String msg = result>0?"예약자 승인 완료":"예약자 승인 실패";
+		String loc = "/owner/resWaitClientList";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

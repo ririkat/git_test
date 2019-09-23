@@ -15,7 +15,7 @@
          <div class="col-sm-9">
             <h2 class="text-center">리뷰 작성</h2>
               <form action="<%=request.getContextPath() %>/review/reviewWriteEnd"
-               method="post" enctype="multipart/form-data">
+               method="post" enctype="multipart/form-data" onsubmit="return fnExtension();">
 
                <table id="tbl-review" class="table table-bordered">
                   <tr>
@@ -29,7 +29,7 @@
                   <tr>
                      <th>첨부파일</th>
                      <td>
-                        <input type="button" id="addFile" value="파일 추가" class="form-control" style="width:100px;">
+                        <input type="button" id="addFile" value="파일 추가" class="form-control" onclick="" style="width:100px;">
                         <input type="file" name="upFile1" id="upFile" >
                      </td>
                   </tr>
@@ -39,7 +39,7 @@
                   </tr>
                   <tr>
                      <td colspan="2" style="text-align: center">
-                     <input type="submit" value="등록" class="btn my-btn" onclick="">
+                     <input type="submit" value="등록" class="btn my-btn">
                      <input type="reset" value="취소" class="btn my-btn" onclick="history.back();"></td>
                   </tr>
                </table>
@@ -56,9 +56,24 @@
          $("#addFile").click(function(){
             var input = $('<input>').attr({"type":"file","name":"upFile"+cnt,"id":"upFile"});
             $("#addFile").parent().append(input);
+            console.log("발발발"+$("#upFile").val());
             console.log(cnt);
             cnt++;
          })
+         
+         
+         
+         //파일 업로드 확장자 제한
+         function fnExtension(){
+        	 var file = $("#upFile").val();
+        	 
+        	 var fileExt = file.substring(file.lastIndexOf('.')+1);
+        	 console.log("파일확장자:"+fileExt);
+        	 if(!(fileExt.toUpperCase()=="JPG"||fileExt.toUpperCase()=="JPEG" || fileExt.toUpperCase()=="PNG" || fileExt.toUpperCase()=="GIF")){
+               alert(fileExt+" 확장자 업로드 불가!");
+               return false;		//preventDefault()로도 가능
+            }
+         }
       </script>
       
 <%@ include file="/views/common/footer.jsp"%>

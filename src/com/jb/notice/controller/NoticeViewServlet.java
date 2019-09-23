@@ -62,9 +62,9 @@ public class NoticeViewServlet extends HttpServlet {
 			response.addCookie(noticeCookie);
 		}
 		Notice n=new NoticeService().selectNoticeOne(no,hasRead);
-		List<NoticeComment> list = new NoticeService().selectNoticeComment(no);
+//		List<NoticeComment> list = new NoticeService().selectNoticeComment(no);
 		
-		request.setAttribute("list", list);
+//		request.setAttribute("list", list);
 		request.setAttribute("notice", n);
 		request.getRequestDispatcher("/views/notice/noticeView.jsp").forward(request, response);
 	}
