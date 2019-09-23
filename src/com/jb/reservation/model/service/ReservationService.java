@@ -40,9 +40,9 @@ public class ReservationService {
 	}
 	
 	//오버로딩 
-	public List<Reservation> loadReservationList(){
+	public List<Reservation> loadReservationList2(){
 		Connection conn = getConnection();
-		List<Reservation> list=dao.loadReservationList(conn);
+		List<Reservation> list=dao.loadReservationList2(conn);
 		
 		System.out.println("service에서 list: "+list);
 		close(conn);

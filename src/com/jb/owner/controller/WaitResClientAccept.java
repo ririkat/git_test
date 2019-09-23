@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.owner.model.service.OwnerService;
 import com.jb.owner.model.vo.Owner;
+import com.jb.reservation.model.service.ReservationService;
 
 /**
  * Servlet implementation class WaitResClientAccept
@@ -40,9 +40,9 @@ public class WaitResClientAccept extends HttpServlet {
 		
 		//승인(추가)할 예약자들 아이디 받아오기
 		String accList = request.getParameter("accResList");
-		System.out.println(accList);
+		System.out.println("!+!+"+accList);
 		
-		int result = new OwnerService().acceptOwnerList(accList);
+		int result = new ReservationService().acceptResList(accList);
 		
 		String msg = result>0?"예약자 승인 완료":"예약자 승인 실패";
 		String loc = "/owner/resWaitClientList";

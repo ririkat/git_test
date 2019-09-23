@@ -1,4 +1,4 @@
-package com.jb.reservation.model.dao;
+	package com.jb.reservation.model.dao;
 
 import static common.template.JDBCTemplate.close;
 
@@ -53,12 +53,12 @@ public class ReservationDao {
 		return result;
 	}
 	
-	//Res_state=='N'인것
+	//
 	public int selectReservationCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = prop.getProperty("selectReservationCount2");
+		String sql = prop.getProperty("selectReservationCount");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -135,24 +135,23 @@ public class ReservationDao {
 	}
 	
 	//오버로딩 장원
-	public List<Reservation> loadReservationList(Connection conn) {
-		PreparedStatement pstmt = null;
+	public List<Reservation> loadReservationList2(Connection conn) {
+//		PreparedStatement pstmt = null;
+		Statement stmt=null;
 		ResultSet rs = null;
 		List<Reservation> list = new ArrayList<Reservation>();
-		String sql = prop.getProperty("loadReservationList2");
-		System.out.println("dao 1 : "+list);
+//		String sql = prop.getProperty("loadReservationList2");
+		String sql = "select * from reservation res inner join room r on res.r_no=r.r_no inner join pension p on r.p_code=p.p_code inner join client c on res.c_id = c.c_id inner join payment pay on res.res_code=pay.res_code where res_state='N'";
 		try {
-			pstmt = conn.prepareStatement(sql);
-			rs= pstmt.executeQuery();
+//			pstmt = conn.prepareStatement(sql);
+//			rs= pstmt.executeQuery();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
 			while (rs.next()) {
 				Reservation r = new Reservation();
 
 				r.setrNo(rs.getString("r_no"));
 				r.setcId(rs.getString("c_id"));
-
-//				r.getPension().setpName(rs.getString("p_name"));
-//				r.getRoom().setrName(rs.getString("r_name"));
-				
 				r.setResCode(rs.getString("res_code"));
 				r.setResCheckIn(rs.getDate("res_checkin"));
 				r.setResCheckOut(rs.getDate("res_checkout"));
@@ -187,8 +186,9 @@ public class ReservationDao {
 						rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
 						rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
 						rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
-				list.add(r);
 				
+				list.add(r);
+				System.out.println(r);
 				System.out.println("DAO에서 list :"+list);
 				System.out.println(r.getRoom().getrName());
 			}
@@ -196,7 +196,8 @@ public class ReservationDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+//			close(pstmt);
+			close(stmt);
 		}
 		return list;
 	}

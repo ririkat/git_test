@@ -40,7 +40,8 @@ public class ResWaitClientListServlet extends HttpServlet {
 			return;
 		}
 	
-		List<Reservation> list = new ReservationService().loadReservationList();
+		List<Reservation> list = new ReservationService().loadReservationList2();  //나중에는 o_id를 받아서 자신에 관련된 예약목록만 승인해줘야하지
+		System.out.println("ResWaitClientList 서블릿에서 list : "+list);
 		
 
 		request.setAttribute("reservations", list);
