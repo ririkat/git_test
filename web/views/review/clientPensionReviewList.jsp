@@ -79,7 +79,7 @@
             </form>
 <%--             <%if(loginClient!=null&&loginOwner==null){ %> --%>
             <div>
-               <button type="submit" id="btn-write" onclick="writeReview();">등록</button>
+               <button type="submit" id="btn-write" class="btn btn-default pull-left" onclick="writeReview();">등록</button>
             </div>
 <%--             <%} %> --%>
             

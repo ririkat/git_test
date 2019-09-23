@@ -58,6 +58,7 @@ public class SearchDetailViewServlet extends HttpServlet {
 		}
 		java.sql.Date toSqlDate = new java.sql.Date(toDate.getTime());
 		
+
 		Pension p = new SearchService().selectDetail(pCode);
 		
 		request.setAttribute("pension", p);

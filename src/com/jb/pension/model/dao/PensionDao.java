@@ -432,7 +432,7 @@ public class PensionDao {
 	}
 	
 	//펜션 추가
-	public int addPension(Connection conn, String pName, String addr, String tel, String oId) {
+	public int addPension(Connection conn, String pName, String addr, String tel, String oId,double loc_y,double loc_x) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("addPension");
@@ -442,6 +442,8 @@ public class PensionDao {
 			pstmt.setString(2, addr);
 			pstmt.setString(3, tel);
 			pstmt.setString(4, oId);
+			pstmt.setDouble(5, loc_y);
+			pstmt.setDouble(6, loc_x);
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

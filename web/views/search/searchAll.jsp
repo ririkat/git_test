@@ -200,9 +200,23 @@
 								<p><%=list.get(i).getpAddr() %></p>
 								<p>
 									<a href="#" class="btn my-btn" role="button">찜♥</a>
-									<button id="<%=list.get(i).getpCode()%>" name="detailgoBtn" onclick="goDetailView();">예매상세</button>
+									
 									<%-- <a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
 										class="btn btn-default" role="button">예매상세</a> --%>
+
+								<%if(loginClient.getcId()!=null){%>
+									<a href="<%=request.getContextPath()%>/client/wishList?
+									pCode=<%=list.get(i).getpCode()%>
+									&pImage=<%=list.get(i).getPenFile().get(0).getpRenameFile() %>
+									&pName=<%=list.get(i).getpName() %>
+									&pAddr=<%=list.get(i).getpAddr() %>
+									&pTel=<%=list.get(i).getpTel() %>
+									&cid=<%=loginClient.getcId() %>"
+									class="btn my-btn" role="button" onclick="btn_wish();">찜♥</a>
+									
+									<button id="<%=list.get(i).getpCode()%>" name="detailgoBtn" onclick="goDetailView();">예매상세</button>
+								<%} %>
+
 								</p>
 							</div>
 						</div>
@@ -217,6 +231,10 @@
 	</div>
 </section>
 <script>
+function btn_wish(){
+	alert("찜목록에 추가하였습니다. 마이페이지로 이동합니다.");
+}
+
 $(document).ready(function(){
 	$("#pf_all").click(function(){
 		 if ($("#pf_all").is(':checked')) {

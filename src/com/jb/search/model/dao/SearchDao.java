@@ -317,12 +317,15 @@ public class SearchDao {
 			pstmt.setString(7,keyword);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				System.out.println("아예 안들어오는거야?ㅠㅠㅠ");
 				Pension p = new Pension();
-				System.out.println(rs.getString("address"));
-				p.setpAddr(rs.getString("address"));
-				p.setLoc_y(rs.getDouble("deg_x"));
-				p.setLoc_x(rs.getDouble("deg_y"));
+				p.setpCode(rs.getString("p_code"));
+				p.setpName(rs.getString("p_name"));
+				p.setpAddr(rs.getString("p_addr"));
+				p.setpTel(rs.getString("p_tel"));
+				p.setoId(rs.getString("o_id"));
+				p.setpEnrollDate(rs.getDate("p_enrolldate"));
+				p.setLoc_y(rs.getDouble("loc_y"));
+				p.setLoc_x(rs.getDouble("loc_x"));
 				list.add(p);
 			}
 			System.out.println("아니 여기 온 건 맞니?");

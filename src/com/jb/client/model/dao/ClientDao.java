@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.client.model.vo.Client;
+import com.jb.wishlist.model.vo.WishList;
 
 public class ClientDao {
 
@@ -54,6 +55,7 @@ public class ClientDao {
 	            c.setcEd(rs.getDate("c_Ed"));
 	            c.setcBLCount(rs.getInt("c_BLCount"));
 	            c.setAuthority(rs.getInt("Authority"));
+	            c.setReadstatus(rs.getString("readstatus"));
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();
@@ -455,6 +457,7 @@ public class ClientDao {
 					c.setcAddr(rs.getString("c_addr"));
 					c.setcEd(rs.getDate("c_ed"));
 					c.setcBLCount(rs.getInt("c_blcount"));
+					c.setReadstatus(rs.getString("readstatus"));
 				}
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -513,4 +516,6 @@ public class ClientDao {
 			}
 			return result;
 		}
+
+		
 }
