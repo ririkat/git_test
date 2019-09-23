@@ -16,13 +16,14 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 	<section>
 		<div class="col-sm-9">
-			<div class="container">
+			<div>
 		<h2> 게시판 </h2>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>번호</th>
                     <th>제목</th>
+                    <th>첨부파일</th>
                     <th>작성자</th>
                     <th>작성일</th>
                     <th>조회수</th>
@@ -37,6 +38,15 @@
                     	<a href="<%=request.getContextPath()%>/board/boardView?cmmNo=<%=b.getCmmNo() %>">
                     	<%=b.getTitle() %></a>
                     </td>
+                    <td>
+						<%
+							if (b.getOriginalFilename() != null) {
+						%>
+						<img src="<%=request.getContextPath()%>/images/file.png" alt="첨부파일" width="16px" />
+						<%
+						 }
+						%>
+					</td>
                     <td><%=b.getcId() %></td>
                     <td><%=b.getEntDate() %></td>
                     <td><%=b.getViewCnt() %></td>

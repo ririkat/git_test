@@ -67,10 +67,10 @@ public class NoticeDao {
 				n.setnEntDate(rs.getDate("n_ent_date"));
 				n.setnModDate(rs.getDate("n_mod_date"));
 				n.setnContent(rs.getString("n_content"));
-				n.setnOriginFile(rs.getString("n_origin_file"));
+				n.setnOriginFile(rs.getString("n_original_file"));
 				n.setmId(rs.getString("m_id"));
 				n.setnViewCnt(rs.getInt("n_view_cnt"));
-				n.setnRenamedFile(rs.getString("n_renamed_file"));
+				n.setnRenamedFile(rs.getString("n_rename_file"));
 				list.add(n);
 			}
 		}catch(SQLException e) {
@@ -98,8 +98,8 @@ public class NoticeDao {
 				n.setnEntDate(rs.getDate("n_ent_date"));
 				n.setnModDate(rs.getDate("n_mod_date"));
 				n.setnContent(rs.getString("n_content"));
-				n.setnOriginFile(rs.getString("n_origin_file"));
-				n.setnRenamedFile(rs.getString("n_renamed_file"));
+				n.setnOriginFile(rs.getString("n_original_file"));
+				n.setnRenamedFile(rs.getString("n_rename_file"));
 				n.setmId(rs.getString("m_id"));
 				n.setnViewCnt(rs.getInt("n_view_cnt"));
 			}
@@ -211,8 +211,8 @@ public class NoticeDao {
 				n.setnEntDate(rs.getDate("n_ent_date"));
 				n.setnModDate(rs.getDate("n_mod_date"));
 				n.setnContent(rs.getString("n_content"));
-				n.setnOriginFile(rs.getString("n_origin_file"));
-				n.setnRenamedFile(rs.getString("n_renamed_file"));
+				n.setnOriginFile(rs.getString("n_original_file"));
+				n.setnRenamedFile(rs.getString("n_rename_file"));
 				n.setmId(rs.getString("m_id"));
 				n.setnViewCnt(rs.getInt("n_view_cnt"));
 				list.add(n);
