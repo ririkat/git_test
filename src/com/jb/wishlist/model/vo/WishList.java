@@ -8,13 +8,13 @@ public class WishList {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WishList(String pImage, String pName, String pAddr, String pTel, String pCode, String cId) {
+	public WishList(String pCode,String pImage,String pName,String pAddr,String pTel,String cId) {
 		super();
+		this.pCode = pCode;
 		this.pImage = pImage;
 		this.pName = pName;
 		this.pAddr = pAddr;
 		this.pTel = pTel;
-		this.pCode = pCode;
 		this.cId=cId;
 	}
 

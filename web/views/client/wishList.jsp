@@ -121,9 +121,6 @@ th, td {
 						<%
 							for (int i = 0; i < list.size(); i++) {
 									WishList w = list.get(i);
-									
-									System.out.println("여기다 이놈아");
-									System.out.println(w.getpCode());
 						%>
 						<form name="pension-jjim-match-Frm" method="post">
 							<input type="hidden" id="" name="pCode" value="<%=w.getpCode()%>" />
