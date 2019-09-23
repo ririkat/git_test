@@ -1,7 +1,7 @@
 package com.jb.reservation.model.vo;
 
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.jb.client.model.vo.Client;
 import com.jb.pension.model.vo.Pension;

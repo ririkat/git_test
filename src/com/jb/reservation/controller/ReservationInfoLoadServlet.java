@@ -38,30 +38,27 @@ public class ReservationInfoLoadServlet extends HttpServlet {
 	
 		//예약정보를 보여주는 로직 
 		
-    	String resCode = request.getParameter("resCode");
-    	System.out.println("현희 서블릿에서 예약코드 : " + resCode);
-//		String resCode = "1234";
+
+		String resCode = request.getParameter("resCode");
+		System.out.println("resCode : "+resCode);
+	
+		//임의로 예약코드 설정해놓음 / DB생성되면 지워도됨 
+	//	String resCode = "1234";
+
 		String cId=request.getParameter("cId");
+		System.out.println("cId : "+cId);
 		
 		Reservation resInfo = new ReservationService().selectOneReservation(resCode, cId);
 		System.out.println("infoLoad서블릿 : "+resInfo);
 	
-	
-		//아직 못받아옴 나중에 풀기 
-		
-		/*
-		 * 
-		 * int rPrice=Integer.parseInt(request.getParameter("rPrice")); int rAddPrice =
-		 * Integer.parseInt(request.getParameter("rAddPrice")); int totalPrice =
-		 * rPrice+rAddPrice;
-		 * 
-		 * 
-		 * request.setAttribute("totalPrice", totalPrice);
-		 */
-		
+
 		
 	    request.setAttribute("resInfo", resInfo);
 	    request.setAttribute("cId", cId);
+	    request.setAttribute("resCode", resCode);
+	     System.out.println("reservation info load 서블릿 " + resInfo);
+	     
+
 		
 		
 		request.getRequestDispatcher("/views/reservation/reservationConfirm.jsp").forward(request,response);		

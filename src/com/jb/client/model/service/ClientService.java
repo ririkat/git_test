@@ -19,6 +19,7 @@ public class ClientService {
 	public Client selectId(String id, String pw) {
 		Connection conn = getConnection();
 		Client c = dao.selectId(conn, id, pw);
+		System.out.println("selectId return c :"+c);
 		close(conn);
 		return c;
 	}

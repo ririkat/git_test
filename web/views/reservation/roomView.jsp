@@ -79,6 +79,9 @@
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
+						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
+						<div id="rNo_" style="display: none;"></div>
+						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo() %>">
 						
 						<%if(loginClient!=null) {%>
 						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
