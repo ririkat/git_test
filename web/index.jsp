@@ -57,7 +57,6 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-
 <!-- 	테스트 링크 -->
 	 <a href="<%=request.getContextPath()%>/search/load" class="text-center new-account">테스트테스트</a>
 

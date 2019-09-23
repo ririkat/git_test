@@ -1,33 +1,25 @@
-package com.jb.client.controller;
+package com.jb.reservation.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.notice.model.service.NoticeService;
-import com.jb.notice.model.vo.Notice;
-import com.jb.pension.model.service.PensionService;
-import com.jb.pension.model.vo.Pension;
-import com.jb.pension.model.vo.Room;
 import com.jb.reservation.model.service.ReservationService;
-import com.jb.reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class ReservationListServlet
+ * Servlet implementation class CancleReservationServlet
  */
-@WebServlet("/client/reservationList")
-public class ReservationListServlet extends HttpServlet {
+@WebServlet("/reservation/cancleRes")
+public class CancleReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationListServlet() {
+    public CancleReservationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,19 +29,19 @@ public class ReservationListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		 
+		String resCode = request.getParameter("resCode");
+		 String cId = request.getParameter("cId");
+		 
+		 int result = new ReservationService().cancleRes(resCode);
 		
+		 String msg = result>0?"예약취소가 완료되었습니다.":"예약취소에 실패하였습니다.";
+		 String loc = result>0?"/":"/client/reservationList";
+		 request.setAttribute("msg", msg);
+		 request.setAttribute("loc", loc);
+		 request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
-		
-		String cId = request.getParameter("cId");
-		List<Reservation> list = new ReservationService().loadReservationList(cId);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/client/mypageHome.jsp").forward(request, response);
-		System.out.println("ReservationList서블릿 : "+list);
-
-		
-		
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
