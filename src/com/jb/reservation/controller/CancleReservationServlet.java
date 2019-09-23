@@ -28,7 +28,8 @@ public class CancleReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String resCode = request.getParameter("resCode");
+	
+		String resCode = request.getParameter("resCode");
 		 String cId = request.getParameter("cId");
 		 
 		 int result = new ReservationService().cancleRes(resCode);
