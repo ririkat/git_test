@@ -33,21 +33,35 @@ public class RoomReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String resState = "N";//결제상태
+		//값 받아오기
 		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
 		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
+		String resState = "N";//결제상태
 		int resNop = Integer.parseInt(request.getParameter("resNop"));//인원
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
 		String rNo = request.getParameter("rNo");//방번
 		String cId = request.getParameter("cId");//아이디
 
-		
-		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
-		ReservationService service = new ReservationService();
+		//객체 생성
+//		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
+		Reservation res = new Reservation(resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
 		  
-		 int result = service.insertReservation(res);
-		 System.out.println(res);
-		 
+		//예약정보 추가. 추가하면서 현재 sequence 받아옴.
+		//이는 지금 추가하는 예약의 resCode이다.
+		int currval = new ReservationService().insertReservation(res);
+		
+		//=======
+		
+		String resCode = Integer.toString(currval);
+		Reservation resInfo = new ReservationService().selectOneReservation(resCode, cId);
+		
+		//잠깐!! totalPrice -> roomView에서 계산해서 제대로 다시 가져와야댕. 일단 받았다치고 한다!?
+		request.setAttribute("totalPrice", totalPrice);
+		
+		request.setAttribute("cId", cId);
+		request.setAttribute("resInfo", resInfo);
+		request.setAttribute("resCode", resCode);
+		request.getRequestDispatcher("/views/reservation/payInfoView.jsp").forward(request, response);
 
 	}
 		

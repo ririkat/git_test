@@ -177,7 +177,7 @@
 
 		<input type="button" class="btn btn-warning" onclick="" value="나중에하기">
 
-<!-- 	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기"> -->
+	<input type="submit" name="payment_btn" class="btn btn-warning"	id="payment"  onclick="payment();" value="결제하기"> 
 
 	</form>
 

@@ -66,7 +66,9 @@
 							<% } %>
 
 						</select><br>
+						기준인원수 : <%=p.getRoomList().get(0).getrNop()%>명
 						<div id="Maxno"> 최대인원수 : <%=p.getRoomList().get(0).getrMaxNop()%>명 </div>
+						추가 인원당 추가 요금 : <%=p.getRoomList().get(0).getrAddPrice() %> 원 <br>
 						인원 수 입력 : <input type="text" name="resNo_" id="addtext" value="0" onkeyup="OnKeyUp(this.value)" maxlength="2"
 						style="width: 40px; height: 20px; font-size: 20px; text-align: center;">명
 						<br>
@@ -82,10 +84,10 @@
 						
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
-						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
-						<%-- <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> --%>
+						<%-- <input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>"> --%>
+						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 						<div id="rNo_" style="display: none;"></div>
-						<input type="hidden" name="rNo" id="rnno" value="">
+						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo()%>">
 						
 					</div>
 					
