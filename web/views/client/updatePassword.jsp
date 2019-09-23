@@ -81,10 +81,15 @@
 
 						</tbody>
 					</table>
+					<br>
+					<br>
+					<br>
+					<center>
 					<input type="submit" class="btn btn-warning" id="btn-update" name="btn-update" onclick="return password_validate();"
 						value="변경"> 
 						
 						<input type="reset" class="btn btn-warning" onclick="" value="뒤로가기">
+						</center>
 
 					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("cId")%>' />
 						

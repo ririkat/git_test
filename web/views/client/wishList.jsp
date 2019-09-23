@@ -10,14 +10,7 @@
 %>
 
 <style>
-/* 예약내역, 찜 내역 제목 */
-#reservedtitle, #jjimtitle {
-	font-family: 'TmonMonsori';
-	font-size: 30px;
-	color: gray;
-	position: relative;
-	top: 40px;
-	/* color: #6a60a9 !important; */
+
 }
 
 table.wish-list {
