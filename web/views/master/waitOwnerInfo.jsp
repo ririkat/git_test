@@ -8,74 +8,75 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideMaster.jsp"%>
 
-<br>
-<br>
-<br>
-<section id="enroll-container">
-   <h1 style="text-align: center">승인신청한 업주 상세정보</h1>
-   <br><br>
-
-      <table class="updateTable">
-         <colgroup>
-            <col width="160px">
-            <col width="">
-         </colgroup>
-         <tbody>
-            <tr>
-               <th class="point" style="vertical-align: middle"><strong
-                  class="point">*</strong>이름</th>
-               <td><%=o.getoName() %><input type="hidden" name="uid" value=""></td>
-            </tr>
-            
-            <tr>
-               <th class="point"><strong class="point"></strong>생년월일</th>
-               <td><%=o.getoBirth() %></td>
-            </tr>
-
-            <tr>
-               <th class="point"><strong class="point">*</strong>성별</th>
-               <%if(o.getoGender().charAt(0)=='M'){ %>
-                  <td>
-                     <input type="radio" name="usex" value="M" checked disabled>남
-                     &nbsp; <input type="radio" name="usex" value="F" disabled>여
-                  </td>
-               <%} else{ %>
-                  <td>
-                     <input type="radio" name="usex" value="M" disabled>남 &nbsp;
-                     <input type="radio" name="usex" value="F" checked disabled>여
-                  </td>
-               <%} %>
-            </tr>
-
-            <tr>
-               <th class="point"><strong class="point">*</strong>아이디</th>
-               <td><%=o.getoId() %></td>
-            </tr>
-            
-            <tr>
-               <th class="point"><strong class="point">*</strong>이메일</th>
-               <td><%=o.getoEmail()%></td>
-            </tr>
-
-            <tr>
-               <th class="point"><strong class="point">*</strong>핸드폰번호</th>
-               <td><%=o.getoPhone() %></td>
-            </tr>
-
-            <tr>
-               <th class="point">주소</th>
-               <td><%=o.getoAddr() %></td>
-            </tr>
-         </tbody>
-      </table>
-   
-   <br>
-   <br>
-   <div class="button">
-      <input type="button" onclick="acceptOwner();" value="승인">
-      <input type="button" onclick="deleteOwner();" value="삭제">
-   </div>
-</section>
+<div class="col-md-10">
+	<div class="mContent">
+		<br><br><br>
+		<div class="tit_contents">승인신청한 업주 상세정보</div>
+		<br><br><br>
+		
+		<section id="enroll-container">		
+		      <table class="updateTable">
+		         <colgroup>
+		            <col width="160px">
+		            <col width="">
+		         </colgroup>
+		         <tbody>
+		            <tr>
+		               <th class="point" style="vertical-align: middle"><strong
+		                  class="point">*</strong>이름</th>
+		               <td><%=o.getoName() %><input type="hidden" name="uid" value=""></td>
+		            </tr>
+		            
+		            <tr>
+		               <th class="point"><strong class="point"></strong>생년월일</th>
+		               <td><%=o.getoBirth() %></td>
+		            </tr>
+		
+		            <tr>
+		               <th class="point"><strong class="point">*</strong>성별</th>
+		               <%if(o.getoGender().charAt(0)=='M'){ %>
+		                  <td>
+		                     <input type="radio" name="usex" value="M" checked disabled>남
+		                     &nbsp; <input type="radio" name="usex" value="F" disabled>여
+		                  </td>
+		               <%} else{ %>
+		                  <td>
+		                     <input type="radio" name="usex" value="M" disabled>남 &nbsp;
+		                     <input type="radio" name="usex" value="F" checked disabled>여
+		                  </td>
+		               <%} %>
+		            </tr>
+		
+		            <tr>
+		               <th class="point"><strong class="point">*</strong>아이디</th>
+		               <td><%=o.getoId() %></td>
+		            </tr>
+		            
+		            <tr>
+		               <th class="point"><strong class="point">*</strong>이메일</th>
+		               <td><%=o.getoEmail()%></td>
+		            </tr>
+		
+		            <tr>
+		               <th class="point"><strong class="point">*</strong>핸드폰번호</th>
+		               <td><%=o.getoPhone() %></td>
+		            </tr>
+		
+		            <tr>
+		               <th class="point">주소</th>
+		               <td><%=o.getoAddr() %></td>
+		            </tr>
+		         </tbody>
+		      </table>
+		   
+		   <br><br>
+		   <div class="button">
+		      <input type="button" onclick="acceptOwner();" value="승인">
+		      <input type="button" onclick="deleteOwner();" value="삭제">
+		   </div>
+		</section>
+	</div>
+</div>
 
 <script>
    function acceptOwner(){
