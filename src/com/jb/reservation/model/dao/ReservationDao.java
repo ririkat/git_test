@@ -8,13 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import com.jb.client.model.vo.Client;
-import com.jb.notice.model.dao.NoticeDao;
-import com.jb.notice.model.vo.Notice;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.Room;
 import com.jb.reservation.model.vo.Payment;
@@ -54,7 +53,26 @@ public class ReservationDao {
 		return result;
 	}
 	
-
+	//Res_state=='N'인것
+	public int selectReservationCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selectReservationCount2");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 	
 	public List<Reservation> loadReservationList(Connection conn, String cId) {
@@ -102,6 +120,73 @@ public class ReservationDao {
 						rs.getDate("p_enrollDate")));
 				
 
+				list.add(r);
+				
+				System.out.println("DAO에서 list :"+list);
+				System.out.println(r.getRoom().getrName());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	//오버로딩 장원
+	public List<Reservation> loadReservationList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Reservation> list = new ArrayList<Reservation>();
+		String sql = prop.getProperty("loadReservationList2");
+		System.out.println("dao 1 : "+list);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+			while (rs.next()) {
+				Reservation r = new Reservation();
+
+				r.setrNo(rs.getString("r_no"));
+				r.setcId(rs.getString("c_id"));
+
+//				r.getPension().setpName(rs.getString("p_name"));
+//				r.getRoom().setrName(rs.getString("r_name"));
+				
+				r.setResCode(rs.getString("res_code"));
+				r.setResCheckIn(rs.getDate("res_checkin"));
+				r.setResCheckOut(rs.getDate("res_checkout"));
+				r.setResState(rs.getString("res_state"));
+				r.setResNop(rs.getInt("res_nop"));
+				r.setTotalPrice(rs.getInt("total_price"));
+			    r.setResDate(rs.getDate("res_date"));
+			    
+			
+			    r.setRoom(new Room(rs.getString("r_no"),rs.getString("r_name")
+			    		,rs.getInt("r_price"),rs.getInt("r_nop"),rs.getInt("r_maxnop")
+			    		,rs.getString("r_size"),rs.getString("p_code"),rs.getString("r_struc")
+			    		,rs.getString("r_info"),rs.getInt("r_addprice")));
+			    
+				r.setPension(new Pension(
+						rs.getString("p_code"),
+						rs.getString("p_name"),
+						rs.getString("p_addr"),
+						rs.getString("p_tel"),
+						rs.getString("o_id"),
+						rs.getString("enrollYn"),
+						rs.getInt("p_blcount"),
+						rs.getDate("p_enrollDate")));
+				
+				r.setPayment(new Payment(
+						rs.getString("pay_code"),
+						rs.getDate("pay_date"),
+						rs.getString("pay_method"),
+						rs.getString("res_code")));
+
+				r.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
+						rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
+						rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
+						rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
 				list.add(r);
 				
 				System.out.println("DAO에서 list :"+list);
@@ -348,6 +433,34 @@ public class ReservationDao {
 	}
 	
 	
+	public int acceptResList(Connection conn, String accList) {
+		Statement stmt=null;
+		int result=0;
+		String sql = "update reservation set res_state='Y' where c_id in (";
+		
+		String[] accDelList = accList.split(",");
+		for(int i=0; i <accDelList.length; i++) {
+			accDelList[i] = "'" + accDelList[i] + "'";
+		}
+		if(accDelList.length<2) {
+			sql += accDelList[0] + ")";
+		}else {
+			sql += accDelList[0];
+			for(int i=1; i< accDelList.length; i++) {
+				sql += "," + accDelList[i];
+			}
+			sql += ")";
+		}
+		try {
+			stmt=conn.createStatement();
+			result=stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
 	   
 	
 }

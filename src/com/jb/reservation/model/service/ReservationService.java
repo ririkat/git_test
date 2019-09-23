@@ -39,6 +39,16 @@ public class ReservationService {
 		return list;
 	}
 	
+	//오버로딩 
+	public List<Reservation> loadReservationList(){
+		Connection conn = getConnection();
+		List<Reservation> list=dao.loadReservationList(conn);
+		
+		System.out.println("service에서 list: "+list);
+		close(conn);
+		return list;
+	}
+	
 	public Reservation selectOneReservation(String cId,String resCode) {
 		Connection conn = getConnection();
 		
@@ -90,6 +100,19 @@ public class ReservationService {
 		close(conn);
 		return result;
 		
+	}
+	
+	//승인대기 예약자들 선택
+	public int acceptResList(String accList) {
+		Connection conn = getConnection();
+		int result = dao.acceptResList(conn, accList);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 	
