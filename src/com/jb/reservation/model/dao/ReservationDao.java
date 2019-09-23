@@ -310,8 +310,6 @@ public class ReservationDao {
 				rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
 				rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
 				rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
-				 
-						
 						
 	
 				System.out.println(res);

@@ -170,9 +170,9 @@ public class PensionService {
 	}
 	
 	//펜션 추가
-	public int addPension(String pName, String addr, String tel, String oId) {
+	public int addPension(String pName, String addr, String tel, String oId,double loc_y,double loc_x) {
 		Connection conn = getConnection();
-		int result = dao.addPension(conn,pName,addr,tel,oId);
+		int result = dao.addPension(conn,pName,addr,tel,oId,loc_y,loc_x);
 		if(result>0) {
 			commit(conn);
 			result = dao.getCurrval(conn);
