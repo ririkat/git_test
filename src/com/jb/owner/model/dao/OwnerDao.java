@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.jb.client.model.vo.Client;
 import com.jb.owner.model.vo.Owner;
-import com.jb.pension.model.vo.Pension;
 
 public class OwnerDao {
 	

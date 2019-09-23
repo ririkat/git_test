@@ -29,6 +29,7 @@ public class LoginClientServlet extends HttpServlet {
 
 
 		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
+
 	}
 
 	/**

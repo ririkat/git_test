@@ -36,7 +36,7 @@
                                 <br>
                                    <%--  onclick="location.href='<%=request.getContextPath()%>/views/client/findPW.jsp'" --%>
 								<!--업체일반 회원뷰로 전환 -->
-                                <a href="<%=request.getContextPath()%>/views/client/singUpChoice.jsp" class="text-center new-account">회원가입</a>
+                                <a href="<%=request.getContextPath()%>/singUpChoice" class="text-center new-account">회원가입</a>
                            </form>
                         </div>
                     </div>
@@ -65,11 +65,11 @@
         // 아이디찾기 업체,일반 라디오 버튼으로 전환
         function find(){
         	if(loginTypefrm.loginType.value=="client") {
-        		location.href="<%=request.getContextPath()%>/views/client/findID.jsp";
+        		location.href="<%=request.getContextPath()%>/FindIdClient";
         		return false;
         	}
         	if(loginTypefrm.loginType.value=="owner") {
-        		location.href="<%=request.getContextPath()%>/views/owner/findIDOwner.jsp";
+        		location.href="<%=request.getContextPath()%>/FindIdOwner";
         		return false;
         	}
         	//성별 빈칸
@@ -82,7 +82,7 @@
         }  
         
         function findPW(){
-        	location.href="<%=request.getContextPath()%>/views/client/findPW.jsp";
+        	location.href="<%=request.getContextPath()%>/FindPw";
         }
     </script>
 

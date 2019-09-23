@@ -200,8 +200,9 @@
 								<p><%=list.get(i).getpAddr() %></p>
 								<p>
 									<a href="#" class="btn my-btn" role="button">찜♥</a>
-									<a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
-										class="btn btn-default" role="button">예매상세</a>
+									<button id="<%=list.get(i).getpCode()%>" name="detailgoBtn" onclick="goDetailView();">예매상세</button>
+									<%-- <a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
+										class="btn btn-default" role="button">예매상세</a> --%>
 								</p>
 							</div>
 						</div>
@@ -274,6 +275,14 @@ function find_validate(){
 	}
 	
 	return true;
+}
+
+function goDetailView(){
+	var pCode=$('button[name=detailgoBtn]').attr('id');
+	var from=$("#datepicker").val();
+	var to=$("#datepicker2").val();
+	
+	location.href="<%=request.getContextPath()%>/search/detailView?pCode="+pCode+"&from="+from+"&to="+to;
 }
 
 //달력

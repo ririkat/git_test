@@ -57,7 +57,7 @@ public class LoginClientEndServlet extends HttpServlet {
 			String msg = "아이디나 비밀번호가 일치하지 않습니다.";
 			request.setAttribute("msg", msg);
 			view = "/views/common/msg.jsp";
-			String loc = "/views/client/login.jsp";
+			String loc = "/login";
 			request.setAttribute("loc", loc);
 			RequestDispatcher rd = request.getRequestDispatcher(view);
 			rd.forward(request, response);

@@ -11,7 +11,7 @@
 			<li data-target="#myCarousel" data-slide-to="2"></li>
 			<li data-target="#myCarousel" data-slide-to="3"></li>
 		</ol>
-
+		
 		<!-- 슬라이드 컨테이너 -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active banner">
@@ -29,7 +29,6 @@
 					<p>Lorem ipsum...</p>
 				</div> -->
 			</div>
-
 
 			<div class="item banner">
 				<img src="http://placehold.it/1024x300" alt="Image" width="100%" height="300px;">
@@ -59,6 +58,7 @@
 		</a>
 	</div>
 	
+
 	
 <!-- 	테스트 링크 -->
 	 <a href="<%=request.getContextPath()%>/search/load" class="text-center new-account">테스트테스트</a>
@@ -146,4 +146,5 @@
 			<br>
 		</div>
 </section>
+
 <%@ include file="/views/common/footer.jsp"%>

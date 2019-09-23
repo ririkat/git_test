@@ -36,24 +36,33 @@ public class RoomReservationServlet extends HttpServlet {
 		String resState = "N";//결제상태
 		Date resCheckIn = Date.valueOf(request.getParameter("checkIn"));//쳌인
 		Date resCheckOut = Date.valueOf(request.getParameter("checkOut")); //아웃
-		int resNop = Integer.parseInt(request.getParameter("resNop"));//인원
+		
+		String no = request.getParameter("resNop");//인원
+		int resNop = Integer.parseInt(no);
+		
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));//가격
 		String rNo = request.getParameter("rNo");//방번
 		String cId = request.getParameter("cId");//아이디
-
-		
-		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId);
+				
+		Reservation res = new Reservation(null,resCheckIn,resCheckOut,resState,resNop,totalPrice,rNo,cId,null);
 		ReservationService service = new ReservationService();
-		  
-		 int result = service.insertReservation(res);
-		 System.out.println(res);
+		int result = service.insertReservation(res);
 		 
-			String msg = "";
-			String loc = "/";
-			msg = result>0? "(예약완료)결제페이지로 넘어갑니다.":"예약이 불가능합니다.";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+
+		System.out.println(resCheckIn);  
+		System.out.println(resCheckOut); 
+		System.out.println(res);
+		System.out.println(rNo); 
+		
+
+//		String msg = "";
+//		String loc = "/reservation/load";
+//		msg = result>0?"등록성공":"등록 실패";
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("loc", loc);
+//		request.getRequestDispatcher("/reservation/reservationInfoLoad").forward(request, response);	
+		
+		
 	}
 		
 

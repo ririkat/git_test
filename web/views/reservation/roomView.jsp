@@ -4,12 +4,15 @@
 <%@page import="com.jb.pension.model.vo.PensionFacilities"%>
 <%@page import="com.jb.pension.model.vo.Room"%>
 <%@page import="java.util.List"%>
+<%@page import="java.sql.Date"%>
 <%@page import="com.jb.pension.model.vo.RoomFile" %>
 <%@page import="com.jb.pension.model.vo.Pension"%>
 <%@ include file="/views/common/header.jsp"%>
 
 <%
 	Pension p = (Pension)request.getAttribute("pension");
+	String from=(String)request.getAttribute("from");
+	String to=(String)request.getAttribute("to");
 %>
 
 
@@ -25,12 +28,7 @@
 
 
 <section>
-	</br>
-	</br>
-	</br>
-	</br>
-	</br>
-	</br>
+<br><br><br><br><br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
@@ -68,16 +66,16 @@
 						<div id="Maxno"> 최대인원수 : <%=p.getRoomList().get(0).getrMaxNop()%>명 </div>
 						인원 수 입력 : <input type="text" name="resNo_" id="addtext" value="0" onkeyup="OnKeyUp(this.value)" maxlength="2"
 						style="width: 40px; height: 20px; font-size: 20px; text-align: center;">명
-						<br>
-						체크인<input type="date" name="checkIn"  disabled style="width: 130px; height: 20px;" ><br>
-						체크아웃<input type="date" name="checkOut" style="width: 130px; height: 20px;">
+						<br><br>
+						체크인<input type="date" name="checkIn" value="<%=from%>" style="width: 150px; height: 30px;" ><br>
+						체크아웃<input type="date" name="checkOut" value="<%=to%>" style="width: 150px; height: 30px;">
+						
+						<input type="button" name="datecheck" value="조회" onclick="CheckInch();">
+						
 						<br><br><br><br>
 						<div id="pe">총 인원 수 : 0명</div>
 						
 						<input type="hidden" name="resNop" id="m_p">
-						<br>
-						<br>
-
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
@@ -87,45 +85,46 @@
 						<%} %>
 						
 						<div id="rNo_" style="display: none;"></div>
-						<input type="hidden" name="rNo" id="rnno" value="">
+						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo()%>">
 						
 					</div>
 					
-					
+					<br>
 					<input type="submit" class="btn btn-lg btn-warning btn-block" value="예약하기"><br>
 				</div>
+				
 			</form>
 		</div>
 	</div>
 	<hr>
 
-	<div class="container text-center">
-		<h3>펜션이미지</h3>
-		<br>
-		<div class="row">
-			<div class="col-sm-3">
-				<img src="<%=request.getContextPath()%>/upload/pension/<%=p.getPenFile().get(0).getpRenameFile()%>"
-					class="img-responsive" style="width: 100%" alt="Image">
-				<p>1</p>
-			</div>
-			<div class="col-sm-3">
-				<img src="<%=request.getContextPath()%>/upload/pension/<%=p.getPenFile().get(0).getpRenameFile()%>"
-					class="img-responsive" style="width: 100%" alt="이미지준비중">
-				<p>2</p>
-			</div>
-			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
-				<p>3</p>
-			</div>
-			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
-				<p>4</p>
-			</div>
-		</div>
-		<hr>
-	</div>
+<!-- 	<div class="container text-center"> -->
+<!-- 		<h3>펜션이미지</h3> -->
+<!-- 		<br> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-sm-3"> -->
+<%-- 				<img src="<%=request.getContextPath()%>/upload/pension/<%=p.getPenFile().get(0).getpRenameFile()%>" --%>
+<!-- 					class="img-responsive" style="width: 100%" alt="Image"> -->
+<!-- 				<p>1</p> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-3"> -->
+<%-- 				<img src="<%=request.getContextPath()%>/upload/pension/<%=p.getPenFile().get(0).getpRenameFile()%>" --%>
+<!-- 					class="img-responsive" style="width: 100%" alt="이미지준비중"> -->
+<!-- 				<p>2</p> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-3"> -->
+<!-- 				<img src="https://placehold.it/150x80?text=IMAGE" -->
+<!-- 					class="img-responsive" style="width: 100%" alt="Image"> -->
+<!-- 				<p>3</p> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-3"> -->
+<!-- 				<img src="https://placehold.it/150x80?text=IMAGE" -->
+<!-- 					class="img-responsive" style="width: 100%" alt="Image"> -->
+<!-- 				<p>4</p> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<hr> -->
+<!-- 	</div> -->
 
 	<!--   펜션안내 -->
 	<div class="container text-center">
@@ -180,7 +179,7 @@
 					type="checkbox" disabled name="penfac" id="fac14"
 					value="<%=p.getPenFac().getCar()%>">
 			</p>
-
+	
 		</div>
 	</div>
 
@@ -188,7 +187,7 @@
 
 	<div class="container text-center">
 		<div class="well">
-
+			
 			<h3>객실 정보</h3><%for (int i = 0; i < p.getRoomList().size(); i++) {%>
 			<!-- 1 -->			
 			<div><h1><%=p.getRoomList().get(i).getrName()%></h1>
@@ -324,17 +323,21 @@
 			
 			if (res1.resNo_.value=="" || res1.resNo_.value==0) {
 	            alert("인원수를 입력해주세요.")
-	            resNo_.focus()
+	            resNo_.focus();
 	            return false;
 	        }
 			
-			if(res1.checkIn.value==""||res1.checkOut.value=="") {
+			if(res1.checkIn.value=="연도-") {
 				alert("체크인/체크아웃 날짜를 선택해주세요.")
-				checkIn.focus()
+				checkIn.focus();
 				return false;
+				
 			}
 				return true;
+				
 		}
+		
+		
 		
 		
 		function OnKeyUp(text) {
@@ -365,7 +368,10 @@
 					alert("선택 인원이 최대인원을 초과했습니다.");
 					return false;
 				}
+				
+			
 			}
+			
 // 			var AP = Number(text) * addprice
 // 			var TP = AP + Number(price)
 
@@ -385,7 +391,13 @@
 			t_p.value = text
 
 		}
-
+		
+		function CheckInch(){
+			var v=$('input[name=checkIn]').val();
+			console.log(v);
+        	location.href="<%=request.getContextPath()%>/checkIncheck?checkIn="+$('input[name=checkIn]').val()+"&checkOut="+$('input[name=checkId]').val();
+        }
+		
 	</script>
 </section>
 

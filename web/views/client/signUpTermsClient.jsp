@@ -297,7 +297,7 @@
 		}
 		if (num == 2 ) {
 			alert("모든 약관에 동의함.");
-			location.href='<%=request.getContextPath()%>/views/client/signUpclient.jsp';
+			location.href='<%=request.getContextPath()%>/SignUpClient';
 			return false;
 		} else {
 			alert("모든 약관에 동의해 주세요.");

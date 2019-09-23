@@ -5,6 +5,7 @@ import static common.template.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +14,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.jb.client.model.vo.Client;
-import com.jb.notice.model.dao.NoticeDao;
-import com.jb.notice.model.vo.Notice;
 import com.jb.pension.model.vo.Pension;
 import com.jb.pension.model.vo.Room;
 import com.jb.reservation.model.vo.Payment;
@@ -303,11 +302,13 @@ public class ReservationDao {
 						rs.getInt("p_blcount"),
 						rs.getDate("p_enrollDate")));
 				
+				
+				//이거 건철이가 client테이블에 컬럼 추가 하면서 발생하는 오류인듯?
 			
 				res.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
 				rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
 				rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
-				rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority")));
+				rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
 				 
 						
 						
@@ -345,12 +346,31 @@ public class ReservationDao {
 		return result;
 	}
 	
-	
-	   
-	
+	public Reservation checkIncheck(Connection conn, Date CheckIn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("checkIn");
+	    Reservation res = null;
+	    try {
+	    	pstmt=conn.prepareStatement(sql);
+	    	pstmt.setDate(1, CheckIn);
+	    	rs=pstmt.executeQuery();
+	    	if(rs.next()) {
+	    		res = new Reservation();
+	    		res.setResCheckIn(rs.getDate("res_checkin"));
+	    		res.setrNo(rs.getString("r_no"));
+	    	}
+	    }catch(SQLException e) {
+	    	e.printStackTrace();
+	    }finally {
+			close(rs);
+			close(pstmt);
+		}
+	return res;
 }
 		
 		
-
+}
 
 

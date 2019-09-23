@@ -171,7 +171,6 @@ public class SearchDao {
 				r.setrAddPrice(rs.getInt("r_addprice"));
 				
 
-
 				r.setRoomFac(new RoomFacilities(rs.getString("r_no"),rs.getString("bed"),rs.getString("dress_Table"),rs.getString("rtable")
 						,rs.getString("sofa"),rs.getString("dress_Case"),rs.getString("bath"),rs.getString("spa")
 						,rs.getString("wash_Kit"),rs.getString("tv"),rs.getString("beam"),rs.getString("aircon")
@@ -301,6 +300,42 @@ public class SearchDao {
 		}
 		return result;
 	}
+
+	public List<Pension> searchMapResultLoad(Connection conn,String keyword,double y, double x) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Pension> list=new ArrayList<Pension>();
+		String sql=prop.getProperty("searchMapResultLoad");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setDouble(1,y);
+			pstmt.setDouble(2,x);
+			pstmt.setDouble(3,y);
+			pstmt.setDouble(4,y);
+			pstmt.setDouble(5,x);
+			pstmt.setDouble(6,x);
+			pstmt.setString(7,keyword);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("아예 안들어오는거야?ㅠㅠㅠ");
+				Pension p = new Pension();
+				System.out.println(rs.getString("address"));
+				p.setpAddr(rs.getString("address"));
+				p.setLoc_y(rs.getDouble("deg_x"));
+				p.setLoc_x(rs.getDouble("deg_y"));
+				list.add(p);
+			}
+			System.out.println("아니 여기 온 건 맞니?");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		// TODO Auto-generated method stub
+		return list;
+	}
+
 	
 	
 }

@@ -16,7 +16,7 @@ import com.jb.review.model.vo.Review;
  */
 @WebServlet("/review/updateReview")
 public class ReviewUpdateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,24 +26,24 @@ public class ReviewUpdateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo=Integer.parseInt(request.getParameter("rNo"));
-		Review r = new ReviewService().selectReviewOne(rNo);
-		
-		request.setAttribute("review", r);
-		request.getRequestDispatcher("/views/review/pensionReviewUpdate.jsp").forward(request, response);
-		
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      int rNo=Integer.parseInt(request.getParameter("rNo"));
+      Review r = new ReviewService().selectReviewOne(rNo);
+      
+      request.setAttribute("review", r);
+      request.getRequestDispatcher("/views/review/pensionReviewUpdate.jsp").forward(request, response);
+      
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

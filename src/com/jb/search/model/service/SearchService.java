@@ -36,7 +36,7 @@ public class SearchService {
 	public Pension selectDetail(String pCode) {
 		Connection conn=getConnection();
 		Pension p=dao.selectDetail(conn,pCode);
-		
+		System.out.println("서비스에서 받아오는지 : " + pCode);
 		close(conn);
 		return p;
 	}
@@ -52,6 +52,14 @@ public class SearchService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public List<Pension> searchMapResultLoad(String keyword, double y, double x) {
+		Connection conn=getConnection();
+		List<Pension> list =dao.searchMapResultLoad(conn,keyword,y,x);
+		
+		close(conn);
+		return list;
 	}
 
 }

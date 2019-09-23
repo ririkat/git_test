@@ -1,3 +1,4 @@
+<%@page import="java.awt.Checkbox"%>
 <%@page import="com.jb.pension.model.vo.RoomFacilities"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -96,47 +97,34 @@
 <%--     <%=rf!=null&&!rf.getBed().isEmpty()?"checked":"" %> --%>
       <h3>객실 부대시설</h3><br>
       <p style="text-align: center">
-	  침대<input type="checkbox" disabled name="roomfac" id="fac1" value="<%=r.getRoomFac().getBed()%>"<%=rf!=null&&!rf.getDressTable().isEmpty()?"checked":"" %>>  
-	  화장대<input type="checkbox" disabled name="roomfac" id="fac2" value="<%=r.getRoomFac().getDressTable()%>"<%=rf!=null&&!rf.getDressTable().isEmpty()?"checked":"" %>>
-	  테이블<input type="checkbox" disabled name="roomfac" id="fac3" value="<%=r.getRoomFac().getTable()%>"<%=rf!=null&&!rf.getTable().isEmpty()?"checked":"" %>>
-	  소파<input type="checkbox" disabled name="roomfac" id="fac4" value="<%=r.getRoomFac().getSofa()%>"<%=rf!=null&&!rf.getSofa().isEmpty()?"checked":"" %>>
-	  옷장<input type="checkbox" disabled name="roomfac" id="fac5" value="<%=r.getRoomFac().getDressCase()%>"<%=rf!=null&&!rf.getDressCase().isEmpty()?"checked":"" %>>
-	  욕조<input type="checkbox" disabled name="roomfac" id="fac6" value="<%=r.getRoomFac().getBath()%>"<%=rf!=null&&!rf.getBath().isEmpty()?"checked":"" %>>
-	  스파<input type="checkbox" disabled name="roomfac" id="fac7" value="<%=r.getRoomFac().getSpa()%>"<%=rf!=null&&!rf.getSpa().isEmpty()?"checked":"" %>>
-	  세면도구<input type="checkbox" disabled name="roomfac" id="fac8" value="<%=r.getRoomFac().getWashKit()%>"<%=rf!=null&&!rf.getWashKit().isEmpty()?"checked":"" %>> 
-	  티비<input type="checkbox" disabled name="roomfac" id="fac9" value="<%=r.getRoomFac().getTv()%>">
+      
+
+
+	침대<input type="checkbox" disabled name="roomfac" id="fac1" value="<%=r.getRoomFac().getBed()%>"<%=rf.getBed() == "Y"?"checked":""%>>  
+	  화장대<input type="checkbox" disabled name="roomfac" id="fac2" value="<%=r.getRoomFac().getDressTable()%>"<%=rf.getDressTable() == "Y"?"checked":""%>> 
+	  테이블<input type="checkbox" disabled name="roomfac" id="fac3" value="<%=r.getRoomFac().getTable()%>"<%=rf.getTable() == "Y"?"checked":""%>> 
+	  소파<input type="checkbox" disabled name="roomfac" id="fac4" value="<%=r.getRoomFac().getSofa()%>"<%=rf.getSofa() == "Y"?"checked":""%>> 
+	  옷장<input type="checkbox" disabled name="roomfac" id="fac5" value="<%=r.getRoomFac().getDressCase()%>"<%=rf.getDressCase() == "Y"?"checked":""%>> 
+	  욕조<input type="checkbox" disabled name="roomfac" id="fac6" value="<%=r.getRoomFac().getBath()%>"<%=rf.getBath() == "Y"?"checked":""%>> 
+	  스파<input type="checkbox" disabled name="roomfac" id="fac7" value="<%=r.getRoomFac().getSpa()%>"<%=rf.getSpa() == "Y"?"checked":""%>> 
+	  세면도구<input type="checkbox" disabled name="roomfac" id="fac8" value="<%=r.getRoomFac().getWashKit()%>"<%=rf.getWashKit() == "Y"?"checked":""%>> 
+	  티비<input type="checkbox" disabled name="roomfac" id="fac9" value="<%=r.getRoomFac().getTv()%>"<%=rf.getTv() == "Y"?"checked":""%>> 
 	 <br><br> 
-	  빔프로젝터<input type="checkbox" disabled name="roomfac" id="fac10" value="<%=r.getRoomFac().getBeam()%>">
-	  에어컨<input type="checkbox" disabled name="roomfac" id="fac11" value="<%=r.getRoomFac().getAircon()%>">
-	  냉장고<input type="checkbox" disabled name="roomfac" id="fac12" value="<%=r.getRoomFac().getFridge()%>">
-	  조리시설<input type="checkbox" disabled name="roomfac" id="fac13" value="<%=r.getRoomFac().getCookFac()%>">
-	  조리기구<input type="checkbox" disabled name="roomfac" id="fac14" value="<%=r.getRoomFac().getCookUten()%>">
-	  밥솥<input type="checkbox" disabled name="roomfac" id="fac15" value="<%=r.getRoomFac().getRice()%>">
-	  전자레인지<input type="checkbox" disabled name="roomfac" id="fac16" value="<%=r.getRoomFac().getMicrowave()%>">
-	  개별바베큐<input type="checkbox" disabled name="roomfac" id="fac17" value="<%=r.getRoomFac().getrSmoked()%>">
-	  유아시설<input type="checkbox" disabled name="roomfac" id="fac18" value="<%=r.getRoomFac().getChild()%>">
-	  오션뷰<input type="checkbox" disabled name="roomfac" id="fac19" value="<%=r.getRoomFac().getoView()%>">
-	  인피니티풀   <input type="checkbox" disabled name="roomfac" id="fac20" value="<%=r.getRoomFac().getiPool()%>">
+	  빔프로젝터<input type="checkbox" disabled name="roomfac" id="fac10" value="<%=r.getRoomFac().getBeam()%>"<%=rf.getBeam() == "Y"?"checked":""%>> 
+	  에어컨<input type="checkbox" disabled name="roomfac" id="fac11" value="<%=r.getRoomFac().getAircon()%>"<%=rf.getAircon() == "Y"?"checked":""%>> 
+	  냉장고<input type="checkbox" disabled name="roomfac" id="fac12" value="<%=r.getRoomFac().getFridge()%>"<%=rf.getFridge() == "Y"?"checked":""%>> 
+	  조리시설<input type="checkbox" disabled name="roomfac" id="fac13" value="<%=r.getRoomFac().getCookFac()%>"<%=rf.getCookFac() == "Y"?"checked":""%>> 
+	  조리기구<input type="checkbox" disabled name="roomfac" id="fac14" value="<%=r.getRoomFac().getCookUten()%>"<%=rf.getCookUten() == "Y"?"checked":""%>> 
+	  밥솥<input type="checkbox" disabled name="roomfac" id="fac15" value="<%=r.getRoomFac().getRice()%>"<%=rf.getRice() == "Y"?"checked":""%>> 
+	  전자레인지<input type="checkbox" disabled name="roomfac" id="fac16" value="<%=r.getRoomFac().getMicrowave()%>"<%=rf.getMicrowave() == "Y"?"checked":""%>> 
+	  개별바베큐<input type="checkbox" disabled name="roomfac" id="fac17" value="<%=r.getRoomFac().getrSmoked()%>"<%=rf.getrSmoked() == "Y"?"checked":""%>> 
+	  유아시설<input type="checkbox" disabled name="roomfac" id="fac18" value="<%=r.getRoomFac().getChild()%>"<%=rf.getChild() == "Y"?"checked":""%>> 
+	  오션뷰<input type="checkbox" disabled name="roomfac" id="fac19" value="<%=r.getRoomFac().getoView()%>"<%=rf.getoView() == "Y"?"checked":""%>> 
+	  인피니티풀   <input type="checkbox" disabled name="roomfac" id="fac20" value="<%=r.getRoomFac().getiPool()%>"<%=rf.getiPool() == "Y"?"checked":""%>> 
+
       </p>
     </div>
     
-  <script>
-  
-  window.onload = function() {
-	  
-	  var chkbox = document.getElementsByName('roomfac');
-		
-	  
-	  for(var i =0; i<chkbox.length; i++){
-		  if(chkbox[i].value=="Y") {
-			  chkbox[i].checked = true;
-		  }
-		  else
-		  {
-		  chkbox[i].checked = false;
-		  }
-	  }
-  }
-  </script>  
+
 </section>
 
