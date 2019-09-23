@@ -28,7 +28,7 @@ public class RoomReservationServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-<<<<<<< HEAD
+
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
@@ -66,7 +66,7 @@ public class RoomReservationServlet extends HttpServlet {
     	  msg = "등록 실패";
     	  loc = "/";
       }
-=======
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

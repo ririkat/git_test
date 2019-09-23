@@ -1,27 +1,4 @@
-/* 
-#fffcf0 : 누리끼리색 - .ivory
-#dedcee : 옅은 남?보라?색 - .navy
-#6a60a9 : 진한 남?보라?색 - .thNavy
-#fbd14b : 노랭이 - .yellow */
 
-/* 타이틀폰트 - 굵 */
-@font-face {
-	font-family: 'TmonMonsori';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-/* 컨텐츠폰트 - 얇 */
-@font-face {
-	font-family: 'BBTreeGR';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 /* 글씨 */
 /* 전체 기본 폰트 : 얇은 */

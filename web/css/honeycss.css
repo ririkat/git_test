@@ -206,6 +206,12 @@ label {
 	box-sizing: border-box;
 }
 
+
+#navbg{
+         background-color:#6a60a9 !important;;
+         
+     }
+
 .form-signin .form-control:focus {
 	z-index: 2;
 }
