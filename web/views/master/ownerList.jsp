@@ -75,7 +75,7 @@ th {
 	<br> <br> <br>
 	<!--         	<div class="" style="padding: 10px  10px 10px 10px"> -->
 	<!--            		 <div class="table-responsive"> -->
-	<table class="table table-striped  table-sm">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th><input type="checkbox" id="allCheck"

@@ -67,7 +67,12 @@
                         R_NOP : <%=r.getrNop() %> <br>
                      </p>
                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="moveJsp();">View</button>
+                         <script>
+							function moveJsp(){
+								location.href="<%=request.getContextPath()%>/master/roomDetail?pCode=<%=p.getpCode()%>&rNo=<%=r.getrNo()%>";
+							}
+						 </script>
                      </div>
                   </div>
                <br><br>
@@ -84,8 +89,6 @@
             <li><%=request.getAttribute("pageBar") %></li>
          </ul>
       </div>
-
    </div>
-  
-
+   
 <%@ include file="/views/common/footer.jsp"%>
