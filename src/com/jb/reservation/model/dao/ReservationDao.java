@@ -1,4 +1,4 @@
-	package com.jb.reservation.model.dao;
+package com.jb.reservation.model.dao;
 
 import static common.template.JDBCTemplate.close;
 
@@ -234,58 +234,6 @@ public class ReservationDao {
 		return result;
 	}
 
-
-	
-//	public Room loadReservatedRoom(Connection conn, String resCode) {
-//		
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		Room r = null;
-//		String sql=prop.getProperty("loadReservatedRoom");
-//		try {
-//			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, resCode);
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {
-//				
-//				r=new Room();
-//				r.setrNo(rs.getString("r_no"));
-//				r.setrName(rs.getString("r_name"));
-//				r.setrPrice(rs.getInt("r_price"));
-//				r.setrNop(rs.getInt("r_nop"));
-//				r.setrMaxNop(rs.getInt("r_maxnop"));
-//				r.setrSize(rs.getString("r_size"));
-//				r.setpCode(rs.getString("p_code"));
-//				r.setrStruc(rs.getString("r_struc"));
-//				r.setrInfo(rs.getString("r_info"));
-//				r.setrAddPrice(rs.getInt("r_addprice"));
-//				
-//				r.setPension(new Pension(
-//				rs.getString("p_code"),
-//				rs.getString("p_name"),
-//				rs.getString("p_addr"),
-//				rs.getString("p_tel"),
-//				rs.getString("o_id"),
-//				rs.getString("enrollYn"),
-//				rs.getInt("p_blcount"),
-//				rs.getDate("p_enrollDate")));
-//				
-//			}
-//				
-//				
-//			}catch(SQLException e) {
-//				e.printStackTrace();
-//			}finally {
-//				close(rs);
-//				close(pstmt);
-//			}return r;
-//		}
-//	
-
-	
-	
-	
-
 	
 	public int insertPayInfo(Connection conn, Payment pay) {
 		
@@ -498,7 +446,3 @@ public class ReservationDao {
 	
 }
 		
-		
-
-
-

@@ -11,11 +11,12 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideMaster.jsp"%>
             <!--content영역-->
-            <div class="col-md-10">
+<div class="col-md-10">
+    <div class="mContent">
                 <br><br><br>
-                <h2 style="text-align:center">회원관리</h2> <br>
+                <h2 class="mListTitle">회원관리</h2><br>
                 
-                <div class="pull-left">
+                <div class="mSearch">
                 	검색타입 : 
                 	<select id="searchType" style="width:90px;height:25px;">
                 		<option value="clientId" <%="c_id".equals(searchType)?"selected":"" %>>아이디</option>
@@ -179,5 +180,7 @@
 		        </script>
                
             </div>
-            
+</div>
+
+
 <%@ include file="/views/common/footer.jsp"%>

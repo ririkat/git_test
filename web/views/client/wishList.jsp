@@ -1,33 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	
+<%@
+	page import="java.util.ArrayList,com.jb.wishlist.model.vo.WishList,java.util.List"
+%>
+
 <%@ include file="/views/common/header.jsp"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.jb.client.model.vo.WishList"%>
 <%
-	/* Client c = (Client) request.getAttribute("client");
-	
-	Cookie[] cookies = request.getCookies();
-	String pCode="";
-	if(cookies!=null){
-		
-		for(int i = 0; i<cookies.length; i++){
-			
-			String key = cookies[i].getName();
-			
-			if(key!=null && key.trim().equals("pCode")){
-				
-				pCode=cookies[i].getValue();
-			}
-		}
-	} */
-
-	//세션에 있는 하나의 찜목록을 빼내서 list를 정의해줌
-
-	ArrayList<WishList> wishList = (ArrayList<WishList>)session.getAttribute("wishList");
+	List<WishList> list=(List)request.getAttribute("list");
 %>
 
 <style>
-
 /* 예약내역, 찜 내역 제목 */
 #reservedtitle, #jjimtitle {
 	font-family: 'TmonMonsori';
@@ -81,56 +63,31 @@ th, td {
 
 <div class="container-fluid">
 	<div class="row content">
-		<div class="col-sm-3 sidenav">
+	
+		<div class="col-sm-3 sidenav"><!--마이페이지 사이드메뉴 -->
 			<br> <br>
-			<h4 id="mypagetitle">
-				<a href="mypage.html">&nbsp;&nbsp;마이페이지</a>
-			</h4>
+			<h4 id="mypagetitle"><a href="mypage.html">&nbsp;&nbsp;마이페이지</a></h4>
 			<div id="mypageList">
 				<ul class="nav nav-pills nav-stacked">
 					<br>
-				
-                         <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
+                        <li><a href="<%=request.getContextPath()%>/views/client/mypageHome.jsp">&nbsp;&nbsp;예약확인/취소</a></li>
                         <li class="active"><a href="<%=request.getContextPath()%>/client/wishList">&nbsp;&nbsp;내가찜한펜션</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/infoLoad?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;회원정보수정</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/updatePassword?cId=<%=loginClient.getcId()%>">&nbsp;&nbsp;비밀번호변경</a></li>
                         <li><a href="<%=request.getContextPath()%>/client/deleteLoad?cId=<%=loginClient.getcId()%>">회원탈퇴</a></li>
-					
+					<br>
 				</ul>
-				<br>
 			</div>
+		</div><!--마이페이지 사이드메뉴 끝 -->
 
-		</div>
-
-		<!-- 마이페이지 nav끝 -->
-
-		<!-- 내가 찜한 객실 시작 -->
-
-		<section>
-
-
-
-
-
+		<section><!-- 내가 찜한 객실 시작 -->
 			<h4 id="jjimtitle" style="text-align: center">내가 찜한 펜션</h4>
-
-
-
-
 			<div class="all-clear">
 				<button class="btn btn-warning" id="all-clear" onclick="">목록모두삭제</button>
 			</div>
-
-			<%
-				if (wishList == null || wishList.size() <= 0) {
-			%>
-			
+			<%if (list == null || list.size() <= 0) {%>
 			<h1>찜한 펜션이 없습니다.</h1>
-			
-			<%
-				} else {
-			%>
-
+			<%} else {%>
 			<table class="wish-list">
 				<colgroup>
 					<!-- 공백부분 -->
@@ -152,7 +109,6 @@ th, td {
 					<thead>
 						<tr>
 							<th scope="row"></th>
-
 							<th scope="row">펜션사진</th>
 							<th scope="row">펜션이름</th>
 							<th scope="row">펜션주소</th>
@@ -161,17 +117,16 @@ th, td {
 							<th scope="row">처리</th>
 						</tr>
 					</thead>
-
 					<tbody>
-
 						<%
-							for (int i = 0; i < wishList.size(); i++) {
-									WishList w = wishList.get(i);
+							for (int i = 0; i < list.size(); i++) {
+									WishList w = list.get(i);
+									
+									System.out.println("여기다 이놈아");
+									System.out.println(w.getpCode());
 						%>
-
 						<form name="pension-jjim-match-Frm" method="post">
-							<input type="hidden" id="" name="pCode"
-								value="<%=w.getpCode()%>" />
+							<input type="hidden" id="" name="pCode" value="<%=w.getpCode()%>" />
 						</form>
 						<tr>
 							<td></td>
@@ -187,58 +142,21 @@ th, td {
 							<td class="td-phone"><%=w.getpTel()%></td>
 							<td class=""><button class="btn btn-warning">보기</button></td>
 							<td class="">
-								<button class="btn btn-warning" id="btn-delete">삭제</button>
+							<button class="btn btn-warning" id="btn-delete">삭제</button>
 							</td>
 						</tr>
-
-						<%
-							}
-						%>
-
-
+						<%} %>
 					</tbody>
-
 				</form>
-
-
 			</table>
-			<%
-				}
-			%>
-
-
+			<%} %>
 		</section>
-
-		<!-- 내가 찜한 객실 끝 -->
+		<!-- 내가 찜한 객실 끝 -->	
 		
-		
-		
-		<script>
-		
-		$(function(){
-			
-			$('#btn-delete').click(function(){
-				
-				
-					
-				if(confirm("정말로 삭제하시겠습니까?")){
-					
-					session.removeAttribute("wishList");
-				}
-			}
-		}
-		
-		}
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		</script>
-
-		<%@ include file="/views/common/footer.jsp"%>
+<script>
+// 	$(function(){
+// 		$('#btn-delete').click(function(){
+// 			if(confirm("정말로 삭제하시겠습니까?")){
+// 	}
+</script>
+<%@ include file="/views/common/footer.jsp"%>
