@@ -12,6 +12,7 @@
 	Pension p = (Pension)request.getAttribute("pension");
 %>
 
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -49,6 +50,8 @@
 				</div>
 			</div>
 			
+			
+			
 			<!--    펜션이름, 방이름, 최대인원수, 추가인원 , 달력, 최종가격 form -->
 			
 			<form name="res1" class="reservation-form" method="post" action="<%=request.getContextPath()%>/reservation" onsubmit="return res_validate();">
@@ -66,20 +69,23 @@
 						인원 수 입력 : <input type="text" name="resNo_" id="addtext" value="0" onkeyup="OnKeyUp(this.value)" maxlength="2"
 						style="width: 40px; height: 20px; font-size: 20px; text-align: center;">명
 						<br>
-						체크인<input type=date name="checkIn" style="width: 130px; height: 20px;" ><br>
-						체크아웃<input type=date name="checkOut" style="width: 130px; height: 20px;">
+						체크인<input type="date" name="checkIn"  disabled style="width: 130px; height: 20px;" ><br>
+						체크아웃<input type="date" name="checkOut" style="width: 130px; height: 20px;">
 						<br><br><br><br>
 						<div id="pe">총 인원 수 : 0명</div>
 						
 						<input type="hidden" name="resNop" id="m_p">
 						<br>
 						<br>
-						
-						
+
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
-						<%-- <input type="hidden" name="cId" value="<%=loginClient.getcId()%>"> --%>
+						
+						<%if(loginClient!=null) {%>
+						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
+						<%} %>
+						
 						<div id="rNo_" style="display: none;"></div>
 						<input type="hidden" name="rNo" id="rnno" value="">
 						
@@ -120,7 +126,6 @@
 		</div>
 		<hr>
 	</div>
-
 
 	<!--   펜션안내 -->
 	<div class="container text-center">
@@ -252,6 +257,7 @@
 					success : function(data) {
 						sel.html(data);
 						//그 형제 태그 안에 ajax 결과값을 출력해줌
+						
 					}
 				});
 	<%-- var rname=<%=p.getRoomList().get(0).getrName()%>
@@ -287,7 +293,7 @@
 			var addprice = selectValue[2]
 			var selectrno = selectValue[3]			
 			
-
+		
 			var addtext = document.getElementById("rNo_");
 			addtext.innerText = "방번호" + selectrno
 			console.log("방번호" + selectrno)
