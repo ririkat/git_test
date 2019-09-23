@@ -22,6 +22,11 @@
                             </a>
                         </li>
                         <li>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/owner/resWaitClientList?oId=<%=loginOwner.getoId() %>">
+                                  승인대기 -예약자 </span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="nav-link" href="<%=request.getContextPath()%>/owner/ownerInfo?oId=<%=loginOwner.getoId()%>">
                                개인정보수정</a>
                         </li>

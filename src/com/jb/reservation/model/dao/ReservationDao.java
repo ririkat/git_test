@@ -5,10 +5,10 @@ import static common.template.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -53,7 +53,26 @@ public class ReservationDao {
 		return result;
 	}
 	
-
+	//
+	public int selectReservationCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = prop.getProperty("selectReservationCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 	
 	public List<Reservation> loadReservationList(Connection conn, String cId) {
@@ -114,58 +133,106 @@ public class ReservationDao {
 		}
 		return list;
 	}
+	
+	//오버로딩 장원
+	public List<Reservation> loadReservationList2(Connection conn) {
+//		PreparedStatement pstmt = null;
+		Statement stmt=null;
+		ResultSet rs = null;
+		List<Reservation> list = new ArrayList<Reservation>();
+//		String sql = prop.getProperty("loadReservationList2");
+		String sql = "select * from reservation res inner join room r on res.r_no=r.r_no inner join pension p on r.p_code=p.p_code inner join client c on res.c_id = c.c_id inner join payment pay on res.res_code=pay.res_code where res_state='N'";
+		try {
+//			pstmt = conn.prepareStatement(sql);
+//			rs= pstmt.executeQuery();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while (rs.next()) {
+				Reservation r = new Reservation();
 
+				r.setrNo(rs.getString("r_no"));
+				r.setcId(rs.getString("c_id"));
+				r.setResCode(rs.getString("res_code"));
+				r.setResCheckIn(rs.getDate("res_checkin"));
+				r.setResCheckOut(rs.getDate("res_checkout"));
+				r.setResState(rs.getString("res_state"));
+				r.setResNop(rs.getInt("res_nop"));
+				r.setTotalPrice(rs.getInt("total_price"));
+			    r.setResDate(rs.getDate("res_date"));
+			    
+			
+			    r.setRoom(new Room(rs.getString("r_no"),rs.getString("r_name")
+			    		,rs.getInt("r_price"),rs.getInt("r_nop"),rs.getInt("r_maxnop")
+			    		,rs.getString("r_size"),rs.getString("p_code"),rs.getString("r_struc")
+			    		,rs.getString("r_info"),rs.getInt("r_addprice")));
+			    
+				r.setPension(new Pension(
+						rs.getString("p_code"),
+						rs.getString("p_name"),
+						rs.getString("p_addr"),
+						rs.getString("p_tel"),
+						rs.getString("o_id"),
+						rs.getString("enrollYn"),
+						rs.getInt("p_blcount"),
+						rs.getDate("p_enrollDate")));
+				
+				r.setPayment(new Payment(
+						rs.getString("pay_code"),
+						rs.getDate("pay_date"),
+						rs.getString("pay_method"),
+						rs.getString("res_code")));
 
+				r.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
+						rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
+						rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
+						rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
+				
+				list.add(r);
+				System.out.println(r);
+				System.out.println("DAO에서 list :"+list);
+				System.out.println(r.getRoom().getrName());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+//			close(pstmt);
+			close(stmt);
+		}
+		return list;
+	}
 	
-//	public Room loadReservatedRoom(Connection conn, String resCode) {
-//		
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		Room r = null;
-//		String sql=prop.getProperty("loadReservatedRoom");
-//		try {
-//			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, resCode);
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {
-//				
-//				r=new Room();
-//				r.setrNo(rs.getString("r_no"));
-//				r.setrName(rs.getString("r_name"));
-//				r.setrPrice(rs.getInt("r_price"));
-//				r.setrNop(rs.getInt("r_nop"));
-//				r.setrMaxNop(rs.getInt("r_maxnop"));
-//				r.setrSize(rs.getString("r_size"));
-//				r.setpCode(rs.getString("p_code"));
-//				r.setrStruc(rs.getString("r_struc"));
-//				r.setrInfo(rs.getString("r_info"));
-//				r.setrAddPrice(rs.getInt("r_addprice"));
-//				
-//				r.setPension(new Pension(
-//				rs.getString("p_code"),
-//				rs.getString("p_name"),
-//				rs.getString("p_addr"),
-//				rs.getString("p_tel"),
-//				rs.getString("o_id"),
-//				rs.getString("enrollYn"),
-//				rs.getInt("p_blcount"),
-//				rs.getDate("p_enrollDate")));
-//				
-//			}
-//				
-//				
-//			}catch(SQLException e) {
-//				e.printStackTrace();
-//			}finally {
-//				close(rs);
-//				close(pstmt);
-//			}return r;
-//		}
-//	
-
-	
-	
-	
+	//예약자 승인대기 삭제
+	public int deleteResList(Connection conn,String delList) {
+		Statement stmt=null;
+		int result= 0;
+		String sql = "delete from reservation where c_id in (";
+		String[] arrDelList = delList.split(",");
+		for(int i=0; i<arrDelList.length; i++) {
+			arrDelList[i] = "'"+arrDelList[i]+"'";
+		}
+		if(arrDelList.length<2) {
+			sql += arrDelList[0]+")";
+		}
+		else {
+			sql += arrDelList[0];
+			for(int i=1; i<arrDelList.length; i++) {
+				sql += ","+arrDelList[i];
+			}
+			sql += ")";
+		}
+		
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
 
 	
 	public int insertPayInfo(Connection conn, Payment pay) {
@@ -346,6 +413,37 @@ public class ReservationDao {
 		return result;
 	}
 	
+	
+	public int acceptResList(Connection conn, String accList) {
+		Statement stmt=null;
+		int result=0;
+		String sql = "update reservation set res_state='Y' where c_id in (";
+		
+		String[] accDelList = accList.split(",");
+		for(int i=0; i <accDelList.length; i++) {
+			accDelList[i] = "'" + accDelList[i] + "'";
+		}
+		if(accDelList.length<2) {
+			sql += accDelList[0] + ")";
+		}else {
+			sql += accDelList[0];
+			for(int i=1; i< accDelList.length; i++) {
+				sql += "," + accDelList[i];
+			}
+			sql += ")";
+		}
+		try {
+			stmt=conn.createStatement();
+			result=stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
+	
+	
 	public Reservation checkIncheck(Connection conn, Date CheckIn) {
 		
 		PreparedStatement pstmt = null;
@@ -372,5 +470,4 @@ public class ReservationDao {
 		
 		
 }
-
-
+  

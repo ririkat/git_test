@@ -61,7 +61,7 @@
          <input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteReview()"/>
          <input type="button" class="btn btn-default pull-right" value="수정" onclick="updateReview()"/>
       <%} %>
-      <input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>
+<!--       <input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/> -->
    <script>
       function toList(){
          location.href="<%=request.getContextPath() %>/review/clientReviewList?pensionCode=<%=pCode%>";
