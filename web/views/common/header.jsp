@@ -138,6 +138,16 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
+nav#myNavbar{
+
+background-color:#6a60a9 !important;
+
+margin-bottom: 0.1px;
+
+}
+
+
 </style>
 </head>
 
@@ -146,7 +156,7 @@
 	<!-- 헤더 -->
 	<!-- 네이게이션 -->
 	<header>
-		<nav class="navbar navbar-inverse navbg">
+		<nav class="navbar navbar-inverse navbg" id="myNavbar">
 <!--  		<nav class="navbar navbar-inverse navbar-fixed-top navbg"> -->
 			<!--위에 코드로하면 헤더가 바디까지 섹션을 먹어서 바디 윗부분이 짤림,-->
 			
@@ -165,21 +175,14 @@
 				<!-- <button type="button" class="navbar-nav btn pull-right btn-srch" id="btn-srch">
 						<span class="glyphicon glyphicon-search btn-srch"></span>
 				</button> -->
-				<div class="pull-right">
-					<form action="" class="search-form">
-		               <div class="form-group has-feedback">
-			           		<label for="search" class="sr-only">Search</label>
-			           		<span class="glyphicon glyphicon-search form-control-feedback"></span>
-			           		<input type="text" class="form-control" name="search" id="search" placeholder="search">
-		           		</div>
-		           	</form>
-		         </div>
 
 				<div class=" collapse navbar-collapse " >
-					<ul class="nav navbar-nav navbar-left font2" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right font2" id="myNavbar">
 					<!-- 로그인 정책 
 					1. 회원로그인/업주 로그인 두종류로 구성
 					2. 관리자는 회원로그인에서 권한이 1인 경우 관리자로 설정 -->
+					<li><a class="aa" href="<%=request.getContextPath()%>/search/load">키워드검색</a></li>
+					<li><a class="aa" href="<%=request.getContextPath()%>/search/loadMap">지도검색</a></li>
 						<li><a class="aa" href="<%=request.getContextPath()%>/notice/noticeList">게시판</a></li>
 						<% if (loginClient == null&&loginOwner==null) {%>
 							<li><a class="aa" href="<%=request.getContextPath()%>/login"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>

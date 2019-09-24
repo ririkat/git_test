@@ -55,7 +55,7 @@
 					<th class="point"><strong class="point">*</strong>성별</th>
 					<td>
 						<%
-							if (o.getoGender().trim().equals("M")) {
+							if (o!=null&&o.getoGender().trim().equals("M")) {
 						%> <input type="radio" name="oGender" id="oGender0" value="M"
 						checked> <label for="oGender0">남</label> <input
 						type="radio" name="oGender" id="oGender1" value="F"> <label

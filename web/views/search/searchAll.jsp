@@ -204,7 +204,7 @@
 									<%-- <a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
 										class="btn btn-default" role="button">예매상세</a> --%>
 
-								<%if(loginClient.getcId()!=null){%>
+								<%if(loginClient!=null){%>
 									<a href="<%=request.getContextPath()%>/client/wishList?
 									pCode=<%=list.get(i).getpCode()%>
 									&pImage=<%=list.get(i).getPenFile().get(0).getpRenameFile() %>

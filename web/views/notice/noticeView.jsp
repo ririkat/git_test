@@ -41,7 +41,7 @@
 						<th>내용</th>
 						<td><%=n.getnContent()%></td>
 					</tr>
-					<%if(loginClient.getAuthority()==1){ %>
+					<%if(loginClient!=null&&loginClient.getAuthority()==1){ %>
 					<tr>
 						<td colspan="2" class="text-center">
 						<input type="button" value="수정하기" onclick="notice_modify();" class="btn my-btn"/>
