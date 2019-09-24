@@ -81,7 +81,7 @@
         	return true;
         }  
         
-        function findPW(){
+        function findPW() {
         	location.href="<%=request.getContextPath()%>/FindPw";
         }
     </script>

@@ -17,14 +17,17 @@
 </style>
 </head>
 <body>
+
+	
 	<div id="checkid-container">
 	
 		<%if(isUseable) { %>
-		[<span><%=id %></span>]는 사용 가능합니다.
-		<br><br>
+		<span style="font-size: 50px;"><%=id %></span><br><br>
+		 사용 가능합니다.
+		<br><br><br>
 		<button type="button" onclick="setUserId();">닫기</button>
 		<%} else {%>
-		[<span id="duplicated"><%=id %></span>]는 이미 사용중입니다.
+		<span id="duplicated" style="font-size: 50px;"><%=id%></span><br><br>이미 사용중인 아이디 입니다
 		<br><br>
 		<form action="<%=request.getContextPath()%>/checkId" method="post" name="checkId">
 			<input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요"/>&nbsp;&nbsp;
