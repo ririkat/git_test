@@ -15,7 +15,8 @@
 <div class="col-sm-10">
     <div class="mContent">
         <br><br><br>
-		<h2 class="mListTitle">신고내역</h2><br>
+		 <center><p class="title" style="color: #6a60a9;">신고내역</p></center>
+   <br><br>
 		
         <table class="table table-hover">
             <thead>

@@ -4,7 +4,9 @@
 	<%@ page import="java.util.Calendar"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Reservation> list = (List) request.getAttribute("list");
+
+List<Reservation> resList = (List) request.getAttribute("resList");
+   int cPage = (int)request.getAttribute("cPage");
 
  		Calendar now = Calendar.getInstance();
  		int nowYear = now.get(Calendar.YEAR); // 현재 년
@@ -17,14 +19,6 @@
 <style>
 
 /* 예약내역, 찜 내역 제목 */
-#reservedtitle, #jjimtitle {
-	font-family: 'TmonMonsori';
-	font-size: 30px;
-	color: gray;
-	position: relative;
-	top: 40px;
-	/* color: #6a60a9 !important; */
-}
 
 table.wish-list {
 	border-collapse: separate;
@@ -55,7 +49,7 @@ table.wish-list td {
 }
 
 #all-clear {
-	/* margin-right: 50%; */
+
 	float: right;
 	position: relative;
 	right: 130px;
@@ -106,7 +100,7 @@ th, td {
 
 			<br> <br> <br>
 
-			<div class="tit_contents">예약/결제내역</div>
+			 <center><p class="title" style="color: #6a60a9;">예약결제내역</p></center>
 			<br>
 			
 			<hr>
@@ -132,9 +126,9 @@ th, td {
 <!-- 				    인원수 -->
 					<col width="10%" />
 <!-- 				    이용일 -->
-					<col width="10%" />
+					<col width="20%" />
 <!-- 					결제금액 -->
-					<col width="10%" />
+					<col width="20%" />
 <!-- 					예약상태 -->
 					<col width="10%" />
 <!-- 					취소 -->
@@ -217,5 +211,4 @@ th, td {
 		
 	
 		</script>
-
 		<%@ include file="/views/common/footer.jsp"%>

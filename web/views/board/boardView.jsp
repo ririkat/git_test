@@ -11,7 +11,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="faq-container" class="container">
 	<div class="col-sm-9">
-		<h2>게시판</h2>
+		<center><p class="title" style="color: #6a60a9;">게시판</p></center>
 		<table id="tbl-faq" class="table table-bordered">
 			<tr>
 				<td>게시번호</td>
@@ -54,8 +54,8 @@
 				<td colspan="2" class="text-center">
 					<input type="button" id="toSend" class="btn btn-default pull-left" value="글목록으로" onclick="toList()"/>
 						<%if(loginClient!=null && (loginClient.getcId().equals(b.getcId()) || loginClient.getcId().equals("admin"))) { %>
-							<input type="button" class="btn btn-default pull-right" value="삭제" onclick="deleteBoard()"/>
-							<input type="button" class="btn btn-default pull-right" value="수정" onclick="updateBoard()"/>
+							<input type="button" class="btn btn-warning" value="삭제" onclick="deleteBoard()"/>
+							<input type="button" class="btn btn-btn-warning" value="수정" onclick="updateBoard()"/>
 						<%} %>
 						<%if(loginClient!=null){ %>
 						<input type="button" class="btn btn-default pull-right" value="신고" onclick="out()"/>

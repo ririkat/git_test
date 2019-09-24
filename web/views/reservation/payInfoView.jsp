@@ -15,17 +15,78 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
+<style>
+
+.td_ contents_font{
+ font-family: 'BBTreeGR';
+line-height: 15px;
+font: 12px/1.25em;
+
+}
+
+
+
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+
+
+.table_final_auction {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+border-collapse: collapse;
+    background-color: #fff;
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+}
+
+
+
+.table_room2 {
+   display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+
+
+.table_room2 td {
+    border: 1px solid #d1d1d1;
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+
+
+</style>
+
 <section id='write-container'>
 
 	<br> <br> <br> <br>
-	<div id="mypagetitle" text-align="center">결제정보확인</div>
+	<div class="titcontents">결제정보확인</div>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payMethod"
 		action="<%=request.getContextPath()%>/reservation/selectPayMethod">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -50,10 +111,10 @@
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		<div id="mypagetitle" text-align="center">결제금액</div>
+		<div class="titcontents">결제금액</div>
 		<br> <br>
 
-		<table class="table_final_auction" style="table-layout: fixed;">
+		<table border="1" class="table_final_auction" style="table-layout: fixed;">
 			<colgroup>
 				<col width="25%">
 				<col width="25%">
@@ -106,13 +167,12 @@
 
 		<br> <br>
 
-		</table>
 
-		<div id="mypagetitle" text-align="center">결제방법</div>
+		<div class="titcontents">결제방법</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 
-		<table width="100%" class="table_pay_type">
+		<table border="1" width="100%" class="table_pay_type">
 			<colgroup>
 				<col width="100">
 				<col width="440">
@@ -120,11 +180,14 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="3"><span style="margin-right: 30px;"> <input
-							type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
-					</span> <span style="margin-right: 30px;"> <input type="radio"
-							name="pay" id="payCard" value="kakaoPay">카카오페이결제
-					</span></th>
+					<th colspan="3">
+						<span style="margin-right: 30px;">
+							<input type="radio" name="pay" id="payAccount" value="account" checked>무통장입금
+						</span>
+						<span style="margin-right: 30px;">
+							<input type="radio"	name="pay" id="payCard" value="kakaoPay">카카오페이결제
+						</span>
+					</th>
 				</tr>
 			</thead>
 
@@ -132,7 +195,7 @@
 				<tr>
 					<th>입금자명</th>
 					<td><input type="text" name="accountName"
-						style="width: 100px;" value=""> <span class="cff">(입금하실
+						style="width: 100px;" value="<%=resInfo.getClient().getcName()%>"> <span class="cff">(입금하실
 							때 반드시 입금자명으로 입금 해 주세요)</span></td>
 					<th rowspan="3">무통장입금 안내(꼭 기억해주세요)
 						<p class="blk h05">&nbsp;</p>
@@ -151,11 +214,14 @@
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 		<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 
+		<br><br><br>
+		<center>
 		<input type="button" class="btn btn-warning" onclick="preview();"
 			value="이전으로"> <input type="submit" name="payment_btn"
 			class="btn btn-warning" id="payment" onclick=""
 			value="결제하기">
-
+</center>
+<br><br><br>
 	</form>
 
 </section>
@@ -164,17 +230,14 @@
 
 /*  카드.카카오페이로 결제하기를 체크할 때  무통장입금정보 숨김*/
  
-      $(document).ready(function () {
-          $("#payCard").click(function () {
-              if ($("#payCard").prop("checked", true)) {
-
-                  $("#accountInfo").hide();
-               } else {
-
-                   $("#accountInfo").show();
-               
-          }
-
+		$(document).ready(function () {
+             if ($("#payCard").prop("checked", true)) {
+				$("#accountInfo").hide();
+               }
+              else {
+				$("#accountInfo").show();
+			}
+		}
 /* 이전으로 버튼 */
 
 // function preview(){

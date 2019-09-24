@@ -14,7 +14,7 @@
 <div class="col-md-10">
     <div class="mContent">
 	   <br><br><br>
-	   <h2 class="mListTitle">승인 대기중인 업주 목록</h2><br>
+	    <center><p class="title" style="color: #6a60a9;">승인대기중인업주목록</p></center>
 	
 	   <div class="mSearch">
 	      검색타입 : <select id="searchType" style="width: 90px; height: 25px;">

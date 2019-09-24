@@ -46,7 +46,7 @@ String cBirthDD=str.substring(8, 10);
          <br>
 
          <section id="enroll-container">
-            <div class="tit_contents">회원정보수정</div>
+             <center><p class="title" style="color: #6a60a9;">회원정보수정</p></center>
             <br>
             <hr>
             <br>
@@ -173,13 +173,16 @@ String cBirthDD=str.substring(8, 10);
    
             <br>
             <br>
-            <div class="button">
+           
+            <center>
 
                <input type="submit" class="btn btn-warning" id="btn-update"  onclick="updateClient();" value="수정"> 
                <input
                   type="reset" onclick="" class="btn btn-warning"  value="뒤로가기">
+                  
+                  </center>
 
-            </div>
+
 
 
             <hr>

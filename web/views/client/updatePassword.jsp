@@ -3,8 +3,6 @@
 <%@ page import="com.jb.client.model.vo.Client"%>
 <%
 	Client c = (Client) request.getAttribute("client");
-	
-	
 
 %>
 
@@ -50,7 +48,7 @@
 
 
 
-				<div class="tit_contents">비밀번호변경</div>
+				 <center><p class="title" style="color: #6a60a9;">비밀번호변경</p></center>
 				<br>
 				<hr>
 				<br>
@@ -83,10 +81,15 @@
 
 						</tbody>
 					</table>
+					<br>
+					<br>
+					<br>
+					<center>
 					<input type="submit" class="btn btn-warning" id="btn-update" name="btn-update" onclick="return password_validate();"
 						value="변경"> 
 						
 						<input type="reset" class="btn btn-warning" onclick="" value="뒤로가기">
+						</center>
 
 					<input type="hidden" name="cId" value='<%=(String) request.getAttribute("cId")%>' />
 						

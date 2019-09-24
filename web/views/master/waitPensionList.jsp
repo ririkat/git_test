@@ -14,7 +14,7 @@
             <div class="col-md-10">
             	<div class="mContent">
 	                <br><br><br>
-	                <h2 class="mListTitle">승인 대기중인 펜션 목록</h2><br>
+	               <center><p class="title" style="color: #6a60a9;">승인대기중인펜션목록</p></center>
 	                
 	                <div class="mSearch">
 	                	검색타입 : 

@@ -9,7 +9,7 @@
 		<div class="col-sm-9">
 			<section id="container">
 				<br> <br> <br> <br> <br>
-				<div class="tit_contents">업주탈퇴</div>
+				<center><p class="title" style="color: #6a60a9;">업주탈퇴</p></center>
 				<br>
 				<hr>
 				<br>

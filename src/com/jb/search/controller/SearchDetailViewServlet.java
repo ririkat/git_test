@@ -3,19 +3,16 @@ package com.jb.search.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jb.pension.model.service.RoomFileService;
-import com.jb.pension.model.service.RoomService;
 import com.jb.pension.model.vo.Pension;
-import com.jb.pension.model.vo.Room;
-import com.jb.pension.model.vo.RoomFile;
 import com.jb.search.model.service.SearchService;
 
 /**
@@ -59,12 +56,26 @@ public class SearchDetailViewServlet extends HttpServlet {
 		java.sql.Date toSqlDate = new java.sql.Date(toDate.getTime());
 		
 
-		Pension p = new SearchService().selectDetail(pCode);
+		Pension p = new SearchService().selectDetail(pCode,fromSqlDate,toSqlDate);
+		String view="";
+		String msg="";
+		String loc="";
+		if(p==null || p.getRoomList()==null) {
+			msg = "예약 가능한 방이 존재하지 않습니다. 검색 화면으로 이동합니다.";
+			request.setAttribute("msg", msg);
+			view = "/views/common/msg.jsp";
+			loc = "/search/load";
+			request.setAttribute("loc", loc);
+			RequestDispatcher rd = request.getRequestDispatcher(view);
+			rd.forward(request, response);
+		}else {
+			request.setAttribute("pension", p);
+			request.setAttribute("from", from);
+			request.setAttribute("to", to);
+			request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("pension", p);
-		request.setAttribute("from", from);
-		request.setAttribute("to", to);
-		request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);
+		
 		
 		System.out.println("서블릿에서 p" + p);
 	}

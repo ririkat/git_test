@@ -25,13 +25,14 @@
 <section id='write-container'>
 
 	<br> <br> <br> <br>
-	<div id="mypagetitle" text-align="center">결제정보확인</div>
+	 <center><p class="title" style="color: #6a60a9;">결제정보확인</p></center>
+   <br><br>
 	<br> <br>
 
 	<form method="post" class="container" name="payFrm" id="payFrm" action="<%=request.getContextPath()%>/reservation/kakaoPaySuccess">
 		<input type="hidden" name="resCode" value="<%=resInfo.getResCode()%>">
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -56,10 +57,10 @@
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		<div id="mypagetitle" text-align="center">결제금액</div>
+		<div class="tit_contents">결제금액</div>
 		<br> <br>
 
-		<table class="table_final_auction" style="table-layout: fixed;">
+		<table border="1" class="table_final_auction" style="table-layout: fixed;">
 			<colgroup>
 				<col width="25%">
 				<col width="25%">
@@ -110,13 +111,12 @@
 
 		<p class="blk h20">&nbsp;</p>
 		<br> <br>
-		</table>
 
-		<div id="mypagetitle" text-align="center">결제방법</div>
+		<div class="tit_contents">결제금액</div>
 		<br> <br>
 		<p class="blk h10">&nbsp;</p>
 
-		<table width="100%" class="table_pay_type">
+		<table border="1" width="100%" class="table_pay_type">
 			<colgroup>
 				<col width="100">
 				<col width="440">

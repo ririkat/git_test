@@ -68,6 +68,8 @@ public class SearchPensionFinder extends HttpServlet {
 		
 		List<Pension> list=new SearchService().findPension(keyword,area,pFac,rFac,nop,fromSqlDate,toSqlDate);
 		request.setAttribute("list", list);
+		request.setAttribute("from", from);
+		request.setAttribute("to", to);
 		request.getRequestDispatcher("/views/search/searchAll.jsp").forward(request, response);
 	}
 

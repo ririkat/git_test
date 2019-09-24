@@ -7,7 +7,8 @@
         
         <section id="enroll-container">
 
-            <div class="tit_contents">업체 회원가입</div>
+             <center><p class="title" style="color: #6a60a9;">업체회원가입</p></center>
+   <br><br>
             <br>
             <hr>
             <br>

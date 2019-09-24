@@ -12,7 +12,7 @@
       <section id="review-container">
          <div class="container">
          <div class="col-sm-9">
-            <h2 class="text-center">리뷰 수정</h2>
+           <center><p class="title" style="color: #6a60a9;">리뷰수정</p></center>
               <form action="<%=request.getContextPath() %>/review/reviewUpdateEnd"
                method="post" enctype="multipart/form-data">
 

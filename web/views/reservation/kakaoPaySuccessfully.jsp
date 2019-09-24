@@ -25,13 +25,14 @@
 <section>
 	<br> <br> <br> <br> <br> <br> <br> <br>
 	<br>
-	<div id="mypagetitle" style="text-align: center">카드결제가 완료되었습니다.</div>
+	 <center><p class="title" style="color: #6a60a9;">카드결제가 완료되었습니다.</p></center>
+   <br><br>
 	<br> <br> <br> <br> <br> <br>
 <	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 <%-- <form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/changeResState"> --%>
 		<h3>예약펜션정보</h3>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>펜션명</th>
@@ -90,7 +91,7 @@
 
 		<h3>결제정보</h3>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 
 			<tbody>
 				<tr>
@@ -111,7 +112,7 @@
 			<h3>고객정보</h3>
 		<br> <br> <br> <br> <br> <br> <br> <br>
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -132,11 +133,8 @@
 			</tbody>
 		</table>
 
-		<h1><%=resName%></h1>
-		님의
-		<p><%=resInfo.getPension().getpName()%>펜션
-		</p>
-		예약이 완료되었습니다.<br> <br> 예약해주셔서 감사합니다. 	
+		<p><%=resName%>님의 <%=resInfo.getPension().getpName()%>펜션 예약이 완료되었습니다. 
+		<br> 예약해주셔서 감사합니다. </p>	
 		<input type="hidden" name ="resCode" value="<%=resInfo.getResCode() %>">
 		<input type="hidden" name ="cId" value="<%=loginClient.getcId()%>">
 		<input type="hidden" name ="payMethod" value="kakaoPay">
