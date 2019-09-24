@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="oracle.net.aso.r"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -57,56 +56,40 @@
 				<div class="col-sm-4">
 					<div class="well">
 						<input type="hidden">
-						<div class="tit_contents"><%=p.getpName()%></div>
-					
+						<h1 style="text-align: center"><%=p.getpName()%></h1>
 						<br> 방 : <select id="selectP" onchange="ChangePrice()">
+						
 							<%for (Room r : p.getRoomList()) { %>
-							<option value="<%=r.getrPrice()%>|<%=r.getrMaxNop()%>|<%=r.getrAddPrice()%>|<%=r.getrNo()%>"><%=r.getrName()%></option>
+							<option value="<%=r.getrPrice()%>|<%=r.getrNop()%>|<%=r.getrMaxNop()%>|<%=r.getrAddPrice()%>|<%=r.getrNo()%>"><%=r.getrName()%></option>
 							<% } %>
 
 						</select><br>
-						기준인원수 : <%=p.getRoomList().get(0).getrNop()%>명
+						<div id="nop"> 기준인원 : <%=p.getRoomList().get(0).getrNop()%>명 </div>
 						<div id="Maxno"> 최대인원수 : <%=p.getRoomList().get(0).getrMaxNop()%>명 </div>
-						추가 인원당 추가 요금 : <%=p.getRoomList().get(0).getrAddPrice() %> 원 <br>
 						인원 수 입력 : <input type="text" name="resNo_" id="addtext" value="0" onkeyup="OnKeyUp(this.value)" maxlength="2"
 						style="width: 40px; height: 20px; font-size: 20px; text-align: center;">명
+						
 						<br><br>
-						체크인<input type="date" name="checkIn" value="<%=from%>" style="width: 150px; height: 30px;" ><br>
-						체크아웃<input type="date" name="checkOut" value="<%=to%>" style="width: 150px; height: 30px;">
+						체크인<input type="text" name="from" id="datepicker" value="<%=from%>"><br>
+						체크아웃<input type="text" name="to" id="datepicker2" value="<%=to%>">
 						
 						<input type="button" name="datecheck" value="조회" onclick="CheckInch();">
-						
 						<br><br><br><br>
 						<div id="pe">총 인원 수 : 0명</div>
 						
 						<input type="hidden" name="resNop" id="m_p">
 						<div id="PriceInfo">가격 : <%=p.getRoomList().get(0).getrPrice()%>원 </div>
 						<input type="hidden" name="totalPrice" value="<%=p.getRoomList().get(0).getrPrice()%>">
-						
 						<input type="hidden" value="<%=p.getRoomList().get(0).getrNo()%>">
-<<<<<<< HEAD
-
-						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
-
-=======
->>>>>>> refs/heads/master
+						<div id="rNo_" style="display: none;"></div>
+						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo() %>">
 						
 						<%if(loginClient!=null) {%>
 						<input type="hidden" name="cId" value="<%=loginClient.getcId()%>">
 						<%} %>
 						
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/master
 						<div id="rNo_" style="display: none;"></div>
-<<<<<<< HEAD
-
-						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo() %>">
-
-=======
 						<input type="hidden" name="rNo" id="rnno" value="<%=p.getRoomList().get(0).getrNo()%>">
->>>>>>> refs/heads/master
 						
 					</div>
 					
@@ -150,7 +133,7 @@
 	<!--   펜션안내 -->
 	<div class="container text-center">
 		<div class="well">
-			<div class="tit_contents">펜션정보</div>
+			<h3>펜션 정보</h3>
 			<p>
 				펜션주소 :
 				<%=p.getpAddr()%></p>
@@ -166,7 +149,7 @@
 	<div class="container text-center">
 		<div class="well">
 
-		<div class="tit_contents">부대시설</div>
+			<h3>부대시설</h3>
 			<br>
 			<br>
 
@@ -209,7 +192,7 @@
 	<div class="container text-center">
 		<div class="well">
 			
-			<div class="tit_contents">객실정보</div><%for (int i = 0; i < p.getRoomList().size(); i++) {%>
+			<h3>예약 가능한 객실 정보</h3><%for (int i = 0; i < p.getRoomList().size(); i++) {%>
 			<!-- 1 -->			
 			<div><h1><%=p.getRoomList().get(i).getrName()%></h1>
 					<br>
@@ -248,7 +231,7 @@
 	<hr>
 	<div class="well">
 		<div class="container text-center">
-			<div class="tit_contents">리뷰게시판</div>
+			<h3 style="text-align: left">리뷰게시판</h3>
 			<p>리뷰</p>
 			<p><p>
 		</div>
@@ -300,6 +283,9 @@
 			}
 
 		}
+		$(function(){
+			 
+		})
 
 		function ChangePrice() {
 			
@@ -309,9 +295,10 @@
 					.split("|");
 
 			var price = selectValue[0]
-			var maxno = selectValue[1]
-			var addprice = selectValue[2]
-			var selectrno = selectValue[3]			
+			var nop = selectValue[1]
+			var maxno = selectValue[2]
+			var addprice = selectValue[3]
+			var selectrno = selectValue[4]			
 			
 		
 			var addtext = document.getElementById("rNo_");
@@ -320,6 +307,7 @@
 			
 			var selectText = selectP.options[selectP.selectedIndex].text;
 			console.log(selectText + "의 가격은 " + price + "입니다.")
+			console.log(selectText + "의 기준인원은 " + nop + "입니다.")
 			console.log(selectText + "의 최대인원수는 " + maxno + "입니다.")
 
 			var PI = document.getElementById("PriceInfo");
@@ -414,12 +402,57 @@
 		}
 		
 		function CheckInch(){
-			var v=$('input[name=checkIn]').val();
-			console.log(v);
-        	location.href="<%=request.getContextPath()%>/checkIncheck?checkIn="+$('input[name=checkIn]').val()+"&checkOut="+$('input[name=checkId]').val();
+			var date1 = new Date($("#datepicker").datepicker("getDate"));
+		     var date2 = new Date($("#datepicker2").datepicker("getDate"));
+			     if(!$("#datepicker").val()) {
+			    	 alert("시작날짜를 선택하세요");
+			    	 return;
+			     }else if(!$("#datepicker2").val()) {
+			    	 alert("끝날짜를 선택하세요");  
+			    	 return;
+			    }else if (date2 - date1 < 0){
+			      alert("끝 날짜가 시작날짜보다 이전일수 없습니다");
+			      return;
+			     }else{
+			    	 location.href="<%=request.getContextPath()%>/search/detailView?pCode=<%=p.getpCode()%>&from="+$("#checkIn").val()+"&to="+$("#checkOut").val();
+			     }
+			/* var v=$('input[name=checkIn]').val();
+			console.log(v); */
         }
+		
+		$(function() {
+            //모든 datepicker에 대한 공통 옵션 설정
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd' //Input Display Format 변경
+                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                ,changeYear: true //콤보박스에서 년 선택 가능
+                ,changeMonth: true //콤보박스에서 월 선택 가능                
+                ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+                ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+                ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
+            });
+ 
+            //input을 datepicker로 선언
+            $("#datepicker").datepicker();
+            var from='<%=from%>';
+            $("#datepicker").datepicker();
+            var from='<%=to%>';
+            $("#datepicker2").datepicker();
+            $("#datepicker2").datepicker();
+            
+        });
 		
 	</script>
 </section>
+
 
 <%@ include file="/views/common/footer.jsp"%>

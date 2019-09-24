@@ -31,7 +31,7 @@
 		 <center><p class="title">예약펜션정보</p></center>
    <br><br>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>펜션명</th>
@@ -91,7 +91,7 @@
 		 <center><p class="title" >결제방법</p></center>
    <br><br><br> <br> <br>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>결제방법</th>
@@ -105,7 +105,7 @@
 
 				<tr>
 				<input type="hidden" name ="payMethod" value="account">
-					<td rowspan="1">무통장입금</td>
+					<td rowspan="1">계좌이체</td>
 					<td rowspan="1">KH은행 1004-1004-1004<br> ( 예금주 : 서현희)
 					</td>
 
@@ -126,7 +126,7 @@
 		<br>
 	
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -146,10 +146,6 @@
 				</tr>
 			</tbody>
 		</table>
-        <br><br><br><br>
-        <div class="container" border="1">
-        <center>
-		<p><%=resName%> 님의 <%=resInfo.getPension().getpName()%>펜션 예약이 완료되었습니다.<br> 
 		<span style="color: #FF8F00;"> 예약확정은 입금 확인 후 진행됩니다.</span>
 		<br> 예약해주셔서 감사합니다. 
 		</center>
@@ -166,6 +162,7 @@
 			<br>
 			<br>
 			<br>
+
 
 	</form>
 

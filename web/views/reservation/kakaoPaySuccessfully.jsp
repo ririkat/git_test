@@ -32,7 +32,7 @@
 <%-- <form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/changeResState"> --%>
 		<h3>예약펜션정보</h3>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 			<tbody>
 				<tr>
 					<th>펜션명</th>
@@ -91,7 +91,7 @@
 
 		<h3>결제정보</h3>
 
-		<table class="table_final_auction">
+		<table border="1" class="table_final_auction">
 
 			<tbody>
 				<tr>
@@ -112,7 +112,7 @@
 			<h3>고객정보</h3>
 		<br> <br> <br> <br> <br> <br> <br> <br>
 
-		<table class="table_final_auction" id="final_input_table">
+		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
 				<col width="20%">
 				<col width="">

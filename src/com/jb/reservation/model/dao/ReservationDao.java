@@ -483,7 +483,148 @@ public class ReservationDao {
 		
 		
 	}
+  
+  	public List<Reservation> selectListPage(Connection conn, String cId, int cPage, int numPerPage){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectListPage");
+		List<Reservation> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Reservation r = new Reservation();
+				
+				r.setrNo(rs.getString("r_no"));
+				r.setcId(rs.getString("c_id"));
+				r.setResCode(rs.getString("res_code"));
+				r.setResCheckIn(rs.getDate("res_checkin"));
+				r.setResCheckOut(rs.getDate("res_checkout"));
+				r.setResState(rs.getString("res_state"));
+				r.setResNop(rs.getInt("res_nop"));
+				r.setTotalPrice(rs.getInt("total_price"));
+			    r.setResDate(rs.getDate("res_date"));
+			    
+			
+			    r.setRoom(new Room(rs.getString("r_no"),rs.getString("r_name")
+			    		,rs.getInt("r_price"),rs.getInt("r_nop"),rs.getInt("r_maxnop")
+			    		,rs.getString("r_size"),rs.getString("p_code"),rs.getString("r_struc")
+			    		,rs.getString("r_info"),rs.getInt("r_addprice")));
+			    
+				r.setPension(new Pension(
+						rs.getString("p_code"),
+						rs.getString("p_name"),
+						rs.getString("p_addr"),
+						rs.getString("p_tel"),
+						rs.getString("o_id"),
+						rs.getString("enrollYn"),
+						rs.getInt("p_blcount"),
+						rs.getDate("p_enrollDate")));
+				
+				r.setPayment(new Payment(
+						rs.getString("pay_code"),
+						rs.getDate("pay_date"),
+						rs.getString("pay_method"),
+						rs.getString("res_code")));
+
+				r.setClient(new Client( rs.getString("c_id"), rs.getString("c_pw"),
+						rs.getString("c_name"), rs.getDate("c_birth"), rs.getString("c_gender"),
+						rs.getString("c_email"), rs.getString("c_phone"), rs.getString("c_addr"),
+						rs.getDate("c_ed"), rs.getInt("c_blcount"), rs.getInt("authority"),rs.getString("readstatus")));
+				
+				list.add(r);
+			}
+		}  catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+  
+  	public int updatePayInfo(Connection conn, Reservation res) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePayInfo");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+		    
+			//예약자 정보 바꾸면 update
+			pstmt.setString(1, res.getClient().getcName());
+			pstmt.setDate(2, res.getClient().getcBirth());
+			pstmt.setString(3, res.getClient().getcPhone());
+			pstmt.setString(4, res.getClient().getcEmail());
+			
+			//결제금액 setting
+			
+			pstmt.setInt(1, res.getRoom().getrPrice());
+			pstmt.setInt(2, res.getRoom().getrAddPrice());
+			pstmt.setInt(3, res.getTotalPrice());
+		
+			result=pstmt.executeUpdate();
+	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+  
+  
+	public int insertPayInfo(Connection conn, Payment pay) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertPayInfo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+		
+			pstmt.setDate(1,(Date) pay.getPayDate());
+			pstmt.setString(2, pay.getPayMethod());
+			pstmt.setString(3, pay.getResCode());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	public int changeResState(Connection conn, Reservation res) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("changeResState");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, res.getResState());
+			pstmt.setString(2, res.getResCode());
+			
+			result=pstmt.executeUpdate();
+			System.out.println("dao result2 : "+result);
+			
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	finally {
+		close(pstmt);
+	}
+	return result;
+}
 		
 		
 }
-

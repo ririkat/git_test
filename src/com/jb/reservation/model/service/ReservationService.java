@@ -1,4 +1,3 @@
-
 package com.jb.reservation.model.service;
 
 import static common.template.JDBCTemplate.close;
@@ -17,6 +16,13 @@ import com.jb.reservation.model.vo.Reservation;
 public class ReservationService {
 
 	private ReservationDao dao = new ReservationDao();
+  
+  	public List<Reservation> selectListPage(String cId, int cPage, int numPerPage){
+		Connection conn = getConnection();
+		List<Reservation> list = dao.selectListPage(conn,cId,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
 
 	public int selectReservationCount(String cId) {
 		Connection conn = getConnection();

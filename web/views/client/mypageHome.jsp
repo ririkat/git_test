@@ -4,7 +4,9 @@
 	<%@ page import="java.util.Calendar"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Reservation> list = (List) request.getAttribute("list");
+
+List<Reservation> resList = (List) request.getAttribute("resList");
+   int cPage = (int)request.getAttribute("cPage");
 
  		Calendar now = Calendar.getInstance();
  		int nowYear = now.get(Calendar.YEAR); // 현재 년
@@ -209,5 +211,4 @@ th, td {
 		
 	
 		</script>
-
 		<%@ include file="/views/common/footer.jsp"%>
