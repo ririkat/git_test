@@ -1,13 +1,13 @@
 <%@page import="oracle.net.aso.r"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp"%>
 <%@page import="com.jb.pension.model.vo.PensionFacilities"%>
 <%@page import="com.jb.pension.model.vo.Room"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.jb.pension.model.vo.RoomFile" %>
 <%@page import="com.jb.pension.model.vo.Pension"%>
-<%@ include file="/views/common/header.jsp"%>
 
 <%
 	Pension p = (Pension)request.getAttribute("pension");

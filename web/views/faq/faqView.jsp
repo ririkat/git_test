@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.faq.model.vo.Faq, com.jb.faq.model.vo.FaqComment, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 	<%
 	Faq f=(Faq)request.getAttribute("faq");
 	List<FaqComment> list=(List)request.getAttribute("list");
 	%>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>

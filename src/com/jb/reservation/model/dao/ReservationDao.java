@@ -236,30 +236,6 @@ public class ReservationDao {
 	}
 
 	
-	public int insertPayInfo(Connection conn, Payment pay) {
-		
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("insertPayInfo");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			
-			pstmt.setString(1, pay.getPayCode());
-			pstmt.setDate(2,pay.getPayDate());
-			pstmt.setString(3, pay.getPayMethod());
-			pstmt.setString(4, pay.getResCode());
-			
-			result=pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
 	
 	
 	//예약데이터 인설트
@@ -439,28 +415,6 @@ public class ReservationDao {
 	return res;
 }
 	
-
-	public int changeResState(Connection conn, Reservation res) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("changeResState");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			
-			pstmt.setString(1, res.getResState());
-			pstmt.setString(2, res.getResCode());
-			
-			result=pstmt.executeUpdate();
-			System.out.println("dao result2 : "+result);
-			
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}
-	finally {
-		close(pstmt);
-	}
-	return result;
-}
 	
 	
 

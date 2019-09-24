@@ -108,7 +108,7 @@ th, td {
 <!-- 			예약한펜션리스트  -->
 
 			<%
- 				if (list == null || list.size() <= 0) {
+ 				if (resList == null || resList.size() <= 0) {
  			%>
 
 			<h1>예약한 펜션이 없습니다.</h1>
@@ -151,8 +151,8 @@ th, td {
 					<tbody>
 
 						<%
- 							for (int i = 0; i < list.size(); i++) {
- 									Reservation res = list.get(i);
+ 							for (int i = 0; i < resList.size(); i++) {
+ 									Reservation res = resList.get(i);
 						%>
 						<input id="resCode" type="hidden" name="resCode" value="<%=res.getResCode() %>">
 

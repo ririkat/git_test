@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.faq.model.vo.Faq, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 	<%
 		List<Faq> list=(List)request.getAttribute("list");
 		String pageBar=(String)request.getAttribute("pageBar");
 		int cPage=(int)request.getAttribute("cPage");
 	%>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>

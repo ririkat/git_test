@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.notice.model.vo.Notice, com.jb.notice.model.vo.NoticeComment, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 <%
     	Notice n = (Notice)request.getAttribute("notice");
 		List<NoticeComment> list = (List)request.getAttribute("list");
     %>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
