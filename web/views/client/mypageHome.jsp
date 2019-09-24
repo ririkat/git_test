@@ -4,9 +4,9 @@
 	<%@ page import="java.util.Calendar"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Reservation> list = (List) request.getAttribute("list");
-	List<Reservation> resList = (List) request.getAttribute("resList");
-	int cPage = (int)request.getAttribute("cPage");
+
+List<Reservation> resList = (List) request.getAttribute("resList");
+   int cPage = (int)request.getAttribute("cPage");
 
  		Calendar now = Calendar.getInstance();
  		int nowYear = now.get(Calendar.YEAR); // 현재 년
@@ -19,14 +19,6 @@
 <style>
 
 /* 예약내역, 찜 내역 제목 */
-#reservedtitle, #jjimtitle {
-	font-family: 'TmonMonsori';
-	font-size: 30px;
-	color: gray;
-	position: relative;
-	top: 40px;
-	/* color: #6a60a9 !important; */
-}
 
 table.wish-list {
 	border-collapse: separate;
@@ -57,7 +49,7 @@ table.wish-list td {
 }
 
 #all-clear {
-	/* margin-right: 50%; */
+
 	float: right;
 	position: relative;
 	right: 130px;
@@ -108,7 +100,7 @@ th, td {
 
 			<br> <br> <br>
 
-			<div class="tit_contents">예약/결제내역</div>
+			 <center><p class="title" style="color: #6a60a9;">예약결제내역</p></center>
 			<br>
 			
 			<hr>
@@ -116,7 +108,7 @@ th, td {
 <!-- 			예약한펜션리스트  -->
 
 			<%
- 				if (resList == null || resList.size() <= 0) {
+ 				if (list == null || list.size() <= 0) {
  			%>
 
 			<h1>예약한 펜션이 없습니다.</h1>
@@ -134,9 +126,9 @@ th, td {
 <!-- 				    인원수 -->
 					<col width="10%" />
 <!-- 				    이용일 -->
-					<col width="10%" />
+					<col width="20%" />
 <!-- 					결제금액 -->
-					<col width="10%" />
+					<col width="20%" />
 <!-- 					예약상태 -->
 					<col width="10%" />
 <!-- 					취소 -->
@@ -159,8 +151,8 @@ th, td {
 					<tbody>
 
 						<%
- 							for (int i = 0; i < resList.size(); i++) {
- 									Reservation res = resList.get(i);
+ 							for (int i = 0; i < list.size(); i++) {
+ 									Reservation res = list.get(i);
 						%>
 						<input id="resCode" type="hidden" name="resCode" value="<%=res.getResCode() %>">
 
@@ -211,12 +203,7 @@ th, td {
 			<% 
  				}
  			%>
-		<!-- 페이지바 -->
-        		<div class="text-center">
-                  <ul class="pagination">
-                     <li><%=request.getAttribute("pageBar") %></li>
-                  </ul>
-               </div>
+		
  		</section>
 
 
@@ -224,5 +211,4 @@ th, td {
 		
 	
 		</script>
-
 		<%@ include file="/views/common/footer.jsp"%>

@@ -80,7 +80,8 @@ img {
 
 <div class="col-md-10">
    <br><br><br>
-   <div class="tit_contents"><%=pInfo.getpName() %></div>
+  
+   <center><p class="title" style="color: #6a60a9;"><%=pInfo.getpName() %></p></center>
    <br><br>
 
    <div class="row pensionList">

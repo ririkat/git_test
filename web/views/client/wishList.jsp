@@ -10,14 +10,7 @@
 %>
 
 <style>
-/* 예약내역, 찜 내역 제목 */
-#reservedtitle, #jjimtitle {
-	font-family: 'TmonMonsori';
-	font-size: 30px;
-	color: gray;
-	position: relative;
-	top: 40px;
-	/* color: #6a60a9 !important; */
+
 }
 
 table.wish-list {
@@ -81,7 +74,7 @@ th, td {
 		</div><!--마이페이지 사이드메뉴 끝 -->
 
 		<section><!-- 내가 찜한 객실 시작 -->
-			<h4 id="jjimtitle" style="text-align: center">내가 찜한 펜션</h4>
+			 <center><p class="title" style="color: #6a60a9;">내가 찜한 목록</p></center>
 			<div class="all-clear">
 				<button class="btn btn-warning" id="all-clear" onclick="">목록모두삭제</button>
 			</div>

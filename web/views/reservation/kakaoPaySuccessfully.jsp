@@ -25,7 +25,8 @@
 <section>
 	<br> <br> <br> <br> <br> <br> <br> <br>
 	<br>
-	<div id="mypagetitle" style="text-align: center">카드결제가 완료되었습니다.</div>
+	 <center><p class="title" style="color: #6a60a9;">카드결제가 완료되었습니다.</p></center>
+   <br><br>
 	<br> <br> <br> <br> <br> <br>
 <	<form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 <%-- <form method="post" class="container" name="reservationFrm" id="reservationFrm" action="<%=request.getContextPath()%>/reservation/changeResState"> --%>
@@ -132,11 +133,8 @@
 			</tbody>
 		</table>
 
-		<h1><%=resName%></h1>
-		님의
-		<p><%=resInfo.getPension().getpName()%>펜션
-		</p>
-		예약이 완료되었습니다.<br> <br> 예약해주셔서 감사합니다. 	
+		<p><%=resName%>님의 <%=resInfo.getPension().getpName()%>펜션 예약이 완료되었습니다. 
+		<br> 예약해주셔서 감사합니다. </p>	
 		<input type="hidden" name ="resCode" value="<%=resInfo.getResCode() %>">
 		<input type="hidden" name ="cId" value="<%=loginClient.getcId()%>">
 		<input type="hidden" name ="payMethod" value="kakaoPay">

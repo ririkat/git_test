@@ -13,7 +13,7 @@
 
 <section id="review-container" class="container">
    <div class="col-sm-9">
-   <h2>리뷰</h2>
+   <center><p class="title" style="color: #6a60a9;">리뷰</p></center>
    <table id="tbl-review" class="table table-bordered">
       <tr>
          <td>게시번호</td>

@@ -12,7 +12,8 @@
 <div class="col-md-10">
 <br><br><br>
 	<section id="enroll-container">
-		<div class="tit_contents">펜션등록</div>
+		 <center><p class="title" style="color: #6a60a9;">펜션등록</p></center>
+   <br><br>
 		<br><hr><br>
 
 		<!--  -->

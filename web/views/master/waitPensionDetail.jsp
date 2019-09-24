@@ -15,7 +15,8 @@
 <div class="col-md-10">
    <div class="mContent">
 		<br><br><br>
-		<div class="tit_contents"><%=p.getpName() %></div>
+		
+		 <center><p class="title" style="color: #6a60a9;"><%=p.getpName() %></p></center>
 		<br><br><br>
 		
 		<div class="row">

@@ -9,7 +9,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="notice-container">
 	<div class="col-sm-9">
-    <h2>게시판 작성</h2>
+   <center><p class="title" style="color: #6a60a9;">게시글작성</p></center>
     <form  action="<%=request.getContextPath() %>/notice/noticeUpdateEnd?noticeNo=<%=n.getnNo() %>" method="post" enctype="multipart/form-data">
         <table id="tbl-board">
         <tr>

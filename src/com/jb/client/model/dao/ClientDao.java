@@ -63,6 +63,8 @@ public class ClientDao {
 	            close(rs);
 	            close(pstmt);
 
+	
+
 	         }
 	         return c;
 	   }

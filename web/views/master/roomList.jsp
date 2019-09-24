@@ -18,7 +18,7 @@
    <div class="col-md-10 album py-5 bg-light">
    	<div class="mContent">
        <div class="row">
-          <div class="tit_contents"><%=p.getpName() %></div>
+           <center><p class="title" style="color: #6a60a9;"><%=p.getpName()%></p></center>
          <div class="col-lg-6 col-md-6">
             <p>
                <img class="img-responsive" src="<%=request.getContextPath() %>/upload/pension/<%=pImg.getpRenameFile()%>" alt="펜션사진" style="width:500px; height:300px;">

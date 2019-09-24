@@ -10,7 +10,7 @@
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
-				<h2>공지사항</h2>
+				<center><p class="title" style="color: #6a60a9;">공지사항</p></center>
 				<table id="tbl-notice" class="table table-bordered">
 					<tr>
 						<th>제 목</th>

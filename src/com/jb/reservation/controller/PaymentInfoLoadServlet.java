@@ -41,8 +41,8 @@ public class PaymentInfoLoadServlet extends HttpServlet {
 		//예약한 clinet 정보 settion 및 예약한 방의 금액을 불러오는 서블릿  
 		
 		
-//		String resCode = request.getParameter("resCode");
-		String resCode = "1234";
+		String resCode = request.getParameter("resCode");
+		//String resCode = "1234";
 		String cId= request.getParameter("cId");
 		
 	

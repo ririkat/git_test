@@ -34,22 +34,23 @@ public class CheckInServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String date = request.getParameter("checkIn");
-	      
-	      SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-	      java.util.Date utilDate = new java.util.Date();
-	      try {
-	         utilDate = transFormat.parse(date);
-	      } catch (ParseException e) {
-	         e.printStackTrace();
-	      }
-	      java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-	      
-	      Date checkIn = sqlDate;
-	      
-	      ReservationService service = new ReservationService();
-	      Reservation res = service.checkIncheck(checkIn);
-	      System.out.println(res);
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date utilDate = new java.util.Date();
+		try {
+			utilDate = transFormat.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
+		Date checkIn = sqlDate;
+		
+		ReservationService service = new ReservationService();
+		Reservation res = service.checkIncheck(checkIn);
+		System.out.println(res);
 			
 		
 		String view = "";

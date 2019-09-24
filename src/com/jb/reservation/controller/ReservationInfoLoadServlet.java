@@ -39,11 +39,13 @@ public class ReservationInfoLoadServlet extends HttpServlet {
 		//예약정보를 보여주는 로직 
 		
 
-		String resCode = request.getParameter("resCode");
-		System.out.println("resCode : "+resCode);
+	//	String resCode = request.getParameter("resCode");
+		
 	
 		//임의로 예약코드 설정해놓음 / DB생성되면 지워도됨 
-	//	String resCode = "1234";
+
+    	//System.out.println("현희 서블릿에서 예약코드 : " + resCode);
+		String resCode = "1234";
 
 		String cId=request.getParameter("cId");
 		System.out.println("cId : "+cId);

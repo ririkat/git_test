@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>에러났다규</title>
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 body {

@@ -12,43 +12,51 @@
 				<div class="container">
 					<table class="table table-bordered">
 						<thead>
-						<caption>게시글 작성</caption>
+						<br><br><br><br><br><br>
+						<center><p class="title" style="color: #6a60a9;">게시글작성</p></center>
+						<br><br><br><br><br><br><br>
 						</thead>
 						<tbody>
 							<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" encType="multipart/form-data"
 							onsubmit="return sendData();">
 								<tr>
-									<th>제목 :</th>
+									<th style="vertical-align:middle;"><center>제목 </center></th>
 									<td><input type="text" placeholder="제목을 입력하세요. "
 										name="title" class="form-control" /></td>
 								</tr>
 								<tr>
 								<tr>
-									<th>작성자 :</th>
+									<th style="vertical-align:middle;"><center>작성자 </center></th>
 									<td><input type="text" value="<%=loginClient.getcId() %>"
 										name="writer" class="form-control" readonly />
 									</td>
 								</tr>
-								<th>내용 :</th>
+								<th style="vertical-align:middle;"><center>내용 </center></th>
 								<td><textarea cols="10" placeholder="내용을 입력하세요. "
 										name="content" id="career" class="form-control"></textarea></td>
 								</tr>
 								<tr>
-									<th>첨부파일 :</th>
-									<td><input type="file" placeholder="파일을 선택하세요. " name="up_file"></td>
+									<th style="vertical-align:middle;"><center>첨부파일 </center></th>
+									<td><input type="file"placeholder="파일을 선택하세요." name="up_file"></td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="submit" value="등록"
-										class="btn btn-default pull-right" /> <input
-										type="button" value="취소" class="btn btn-default pull-left" />
+									<td colspan="2"> 
 										<input type="button" value="글 목록으로 "
 										class="btn btn-default pull-right" onclick="toList()" ;/></td>
 								</tr>
-							</form>
+								
+								
+							
 						</tbody>
 					</table>
 				</div>
+				<br><br><br><br><br><br>
+				<center>
+								<input type="submit"value="등록" 	class="btn btn-warning" />
+								<input type="button" value="취소" class="btn btn-warning" />
+								</center>
 			</div>
+			</form>
 		</section>
 	</div>
 </div>
