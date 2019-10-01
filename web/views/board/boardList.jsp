@@ -17,14 +17,24 @@
 	<section>
 		<div class="col-sm-9">
 			<div>
-		<h2> 게시판 </h2>
-		<div id="search-container">
-			<form method="get" action="<%=request.getContextPath()%>/board/boardFinder">
-				<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
-				​​​​​​​<button type="submit">검색</button>
-			</form>
-		</div>
-		
+			<br><br><br><br>
+			
+		<center><p class="title" style="color: #6a60a9;">게시판</p></center>
+		<br>
+		<br>
+		<br>
+		<hr>
+	
+		 <div class="container">
+               <div class = "input-group" style="float:right;">
+                <form method="get" action="<%=request.getContextPath()%>/notice/noticeFinder">
+                <input type="text"  style="width:300px;" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
+                                                       
+                    <button type="submit"  style="height:29px;" style="vertical-align:middle;"class = "btn btn-warning">검색</button>   <br><br>                                         
+                  </form>
+            </div>
+            <br><br><br><br>
+		<br>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -63,18 +73,26 @@
             %>
             </tbody>
         </table>
+        
         <hr/>
 
         <!-- 글쓰기 버튼 좌우 정렬 pull-right / pull-left -->
         <!-- 로그인시에만 보이는 보이는 로직 필요 -->
-        <input type="button" value="글쓰기" class="btn btn-default pull-right" onclick="writeBoard()"/>
-        <input type="button" value="검색" class="btn btn-default pull-left" onclick="findBoard()"/>
         
+        <br><br><br><br><br>
         <div class="text-center">
+           <center>
+    		<input type="button" value="글쓰기" class="btn btn-warning" onclick="writeBoard()"/>
+        <input type="button" value="검색" class="btn btn-warning" onclick="findBoard()"/>
+        </center>
+        <br><br><br><br>
             <ul class="pagination">
+            
                 <li><%=request.getAttribute("pageBar") %></li>
             </ul>
 		</div>
+    		</div>
+    		
     		</div>
 			    <script>
 			       	function writeBoard(){

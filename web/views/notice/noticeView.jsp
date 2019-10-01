@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.notice.model.vo.Notice, com.jb.notice.model.vo.NoticeComment, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 <%
     	Notice n = (Notice)request.getAttribute("notice");
 		List<NoticeComment> list = (List)request.getAttribute("list");
     %>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container" class="container">
 			<div class="col-sm-9">
-				<h2>공지사항</h2>
+				<center><p class="title" style="color: #6a60a9;">공지사항</p></center>
 				<table id="tbl-notice" class="table table-bordered">
 					<tr>
 						<th>제 목</th>
@@ -41,7 +41,7 @@
 						<th>내용</th>
 						<td><%=n.getnContent()%></td>
 					</tr>
-					<%if(loginClient.getAuthority()==1){ %>
+					<%if(loginClient!=null&&loginClient.getAuthority()==1){ %>
 					<tr>
 						<td colspan="2" class="text-center">
 						<input type="button" value="수정하기" onclick="notice_modify();" class="btn my-btn"/>

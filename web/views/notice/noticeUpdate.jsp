@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.notice.model.vo.Notice"%>
+<%@ include file="/views/common/header.jsp"%>
 	<%
 	Notice n = (Notice)request.getAttribute("notice");
 	%>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
 <section id="notice-container">
 	<div class="col-sm-9">
-    <h2>게시판 작성</h2>
+   <center><p class="title" style="color: #6a60a9;">게시글작성</p></center>
     <form  action="<%=request.getContextPath() %>/notice/noticeUpdateEnd?noticeNo=<%=n.getnNo() %>" method="post" enctype="multipart/form-data">
         <table id="tbl-board">
         <tr>

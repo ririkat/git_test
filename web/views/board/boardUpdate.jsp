@@ -16,7 +16,7 @@
 				<div class="container">
 					<table class="table table-bordered">
 						<thead>
-						<caption>게시글 수정</caption>
+						<center><p class="title" style="color: #6a60a9;">게시글수정</p></center>
 						</thead>
 						<tbody>
 							<form action="<%=request.getContextPath() %>/board/boardUpdateEnd" method="post" encType="multipart/form-data"

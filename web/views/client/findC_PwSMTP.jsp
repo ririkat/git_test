@@ -18,7 +18,7 @@
 <section>
 	<br><br><br><br>
 	<section id="enroll-container">
-		<div class="tit_contents">일반회원 비밀번호 찾기</div>
+		<div class="tit_contents">비밀번호찾기</div>
 		<br>
 		<hr>
 		<br>

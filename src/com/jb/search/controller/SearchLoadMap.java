@@ -1,29 +1,23 @@
-package com.jb.client.controller;
+package com.jb.search.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.jb.client.model.service.ClientService;
-import com.jb.client.model.vo.Client;
 
 /**
- * Servlet implementation class LoginClientServlet
+ * Servlet implementation class SearchLoadMap
  */
-@WebServlet("/login")
-public class LoginClientServlet extends HttpServlet {
+@WebServlet("/search/loadMap")
+public class SearchLoadMap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginClientServlet() {
+    public SearchLoadMap() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +25,8 @@ public class LoginClientServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("/views/client/login.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/views/search/searchMap.jsp").forward(request, response);
 	}
 
 	/**

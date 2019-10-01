@@ -11,7 +11,7 @@
 			<div class="row">
 				<div class="m-0">
 					<div class="account-wall" style="text-align: center">
-						<h2>자바방 사용자 이용약관</h2>
+						 <center><p class="title" style="color: #6a60a9;">이용약관</p></center>
 						<br>
 						
 						<table width="100%" cellpadding="4" cellspacing="0"

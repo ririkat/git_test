@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.jb.faq.model.vo.Faq, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 	<%
 		List<Faq> list=(List)request.getAttribute("list");
 		String pageBar=(String)request.getAttribute("pageBar");
 		int cPage=(int)request.getAttribute("cPage");
 	%>
-<%@ include file="/views/common/header.jsp"%>
 <div class="container-fluid">
 	<div class="row content">
 		<%@ include file="/views/common/sideBoard.jsp"%>
 		<section id="notice-container">
 			<div class="col-sm-9">
-				<h2>FAQ</h2>
+			    <br>
+				<br>
+				 <center><p class="title" style="color: #6a60a9;">FAQ</p></center>
+				<br>
+				<br>
+				<hr>
+				<br>
+				<br><div class="container">
 				<!-- <div id="search-container">
 					<form method="get" action="<%=request.getContextPath()%>/faq/faqFinder">
 						<input type="text" name="keyword" placeholder="키워드를 입력하세요(제목)"/>
@@ -63,11 +70,14 @@
 				<%
 					}
 				%>
+				<br>
+				<br>
 				<div id="pageBar" class="text-center">
 					<ul class="pagination">
 						<li><%=pageBar%></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 
 			<script>

@@ -11,7 +11,7 @@
 <div class="col-md-10">
 	<div class="mContent">
 		<br><br><br>
-		<div class="tit_contents">승인신청한 업주 상세정보</div>
+		 <center><p class="title" style="color: #6a60a9;">승인 신청 한 업주 상세정보</p></center>
 		<br><br><br>
 		
 		<section id="enroll-container">		

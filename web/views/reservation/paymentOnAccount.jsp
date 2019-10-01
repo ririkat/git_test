@@ -20,7 +20,7 @@
 
 	<br> <br> <br> <br>
 	<br> <br> <br> <br> <br>
-	<div id="mypagetitle" style="text-align: center">계좌이체 정보 확인</div>
+	 <center><p class="title" style="color: #6a60a9;">무통장입금정보확인</p></center>
 	<br> <br> <br> <br> <br> <br>
 
 
@@ -28,7 +28,8 @@
 		id="reservationFrm"
 		action="<%=request.getContextPath()%>/reservation/payInfoInsert">
 
-		예약펜션정보
+		 <center><p class="title">예약펜션정보</p></center>
+   <br><br>
 
 		<table border="1" class="table_final_auction">
 			<tbody>
@@ -85,8 +86,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<br> <br> <br><br>
 
-		결제방법
+		 <center><p class="title" >결제방법</p></center>
+   <br><br><br> <br> <br>
 
 		<table border="1" class="table_final_auction">
 			<tbody>
@@ -114,16 +117,14 @@
 			</tbody>
 		</table>
 
-
-		고객정보
+<br><br><br><br><br>
+		 <center><p class="title" >고객정보</p></center>
+   <br><br>
 		 <br>
 		<br>
 		<br>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+	
 
 		<table border="1" class="table_final_auction" id="final_input_table">
 			<colgroup>
@@ -145,23 +146,35 @@
 				</tr>
 			</tbody>
 		</table>
+		<span style="color: #FF8F00;"> 예약확정은 입금 확인 후 진행됩니다.</span>
+		<br> 예약해주셔서 감사합니다. 
+		</center>
+		</div>
+		
+		<br><br>
+		
+		<center>
+		<input type="submit"
+			onclick="paySuccessfully" name="goMainView"  class="btn btn-warning" value="예약목록확인">
+			<center>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 
-
-		<h1><%=resName%></h1>
-		님의
-		<p><%=resInfo.getPension().getpName()%>펜션
-		</p>
-		예약이 완료되었습니다.<br> <span style="color: #FF8F00;"> 예약확정은 입금
-			확인 후 진행됩니다.</span><br> 예약해주셔서 감사합니다.
-			<input type="hidden" name ="resCode" value="<%=resInfo.getResCode() %>">
-		<input type="hidden" name ="cId" value="<%=loginClient.getcId()%>">
-		<input type="hidden" name ="payMethod" value="kakaoPay">
-	
-			<input type="submit" name="goMainView" value="예약목록확인">
 
 	</form>
 
 </section>
+
+<script>
+
+function paySuccessfully() {
+		
+	location.href="<%=request.getContextPath()%>/reservation/payInfoInsert?resCode=<%=resInfo.getResCode()%>";
+	}
+</script>
 
 
 

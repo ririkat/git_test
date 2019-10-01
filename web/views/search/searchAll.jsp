@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.jb.pension.model.vo.Pension" %>
+<%@ include file="/views/common/header.jsp"%>
 <%
 	List<Pension> list=(List)request.getAttribute("list");
+String from=(String)request.getAttribute("from");
+String to=(String)request.getAttribute("to");
 %>
 
-<%@ include file="/views/common/header.jsp"%>
    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <section>
 	<div class="container">
-	<h2 class="text-center">펜션 검색</h2>
+	<center><p class="title" style="color: #6a60a9;">펜션검색</p></center>
 		<!--리스트컨테이너-->
 		<div class="row">
 			<!--검색바-->
@@ -27,8 +29,8 @@
 							<tr>
 								<th class="text-center">메인조건</th>
 								<td>
-								 시작일<input type="text" name="from" id="datepicker">
-								~ 종료일<input type="text" name="to" id="datepicker2">
+								 시작일<input type="text" name="from" id="datepicker" value="<%=from%>">
+								~ 종료일<input type="text" name="to" id="datepicker2" value="<%=to%>">
 								
 								</td>
 							<tr>
@@ -181,6 +183,7 @@
 			</div>
 		</div>
 		<br><br><br><br>
+		<h4><%=from %>~<%=to%> 기간에 예약 가능한 결과입니다.</h4>
 		<h2>검색 결과</h2>
 		<hr>
 		<div class="row">
@@ -199,12 +202,12 @@
 								<h3><%=list.get(i).getpName() %></h3>
 								<p><%=list.get(i).getpAddr() %></p>
 								<p>
-									<a href="#" class="btn my-btn" role="button">찜♥</a>
+								<!-- 	<a href="#" class="btn my-btn" role="button">찜♥</a> -->
 									
 									<%-- <a href="<%=request.getContextPath()%>/search/detailView?pCode=<%=list.get(i).getpCode()%>"
 										class="btn btn-default" role="button">예매상세</a> --%>
 
-								<%if(loginClient.getcId()!=null){%>
+								<%if(loginClient!=null){%>
 									<a href="<%=request.getContextPath()%>/client/wishList?
 									pCode=<%=list.get(i).getpCode()%>
 									&pImage=<%=list.get(i).getPenFile().get(0).getpRenameFile() %>
@@ -214,8 +217,9 @@
 									&cid=<%=loginClient.getcId() %>"
 									class="btn my-btn" role="button" onclick="btn_wish();">찜♥</a>
 									
-									<button id="<%=list.get(i).getpCode()%>" name="detailgoBtn" onclick="goDetailView();">예매상세</button>
 								<%} %>
+								
+								<button id="<%=list.get(i).getpCode()%>" name="detailgoBtn" onclick="goDetailView();">예매상세</button>
 
 								</p>
 							</div>
@@ -325,14 +329,16 @@ $(function() {
                 ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
             });
  
+            
             //input을 datepicker로 선언
-            $("#datepicker").datepicker();                    
+            $("#datepicker").datepicker();
+            var from='<%=from%>';
+            $("#datepicker").datepicker();
+            var from='<%=to%>';
+            $("#datepicker2").datepicker();
             $("#datepicker2").datepicker();
             
-            //From의 초기값을 오늘 날짜로 설정
-            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-            //To의 초기값을 내일로 설정
-            $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+           
         });
 </script>
 

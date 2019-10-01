@@ -13,7 +13,7 @@
     <div class="mContent">
 		<br><br><br>
 
-		<div class="tit_contents">업주정보</div>
+		 <center><p class="title" style="color: #6a60a9;">업주정보</p></center>
 		<br><br><br>
 		<section id="enroll-container">
 			<form name="form1" method="post">

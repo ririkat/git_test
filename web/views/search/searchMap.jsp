@@ -1,6 +1,6 @@
+<%@ include file="/views/common/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
 <section>
 	<div class="map_wrap">
 		<p id="result1"></p>
@@ -159,42 +159,11 @@
 					var pagination=Math.ceil(positions.length/5+positions.length%5*0.01);
 					var cPage=1;
 					if(positions.length==0){
-						alert('반경 10km 이내에 검색결과가 없습니다.');
+						alert('반경 70km 이내에 검색결과가 없습니다.');
 					}else{
 						displayPlaces(data,cPage,pagination);
 						
 						displayPagination(data,cPage,pagination);
-						
-						/* for (var i = 0; i < positions.length; i ++) {
- 							var coords = new kakao.maps.LatLng(positions[0].loc_y,
-									positions[0].loc_x); 
-									
-						    var marker = new kakao.maps.Marker({
-						        map: map, // 마커를 표시할 지도
-						        position: new kakao.maps.LatLng(positions[i].loc_y, positions[i].loc_x) // 마커를 표시할 위치
-						    });
-						    marker.setMap(map);
-						    markers.push(marker); 
-						    
-						   (function(marker,title,addr,tel,pCode){
-							   kakao.maps.event.addListener(marker, 'click',
-										function() {
-								   var content = '<div style="padding:5px;z-index:1; width:300px;height:100px;">'
-								   +'<p>'+title+'</p>'
-								   +'<p>'+addr+'</p>'
-								   +'<p>'+tel+'</p>'
-								   +'<p>'+pCode+'</p>'
-								   +'<p><button>예매하러가기</button></p>'
-									+ '</div>';
-
-							infowindow.setContent(content);
-							infowindow.open(map, marker);
-										});
-							   
-						   })(marker,positions[i].pName,positions[i].pAddr,positions[i].pTel,positions[i].pCode)
-						    
-						    map.setCenter(coords); */
-						/* } */
 					}
 					
 				},
@@ -252,7 +221,7 @@
 								   +'<p>'+title+'</p>'
 								   +'<p>'+addr+'</p>'
 								   +'<p>'+tel+'</p>'
-								   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'"><button>예매하러가기</button></a>'
+								   +'<a href="<%=request.getContextPath()%>/search/detailView?pCode='+pCode+'&from=2019-19-24&to=2019-19-25"><button>예매하러가기</button></a>'
 									+ '</div>';
 							
 

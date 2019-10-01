@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date,java.text.SimpleDateFormat"%>
-
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/sideOwner.jsp"%>
+
 
 
 
@@ -55,7 +55,7 @@
 					<th class="point"><strong class="point">*</strong>성별</th>
 					<td>
 						<%
-							if (o.getoGender().trim().equals("M")) {
+							if (o!=null&&o.getoGender().trim().equals("M")) {
 						%> <input type="radio" name="oGender" id="oGender0" value="M"
 						checked> <label for="oGender0">남</label> <input
 						type="radio" name="oGender" id="oGender1" value="F"> <label

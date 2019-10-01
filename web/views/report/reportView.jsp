@@ -11,7 +11,8 @@
 <div class="col-sm-10">
     <div class="mContent">
 	    <br><br><br>
-		<h2 class="mListTitle">신고 상세</h2><br>
+		 <center><p class="title" style="color: #6a60a9;">신고상세</p></center>
+   <br><br>
 		
 		<table id="tbl-faq" class="table table-bordered">
 			<tr>

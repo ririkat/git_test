@@ -14,7 +14,7 @@
             <div class="col-md-10">
             	<div class="mContent">
 	                <br><br><br>
-	                <h2 class="mListTitle">운영중인 펜션관리</h2><br>
+	                 <center><p class="title" style="color: #6a60a9;">운영중인펜션관리</p></center>
 	                
 	                <div class="mSearch">
 	                	검색타입 : 
