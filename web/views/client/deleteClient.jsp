@@ -31,7 +31,7 @@ Client c=(Client)request.getAttribute("client");
 				<br>
 			</div>
 		</div>
-		<div class="col-sm-9 sidenav">
+		
 			<section id="container">
 				<br> <br> <br> <br> <br>
 				  <center><p class="title" style="color: #6a60a9;">회원탈퇴</p></center>
@@ -94,8 +94,7 @@ Client c=(Client)request.getAttribute("client");
 					<center>
 						<input type="button" id="btn-delete" class="btn btn-warning"
 							name="btn-delete" onclick="deleteClient();" value="탈퇴"> 
-							<input type="reset" class="btn btn-warning" onclick="<%=request.getContextPath()%>/client/infoLoad" value="취소">
-	                 </center>
+							<input type="reset" class="btn btn-warning" onclick="<%=request.getContextPath()%>/client/infoLoad" value="취소"> </center>
 					<hr>
 				</form>
 		
