@@ -111,11 +111,7 @@ public class OwnerModifyRoomEndServlet extends HttpServlet {
       String reFile = "";
       int imgRes = 0;
       Enumeration files = mr.getFileNames();
-      if(files!=null) {	//수정했으면
-//    	  for(int i=0; i<rFiles.length; i++) {
-//    		  File remove = new File(saveDir+"/"+rFiles[i]);	//변경전 원본 삭제
-//    		  remove.delete();
-//    	  }
+      if(files!=null) {
          while (files.hasMoreElements()) {	//사진변경
             file = (String) files.nextElement();
             oriFile = mr.getOriginalFileName(file);
