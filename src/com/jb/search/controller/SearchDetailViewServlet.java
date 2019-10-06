@@ -72,7 +72,7 @@ public class SearchDetailViewServlet extends HttpServlet {
 			request.setAttribute("pension", p);
 			request.setAttribute("from", from);
 			request.setAttribute("to", to);
-			request.getRequestDispatcher("/views/reservation/roomView.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/reservation/pensionInfo.jsp").forward(request, response);
 		}
 		
 		
