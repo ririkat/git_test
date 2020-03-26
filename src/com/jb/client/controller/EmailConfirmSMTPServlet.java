@@ -51,8 +51,8 @@ public class EmailConfirmSMTPServlet extends HttpServlet {
 		System.out.println(toEmail);
 		
 		String host="smtp.gmail.com";
-		String user="ehquf8011@gmail.com";
-		String password="ryustarWkd!1";
+		String user="이메일계정";
+		String password="";
 		
 		String msgText="인증코드 : "+numStr+"을 입력하세요<br/>**유효시간이 지나면 자동으로 폐기됩니다.**";
 		
